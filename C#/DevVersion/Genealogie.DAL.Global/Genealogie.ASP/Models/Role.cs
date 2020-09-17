@@ -1,6 +1,7 @@
 ﻿using Genealogie.ASP.Services.API;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -33,8 +34,11 @@ namespace Genealogie.ASP.Models
 
     public class RoleCreation
     {
-        
+        [Required]
+        [MaxLength(50)]
         public string nom { get; set; }
+        [Required]
+        [MaxLength(1000)]
         public string description { get; set; }
         
 
@@ -45,7 +49,11 @@ namespace Genealogie.ASP.Models
     public class RoleModification
     {
         public int id { get; set; }
+        [Required]
+        [MaxLength(50)]
         public string nom { get; set; }
+        [Required]
+        [MaxLength(1000)]
         public string description { get; set; }
         
 

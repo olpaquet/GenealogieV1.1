@@ -1,5 +1,6 @@
 ﻿using Genealogie.ASP.Conversion;
 using Genealogie.ASP.Models;
+using Genealogie.ASP.Securite;
 using Genealogie.ASP.Services.API;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Web.Mvc;
 
 namespace Genealogie.ASP.Controllers
 {
+    [AdminAut]
     public class RoleController : Controller
     {
         // GET: Role

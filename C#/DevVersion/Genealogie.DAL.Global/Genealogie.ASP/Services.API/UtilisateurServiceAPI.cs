@@ -99,7 +99,7 @@ namespace Genealogie.ASP.Services.API
         
         public bool EstAdmin(int id)
         {
-            HttpResponseMessage reponse = _client.GetAsync($"Utilisateur/EstAdmin{id}").Result;
+            HttpResponseMessage reponse = _client.GetAsync($"Utilisateur/EstAdmin/{id}").Result;
             if (!reponse.IsSuccessStatusCode) throw new Exception("Echec de la réception des données");
             return Convert.ToBoolean(reponse.Content.ReadAsStringAsync().Result);
         }

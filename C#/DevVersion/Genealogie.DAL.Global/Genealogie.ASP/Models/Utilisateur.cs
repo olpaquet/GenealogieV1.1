@@ -1,8 +1,11 @@
 ﻿
 
+using Genealogie.ASP.Phrases;
 using Genealogie.ASP.Services.API;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -35,9 +38,15 @@ namespace Genealogie.ASP.Models
     public class UtilisateurIndex
     {
         public int id { get; set; }
+        
+        [DisplayName("identifiant")]
         public string login { get; set; }
         public string nom { get; set; }
+        [MaxLength(50)]
+        [DisplayName("prénom")]
         public string prenom { get; set; }
+        [DataType(DataType.EmailAddress)]
+        [MaxLength(200)]
         public string email { get; set; }
         public bool actif { get; set; }
 
@@ -51,13 +60,16 @@ namespace Genealogie.ASP.Models
 
     public class UtilisateurDetails
     {
-        public int id { get; set; }
+        public int id { get; set; }        
+        [DisplayName("identifiant")]
         public string login { get; set; }
         public string nom { get; set; }
         public string prenom { get; set; }
         public string email { get; set; }
+        [DataType(DataType.Date)]
         public DateTime? dateDeNaissance { get; set; }
         public bool homme { get; set; }
+        [DisplayName("carte de payement")]
         public string cartedepayement { get; set; }
         /*public string PreSel { get; set; }
         public string PostSel { get; set; }*/
@@ -76,20 +88,42 @@ namespace Genealogie.ASP.Models
 
     public class UtilisateurConnexion
     {
+        [Required]
+        [MaxLength(50)]
+        [DisplayName("identifiant")]
         public string login { get; set; }
+        [Required]
+        [MaxLength(50)]
+        [DisplayName("identifiant")]
+        [DataType(DataType.Password)]
         public string motDePasse { get; set; }        
     }
 
     public class UtilisateurEnregistrement
     {
+        [Required]
+        [MaxLength(50)]
+        [DisplayName("identifiant")]
         public string login { get; set; }
+        [Required]
+        [MaxLength(50)]
         public string nom { get; set; }
+        [MaxLength(50)]
         public string prenom { get; set; }
+        [MaxLength(200)]
+        [DataType(DataType.EmailAddress)]
+        [Required]
         public string email { get; set; }
         public DateTime? dateDeNaissance { get; set; }
         public bool homme { get; set; }
+        [MaxLength(50)]
+        [DisplayName("carte de payement")]
         public string cartedepayement { get; set; }
+        [MaxLength(50)]
+        [Required]
         public string motDePasse { get; set; }
+        [MaxLength(50)]
+        [Required]
         public string motDePasseConfirmation { get; set; }
 
     }
@@ -97,13 +131,28 @@ namespace Genealogie.ASP.Models
     public class UtilisateurCreation
     {
         public int id { get; set; }
+        [Required]
+        [MaxLength(50)]
+        [DisplayName("identifiant")]
         public string login { get; set; }
+        [Required]
+        [MaxLength(50)]
         public string nom { get; set; }
+        [MaxLength(50)]
         public string prenom { get; set; }
+        [MaxLength(200)]
+        [DataType(DataType.EmailAddress)]
+        [Required]
         public string email { get; set; }
+        [DataType(DataType.Date)]
         public DateTime? dateDeNaissance { get; set; }
         public bool homme { get; set; }
+        [MaxLength(50)]
+        [DisplayName("carte de payement")]
         public string cartedepayement { get; set; }
+        [MaxLength(50)]
+        [Required]
+        [DataType(DataType.Password)]
         public string motDePasse { get; set; }
         /*public string PreSel { get; set; }
         public string PostSel { get; set; }*/
@@ -113,12 +162,22 @@ namespace Genealogie.ASP.Models
 
     public class UtilisateurModification
     {
+
+        [DisplayName("identifiant")]
         public string login { get; set; }
+        [Required]
+        [MaxLength(50)]
         public string nom { get; set; }
+        [MaxLength(50)]
         public string prenom { get; set; }
+        [MaxLength(200)]
+        [Required]
+        [DataType(DataType.EmailAddress)]
         public string email { get; set; }
+        [DataType(DataType.Date)]
         public DateTime? dateDeNaissance { get; set; }
         public bool homme { get; set; }
+        [MaxLength(50)]
         public string cartedepayement { get; set; }
         public IList<SelectListItem> SLIRoles { get; set; }
 

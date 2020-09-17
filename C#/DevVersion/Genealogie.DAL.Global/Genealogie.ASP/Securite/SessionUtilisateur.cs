@@ -24,7 +24,8 @@ namespace Genealogie.ASP.Securite
         public static Utilisateur Utilisateur
         {
             
-            get { return (Utilisateur)HttpContext.Current.Session["utilisateur"]; }
+            get { if (HttpContext.Current.Session["utilisateur"] == null) return null; 
+                return (Utilisateur)HttpContext.Current.Session["utilisateur"]; }
             set
             {
                 HttpContext.Current.Session["Utilisateur"] = value;
@@ -51,6 +52,20 @@ namespace Genealogie.ASP.Securite
             SessionUtilisateur.Utilisateur = u;
         }
         public static void AssignerUtilisateur() { SessionUtilisateur.Utilisateur = null; }
+
+        public static bool EstAdmin()
+        {
+            if (SessionUtilisateur.Utilisateur == null) return false;
+            return SessionUtilisateur.Utilisateur.estAdmin();
+        }
+
+        public static bool Anonyme()
+        {
+            if (SessionUtilisateur.Utilisateur == null) return true;
+            return false;
+        }
+
+        public static bool Connecte() { return !SessionUtilisateur.Anonyme(); }
     }
 
 

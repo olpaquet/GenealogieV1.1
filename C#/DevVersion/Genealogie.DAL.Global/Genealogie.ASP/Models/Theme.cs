@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -8,7 +9,12 @@ namespace Genealogie.ASP.Models
     public class Theme
     {
         public int id { get; set; }
+
+        [Required]
+        [MaxLength(50)]
         public string titre { get; set; }
+        [Required]
+        [MaxLength(1000)]
         public string description { get; set; }
         public bool actif { get; set; }
     }
@@ -16,7 +22,11 @@ namespace Genealogie.ASP.Models
     public class ThemeIndex
     {
         public int id { get; set; }
+        [Required]
+        [MaxLength(50)]
         public string titre { get; set; }
+        [Required]
+        [MaxLength(1000)]
         public string description { get; set; }
         public bool actif { get; set; }
 
@@ -26,8 +36,11 @@ namespace Genealogie.ASP.Models
 
     public class ThemeCreation
     {
-
+        [Required]
+        [MaxLength(50)]
         public string titre { get; set; }
+        [Required]
+        [MaxLength(100)]
         public string description { get; set; }
 
 
@@ -38,7 +51,11 @@ namespace Genealogie.ASP.Models
     public class ThemeModification
     {
         public int id { get; set; }
+        [Required]
+        [MaxLength(50)]
         public string titre { get; set; }
+        [Required]
+        [MaxLength(1000)]
         public string description { get; set; }
 
 

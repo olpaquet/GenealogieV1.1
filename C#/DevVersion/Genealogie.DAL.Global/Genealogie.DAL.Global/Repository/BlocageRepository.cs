@@ -8,7 +8,7 @@ using System.Text;
 
 namespace Genealogie.DAL.Global.Repository
 {
-    public class BlocageRepository : BaseRepository, IBlocageRepository
+    public class BlocageRepository : BaseRepository, IBlocageRepository<Blocage>
     {
         private const string CONST_BLOCAGE_REQ = "select id,nom,description from Blocage";
         public int Creer(Blocage e)
