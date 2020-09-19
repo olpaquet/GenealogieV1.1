@@ -2,6 +2,8 @@
 using Genealogie.ASP.Models;
 using Genealogie.ASP.Securite;
 using Genealogie.ASP.Services.API;
+using Genealogie.ASP.Validation;
+using Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +16,7 @@ namespace Genealogie.ASP.Controllers
     public class UtilisateurController : Controller
     {
         // GET: Utilisateur
-        [AdminAut]
+        [AutorisationRole(EnumRole.ADMIN)]
         [HttpGet]
         public ActionResult Index()
         {
@@ -22,7 +24,7 @@ namespace Genealogie.ASP.Controllers
             IEnumerable<UtilisateurIndex> ieui = usa.Donner().Select(j => new UtilisateurIndex(j));
             return View(ieui);
         }
-        [AdminAut]
+        [AutorisationRole(EnumRole.ADMIN)]
         [HttpGet]
         public ActionResult Details(int id)
         {            
@@ -33,7 +35,7 @@ namespace Genealogie.ASP.Controllers
 
             return View(ud);
         }
-        [AdminAut]
+        [AutorisationRole(EnumRole.ADMIN)]
         [HttpGet]
         public ActionResult Creer()
         {            
@@ -42,7 +44,7 @@ namespace Genealogie.ASP.Controllers
             u.SLIRoles = usa.DonnerSLIRoles((int?)null).ToList();
             return View(u);
         }
-        [AdminAut]
+        [AutorisationRole(EnumRole.ADMIN)]
         [HttpPost]
         public ActionResult Creer(UtilisateurCreation u)
         {
@@ -57,9 +59,9 @@ namespace Genealogie.ASP.Controllers
             }
             return View(u);
         }
-
-        [AdminAut]
+                
         [HttpGet]
+        [AutorisationRole(EnumRole.ADMIN)]
         public ActionResult Modifier(int id)
         {
             UtilisateurServiceAPI usa = new UtilisateurServiceAPI();
@@ -68,9 +70,10 @@ namespace Genealogie.ASP.Controllers
             um.SLIRoles = usa.DonnerSLIRoles(id).ToList();
             return View(um);
         }
-
-        [AdminAut]
+                
         [HttpPost]
+        [AutorisationRole(EnumRole.ADMIN)]
+        [Route("Utilisateur/Modifier/{id:ExisteX}")]
         public ActionResult Modifier(int id, UtilisateurModification um)
         {
             if (ModelState.IsValid)
@@ -118,8 +121,9 @@ namespace Genealogie.ASP.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        [AdminAut]
+        [AutorisationRole(EnumRole.ADMIN)]
         [HttpGet]
+        [Route("Utilisateur/Modifier/{id:ExisteX}")]
         public ActionResult Supprimer(int id)
         {
             UtilisateurServiceAPI usa = new UtilisateurServiceAPI();
@@ -127,7 +131,7 @@ namespace Genealogie.ASP.Controllers
             return View(u);
         }
 
-        [AdminAut]
+        [AutorisationRole(EnumRole.ADMIN)]
         [HttpPost]
         public ActionResult Supprimer(int id, UtilisateurDetails u)
         {
@@ -136,22 +140,23 @@ namespace Genealogie.ASP.Controllers
                 UtilisateurServiceAPI usa = new UtilisateurServiceAPI();
                 if ((usa.Supprimer(id))) return RedirectToAction("Index"); 
             }
-            return View(u);
+            return View("Error");
             
 
         }
-
-        [AdminAut]
+                
         [HttpGet]
+        [AutorisationRole(EnumRole.ADMIN)]
         public ActionResult Desactiver(int id)
         {
             UtilisateurServiceAPI usa = new UtilisateurServiceAPI();
             usa.Desactiver(id);
             return RedirectToAction("Index");
         }
-
-        [AdminAut]
+                
         [HttpGet]
+        [AutorisationRole(EnumRole.ADMIN)]
+        [Route("Utilisateur/Modifier/{id:ExisteX}")]
         public ActionResult Activer(int id)
         {
             UtilisateurServiceAPI usa = new UtilisateurServiceAPI();

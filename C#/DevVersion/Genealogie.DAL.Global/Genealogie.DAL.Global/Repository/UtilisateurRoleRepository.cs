@@ -79,6 +79,38 @@ namespace Genealogie.DAL.Global.Repository
             throw new NotImplementedException();
         }
 
+        public bool EstAdminForum(int idUtilisateur)
+        {
+            Commande com = new Commande($"{CONST_UTILISATEURROLE_REQ} where idutilisateur = @idutilisateur");
+            com.AjouterParametre("idutilisateur", idUtilisateur);
+            IEnumerable<int> roles = _connexion.ExecuterLecteur(com, j => j.VersUtilisateurRole()).Select(d => d.idrole);
+            foreach (int i in roles) { RoleRepository rr = new RoleRepository(); if (rr.EstAdminForum(i)) return true; }
+            return false;
+            throw new NotImplementedException();
+            throw new NotImplementedException();
+        }
+
+        public bool EstAdminMessage(int idUtilisateur)
+        {
+            Commande com = new Commande($"{CONST_UTILISATEURROLE_REQ} where idutilisateur = @idutilisateur");
+            com.AjouterParametre("idutilisateur", idUtilisateur);
+            IEnumerable<int> roles = _connexion.ExecuterLecteur(com, j => j.VersUtilisateurRole()).Select(d => d.idrole);
+            foreach (int i in roles) { RoleRepository rr = new RoleRepository(); if (rr.EstAdminMessage(i)) return true; }
+            return false;
+            throw new NotImplementedException();
+        }
+
+        public bool EstAdminNouvelle(int idUtilisateur)
+        {
+            Commande com = new Commande($"{CONST_UTILISATEURROLE_REQ} where idutilisateur = @idutilisateur");
+            com.AjouterParametre("idutilisateur", idUtilisateur);
+            IEnumerable<int> roles = _connexion.ExecuterLecteur(com, j => j.VersUtilisateurRole()).Select(d => d.idrole);
+            foreach (int i in roles) { RoleRepository rr = new RoleRepository(); if (rr.EstAdminNouvelle(i)) return true; }
+            return false;
+            throw new NotImplementedException();
+            throw new NotImplementedException();
+        }
+
         public bool Modifier(int idutilisateur, int idrole, UtilisateurRole e)
         {
             Commande com = new Commande("utilisateurrole_mod");

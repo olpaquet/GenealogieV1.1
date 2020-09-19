@@ -78,6 +78,30 @@ namespace Genealogie.DAL.Client.Services
             throw new NotImplementedException();
         }
 
+        public bool EstAdminForum(int id)
+        {
+            return _rep.EstAdminForum(id);
+            throw new NotImplementedException();
+        }
+
+        public bool EstAdminMessage(int id)
+        {
+            return _rep.EstAdminMessage(id);
+            throw new NotImplementedException();
+        }
+
+        public bool EstAdminNouvelle(int id)
+        {
+            return _rep.EstAdminNouvelle(id);
+            throw new NotImplementedException();
+        }
+
+        public bool EstUtilisee(int id, string[] options)
+        {
+            return _rep.EstUtilisee(id, options);
+            throw new NotImplementedException();
+        }
+
         public bool Modifier(int id, Utilisateur e)
         {
             var xx = e.VersGlobal();

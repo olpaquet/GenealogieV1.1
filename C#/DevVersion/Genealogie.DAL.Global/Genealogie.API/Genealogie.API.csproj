@@ -129,7 +129,10 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Autentification\AutentificationDeBase.cs" />
     <Compile Include="Autentification\ResultatAvecDefi.cs" />
+    <Compile Include="Controllers\BlocageController.cs" />
+    <Compile Include="Controllers\NouvelleController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Controllers\ThemeController.cs" />
     <Compile Include="Controllers\UtilisateurController.cs" />
     <Compile Include="Controllers\UtilisateurRoleController.cs" />
     <Compile Include="Conversion\Mapper.cs" />

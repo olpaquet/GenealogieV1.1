@@ -80,6 +80,8 @@ namespace Genealogie.DAL.Global.Modeles
         public int id { get; set; }
         public string titre { get; set; }
         public string description { get; set; }
+        public int idcreateur { get; set; }
+        public DateTime datecreation { get; set; }
         public int actif { get; set; }
     }
     public class Personne

@@ -79,10 +79,12 @@ namespace Genealogie.DAL.Client.Modeles
     }
     public class Nouvelle
     {
-        public int Id { get; set; }
-        public string Titre { get; set; }
-        public string Description { get; set; }
-        public int Actif { get; set; }
+        public int id { get; set; }
+        public string titre { get; set; }
+        public string description { get; set; }
+        public DateTime dateCreation { get; set; }
+        public int idCreateur { get; set; }
+        public bool actif { get; set; }
     }
     public class Personne
     {

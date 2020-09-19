@@ -6,7 +6,7 @@ using System.Web;
 
 namespace Genealogie.ASP.Models
 {
-    public enum EnumAction { CREER, MODIFIER, SUPPRIMER }
+    
 
     public class ChangerMotDePasse
     {

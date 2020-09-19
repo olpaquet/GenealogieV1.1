@@ -12,5 +12,7 @@ namespace Genealogie.DAL.Global.Repository
 
         IEnumerable<TE> Donner();
         TE Donner(int id);
+
+        bool EstUtilisee(int id, string[] options);
     }
 }

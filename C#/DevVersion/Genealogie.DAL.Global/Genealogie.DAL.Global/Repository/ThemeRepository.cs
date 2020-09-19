@@ -94,9 +94,15 @@ namespace Genealogie.DAL.Global.Repository
             Commande com = new Commande($"{CONST_THEME_REQ} where nom = @nom)");
             com.AjouterParametre("nom", nom);
             Theme r = _connexion.ExecuterLecteur(com, j => j.VersTheme()).SingleOrDefault();
-            return (r == null) ? (int?)null : (int?)r.id;
+            return (r == null) ? null : (int?)r.id;
 
-        }        
+        }
+
+        public bool EstUtilisee(int id, string[] options)
+        {
+            return false;
+            throw new NotImplementedException();
+        }
         //throw new NotImplementedException();
 
     }

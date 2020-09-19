@@ -2,6 +2,7 @@
 using Genealogie.ASP.Phrases;
 using Genealogie.ASP.ServiceGeneral;
 using Genealogie.ASP.Services.API;
+using Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -37,6 +38,9 @@ namespace Genealogie.ASP.Validation
                     ErrorMessage = Phrase.LoginExiste();
 
                     break;
+                case "Theme":
+                    ErrorMessage = Phrase.TitreExiste();
+                    break;
                 default:
                     ErrorMessage = Phrase.NomExiste();
                     break;                    
@@ -63,6 +67,12 @@ namespace Genealogie.ASP.Validation
                     break;
                 case "Role":
                     ob.res = new RoleServiceAPI().DonnerParNom(ob.lit);
+                    break;
+                case "Blocage":
+                    ob.res = new BlocageServiceAPI().DonnerParNom(ob.lit);
+                    break;
+                case "Theme":
+                    ob.res = new BlocageServiceAPI().DonnerParNom(ob.lit);
                     break;
                 default:
                     b = false;

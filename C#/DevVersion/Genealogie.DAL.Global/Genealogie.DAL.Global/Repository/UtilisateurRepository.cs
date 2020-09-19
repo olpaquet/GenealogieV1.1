@@ -165,5 +165,32 @@ namespace Genealogie.DAL.Global.Repository
             return (u == null) ? (int?)null : (int?)u.id;
             throw new NotImplementedException();
         }
+
+        public bool EstUtilisee(int id, string[] options)
+        {
+            return true;
+            throw new NotImplementedException();
+        }
+
+        public bool EstAdminNouvelle(int id)
+        {
+            UtilisateurRoleRepository urr = new UtilisateurRoleRepository();
+            return (urr.EstAdminNouvelle(id));
+            throw new NotImplementedException();
+        }
+
+        public bool EstAdminForum(int id)
+        {
+            UtilisateurRoleRepository urr = new UtilisateurRoleRepository();
+            return (urr.EstAdminForum(id));
+            throw new NotImplementedException();
+        }
+
+        public bool EstAdminMessage(int id)
+        {
+            UtilisateurRoleRepository urr = new UtilisateurRoleRepository();
+            return (urr.EstAdminMessage(id));
+            throw new NotImplementedException();
+        }
     }
 }

@@ -36,7 +36,16 @@ namespace Genealogie.ASP.Conversion
         public static Blocage VersBlocage(this BlocageModification e) { if (e == null) { return null; } return new Blocage { id = e.id, description = e.description, nom = e.nom }; }
         public static Blocage VersBlocage(this BlocageDetails e) { if (e == null) { return null; } return new Blocage { id = e.id, actif = e.actif, description = e.description, nom = e.nom }; }
 
+        /*Theme*/
+        public static Theme VersTheme(this ThemeCreation e) { if (e == null) { return null; } return new Theme { description = e.description, titre=e.titre }; }
+        public static Theme VersTheme(this ThemeModification e) { if (e == null) { return null; } return new Theme { id = e.id, description = e.description, titre=e.titre}; }
+        public static Theme VersTheme(this ThemeDetails e) { if (e == null) { return null; } return new Theme { id = e.id, actif = e.actif, description = e.description,titre=e.titre}; }
 
+        /*Nouvelle*/
+        public static Nouvelle VersNouvelle(this NouvelleCreation e) { if (e == null) { return null; } return new Nouvelle { dateCreation=e.dateCreation, description=e.description, titre=e.titre, idCreateur=e.idCreateur }; }
+        public static Nouvelle VersNouvelle(this NouvelleDetails e) { if (e == null) { return null; } return new Nouvelle { titre = e.titre, id=e.id, description=e.description }; }
 
     }
+
+
 }

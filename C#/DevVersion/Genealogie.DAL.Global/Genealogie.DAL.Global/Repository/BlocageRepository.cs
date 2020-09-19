@@ -10,7 +10,7 @@ namespace Genealogie.DAL.Global.Repository
 {
     public class BlocageRepository : BaseRepository, IBlocageRepository<Blocage>
     {
-        private const string CONST_BLOCAGE_REQ = "select id,nom,description from Blocage";
+        private const string CONST_BLOCAGE_REQ = "select id,nom,description,actif from Blocage";
         public int Creer(Blocage e)
         {
             Commande com = new Commande("Blocage_cre", true);
@@ -87,10 +87,16 @@ namespace Genealogie.DAL.Global.Repository
         public int? DonnerParNom(string nom)
         {
             if (nom == null) return null;
-            Commande com = new Commande($"{CONST_BLOCAGE_REQ} where nom = @nom)");
+            Commande com = new Commande($"{CONST_BLOCAGE_REQ} where nom = @nom");
             com.AjouterParametre("nom", nom);
             Blocage e = _connexion.ExecuterLecteur(com, j => j.VersBlocage()).SingleOrDefault();
-            return (e == null) ? (int?)null : (int?)e.id;
+            return (e == null) ? (int?)null : e.id;
+        }
+
+        public bool EstUtilisee(int id, string[] options)
+        {
+            return false;
+            throw new NotImplementedException();
         }
         //throw new NotImplementedException();
 

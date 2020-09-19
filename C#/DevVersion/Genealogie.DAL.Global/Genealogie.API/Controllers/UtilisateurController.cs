@@ -95,6 +95,30 @@ namespace Genealogie.API.Controllers
             throw new NotImplementedException();
         }
 
+        [HttpGet]
+        public bool EstAdminNouvelle(int id)
+        {
+            UtilisateurService us = new UtilisateurService();
+            return us.EstAdminNouvelle(id);
+            throw new NotImplementedException();
+        }
+
+        [HttpGet]
+        public bool EstAdminForum(int id)
+        {
+            UtilisateurService us = new UtilisateurService();
+            return us.EstAdminForum(id);
+            throw new NotImplementedException();
+        }
+
+        [HttpGet]
+        public bool EstAdminMessage(int id)
+        {
+            UtilisateurService us = new UtilisateurService();
+            return us.EstAdminMessage(id);
+            throw new NotImplementedException();
+        }
+
         [HttpPut]
         public bool Modifier(int id, Utilisateur e)
         {
@@ -133,7 +157,14 @@ namespace Genealogie.API.Controllers
         {
             UtilisateurService us = new UtilisateurService();
             return us.Creer(e.VersClient());
-        }        
+        }
+
+        [HttpGet]
+        public bool EstUtilisee(int id)
+        {
+            UtilisateurService rs = new UtilisateurService();
+            return rs.EstUtilisee(id, null);
+        }
     }
 
 }

@@ -119,6 +119,24 @@ namespace Genealogie.ASP.Services.API
             if (!reponse.IsSuccessStatusCode) throw new Exception("Echec de la réception des données");
             return Convert.ToBoolean(reponse.Content.ReadAsStringAsync().Result);
         }
+        public bool EstAdminForum(int id)
+        {
+            HttpResponseMessage reponse = _client.GetAsync($"Utilisateur/EstAdminForum/{id}").Result;
+            if (!reponse.IsSuccessStatusCode) throw new Exception("Echec de la réception des données");
+            return Convert.ToBoolean(reponse.Content.ReadAsStringAsync().Result);
+        }
+        public bool EstAdminNouvelle(int id)
+        {
+            HttpResponseMessage reponse = _client.GetAsync($"Utilisateur/EstAdminNouvelle/{id}").Result;
+            if (!reponse.IsSuccessStatusCode) throw new Exception("Echec de la réception des données");
+            return Convert.ToBoolean(reponse.Content.ReadAsStringAsync().Result);
+        }
+        public bool EstAdminMessage(int id)
+        {
+            HttpResponseMessage reponse = _client.GetAsync($"Utilisateur/EstAdminMessage/{id}").Result;
+            if (!reponse.IsSuccessStatusCode) throw new Exception("Echec de la réception des données");
+            return Convert.ToBoolean(reponse.Content.ReadAsStringAsync().Result);
+        }
 
         public bool ValiderUtilisateur(UtilisateurConnexion uc)
         {
@@ -172,6 +190,16 @@ namespace Genealogie.ASP.Services.API
 
             return ret;
 
+        }
+        public bool EstUtilisee(int id)
+        {
+            HttpResponseMessage reponse = _client.GetAsync($"Utilisateur/EstUtilisee/{id}").Result;
+            if (!reponse.IsSuccessStatusCode)
+            {
+                throw new Exception("Echec de la réception de données.");
+            }
+            return bool.Parse(reponse.Content.ReadAsStringAsync().Result);
+            throw new NotImplementedException();
         }
     }
 }

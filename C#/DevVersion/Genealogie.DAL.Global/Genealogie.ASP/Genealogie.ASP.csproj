@@ -150,10 +150,11 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\BlocageController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\NouvelleController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Controllers\ThemeController.cs" />
     <Compile Include="Controllers\UtilisateurController.cs" />
     <Compile Include="Conversion\Mapper.cs" />
     <Compile Include="Global.asax.cs">
@@ -162,22 +163,27 @@
     <Compile Include="Models\Arbre.cs" />
     <Compile Include="Models\Blocage.cs" />
     <Compile Include="Models\ExtraClasses.cs" />
+    <Compile Include="Models\Nouvelle.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\Theme.cs" />
     <Compile Include="Models\Utilisateur.cs" />
     <Compile Include="Models\UtilisateurRole.cs" />
     <Compile Include="Phrases\Phrase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Securite\AdminAutAttribute.cs" />
+    <Compile Include="Securite\AutorisationRoleAttribute.cs" />
     <Compile Include="Securite\AnonymeAutAttribute.cs" />
     <Compile Include="Securite\ConnecteAutAttribute.cs" />
+    <Compile Include="Securite\ExisteConstraint.cs" />
     <Compile Include="Securite\SessionUtilisateur.cs" />
     <Compile Include="ServiceGeneral\ExplorationObjet.cs" />
     <Compile Include="Services.API\BaseServiceAPI.cs" />
     <Compile Include="Services.API\BlocageServiceAPI.cs" />
+    <Compile Include="Services.API\NouvelleServiceAPI.cs" />
     <Compile Include="Services.API\RoleServiceAPI.cs" />
+    <Compile Include="Services.API\ThemeServiceAPI.cs" />
     <Compile Include="Services.API\UtilisateurRoleServiceAPI.cs" />
     <Compile Include="Services.API\UtilisateurServiceAPI.cs" />
+    <Compile Include="Validation\InutiliseeAttribute.cs" />
     <Compile Include="Validation\MotDePasseConfirmeAttribute.cs" />
     <Compile Include="Validation\NomUniqueAttribute.cs" />
   </ItemGroup>
@@ -229,10 +235,22 @@
     <Content Include="Views\Role\Modifier.cshtml" />
     <Content Include="Views\Role\Supprimer.cshtml" />
     <Content Include="Views\Role\Details.cshtml" />
+    <Content Include="Views\Blocage\Index.cshtml" />
+    <Content Include="Views\Blocage\Creer.cshtml" />
+    <Content Include="Views\Blocage\Details.cshtml" />
+    <Content Include="Views\Blocage\Modifier.cshtml" />
+    <Content Include="Views\Blocage\Supprimer.cshtml" />
+    <Content Include="Views\Theme\Index.cshtml" />
+    <Content Include="Views\Theme\Details.cshtml" />
+    <Content Include="Views\Theme\Creer.cshtml" />
+    <Content Include="Views\Theme\Modifier.cshtml" />
+    <Content Include="Views\Theme\Supprimer.cshtml" />
+    <Content Include="Views\Nouvelle\Details.cshtml" />
+    <Content Include="Views\Nouvelle\Creer.cshtml" />
+    <Content Include="Views\Nouvelle\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Blocage\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -248,9 +266,17 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Genealogie.DAL.Global\Genealogie.DAL.Global.csproj">
+      <Project>{DD858B87-D39B-4DA0-9964-31ADAF15E360}</Project>
+      <Name>Genealogie.DAL.Global</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Genealogie.Modeles.API.ASP\Genealogie.Modeles.API.ASP.csproj">
       <Project>{e466b2f8-0f05-4258-a2f0-1c5767e8388a}</Project>
       <Name>Genealogie.Modeles.API.ASP</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Services\Services.csproj">
+      <Project>{07331121-1c02-4237-a2dd-b12052142278}</Project>
+      <Name>Services</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

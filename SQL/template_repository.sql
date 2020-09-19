@@ -4,7 +4,7 @@ use Genealogie
 declare @yes nvarchar(max);
 declare @ttype varchar(100);
 
-declare @nomtable varchar(250) = 'Blocage'
+declare @nomtable varchar(250) = 'Nouvelle'
 DECLARE @idcol int
 declare @nomcol VARCHAR(250)
 declare @typecol nVARCHAR(25)
@@ -158,7 +158,7 @@ print 'throw new NotImplementedException();}'
 
 print concat('public',' ','int? DonnerParNom(string nom){')
 print 'if (nom==null) return null;'
-print concat('Commande com = new Commande($"{CONST_',upper(@nomtable),'_REQ} where nom = @nom)");')
+print concat('Commande com = new Commande($"{CONST_',upper(@nomtable),'_REQ} where nom = @nom");')
 print 'com.AjouterParametre("nom", nom);'
 print concat(@nomtable,' ','e =',' ','_connexion.ExecuterLecteur(com,j=>j.Vers',@nomtable,'()).SingleOrDefault();')
 print concat('return (e==null)?(int?)null:(int?)e.',@clef,';}')

@@ -82,9 +82,9 @@ namespace Genealogie.ASP.Services.API
             throw new NotImplementedException();
         }
 
-        public int? DonnerParNom(ChercherPar cp)
+        public int? DonnerParNom(string cherche)
         {
-            string contenuJson = JsonConvert.SerializeObject(cp, Formatting.Indented);
+            string contenuJson = JsonConvert.SerializeObject(new ChercherPar { chercheString=cherche }, Formatting.Indented);
             StringContent contenu = new StringContent(contenuJson, Encoding.UTF8, "application/json");
             HttpResponseMessage reponse = _client.PutAsync($"Blocage/DonnerParNom/", contenu).Result;
             if (!reponse.IsSuccessStatusCode)
@@ -92,7 +92,7 @@ namespace Genealogie.ASP.Services.API
                 throw new Exception("Echec de la réception de données.");
             }
             var x = reponse.Content.ReadAsStringAsync().Result;
-            if (x == null) return null;
+            if (x == "null") return null;
             else return int.Parse(reponse.Content.ReadAsStringAsync().Result);
             throw new NotImplementedException();
         }
@@ -120,6 +120,17 @@ namespace Genealogie.ASP.Services.API
             }
             var x = reponse.Content.ReadAsStringAsync().Result;
             return bool.Parse(x);
+            throw new NotImplementedException();
+        }
+
+        public bool EstUtilisee(int id)
+        {
+            HttpResponseMessage reponse = _client.GetAsync($"Blocage/EstUtilisee/{id}").Result;
+            if (!reponse.IsSuccessStatusCode)
+            {
+                throw new Exception("Echec de la réception de données.");
+            }
+            return bool.Parse(reponse.Content.ReadAsStringAsync().Result);
             throw new NotImplementedException();
         }
     }

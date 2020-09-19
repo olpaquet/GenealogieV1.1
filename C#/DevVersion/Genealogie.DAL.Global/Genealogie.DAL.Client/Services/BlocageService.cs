@@ -65,6 +65,12 @@ namespace Genealogie.DAL.Client.Services
             throw new NotImplementedException();
         }
 
+        public bool EstUtilisee(int id, string[] options)
+        {
+            return _rep.EstUtilisee(id, options);
+            throw new NotImplementedException();
+        }
+
         public bool Modifier(int id, Blocage e)
         {
             return _rep.Modifier(id, e.VersGlobal());

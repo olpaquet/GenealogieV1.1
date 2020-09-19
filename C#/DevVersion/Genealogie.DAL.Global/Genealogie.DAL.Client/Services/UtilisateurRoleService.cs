@@ -58,6 +58,27 @@ namespace Genealogie.DAL.Client.Services
             throw new NotImplementedException();
         }
 
+        public bool EstAdminForum(int idUtilisateur)
+        {
+            UtilisateurRoleRepository urr = new UtilisateurRoleRepository();
+            return urr.EstAdminForum(idUtilisateur);
+            throw new NotImplementedException();
+        }
+
+        public bool EstAdminMessage(int idUtilisateur)
+        {
+            UtilisateurRoleRepository urr = new UtilisateurRoleRepository();
+            return urr.EstAdminMessage(idUtilisateur);
+            throw new NotImplementedException();
+        }
+
+        public bool EstAdminNouvelle(int idUtilisateur)
+        {
+            UtilisateurRoleRepository urr = new UtilisateurRoleRepository();
+            return urr.EstAdminNouvelle(idUtilisateur);
+            throw new NotImplementedException();
+        }
+
         public bool Modifier(int idutilisateur, int idrole, UtilisateurRole e)
         {
             UtilisateurRoleRepository urr = new UtilisateurRoleRepository();

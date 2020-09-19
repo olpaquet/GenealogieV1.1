@@ -29,7 +29,7 @@ declare @estnullable int
 
 declare cc cursor for 
 select distinct nomtable from v_tables
-where nomtable = 'Arbre'
+where nomtable = 'Nouvelle'
 ;
 
 

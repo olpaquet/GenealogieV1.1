@@ -88,6 +88,13 @@ namespace Genealogie.API.Controllers
             RoleService rs = new RoleService();
             return rs.Supprimer(id);
         }
-        
+
+        [HttpGet]
+        public bool EstUtilisee(int id)
+        {
+            RoleService rs = new RoleService();
+            return rs.EstUtilisee(id, null);
+        }
+
     }
 }

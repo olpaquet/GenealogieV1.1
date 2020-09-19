@@ -8,7 +8,7 @@ using System.Text;
 
 namespace Genealogie.DAL.Global.Repository
 {
-    public class ArbreRepository : BaseRepository, IArbreRepository<Arbre>
+    public class ArbreRepository : BaseRepository, IArbreRepository<Arbre, int>
     {
         private const string CONST_ARBRE_REQ = "select id,nom,description,idcreateur,datecreation,idblocage,idbloqueur,dateblocage from Arbre";
         public int Creer(Arbre e)
@@ -92,13 +92,20 @@ namespace Genealogie.DAL.Global.Repository
             return _connexion.ExecuterLecteur(com, j => j.VersArbre());
             throw new NotImplementedException();
         }
-        public int? DonnerParNom(string nom)
+        public int? DonnerParNom(string nom, int idcreateur)
         {
             if (nom == null) return null;
-            Commande com = new Commande($"{CONST_ARBRE_REQ} where nom = @nom)");
+            Commande com = new Commande($"{CONST_ARBRE_REQ} where nom = @nom and idcreateur = @idcreateur");
             com.AjouterParametre("nom", nom);
+            com.AjouterParametre("idcreateur", idcreateur);
             Arbre e = _connexion.ExecuterLecteur(com, j => j.VersArbre()).SingleOrDefault();
             return (e == null) ? (int?)null : (int?)e.id;
+        }
+
+        public bool EstUtilisee(int id, string[] options)
+        {
+            return false;
+            throw new NotImplementedException();
         }
         //throw new NotImplementedException();
         //throw new NotImplementedException();

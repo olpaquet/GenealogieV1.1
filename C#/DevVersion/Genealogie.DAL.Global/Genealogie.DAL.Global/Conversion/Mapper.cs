@@ -157,13 +157,17 @@ namespace Genealogie.DAL.Global.Conversion
             if (idr == null) return null;
             return new Nouvelle
             {
-                id = (int)idr[nameof(Nouvelle.id)]
+                id = (int)idr[nameof(Nouvelle.id)]/*int*/
             ,
-                titre = (string)idr[nameof(Nouvelle.titre)]
+                titre = (string)idr[nameof(Nouvelle.titre)]/*nvarchar*/
             ,
-                description = (string)idr[nameof(Nouvelle.description)]
+                description = (string)idr[nameof(Nouvelle.description)]/*nvarchar*/
             ,
-                actif = (int)idr[nameof(Nouvelle.actif)]
+                idcreateur = (int)idr[nameof(Nouvelle.idcreateur)]/*int*/
+            ,
+                datecreation = (DateTime)idr[nameof(Nouvelle.datecreation)]/*datetime*/
+            ,
+                actif = (int)idr[nameof(Nouvelle.actif)]/*int*/
             };
         }
         public static Personne VersPersonne(this IDataRecord idr)

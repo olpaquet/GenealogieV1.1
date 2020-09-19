@@ -1,6 +1,8 @@
 ﻿using Genealogie.ASP.Conversion;
 using Genealogie.ASP.Models;
+using Genealogie.ASP.Securite;
 using Genealogie.ASP.Services.API;
+using Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +11,7 @@ using System.Web.Mvc;
 
 namespace Genealogie.ASP.Controllers
 {
+    [AutorisationRole(EnumRole.ADMIN)]
     public class BlocageController : Controller
     {
         // GET: Blocage

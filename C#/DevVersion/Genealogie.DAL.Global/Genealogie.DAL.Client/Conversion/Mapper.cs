@@ -25,5 +25,8 @@ namespace Genealogie.DAL.Client.Conversion
 
         public static Theme VersClient(this gl.Theme e) { if (e == null) { return null; } return new Theme { id = e.id, description = e.description, titre = e.titre, actif = e.actif == 1 ? true : false }; }
         public static gl.Theme VersGlobal(this Theme e) { if (e == null) { return null; } return new gl.Theme { id = e.id, description = e.description, titre = e.titre, actif = e.actif ? 1 : 0 }; }
+
+        public static Nouvelle VersClient(this gl.Nouvelle e) { if (e == null) { return null; } return new Nouvelle { id = e.id, description = e.description, titre = e.titre, actif = e.actif == 1 ? true : false, dateCreation=e.datecreation, idCreateur=e.idcreateur }; }
+        public static gl.Nouvelle VersGlobal(this Nouvelle e) { if (e == null) { return null; } return new gl.Nouvelle { id = e.id, description = e.description, titre = e.titre, actif = e.actif ? 1 : 0, idcreateur=e.idCreateur, datecreation=e.dateCreation }; }
     }
 }

@@ -214,6 +214,7 @@ go
  titre nvarchar(50) not null,
  description nvarchar(1000) not null,
  idcreateur int not null,
+ datecreation datetime not null,
  actif int not null default 1
  constraint pk_nouvelle primary key(id)
  )
@@ -1177,22 +1178,23 @@ select id,nom,description,duree,prix,nombremaxarbres,nombremaxpersonnesid,nom,de
 private const string CONST_MESSAGEFORUM_REQ = "select id,nom,description,duree,prix,nombremaxarbres,nombremaxpersonnesid,nom,description,idcreateur,datecreation,idblocage,idbloqueur,dateblocageid,nom,descriptionid,dateidpersonne,idpartenaire,datedebut,datefinid,sujet,texte,idemetteur,idconversationid,sujet,texte,idtheme,idpublicateur,datepublication from MessageForum";
 */
 /***txable***Nouvelle*/
+/***txable***Nouvelle*/
 go	
 drop procedure Nouvelle_cre
 go
 create PROCEDURE Nouvelle_cre
- @id int out, @titre nvarchar(100), @description nvarchar(2000), @idcreateur int
+ @id int out, @titre nvarchar(100), @description nvarchar(2000), @idcreateur int, @datecreation datetime
 AS
-insert into Nouvelle (titre,description,idcreateur) values (@titre,@description,@idcreateur);
+insert into Nouvelle (titre,description,idcreateur,datecreation) values (@titre,@description,@idcreateur,@datecreation);
 set @id = @@IDENTITY;
 go
 drop procedure Nouvelle_mod
 go
 create PROCEDURE Nouvelle_mod
-@id int,@titre nvarchar(100),@description nvarchar(2000),@idcreateur int
+@id int,@titre nvarchar(100),@description nvarchar(2000),@idcreateur int,@datecreation datetime
 AS
 update Nouvelle
-set titre=@titre,description=@description,idcreateur=@idcreateur
+set titre=@titre,description=@description,idcreateur=@idcreateur,datecreation=@datecreation
 where id=@id
 ;
 go
@@ -1223,6 +1225,15 @@ update Nouvelle set actif = 0
 where id=@id
 ;
 go
+/*
+select id,titre,description,idcreateur,datecreation from Nouvelle
+*/
+/*
+private const string CONST_NOUVELLE_REQ = "select id,titre,description,idcreateur,datecreation from Nouvelle";
+*/
+
+
+
 /*
 select id,nom,description,duree,prix,nombremaxarbres,nombremaxpersonnesid,nom,description,idcreateur,datecreation,idblocage,idbloqueur,dateblocageid,nom,descriptionid,dateidpersonne,idpartenaire,datedebut,datefinid,sujet,texte,idemetteur,idconversationid,sujet,texte,idtheme,idpublicateur,datepublicationid,titre,description from Nouvelle
 */
@@ -1373,8 +1384,9 @@ private const string CONST_THEME_REQ = "select id,nom,description,duree,prix,nom
 declare @id int
 declare @iid int
 exec role_cre @iid out, 'Administrateur','Voici un bel administrateur blond'
-exec role_cre @iid out, 'xAdministrateur','Voici un bel administrateur blond'
-exec role_cre @iid out, 'xxAdministrateur','Voici un très bel administrateur blond'
+exec role_cre @iid out, 'Editeur de nouvelles','Pas de fake news svp'
+exec role_cre @iid out, 'Maître du forum','Surveillant général'
+exec Role_cre @iid out, 'Maître de messagerie', 'Surveillant général aussi'
 
 
 exec utilisateur_cre @id out, 'admin','admin',null,'adm@i.n',null,1,null,'1','presel','postsel', '1'

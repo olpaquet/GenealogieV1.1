@@ -45,7 +45,7 @@ namespace Genealogie.ASP.Securite
             }
         }
 
-        public static int id { get { return (int)HttpContext.Current.Session["id"]; } }
+        public static int? id { get { return (int)HttpContext.Current.Session["id"]; } }
         public static string nomAffichage { get { return (string)HttpContext.Current.Session["nomaffichage"]; } }
 
         public static void AssignerUtilisateur(Utilisateur u)

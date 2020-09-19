@@ -4,6 +4,7 @@ using Genealogie.ASP.Phrases;
 using Genealogie.ASP.Services.API;
 using Genealogie.ASP.Validation;
 using Genealogie.Modeles.API.ASP.Modeles;
+using Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -36,12 +37,13 @@ namespace Genealogie.ASP.Models
         [MaxLength(200)]
         public string email { get; set; }
         public bool actif { get; set; }
+        public int nombreDeRoles { get; set; }
 
         public UtilisateurIndex() { }
         public UtilisateurIndex(Utilisateur e)
         {
             id = e.id; login = e.login; nom = e.nom; prenom = e.prenom; email = e.email;            
-            actif = e.actif;
+            actif = e.actif; nombreDeRoles = e.nombreDeRoles();
         }
     }
 
@@ -200,6 +202,12 @@ namespace Genealogie.ASP.Models
             
         }
 
+        public class UtilisateurSuppression : UtilisateurDetails
+        {
+            [Inutilisee("Utilisateur")]
+            public UtilisateurSuppression() : base() { }
+            public UtilisateurSuppression(Utilisateur u) : base(u) { }
+        }
     }
 
 }

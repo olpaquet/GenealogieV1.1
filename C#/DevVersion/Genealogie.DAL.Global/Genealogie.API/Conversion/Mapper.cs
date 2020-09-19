@@ -14,5 +14,14 @@ namespace Genealogie.API.Conversion
 
         public static Role VersAPI(this cl.Role e) { if (e == null) return null; return new Role {id=e.id, actif=e.actif, description=e.description, nom=e.nom }; }
         public static cl.Role VersClient(this Role e) { if (e == null) return null; return new cl.Role { id = e.id, actif = e.actif, description = e.description, nom = e.nom }; }
+
+        public static Blocage VersAPI(this cl.Blocage e) { if(e==null) { return null; } return new Blocage { actif=e.actif, description=e.description, id=e.id, nom=e.nom }; }
+        public static cl.Blocage VersClient(this Blocage e) { if (e == null) { return null; } return new cl.Blocage { actif = e.actif, description = e.description, id = e.id, nom = e.nom }; }
+
+        public static Theme VersAPI(this cl.Theme e) { if (e == null) { return null; } return new Theme { actif = e.actif, description = e.description, id = e.id, titre = e.titre }; }
+        public static cl.Theme VersClient(this Theme e) { if (e == null) { return null; } return new cl.Theme { actif = e.actif, description = e.description, id = e.id, titre = e.titre }; }
+
+        public static Nouvelle VersAPI(this cl.Nouvelle e) { if (e == null) { return null; } return new Nouvelle { actif = e.actif, description = e.description, id = e.id, titre = e.titre, dateCreation=e.dateCreation, idCreateur=e.idCreateur }; }
+        public static cl.Nouvelle VersClient(this Nouvelle e) { if (e == null) { return null; } return new cl.Nouvelle { actif = e.actif, description = e.description, id = e.id, titre = e.titre, dateCreation=e.dateCreation, idCreateur=e.idCreateur }; }
     }
 }

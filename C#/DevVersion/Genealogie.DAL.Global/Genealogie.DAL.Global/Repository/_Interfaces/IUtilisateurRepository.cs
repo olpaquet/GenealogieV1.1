@@ -5,11 +5,14 @@ using System.Text;
 
 namespace Genealogie.DAL.Global.Repository
 {
-    public interface IUtilisateurRepository<TE>: IBase<TE>, IAct<TE>, IParNom
+    public interface IUtilisateurRepository<TE>: IBase<TE>, IAct<TE>, IParNom, IAdmin
     {
         bool ValiderUtilisateur(string login, string motdepasse, string[] option = null);
         bool ChangerMotDePasse(string login, string vieuxmotdepasse, string nouveaumotdepasse, string[] option = null);
         TE Donner(string login, string motDePasse);
         bool EstAdmin(int id);
+        bool EstAdminNouvelle(int id);
+        bool EstAdminForum(int id);
+        bool EstAdminMessage(int id);
     }
 }

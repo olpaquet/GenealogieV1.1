@@ -2,6 +2,8 @@
 using Genealogie.ASP.Models;
 using Genealogie.ASP.Securite;
 using Genealogie.ASP.Services.API;
+using Genealogie.ASP.Validation;
+using Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +12,7 @@ using System.Web.Mvc;
 
 namespace Genealogie.ASP.Controllers
 {
-    [AdminAut]
+    [AutorisationRole(EnumRole.ADMIN)]
     public class RoleController : Controller
     {
         // GET: Role
@@ -73,24 +75,26 @@ namespace Genealogie.ASP.Controllers
             return View(rm);
         }
 
-        [HttpGet]
+        [HttpGet]        
         public ActionResult Supprimer(int id)
         {
             RoleServiceAPI rsa = new RoleServiceAPI();
-            RoleDetails r = new RoleDetails(rsa.Donner(id));
+            RoleSuppression r = new RoleSuppression(rsa.Donner(id));
             return View(r);
         }
 
         [HttpPost]
-        public ActionResult Supprimer(int id,RoleDetails r)
+        public ActionResult Supprimer(int id,RoleSuppression r)
         {
+            RoleServiceAPI rsa = new RoleServiceAPI();
+            RoleSuppression rr = new RoleSuppression(rsa.Donner(id));
             if (ModelState.IsValid)
             {
-                RoleServiceAPI rsa = new RoleServiceAPI();
+                //RoleServiceAPI rsa = new RoleServiceAPI();
                 bool b = rsa.Supprimer(id);
                 if (b) return RedirectToAction("Index");
             }
-            return View(r);
+            return View("Error");
         }
 
         [HttpGet]

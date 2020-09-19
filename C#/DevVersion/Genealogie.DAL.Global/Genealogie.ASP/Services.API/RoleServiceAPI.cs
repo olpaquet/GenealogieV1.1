@@ -92,7 +92,7 @@ namespace Genealogie.ASP.Services.API
                 throw new Exception("Echec de la réception de données.");
             }
             var x = reponse.Content.ReadAsStringAsync().Result;
-            if (x == null) return null;
+            if (x == "null") return null;
             else return int.Parse(reponse.Content.ReadAsStringAsync().Result);
             throw new NotImplementedException();
         }
@@ -120,6 +120,17 @@ namespace Genealogie.ASP.Services.API
             }
             var x = reponse.Content.ReadAsStringAsync().Result;
             return bool.Parse(x);
+            throw new NotImplementedException();
+        }
+
+        public bool EstUtilisee(int id)
+        {
+            HttpResponseMessage reponse = _client.GetAsync($"Role/EstUtilisee/{id}").Result;
+            if (!reponse.IsSuccessStatusCode)
+            {
+                throw new Exception("Echec de la réception de données.");
+            }
+            return bool.Parse(reponse.Content.ReadAsStringAsync().Result);
             throw new NotImplementedException();
         }
     }

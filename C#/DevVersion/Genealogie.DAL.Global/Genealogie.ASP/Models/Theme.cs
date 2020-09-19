@@ -1,4 +1,6 @@
-﻿using Genealogie.Modeles.API.ASP.Modeles;
+﻿using Genealogie.ASP.Validation;
+using Genealogie.Modeles.API.ASP.Modeles;
+using Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -30,6 +32,7 @@ namespace Genealogie.ASP.Models
     {
         [Required]
         [MaxLength(50)]
+        [NomUnique("Theme","titre",EnumAction.CREER)]
         public string titre { get; set; }
         [Required]
         [MaxLength(100)]
@@ -45,6 +48,7 @@ namespace Genealogie.ASP.Models
         public int id { get; set; }
         [Required]
         [MaxLength(50)]
+        [NomUnique("Theme","titre",EnumAction.MODIFIER)]
         public string titre { get; set; }
         [Required]
         [MaxLength(1000)]

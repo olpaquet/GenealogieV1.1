@@ -4,8 +4,8 @@ using System.Text;
 
 namespace Genealogie.DAL.Global.Repository
 {
-    public interface IRoleRepository<TE> : IBase<TE>, IAct<TE>, IParNom
+    public interface IRoleRepository<TE> : IBase<TE>, IAct<TE>, IParNom, IAdmin
     {
-        bool EstAdmin(int id);
+        
     }
 }

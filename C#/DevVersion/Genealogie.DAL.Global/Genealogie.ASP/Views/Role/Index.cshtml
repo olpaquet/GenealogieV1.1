@@ -37,7 +37,8 @@
     <td>
         @Html.ActionLink("Modifier", "Modifier", new { id = item.id }) |
         @Html.ActionLink("Détails", "Details", new { id = item.id }) |
-        @Html.ActionLink("Supprimer", "Supprimer", new { id = item.id }) |
+        @if (!(item.EstUtilisee)) {@Html.ActionLink("Supprimer", "Supprimer", new { id = item.id })}
+        |
         @if (item.actif)
         {@Html.ActionLink("Désactiver", "Desactiver", new { id = item.id })}
     else

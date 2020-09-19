@@ -63,4 +63,14 @@ namespace Genealogie.Modeles.API.ASP.Modeles
         public string description { get; set; }
         public bool actif { get; set; }
     }
+
+    public abstract class BNouvelle
+    {
+        public int id { get; set; }
+        public string titre { get; set; }
+        public string description { get; set; }
+        public int idCreateur { get; set; }
+        public DateTime dateCreation { get; set; }
+        public bool actif { get; set; }
+    }
 }

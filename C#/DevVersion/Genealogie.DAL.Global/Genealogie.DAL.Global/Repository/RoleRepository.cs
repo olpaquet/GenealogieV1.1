@@ -91,16 +91,44 @@ namespace Genealogie.DAL.Global.Repository
         public int? DonnerParNom(string nom)
         {
             if (nom == null) return null;
-            Commande com = new Commande($"{CONST_ROLE_REQ} where nom = @nom)");
+            Commande com = new Commande($"{CONST_ROLE_REQ} where nom = @nom");
             com.AjouterParametre("nom", nom);
             Role r = _connexion.ExecuterLecteur(com, j => j.VersRole()).SingleOrDefault();
-            return (r==null)?(int?)null:(int?)r.id;
+            return (r==null)?(int?)null:r.id;
             
         }
 
         public bool EstAdmin(int id)
         {
             return id == 1;
+            throw new NotImplementedException();
+        }
+
+        public bool EstUtilisee(int id, string[] options)
+        {
+
+            /* Utilisateur */
+            UtilisateurRoleRepository ur = new UtilisateurRoleRepository();
+            int nombreDUtilisateurs = ur.DonnerUtilisateurParRole(id).Count();
+            return nombreDUtilisateurs> 0;
+
+            throw new NotImplementedException();
+        }
+
+        public bool EstAdminNouvelle(int id)
+        {
+            return id == 2||id==1;
+            throw new NotImplementedException();
+        }
+
+        public bool EstAdminForum(int id)
+        {
+            return id == 3 || id == 1;
+        }
+
+        public bool EstAdminMessage(int id)
+        {
+            return id == 4 || id == 1;
             throw new NotImplementedException();
         }
         //throw new NotImplementedException();

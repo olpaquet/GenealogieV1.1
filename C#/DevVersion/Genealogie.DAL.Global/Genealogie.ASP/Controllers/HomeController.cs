@@ -10,7 +10,7 @@ namespace Genealogie.ASP.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("Index", "Nouvelle");
         }
 
         public ActionResult About()

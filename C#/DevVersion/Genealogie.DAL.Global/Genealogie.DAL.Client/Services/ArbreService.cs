@@ -9,10 +9,10 @@ using Genealogie.DAL.Client.Conversion;
 
 namespace Genealogie.DAL.Client.Services
 {
-    public class ArbreService : IArbreRepository<Arbre>
+    public class ArbreService : IArbreRepository<Arbre,int>
     {
 
-        private IArbreRepository<gl.Arbre> _rep;
+        private IArbreRepository<gl.Arbre,int> _rep;
 
         public ArbreService() { this._rep = new ArbreRepository(); }
 
@@ -58,9 +58,15 @@ namespace Genealogie.DAL.Client.Services
             throw new NotImplementedException();
         }
 
-        public int? DonnerParNom(string nom)
+        public int? DonnerParNom(string nom, int idcreateur)
         {
-            return _rep.DonnerParNom(nom);
+            return _rep.DonnerParNom(nom, idcreateur);
+            throw new NotImplementedException();
+        }
+
+        public bool EstUtilisee(int id, string[] options)
+        {
+            return _rep.EstUtilisee(id, options);
             throw new NotImplementedException();
         }
 
