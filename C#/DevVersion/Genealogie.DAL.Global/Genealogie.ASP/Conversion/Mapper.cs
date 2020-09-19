@@ -12,7 +12,7 @@ namespace Genealogie.ASP.Conversion
             int compteur = 0;
             string ret = "";
             foreach(int i in e) { compteur++; ret = ret + (compteur != 1 ? "," : "") + i.ToString(); }
-            return ret;
+            return (ret=="")?null:ret;
 
         }
 

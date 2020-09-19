@@ -24,6 +24,7 @@
                     @if (@HttpContext.Current.Session["utilisateur"] == null)
                     {
                         <li>@Html.ActionLink("Connexion", "Connexion", "Utilisateur")</li>
+                        <li>@Html.ActionLink("S'enregistrer", "Enregistrer", "Utilisateur")</li>
                     }
                     else
                     {
@@ -36,7 +37,7 @@
 
                     <li>@Html.ActionLink("Mes arbres", "Index", "Arbre")</li>
                     
-
+                    @{ var xx = HttpContext.Current.Session["admin"];}
                     @if (HttpContext.Current.Session["admin"] != null) {
                     <li>@Html.ActionLink("Utilisateurs", "Index", "Utilisateur")</li>
                     <li>@Html.ActionLink("Rôles", "Index", "Role")</li>

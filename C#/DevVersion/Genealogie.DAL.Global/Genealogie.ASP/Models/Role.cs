@@ -1,4 +1,5 @@
 ﻿using Genealogie.ASP.Services.API;
+using Genealogie.Modeles.API.ASP.Modeles;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -7,18 +8,8 @@ using System.Web;
 
 namespace Genealogie.ASP.Models
 {
-    public class Role
-    {
-        public int id { get; set; }
-        public string nom { get; set; }
-        public string description { get; set; }
-        public bool actif { get; set; }
-
-        /*public IEnumerable<Utilisateur> utilisateurs
-        {get{ UtilisateurRoleServiceAPI ursa = new UtilisateurRoleServiceAPI(); return ursa.DonnerUtilisateursParRole(id);}}
-
-        public int nombreDUtilisateurs
-        { get { return this.utilisateurs.Count(); }}*/
+    public class Role : BRole
+    {        
     }
 
     public class RoleIndex

@@ -2,6 +2,8 @@
 
 using Genealogie.ASP.Phrases;
 using Genealogie.ASP.Services.API;
+using Genealogie.ASP.Validation;
+using Genealogie.Modeles.API.ASP.Modeles;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,27 +14,12 @@ using System.Web.Mvc;
 
 namespace Genealogie.ASP.Models
 {
-    public class Utilisateur
-    {
-        public int id { get; set; }
-        public string login { get; set; }
-        public string nom { get; set; }
-        public string prenom { get; set; }
-        public string email { get; set; }
-        public DateTime? dateDeNaissance { get; set; }
-        public bool homme { get; set; }
-        public string cartedepayement { get; set; }
-        public string motDePasse { get; set; }
-        /*public string PreSel { get; set; }
-        public string PostSel { get; set; }*/
-        public bool actif { get; set; }
-        public string lRoles { get; set; }
-
-        public IEnumerable<Role> roles 
-        {get{UtilisateurServiceAPI usa = new UtilisateurServiceAPI();return usa.DonnerRoles(this.id);}}
+    public class Utilisateur : BUtilisateur
+    {        
+        public IEnumerable<Role> roles { get { UtilisateurServiceAPI usa = new UtilisateurServiceAPI(); return usa.DonnerRoles(this.id); } }
         public int nombreDeRoles() { return this.roles.Count(); }
-        public string nomAffichage() { string pr = this.prenom ?? ""; return $"{pr.Trim()} {this.nom.Trim()}".Trim();}
-        public bool estAdmin(){   UtilisateurServiceAPI usa = new UtilisateurServiceAPI();return usa.EstAdmin(this.id);}
+        public string nomAffichage() { string pr = this.prenom ?? ""; return $"{pr.Trim()} {this.nom.Trim()}".Trim(); }
+        public bool estAdmin() { UtilisateurServiceAPI usa = new UtilisateurServiceAPI(); return usa.EstAdmin(this.id); }
     }
 
     public class UtilisateurIndex
@@ -64,9 +51,11 @@ namespace Genealogie.ASP.Models
         [DisplayName("identifiant")]
         public string login { get; set; }
         public string nom { get; set; }
+        [DisplayName("prénom")]
         public string prenom { get; set; }
         public string email { get; set; }
         [DataType(DataType.Date)]
+        [DisplayName("date de naissance")]
         public DateTime? dateDeNaissance { get; set; }
         public bool homme { get; set; }
         [DisplayName("carte de payement")]
@@ -94,8 +83,8 @@ namespace Genealogie.ASP.Models
         public string login { get; set; }
         [Required]
         [MaxLength(50)]
-        [DisplayName("identifiant")]
         [DataType(DataType.Password)]
+        [DisplayName("mot de passe")]
         public string motDePasse { get; set; }        
     }
 
@@ -109,11 +98,14 @@ namespace Genealogie.ASP.Models
         [MaxLength(50)]
         public string nom { get; set; }
         [MaxLength(50)]
+        [DisplayName("prénom")]
         public string prenom { get; set; }
         [MaxLength(200)]
         [DataType(DataType.EmailAddress)]
         [Required]
         public string email { get; set; }
+        [DisplayName("date de naissance")]
+        [DataType(DataType.Date)]
         public DateTime? dateDeNaissance { get; set; }
         public bool homme { get; set; }
         [MaxLength(50)]
@@ -121,9 +113,14 @@ namespace Genealogie.ASP.Models
         public string cartedepayement { get; set; }
         [MaxLength(50)]
         [Required]
+        [DataType(DataType.Password)]
+        [DisplayName("mot de passe")]
         public string motDePasse { get; set; }
         [MaxLength(50)]
         [Required]
+        [DataType(DataType.Password)]
+        [MotDePasseConfirme]
+        [DisplayName("confirmation du mot de passe")]
         public string motDePasseConfirmation { get; set; }
 
     }
@@ -134,6 +131,7 @@ namespace Genealogie.ASP.Models
         [Required]
         [MaxLength(50)]
         [DisplayName("identifiant")]
+        [NomUnique("Utilisateur","login",EnumAction.CREER)]
         public string login { get; set; }
         [Required]
         [MaxLength(50)]
@@ -154,6 +152,12 @@ namespace Genealogie.ASP.Models
         [Required]
         [DataType(DataType.Password)]
         public string motDePasse { get; set; }
+        [MaxLength(50)]
+        [Required]
+        [DataType(DataType.Password)]
+        [DisplayName("confirmation du mot de passe")]
+        [MotDePasseConfirme]
+        public string motDePasseConfirmation { get; set; }
         /*public string PreSel { get; set; }
         public string PostSel { get; set; }*/
         public IList<SelectListItem> SLIRoles { get; set; }
@@ -175,6 +179,8 @@ namespace Genealogie.ASP.Models
         [DataType(DataType.EmailAddress)]
         public string email { get; set; }
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [DisplayName("date de naissance")]
         public DateTime? dateDeNaissance { get; set; }
         public bool homme { get; set; }
         [MaxLength(50)]

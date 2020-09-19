@@ -82,9 +82,9 @@ namespace Genealogie.ASP.Services.API
             throw new NotImplementedException();
         }
 
-        public int? DonnerParNom(ChercherPar cp)
+        public int? DonnerParNom(string cherche)
         {
-            string contenuJson = JsonConvert.SerializeObject(cp, Formatting.Indented);
+            string contenuJson = JsonConvert.SerializeObject(new ChercherPar { chercheString=cherche }, Formatting.Indented);
             StringContent contenu = new StringContent(contenuJson, Encoding.UTF8, "application/json");
             HttpResponseMessage reponse = _client.PutAsync($"Role/DonnerParNom/", contenu).Result;
             if (!reponse.IsSuccessStatusCode)

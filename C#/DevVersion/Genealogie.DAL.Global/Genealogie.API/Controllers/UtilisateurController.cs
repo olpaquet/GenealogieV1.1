@@ -46,6 +46,14 @@ namespace Genealogie.API.Controllers
         }
 
         [HttpPut]
+        public int? DonnerParNom(ChercherPar cp)
+        {
+            UtilisateurService rs = new UtilisateurService();
+            return rs.DonnerParNom(cp.chercheString);
+            throw new NotImplementedException();
+        }
+
+        [HttpPut]
         public bool Activer(int id)
         {
             UtilisateurService us = new UtilisateurService();
@@ -100,6 +108,7 @@ namespace Genealogie.API.Controllers
         public bool Supprimer(int id)
         {
             UtilisateurService us = new UtilisateurService();
+            
             return us.Supprimer(id);
             throw new NotImplementedException();
         }

@@ -26,5 +26,10 @@ namespace Genealogie.API.Models
         public string[] options { get; set; }
     }
 
+    public class ChercherPar
+    {
+        public string chercheString { get; set; }
+    }
+
 
 }

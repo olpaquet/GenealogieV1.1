@@ -47,11 +47,31 @@
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
+    <Reference Include="System.Configuration.ConfigurationManager, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Configuration.ConfigurationManager.4.7.0\lib\net461\System.Configuration.ConfigurationManager.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.Data.SqlClient, Version=4.6.1.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SqlClient.4.8.2\lib\net461\System.Data.SqlClient.dll</HintPath>
+    </Reference>
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
+    <Reference Include="System.Security" />
+    <Reference Include="System.Security.AccessControl, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.AccessControl.4.7.0\lib\net461\System.Security.AccessControl.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Permissions, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Permissions.4.7.0\lib\net461\System.Security.Permissions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Principal.Windows, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Principal.Windows.4.7.0\lib\net461\System.Security.Principal.Windows.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -119,6 +139,7 @@
       <Private>True</Private>
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
@@ -151,11 +172,14 @@
     <Compile Include="Securite\AnonymeAutAttribute.cs" />
     <Compile Include="Securite\ConnecteAutAttribute.cs" />
     <Compile Include="Securite\SessionUtilisateur.cs" />
+    <Compile Include="ServiceGeneral\ExplorationObjet.cs" />
     <Compile Include="Services.API\BaseServiceAPI.cs" />
     <Compile Include="Services.API\BlocageServiceAPI.cs" />
     <Compile Include="Services.API\RoleServiceAPI.cs" />
     <Compile Include="Services.API\UtilisateurRoleServiceAPI.cs" />
     <Compile Include="Services.API\UtilisateurServiceAPI.cs" />
+    <Compile Include="Validation\MotDePasseConfirmeAttribute.cs" />
+    <Compile Include="Validation\NomUniqueAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -224,13 +248,9 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Genealogie.DAL.Client\Genealogie.DAL.Client.csproj">
-      <Project>{9C8BD70E-F3CF-4621-BC62-C422C5A2EA3D}</Project>
-      <Name>Genealogie.DAL.Client</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Genealogie.DAL.Global\Genealogie.DAL.Global.csproj">
-      <Project>{DD858B87-D39B-4DA0-9964-31ADAF15E360}</Project>
-      <Name>Genealogie.DAL.Global</Name>
+    <ProjectReference Include="..\Genealogie.Modeles.API.ASP\Genealogie.Modeles.API.ASP.csproj">
+      <Project>{e466b2f8-0f05-4258-a2f0-1c5767e8388a}</Project>
+      <Name>Genealogie.Modeles.API.ASP</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

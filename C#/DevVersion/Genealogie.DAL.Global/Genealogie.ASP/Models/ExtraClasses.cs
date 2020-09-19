@@ -6,6 +6,8 @@ using System.Web;
 
 namespace Genealogie.ASP.Models
 {
+    public enum EnumAction { CREER, MODIFIER, SUPPRIMER }
+
     public class ChangerMotDePasse
     {
         public string login { get; set; }
@@ -27,9 +29,10 @@ namespace Genealogie.ASP.Models
         public string[] options { get; set; }
     }
 
+    
     public class ChercherPar
     {
-        public string recherche { get; set; }
+        public string chercheString { get; set; }
     }
 
 }

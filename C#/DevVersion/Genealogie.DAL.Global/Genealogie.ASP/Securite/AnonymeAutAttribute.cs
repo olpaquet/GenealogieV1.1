@@ -12,7 +12,7 @@ namespace Genealogie.ASP.Securite
 
         protected override bool AuthorizeCore(HttpContextBase httpContext)
         {
-            return (SessionUtilisateur.Anonyme() == null);
+            return (SessionUtilisateur.Anonyme());
         }
         protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)
         {

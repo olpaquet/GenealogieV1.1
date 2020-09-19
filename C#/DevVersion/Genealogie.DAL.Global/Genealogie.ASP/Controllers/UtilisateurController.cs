@@ -10,9 +10,11 @@ using System.Web.Mvc;
 
 namespace Genealogie.ASP.Controllers
 {
+    
     public class UtilisateurController : Controller
     {
         // GET: Utilisateur
+        [AdminAut]
         [HttpGet]
         public ActionResult Index()
         {
@@ -20,6 +22,7 @@ namespace Genealogie.ASP.Controllers
             IEnumerable<UtilisateurIndex> ieui = usa.Donner().Select(j => new UtilisateurIndex(j));
             return View(ieui);
         }
+        [AdminAut]
         [HttpGet]
         public ActionResult Details(int id)
         {            
@@ -30,7 +33,7 @@ namespace Genealogie.ASP.Controllers
 
             return View(ud);
         }
-
+        [AdminAut]
         [HttpGet]
         public ActionResult Creer()
         {            
@@ -39,6 +42,7 @@ namespace Genealogie.ASP.Controllers
             u.SLIRoles = usa.DonnerSLIRoles((int?)null).ToList();
             return View(u);
         }
+        [AdminAut]
         [HttpPost]
         public ActionResult Creer(UtilisateurCreation u)
         {
@@ -46,13 +50,15 @@ namespace Genealogie.ASP.Controllers
             {
                 UtilisateurServiceAPI usa = new UtilisateurServiceAPI();
                 Utilisateur ch = u.VersUtilisateur();
-                ch.lRoles = u.SLIRoles.Where(j => j.Selected).Select(k => Int32.Parse(k.Value)).VersListePypee();
+                var x = u.SLIRoles;
+                ch.lRoles = (u.SLIRoles==null)?null:u.SLIRoles.Where(j => j.Selected).Select(k => Int32.Parse(k.Value)).VersListePypee();
                 int b = usa.Creer(ch);
                 if (b >= 1) return RedirectToAction("Index");
             }
             return View(u);
         }
 
+        [AdminAut]
         [HttpGet]
         public ActionResult Modifier(int id)
         {
@@ -63,6 +69,7 @@ namespace Genealogie.ASP.Controllers
             return View(um);
         }
 
+        [AdminAut]
         [HttpPost]
         public ActionResult Modifier(int id, UtilisateurModification um)
         {
@@ -78,6 +85,7 @@ namespace Genealogie.ASP.Controllers
             return View(um);
         }
 
+        [AnonymeAut]
         [HttpGet]
         public ActionResult Connexion()
         {
@@ -102,6 +110,7 @@ namespace Genealogie.ASP.Controllers
             return View(uc);
         }
 
+        [ConnecteAut]
         [HttpGet]
         public ActionResult Deconnexion()
         {
@@ -109,6 +118,7 @@ namespace Genealogie.ASP.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [AdminAut]
         [HttpGet]
         public ActionResult Supprimer(int id)
         {
@@ -116,17 +126,22 @@ namespace Genealogie.ASP.Controllers
             UtilisateurDetails u = usa.Donner(id).VersUtilisateurDetails();
             return View(u);
         }
+
+        [AdminAut]
         [HttpPost]
         public ActionResult Supprimer(int id, UtilisateurDetails u)
         {
             if (ModelState.IsValid)
             {
                 UtilisateurServiceAPI usa = new UtilisateurServiceAPI();
-                if (!(usa.Supprimer(id))) return RedirectToAction("Index");
+                if ((usa.Supprimer(id))) return RedirectToAction("Index"); 
             }
             return View(u);
+            
+
         }
 
+        [AdminAut]
         [HttpGet]
         public ActionResult Desactiver(int id)
         {
@@ -135,6 +150,7 @@ namespace Genealogie.ASP.Controllers
             return RedirectToAction("Index");
         }
 
+        [AdminAut]
         [HttpGet]
         public ActionResult Activer(int id)
         {
@@ -143,12 +159,15 @@ namespace Genealogie.ASP.Controllers
             return RedirectToAction("Index");
         }
 
+        [AnonymeAut]
         [HttpGet]
         public ActionResult Enregistrer()
         {
             UtilisateurEnregistrement ur = new UtilisateurEnregistrement();
             return View(ur);
         }
+
+        [AnonymeAut]
         [HttpPost]
         public ActionResult Enregistrer(UtilisateurEnregistrement uc)
         {

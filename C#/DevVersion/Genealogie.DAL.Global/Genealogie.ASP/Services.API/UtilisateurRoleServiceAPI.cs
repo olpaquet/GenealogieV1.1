@@ -1,5 +1,4 @@
 ﻿using Genealogie.ASP.Models;
-using Genealogie.DAL.Global.Repository;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;

@@ -351,8 +351,6 @@ C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.G
 C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\Genealogie.ASP\bin\roslyn\VBCSCompiler.exe
 C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\Genealogie.ASP\bin\roslyn\VBCSCompiler.exe.config
 C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\Genealogie.ASP\bin\Antlr3.Runtime.dll
-C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\Genealogie.ASP\bin\Genealogie.DAL.Client.dll
-C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\Genealogie.ASP\bin\Genealogie.DAL.Global.dll
 C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\Genealogie.ASP\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\Genealogie.ASP\bin\Microsoft.Web.Infrastructure.dll
 C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\Genealogie.ASP\bin\Newtonsoft.Json.dll
@@ -367,10 +365,6 @@ C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.G
 C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\Genealogie.ASP\bin\System.Web.WebPages.dll
 C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\Genealogie.ASP\bin\System.Web.WebPages.Razor.dll
 C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\Genealogie.ASP\bin\WebGrease.dll
-C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\Genealogie.ASP\bin\BoiteAOutil.DB.Standard.dll
-C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\Genealogie.ASP\bin\BoiteAOutil.Hasard.dll
-C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\Genealogie.ASP\bin\Genealogie.DAL.Client.pdb
-C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\Genealogie.ASP\bin\Genealogie.DAL.Global.pdb
 C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\Genealogie.ASP\bin\System.Net.Http.Formatting.xml
 C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\Genealogie.ASP\bin\System.Web.Http.xml
 C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\Genealogie.ASP\bin\System.Web.Http.WebHost.xml
@@ -384,8 +378,6 @@ C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.G
 C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\Genealogie.ASP\bin\Newtonsoft.Json.xml
 C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\Genealogie.ASP\bin\Antlr3.Runtime.pdb
 C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\Genealogie.ASP\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\Genealogie.ASP\bin\BoiteAOutil.DB.Standard.pdb
-C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\Genealogie.ASP\bin\BoiteAOutil.Hasard.pdb
 C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\Genealogie.ASP\bin\fr\System.Net.Http.Formatting.resources.dll
 C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\Genealogie.ASP\bin\fr\System.Web.Http.resources.dll
 C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\Genealogie.ASP\bin\fr\System.Web.Http.WebHost.resources.dll
@@ -400,3 +392,15 @@ C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.G
 C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\Genealogie.ASP\obj\Debug\Genealogie.ASP.csproj.CopyComplete
 C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\Genealogie.ASP\obj\Debug\Genealogie.ASP.dll
 C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\Genealogie.ASP\obj\Debug\Genealogie.ASP.pdb
+C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\Genealogie.ASP\bin\System.Security.Permissions.dll
+C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\Genealogie.ASP\bin\System.Security.Permissions.xml
+C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\Genealogie.ASP\bin\System.Configuration.ConfigurationManager.dll
+C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\Genealogie.ASP\bin\System.Security.AccessControl.dll
+C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\Genealogie.ASP\bin\System.Security.Principal.Windows.dll
+C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\Genealogie.ASP\bin\System.Configuration.ConfigurationManager.xml
+C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\Genealogie.ASP\bin\System.Security.AccessControl.xml
+C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\Genealogie.ASP\bin\System.Security.Principal.Windows.xml
+C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\Genealogie.ASP\bin\System.Data.SqlClient.dll
+C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\Genealogie.ASP\bin\System.Data.SqlClient.xml
+C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\Genealogie.ASP\bin\Genealogie.Modeles.API.ASP.dll
+C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\Genealogie.ASP\bin\Genealogie.Modeles.API.ASP.pdb

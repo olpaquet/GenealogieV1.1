@@ -37,6 +37,22 @@ namespace Genealogie.ASP.Services.API
             return reponse.Content.ReadAsAsync<Utilisateur>().Result;
         }
 
+        public int? DonnerParNom(string cherche)
+        {
+            string contenuJson = JsonConvert.SerializeObject(new ChercherPar { chercheString = cherche }, Formatting.Indented);
+            StringContent contenu = new StringContent(contenuJson, Encoding.UTF8, "application/json");
+            HttpResponseMessage reponse = _client.PutAsync("Utilisateur/DonnerParNom/", contenu).Result;
+            if (!reponse.IsSuccessStatusCode)
+            {
+                throw new Exception("Echec de la réception de données.");
+            }
+            var x = reponse.Content.ReadAsStringAsync().Result;
+            if (x == "null") return (int?)null;
+
+            return int.Parse(x);
+                
+        }
+
         public int Creer(Utilisateur e)
         {
             string contenuJson = JsonConvert.SerializeObject(e, Formatting.Indented);

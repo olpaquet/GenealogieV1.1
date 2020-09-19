@@ -31,6 +31,14 @@ namespace Genealogie.API.Controllers
         }
 
         [HttpPut]
+        public int? DonnerParNom(ChercherPar cp)
+        {
+            RoleService rs = new RoleService();
+            return rs.DonnerParNom(cp.chercheString);
+            throw new NotImplementedException();
+        }
+
+        [HttpPut]
         public IEnumerable<Role> Donner(ObjetDonnerListe odl)
         {
             RoleService rs = new RoleService();

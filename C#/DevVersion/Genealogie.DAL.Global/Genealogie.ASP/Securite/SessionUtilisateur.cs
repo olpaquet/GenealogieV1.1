@@ -39,7 +39,8 @@ namespace Genealogie.ASP.Securite
                 {
                     HttpContext.Current.Session["id"] = ((Utilisateur)value).id;
                     HttpContext.Current.Session["nomaffichage"] = ((Utilisateur)value).nomAffichage();
-                    HttpContext.Current.Session["admin"] = (Utilisateur)value;
+                    HttpContext.Current.Session["admin"] = ((Utilisateur)value).estAdmin()?"1":null;
+                    var x = ((Utilisateur)value).estAdmin();
                 }
             }
         }

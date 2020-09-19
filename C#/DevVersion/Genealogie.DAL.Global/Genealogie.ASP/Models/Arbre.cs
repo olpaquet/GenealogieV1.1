@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Genealogie.Modeles.API.ASP.Modeles;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -7,16 +8,9 @@ using System.Web;
 
 namespace Genealogie.ASP.Models
 {
-    public class Arbre
+    public class Arbre : BArbre
     {
-        public int id { get; set; }
-        public string nom { get; set; }
-        public string description { get; set; }
-        public int idCreateur { get; set; }
-        public DateTime dateCreation { get; set; }
-        public int? idBlocage { get; set; }
-        public int? idBloqueur { get; set; }
-        public DateTime? dateBlocage { get; set; }
+        
     }
 
     public class ArbreIndex

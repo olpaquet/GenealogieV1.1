@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Genealogie.Modeles.API.ASP.Modeles;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -6,12 +7,9 @@ using System.Web;
 
 namespace Genealogie.ASP.Models
 {
-    public class Blocage
+    public class Blocage : BBlocage
     {
-        public int id { get; set; }
-        public string nom { get; set; }
-        public string description { get; set; }
-        public bool actif { get; set; }
+        
     }
 
     public class BlocageIndex
