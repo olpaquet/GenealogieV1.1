@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Genealogie.Modeles.API.ASP.Modeles;
 
 namespace Genealogie.ASP.Models
 {
@@ -29,10 +30,6 @@ namespace Genealogie.ASP.Models
         public string[] options { get; set; }
     }
 
-    
-    public class ChercherPar
-    {
-        public string chercheString { get; set; }
-    }
+    public class ChercherPar : BChercherPar { }
 
 }

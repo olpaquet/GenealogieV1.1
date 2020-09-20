@@ -64,6 +64,20 @@ namespace Genealogie.Modeles.API.ASP.Modeles
         public bool actif { get; set; }
     }
 
+    public abstract class BPersonne
+    {
+        public int id { get; set; }
+        public string nom { get; set; }
+        public string prenom { get; set; }
+        public DateTime? dateDeNaissance { get; set; }
+        public DateTime? dateDeDeces { get; set; }
+        public bool homme { get; set; }
+        public int idArbre { get; set; }
+        public DateTime dateAjout { get; set; }
+        public int? idPere { get; set; }
+        public int? idMere { get; set; }
+    }
+
     public abstract class BNouvelle
     {
         public int id { get; set; }
@@ -72,5 +86,39 @@ namespace Genealogie.Modeles.API.ASP.Modeles
         public int idCreateur { get; set; }
         public DateTime dateCreation { get; set; }
         public bool actif { get; set; }
+    }
+
+    public abstract class BAbonnement
+    {
+        public int id { get; set; }
+        public string nom { get; set; }
+        public string description { get; set; }
+        public int duree { get; set; }
+        public decimal prix { get; set; }
+        public int nombreMaxArbres { get; set; }
+        public int nombreMaxPersonnes { get; set; }
+        public bool actif { get; set; }
+    }
+
+    public abstract class BCouple
+    {
+        public class Couple
+        {
+            public int idPersonne { get; set; }
+            public int idPartenaire { get; set; }
+            public DateTime dateDebut { get; set; }
+            public DateTime? dateFin { get; set; }
+        }
+    }
+
+
+
+    /******************/
+
+    public abstract class BChercherPar
+    {
+        public string chercheString { get; set; }
+        public int chercheInt { get; set; }
+
     }
 }

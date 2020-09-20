@@ -150,6 +150,8 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AbonnementController.cs" />
+    <Compile Include="Controllers\ArbreController.cs" />
     <Compile Include="Controllers\BlocageController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NouvelleController.cs" />
@@ -160,10 +162,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Abonnement.cs" />
     <Compile Include="Models\Arbre.cs" />
     <Compile Include="Models\Blocage.cs" />
     <Compile Include="Models\ExtraClasses.cs" />
     <Compile Include="Models\Nouvelle.cs" />
+    <Compile Include="Models\Personne.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\Theme.cs" />
     <Compile Include="Models\Utilisateur.cs" />
@@ -174,8 +178,11 @@
     <Compile Include="Securite\AnonymeAutAttribute.cs" />
     <Compile Include="Securite\ConnecteAutAttribute.cs" />
     <Compile Include="Securite\ExisteConstraint.cs" />
+    <Compile Include="Securite\ProprietaireConstraint.cs" />
     <Compile Include="Securite\SessionUtilisateur.cs" />
     <Compile Include="ServiceGeneral\ExplorationObjet.cs" />
+    <Compile Include="Services.API\AbonnementServiceAPI.cs" />
+    <Compile Include="Services.API\ArbreServiceAPI.cs" />
     <Compile Include="Services.API\BaseServiceAPI.cs" />
     <Compile Include="Services.API\BlocageServiceAPI.cs" />
     <Compile Include="Services.API\NouvelleServiceAPI.cs" />
@@ -183,6 +190,7 @@
     <Compile Include="Services.API\ThemeServiceAPI.cs" />
     <Compile Include="Services.API\UtilisateurRoleServiceAPI.cs" />
     <Compile Include="Services.API\UtilisateurServiceAPI.cs" />
+    <Compile Include="Validation\PositifAttribute.cs" />
     <Compile Include="Validation\InutiliseeAttribute.cs" />
     <Compile Include="Validation\MotDePasseConfirmeAttribute.cs" />
     <Compile Include="Validation\NomUniqueAttribute.cs" />
@@ -230,24 +238,30 @@
     <Content Include="Views\Utilisateur\Creer.cshtml" />
     <Content Include="Views\Utilisateur\Supprimer.cshtml" />
     <Content Include="Views\Utilisateur\Enregistrer.cshtml" />
-    <Content Include="Views\Role\Index.cshtml" />
-    <Content Include="Views\Role\Creer.cshtml" />
-    <Content Include="Views\Role\Modifier.cshtml" />
-    <Content Include="Views\Role\Supprimer.cshtml" />
-    <Content Include="Views\Role\Details.cshtml" />
-    <Content Include="Views\Blocage\Index.cshtml" />
-    <Content Include="Views\Blocage\Creer.cshtml" />
-    <Content Include="Views\Blocage\Details.cshtml" />
-    <Content Include="Views\Blocage\Modifier.cshtml" />
-    <Content Include="Views\Blocage\Supprimer.cshtml" />
-    <Content Include="Views\Theme\Index.cshtml" />
-    <Content Include="Views\Theme\Details.cshtml" />
-    <Content Include="Views\Theme\Creer.cshtml" />
-    <Content Include="Views\Theme\Modifier.cshtml" />
-    <Content Include="Views\Theme\Supprimer.cshtml" />
+    <Content Include="Views\_admin\Role\Index.cshtml" />
+    <Content Include="Views\_admin\Role\Creer.cshtml" />
+    <Content Include="Views\_admin\Role\Modifier.cshtml" />
+    <Content Include="Views\_admin\Role\Supprimer.cshtml" />
+    <Content Include="Views\_admin\Role\Details.cshtml" />
+    <Content Include="Views\_admin\Blocage\Index.cshtml" />
+    <Content Include="Views\_admin\Blocage\Creer.cshtml" />
+    <Content Include="Views\_admin\Blocage\Details.cshtml" />
+    <Content Include="Views\_admin\Blocage\Modifier.cshtml" />
+    <Content Include="Views\_admin\Blocage\Supprimer.cshtml" />
+    <Content Include="Views\_admin\Theme\Index.cshtml" />
+    <Content Include="Views\_admin\Theme\Details.cshtml" />
+    <Content Include="Views\_admin\Theme\Creer.cshtml" />
+    <Content Include="Views\_admin\Theme\Modifier.cshtml" />
+    <Content Include="Views\_admin\Theme\Supprimer.cshtml" />
     <Content Include="Views\Nouvelle\Details.cshtml" />
     <Content Include="Views\Nouvelle\Creer.cshtml" />
     <Content Include="Views\Nouvelle\Index.cshtml" />
+    <Content Include="Views\_admin\Abonnement\Index.cshtml" />
+    <Content Include="Views\_admin\Abonnement\Details.cshtml" />
+    <Content Include="Views\_admin\Abonnement\Creer.cshtml" />
+    <Content Include="Views\_admin\Abonnement\Modifier.cshtml" />
+    <Content Include="Views\Arbre\Index.cshtml" />
+    <Content Include="Views\Arbre\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -185,6 +185,8 @@ namespace Genealogie.DAL.Global.Conversion
             ,
                 datededeces = (DateTime?)idr[nameof(Personne.datededeces)].SiNul()
             ,
+                homme = (int)idr[nameof(Personne.homme)]
+            ,
                 idarbre = (int)idr[nameof(Personne.idarbre)]
             ,
                 dateajout = (DateTime)idr[nameof(Personne.dateajout)]

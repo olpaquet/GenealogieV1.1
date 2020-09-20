@@ -133,7 +133,7 @@ namespace Genealogie.ASP.Models
         [Required]
         [MaxLength(50)]
         [DisplayName("identifiant")]
-        [NomUnique("Utilisateur","login",EnumAction.CREER)]
+        [NomUnique("Utilisateur","login","",EnumAction.CREER)]
         public string login { get; set; }
         [Required]
         [MaxLength(50)]

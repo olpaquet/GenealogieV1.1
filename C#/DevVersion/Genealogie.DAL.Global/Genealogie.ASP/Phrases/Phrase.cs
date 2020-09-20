@@ -13,5 +13,7 @@ namespace Genealogie.ASP.Phrases
         public static string NomExiste() { return $"Ce nom existe déjà."; }
         public static string TitreExiste() { return $"Ce titre existe déjà."; }
         public static string MotDePasseConfirme() { return $"Les deux mots de passe ne sont pas identiques."; }
+        public static string NombreStrictementPositif() { return $"Cette valeur doit être strictement positive."; }
+        public static string NombrePositif() { return $"Cette valeur doit être supérieure ou égale à zéro."; }
     }
 }

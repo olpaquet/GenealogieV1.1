@@ -39,7 +39,7 @@ namespace Genealogie.ASP.Models
     {
         [Required]
         [MaxLength(50)]
-        [NomUnique("Role","nom",EnumAction.CREER)]
+        [NomUnique("Role","nom","",EnumAction.CREER)]
         public string nom { get; set; }
         [Required]
         [MaxLength(1000)]
@@ -55,7 +55,7 @@ namespace Genealogie.ASP.Models
         public int id { get; set; }
         [Required]
         [MaxLength(50)]
-        [NomUnique("Role","nom",EnumAction.MODIFIER)]
+        [NomUnique("Role","nom","",EnumAction.MODIFIER)]
         public string nom { get; set; }
         [Required]
         [MaxLength(1000)]

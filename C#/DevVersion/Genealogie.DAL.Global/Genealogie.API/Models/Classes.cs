@@ -14,5 +14,7 @@ namespace Genealogie.API.Models
     public class Blocage : BBlocage { }
     public class Theme : BTheme { }
     public class Nouvelle : BNouvelle { }
-    
+    public class Abonnement : BAbonnement { }
+    public class Arbre : BArbre { }
+    public class Personne : BPersonne { }    
 }

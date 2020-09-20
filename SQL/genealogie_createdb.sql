@@ -39,6 +39,9 @@ alter table Message drop constraint fk_message_emetteur
 
 /****ENDDROPFK*/
 
+/****VUE****/
+
+
 /****SUPERVUE*/
 
 drop view v_tables
@@ -138,7 +141,8 @@ go
  idabonne int not null,
  idabonnement int not null,
  dateabonnement datetime not null,
- cartedepayement nvarchar(50) not null
+ cartedepayement nvarchar(50) not null,
+ prix decimal not null default 0.0
  constraint pk_utilisateurabonnement primary key(idabonne,idabonnement, dateabonnement)
  )
  
@@ -172,7 +176,7 @@ go
  constraint pk_arbre primary key(id)
  )
  create unique index iu_arbre_nom on Arbre(nom,idcreateur)
- 
+ create index i_arbre_createur on Arbre(idcreateur)
  go
  
  
@@ -193,12 +197,16 @@ go
  prenom nvarchar(50),
  datedenaissance datetime,
  datededeces datetime,
+ homme int not null,
  idarbre int not null,
  dateajout datetime not null,
  idpere int,
  idmere int
  constraint pk_personne primary key (id)
  )
+create index i_personne_pere on Personne(idpere)
+create index i_personne_mere on Personne(idmere)
+
 
 
  create table Couple(
@@ -824,18 +832,18 @@ go
 drop procedure utilisateurabonnement_cre
 go
 create PROCEDURE utilisateurabonnement_cre
- @idabonne int, @idabonnement int, @dateabonnement datetime, @cartedepayement nvarchar(100)
+ @idabonne int, @idabonnement int, @dateabonnement datetime, @cartedepayement nvarchar(100), @prix decimal
 AS
-insert into utilisateurabonnement (idabonne,idabonnement,dateabonnement,cartedepayement) values (@idabonne,@idabonnement,@dateabonnement,@cartedepayement);
+insert into utilisateurabonnement (idabonne,idabonnement,dateabonnement,cartedepayement,prix) values (@idabonne,@idabonnement,@dateabonnement,@cartedepayement,@prix);
 
 go
 drop procedure utilisateurabonnement_mod
 go
 create PROCEDURE utilisateurabonnement_mod
-@idabonne int,@idabonnement int,@dateabonnement datetime,@cartedepayement nvarchar(100)
+@idabonne int,@idabonnement int,@dateabonnement datetime,@cartedepayement nvarchar(100), @prix decimal
 AS
 update utilisateurabonnement
-set dateabonnement=@dateabonnement,cartedepayement=@cartedepayement
+set dateabonnement=@dateabonnement,cartedepayement=@cartedepayement,prix=@prix
 where idabonne=@idabonne and idabonnement=@idabonnement
 ;
 go
@@ -1065,10 +1073,10 @@ go
 drop procedure Couple_cre
 go
 create PROCEDURE Couple_cre
- @idpersonne int out, @idpartenaire int, @datedebut datetime, @datefin datetime
+ @idpersonne int , @idpartenaire int, @datedebut datetime, @datefin datetime
 AS
-insert into Couple (idpartenaire,datedebut,datefin) values (@idpartenaire,@datedebut,@datefin);
-set @idpersonne = @@IDENTITY;
+insert into Couple (idpersonne,idpartenaire,datedebut,datefin) values (@idpersonne,@idpartenaire,@datedebut,@datefin);
+
 go
 drop procedure Couple_mod
 go
@@ -1076,17 +1084,18 @@ create PROCEDURE Couple_mod
 @idpersonne int,@idpartenaire int,@datedebut datetime,@datefin datetime
 AS
 update Couple
-set idpartenaire=@idpartenaire,datedebut=@datedebut,datefin=@datefin
+set datedebut=@datedebut,datefin=@datefin
 where idpersonne=@idpersonne
 ;
 go
 drop procedure Couple_eff
 go
 create procedure Couple_eff
-@idpersonne int
+@idpersonne int,
+@idpartenaire int
 AS
 delete Couple 
-where idpersonne=@idpersonne
+where idpersonne=@idpersonne and idpartenaire = @idpartenaire
 ;
 go
 /*
@@ -1245,18 +1254,20 @@ go
 drop procedure Personne_cre
 go
 create PROCEDURE Personne_cre
- @id int out, @nom nvarchar(100), @prenom nvarchar(100), @datedenaissance datetime, @datededeces datetime, @idarbre int, @dateajout datetime, @idpere int, @idmere int
+ @id int out, @nom nvarchar(100), @prenom nvarchar(100), @datedenaissance datetime, 
+ @datededeces datetime, @homme int, @idarbre int, @dateajout datetime, @idpere int, @idmere int
 AS
-insert into Personne (nom,prenom,datedenaissance,datededeces,idarbre,dateajout,idpere,idmere) values (@nom,@prenom,@datedenaissance,@datededeces,@idarbre,@dateajout,@idpere,@idmere);
+insert into Personne (nom,prenom,datedenaissance,datededeces,homme,idarbre,dateajout,idpere,idmere) 
+values (@nom,@prenom,@datedenaissance,@datededeces,@homme,@idarbre,@dateajout,@idpere,@idmere);
 set @id = @@IDENTITY;
 go
 drop procedure Personne_mod
 go
 create PROCEDURE Personne_mod
-@id int,@nom nvarchar(100),@prenom nvarchar(100),@datedenaissance datetime,@datededeces datetime,@idarbre int,@dateajout datetime,@idpere int,@idmere int
+@id int,@nom nvarchar(100),@prenom nvarchar(100),@datedenaissance datetime,@datededeces datetime,@homme int,@idarbre int,@dateajout datetime,@idpere int,@idmere int
 AS
 update Personne
-set nom=@nom,prenom=@prenom,datedenaissance=@datedenaissance,datededeces=@datededeces,idarbre=@idarbre,dateajout=@dateajout,idpere=@idpere,idmere=@idmere
+set nom=@nom,prenom=@prenom,datedenaissance=@datedenaissance,datededeces=@datededeces,homme=@homme,idarbre=@idarbre,dateajout=@dateajout,idpere=@idpere,idmere=@idmere
 where id=@id
 ;
 go
@@ -1388,9 +1399,55 @@ exec role_cre @iid out, 'Editeur de nouvelles','Pas de fake news svp'
 exec role_cre @iid out, 'Maître du forum','Surveillant général'
 exec Role_cre @iid out, 'Maître de messagerie', 'Surveillant général aussi'
 
+exec Blocage_cre @iid out, 'Fake news', 'fake news interdites'
+exec Blocage_cre @iid out, 'Supporter du Standard','je n''accepte que du mauve'
+
+
+exec Abonnement_cre @iid out, 'Platinium', 'Tout, à vie!', 0, 999.9, 0,0
+exec Abonnement_cre @iid out, 'Premium', 'un certain temps', 365, 400, 0,0
+exec Abonnement_cre @iid out, 'Light', 'léger, peu de temps',365, 250, 5, 500
+
 
 exec utilisateur_cre @id out, 'admin','admin',null,'adm@i.n',null,1,null,'1','presel','postsel', '1'
 exec utilisateur_mod @id, 'admin',null,'adm@i.n',null,1,null,'1,3'
+
+
+declare @dd datetime
+set @dd = (select GETDATE())
+exec Nouvelle_cre @id out, 'C''est parti!', 'Super promotion à l''occasion de l''ouverture du site. Pour chaque abonnement platinium souscrit, nous vous dirons merci.', 1, @dd
+
+set @dd = (select GETDATE())
+exec utilisateur_cre @id out, 'sabrina','Salerno','Sabrina','sabrina@boysboys.boys',null,2,null,'1','presel','postsel', null
+exec Arbre_cre @id out, 'mon premier arbre', 'Essayons', 2, @dd, null,null,null
+set @dd = (select GETDATE())
+exec Arbre_cre @id out, 'mon deuxième arbre', 'xxxEssayons', 2, @dd, 2,1,@dd
+
+declare @idarbre int
+set @idarbre = 2
+/*1*/exec Personne_cre @id out, 'de Belgique', 'Albert', null,null, 1, 2, @dd, null,null
+/*2*/exec Personne_cre @id out, 'Rufio di Calabre', 'Paola', null,null, 2, 2, @dd, null,null
+
+exec Couple_cre 1, 2, @dd, null
+exec Couple_cre 2, 1, @dd,null
+/*3*/exec Personne_cre @id out, 'de Belgique', 'Philippe', null,null,1,2, @dd, 1,2
+/*4*/exec Personne_cre @id out, 'd''Udekem d''Acoz', 'Mathilde', null,null,0,2, @dd, null,null
+/*5*/exec Personne_cre @id out, 'de Belgique', 'Elisabeth', null,null,0,2, @dd, 3,4
+
+/*6*/exec Personne_cre @id out, 'Paquet', 'François', null, null, 1, 1, @dd, null, null
+/*7*/exec Personne_cre @id out, 'Jooris', 'Nicole', null, null, 1, 1, @dd, null, null
+/*8*/exec Personne_cre @id out, 'Paquet','Olivier',null,null,1,1,@dd,6,7
+/*9*/exec Personne_cre @id out, 'Paquet','Florian',null,null,1,1,@dd,8,null
+/*10*/exec Personne_cre @id out, 'Paquet','Nicolas',null,null,1,1,@dd,9,null
+
+
+
+
+
+
+
+
+
+
 /*@id int,@nom nvarchar(100),@prenom nvarchar(100),
 @email nvarchar(400),@datedenaissance datetime,@homme int, @cartedepayement nvarchar(50),
 @roles nvarchar(max) */
@@ -1402,3 +1459,6 @@ select * from utilisateurrole
 /*****ENDCRUD*/
 
 
+select * from nouvelle
+select * from couple
+select * from personne

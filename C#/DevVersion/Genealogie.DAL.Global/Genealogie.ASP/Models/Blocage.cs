@@ -28,7 +28,7 @@ namespace Genealogie.ASP.Models
     {
         [Required]
         [MaxLength(50)]
-        [NomUnique("Blocage","nom",EnumAction.CREER)]
+        [NomUnique("Blocage","nom","",EnumAction.CREER)]
         public string nom { get; set; }
         [Required]
         [MaxLength(50)]
@@ -44,7 +44,7 @@ namespace Genealogie.ASP.Models
         public int id { get; set; }
         [Required]
         [MaxLength(50)]
-        [NomUnique("Blocage", "nom", EnumAction.MODIFIER)]
+        [NomUnique("Blocage", "nom","", EnumAction.MODIFIER)]
         public string nom { get; set; }
         [Required]
         [MaxLength(50)]

@@ -12,5 +12,7 @@ namespace Services
         }
 
         public enum EnumAction { CREER, MODIFIER, SUPPRIMER }
+
+        public enum EnumTypeDeDonnee { INT, DECIMAL}        
     
 }

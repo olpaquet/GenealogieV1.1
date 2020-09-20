@@ -107,6 +107,14 @@ namespace Genealogie.DAL.Global.Repository
             return false;
             throw new NotImplementedException();
         }
+
+        public IEnumerable<Arbre> DonnerParUtilisateur(int idutilisateur)
+        {
+            Commande com = new Commande($"{CONST_ARBRE_REQ} where idcreateur = @idcreateur");
+            com.AjouterParametre("idcreateur", idutilisateur);
+            return _connexion.ExecuterLecteur(com, j => j.VersArbre());
+            throw new NotImplementedException();
+        }
         //throw new NotImplementedException();
         //throw new NotImplementedException();
 

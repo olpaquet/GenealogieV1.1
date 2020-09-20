@@ -4,7 +4,7 @@ use Genealogie
 declare @yes nvarchar(max);
 declare @ttype varchar(100);
 
-declare @nomtable varchar(250) = 'Nouvelle'
+declare @nomtable varchar(250) = 'Personne'
 DECLARE @idcol int
 declare @nomcol VARCHAR(250)
 declare @typecol nVARCHAR(25)
@@ -18,6 +18,8 @@ declare @val varchar(max)
 declare @return varchar(max)
 declare @clef varchar(max)
 declare @cleftype varchar(max)
+
+declare @listep varchar(max)
 
 DECLARE c CURSOR FOR
     SELECT  idcol, nomcol, typecol, longueurmax, precision, scale, estnullable FROM v_tables
@@ -35,6 +37,10 @@ set @yesmodify = '';
 
 WHILE @@FETCH_STATUS = 0
 BEGIN
+
+	if @listep <> ''
+		set @listep = concat(@listep,',')
+	set @listep = concat(@listep, @nomcol);
 
 	select @ttype = dbo.DonnerTypeCSharp(@typecol, @estnullable)
 	/*select @ttype = CASE
@@ -66,9 +72,13 @@ BEGIN
 	FETCH c INTO  @idcol, @nomcol, @typecol, @longueurmax, @precision, @scale, @estnullable
 	
 END
- 
+
 CLOSE c
 DEALLOCATE c
+
+
+print concat('private const string CONST_',upper(@nomtable),'_REQ = "','select',' ',@listep,' ','from',' ',@nomtable,'";' )
+
 
 print concat('public int Creer(',@nomtable,' ','e){')
 print concat('Commande com = new Commande("',@nomtable,'_cre",true);')

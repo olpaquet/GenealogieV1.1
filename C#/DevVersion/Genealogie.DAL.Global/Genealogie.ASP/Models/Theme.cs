@@ -32,7 +32,7 @@ namespace Genealogie.ASP.Models
     {
         [Required]
         [MaxLength(50)]
-        [NomUnique("Theme","titre",EnumAction.CREER)]
+        [NomUnique("Theme","titre","",EnumAction.CREER)]
         public string titre { get; set; }
         [Required]
         [MaxLength(100)]
@@ -48,7 +48,7 @@ namespace Genealogie.ASP.Models
         public int id { get; set; }
         [Required]
         [MaxLength(50)]
-        [NomUnique("Theme","titre",EnumAction.MODIFIER)]
+        [NomUnique("Theme","titre","",EnumAction.MODIFIER)]
         public string titre { get; set; }
         [Required]
         [MaxLength(1000)]

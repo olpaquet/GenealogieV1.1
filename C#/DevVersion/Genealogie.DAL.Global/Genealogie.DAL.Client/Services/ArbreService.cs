@@ -64,6 +64,12 @@ namespace Genealogie.DAL.Client.Services
             throw new NotImplementedException();
         }
 
+        public IEnumerable<Arbre> DonnerParUtilisateur(int idutilisateur)
+        {
+            return _rep.DonnerParUtilisateur(idutilisateur).Select(j => j.VersClient());
+            throw new NotImplementedException();
+        }
+
         public bool EstUtilisee(int id, string[] options)
         {
             return _rep.EstUtilisee(id, options);

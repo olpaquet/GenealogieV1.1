@@ -24,13 +24,15 @@ namespace Genealogie.ASP.Validation
         }*/
         private EnumAction _action;
         private string _cherche;
+        private string _chercheint;
         private string _modele;
 
-        public NomUniqueAttribute(string modele, string cherche, EnumAction action)
+        public NomUniqueAttribute(string modele, string cherche, string chercheint, EnumAction action)
         {
             _action = action;
             _modele = modele;
             _cherche = cherche;
+            _chercheint = chercheint;
             
             switch (_modele)
             {
@@ -54,11 +56,35 @@ namespace Genealogie.ASP.Validation
             Ob ob = new Ob();
 
             ob.lit = (string)ExplorationObjet.Valeur(contexteVal.ObjectInstance, _cherche);
-            
-            if (ExplorationObjet.Existe(contexteVal.ObjectInstance, "id")) ob.id = (int?)ExplorationObjet.Valeur(contexteVal.ObjectInstance, "id");
-            else ob.id = null;
+
+
+            try
+            {
+                if (ExplorationObjet.Existe(contexteVal.ObjectInstance, "id")) ob.id = (int?)ExplorationObjet.Valeur(contexteVal.ObjectInstance, "id");
+                else ob.id = null;
+
+            }
+            catch (Exception)
+            {
+                return new ValidationResult("Kolossale Error :(");
+                throw;
+            }
 
             if (_action == EnumAction.CREER) ob.id = null;
+
+            if (!(_chercheint == "") )
+            {
+                try
+                {
+                    if (ExplorationObjet.Existe(contexteVal.ObjectInstance, _chercheint)) ob.litint = (int)ExplorationObjet.Valeur(contexteVal.ObjectInstance, _chercheint);
+                    else return new ValidationResult("Kolossale Error :(");
+                }
+                catch (Exception)
+                {
+                    return new ValidationResult("Kolossale Error :(");
+                    throw;
+                }
+            }
 
             switch (_modele)
             {
@@ -74,6 +100,12 @@ namespace Genealogie.ASP.Validation
                 case "Theme":
                     ob.res = new BlocageServiceAPI().DonnerParNom(ob.lit);
                     break;
+                case "Abonnement":
+                    ob.res = new AbonnementServiceAPI().DonnerParNom(ob.lit);
+                    break;
+                case "Arbre":
+                    ob.res = new ArbreServiceAPI().DonnerParNom(ob.lit, ob.litint);
+                    break;
                 default:
                     b = false;
                     break;
@@ -84,7 +116,7 @@ namespace Genealogie.ASP.Validation
             switch (_action)
             {
                 case EnumAction.CREER:
-                    if (ob.res != null) b = false;
+                    if (ob.res != null ) b = false;
                     break;
                 case EnumAction.MODIFIER:
                     if (!(ob.res == ob.id)) b = false;
@@ -100,6 +132,7 @@ namespace Genealogie.ASP.Validation
         {
             public EnumAction action { get; set; }
             public string lit { get; set; }
+            public int litint { get; set; }
             public int? id { get; set; }
             public int? res { get; set; }
         }      

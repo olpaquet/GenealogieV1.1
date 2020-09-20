@@ -24,7 +24,7 @@ namespace Genealogie.API
             //*json.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
 
             //Class Formatter permettant un comportement plus propre au niveau du navigateur, il ne reçois plus du Text formatté en JSON mais du application/json
-            config.Formatters.Add(new BrowserJsonFormatter());
+            config.Formatters.Add(new FormatteurJSon());
 
             // Itinéraires de l'API Web
             config.MapHttpAttributeRoutes();

@@ -91,11 +91,13 @@ namespace Genealogie.DAL.Global.Modeles
         public string prenom { get; set; }
         public DateTime? datedenaissance { get; set; }
         public DateTime? datededeces { get; set; }
+        public int homme {get; set;}
         public int idarbre { get; set; }
         public DateTime dateajout { get; set; }
         public int? idpere { get; set; }
         public int? idmere { get; set; }
     }
+
     public class Role
     {
         public int id { get; set; }

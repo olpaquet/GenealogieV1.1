@@ -35,14 +35,17 @@
                     <li>@Html.ActionLink("À propos de", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
 
-                    <li>@Html.ActionLink("Mes arbres", "Index", "Arbre")</li>
-                    
+                    @if (HttpContext.Current.Session["utilisateur"] != null)
+                    {<li>@Html.ActionLink("Mes arbres", "Index", "Arbre")</li>}
+
                     @{ var xx = HttpContext.Current.Session["admin"];}
-                    @if (HttpContext.Current.Session["admin"] != null) {
-                    <li>@Html.ActionLink("Utilisateurs", "Index", "Utilisateur")</li>
-                    <li>@Html.ActionLink("Rôles", "Index", "Role")</li>
-                    <li>@Html.ActionLink("Blocages", "Index", "Blocage")</li>
-                    <li>@Html.ActionLink("Thèmes", "Index", "Theme")</li>
+                    @if (HttpContext.Current.Session["admin"] != null)
+                    {
+                        <li>@Html.ActionLink("Utilisateurs", "Index", "Utilisateur")</li>
+                        <li>@Html.ActionLink("Rôles", "Index", "Role")</li>
+                        <li>@Html.ActionLink("Blocages", "Index", "Blocage")</li>
+                        <li>@Html.ActionLink("Thèmes", "Index", "Theme")</li>
+                        <li>@Html.ActionLink("Abonnements", "Index", "Abonnement")</li>
                     }
                 </ul>
             </div>

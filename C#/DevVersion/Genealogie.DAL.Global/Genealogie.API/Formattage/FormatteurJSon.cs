@@ -9,9 +9,9 @@ using System.Web;
 
 namespace Genealogie.API.Formattage
 {
-    public class BrowserJsonFormatter : JsonMediaTypeFormatter
+    public class FormatteurJSon : JsonMediaTypeFormatter
     {
-        public BrowserJsonFormatter()
+        public FormatteurJSon()
         {
             this.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
             this.SerializerSettings.Formatting = Formatting.Indented;

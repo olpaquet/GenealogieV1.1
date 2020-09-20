@@ -23,5 +23,17 @@ namespace Genealogie.API.Conversion
 
         public static Nouvelle VersAPI(this cl.Nouvelle e) { if (e == null) { return null; } return new Nouvelle { actif = e.actif, description = e.description, id = e.id, titre = e.titre, dateCreation=e.dateCreation, idCreateur=e.idCreateur }; }
         public static cl.Nouvelle VersClient(this Nouvelle e) { if (e == null) { return null; } return new cl.Nouvelle { actif = e.actif, description = e.description, id = e.id, titre = e.titre, dateCreation=e.dateCreation, idCreateur=e.idCreateur }; }
+
+        public static Abonnement VersAPI(this cl.Abonnement e) { if (e == null) { return null; } return new Abonnement { actif = e.actif, description = e.description, id = e.id, nom = e.nom, duree=e.duree, nombreMaxArbres=e.nombreMaxArbres, nombreMaxPersonnes=e.nombreMaxPersonnes, prix=e.prix }; }
+        public static cl.Abonnement VersClient(this Abonnement e) { if (e == null) { return null; } return new cl.Abonnement { actif = e.actif, description = e.description, id = e.id, nom = e.nom, duree = e.duree, nombreMaxArbres = e.nombreMaxArbres, nombreMaxPersonnes = e.nombreMaxPersonnes, prix = e.prix }; }
+
+        public static Arbre VersAPI(this cl.Arbre e) { if (e == null) { return null; } return new Arbre { dateBlocage = e.dateBlocage, dateCreation=e.dateCreation, description=e.description, id=e.id, idBlocage=e.idBlocage, idBloqueur=e.idBloqueur, idCreateur=e.idCreateur, nom=e.nom }; }
+        public static cl.Arbre VersClient(this Arbre e) { if (e == null) { return null; } return new cl.Arbre { dateBlocage = e.dateBlocage, dateCreation = e.dateCreation, description = e.description, id = e.id, idBlocage = e.idBlocage, idBloqueur = e.idBloqueur, idCreateur = e.idCreateur, nom = e.nom }; }
+
+        public static Personne VersAPI(this cl.Personne e) { if (e == null) { return null; }return new Personne { dateDeNaissance=e.dateDeNaissance, dateAjout=e.dateAjout, dateDeDeces=e.dateDeDeces, homme=e.homme, id=e.id, idArbre=e.idArbre, idMere=e.idMere, idPere=e.idPere, nom=e.nom, prenom=e.prenom  }; }
+        public static cl.Personne VersClient(this Personne e){ if (e == null) { return null; } return new cl.Personne { dateDeNaissance = e.dateDeNaissance, dateAjout = e.dateAjout, dateDeDeces = e.dateDeDeces, homme = e.homme, id = e.id, idArbre = e.idArbre, idMere = e.idMere, idPere = e.idPere, nom = e.nom, prenom = e.prenom }; }
+
+
+
     }
 }

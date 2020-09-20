@@ -7,25 +7,25 @@ namespace Genealogie.DAL.Client.Modeles
     
     public class Abonnement
     {
-        public int Id { get; set; }
-        public string Nom { get; set; }
-        public string Description { get; set; }
-        public int Duree { get; set; }
-        public decimal Prix { get; set; }
-        public int NombreMaxArbres { get; set; }
-        public int NombreMaxPersonnes { get; set; }
-        public int Actif { get; set; }
+        public int id { get; set; }
+        public string nom { get; set; }
+        public string description { get; set; }
+        public int duree { get; set; }
+        public decimal prix { get; set; }
+        public int nombreMaxArbres { get; set; }
+        public int nombreMaxPersonnes { get; set; }
+        public bool actif { get; set; }
     }
     public class Arbre
     {
-        public int Id { get; set; }
-        public string Nom { get; set; }
-        public string Description { get; set; }
-        public int IdCreateur { get; set; }
-        public DateTime DateCreation { get; set; }
-        public int? IdBlocage { get; set; }
-        public int? IdBloqueur { get; set; }
-        public DateTime? DateBlocage { get; set; }
+        public int id { get; set; }
+        public string nom { get; set; }
+        public string description { get; set; }
+        public int idCreateur { get; set; }
+        public DateTime dateCreation { get; set; }
+        public int? idBlocage { get; set; }
+        public int? idBloqueur { get; set; }
+        public DateTime? dateBlocage { get; set; }
     }
     public class Blocage
     {
@@ -42,10 +42,10 @@ namespace Genealogie.DAL.Client.Modeles
     }
     public class Couple
     {
-        public int IdPersonne { get; set; }
-        public int IdPartenaire { get; set; }
-        public DateTime DateDebut { get; set; }
-        public DateTime? DateFin { get; set; }
+        public int idPersonne { get; set; }
+        public int idPartenaire { get; set; }
+        public DateTime dateDebut { get; set; }
+        public DateTime? dateFin { get; set; }
     }
     public class Message
     {
@@ -88,15 +88,16 @@ namespace Genealogie.DAL.Client.Modeles
     }
     public class Personne
     {
-        public int Id { get; set; }
-        public string Nom { get; set; }
-        public string Prenom { get; set; }
-        public DateTime? DateDeNaissance { get; set; }
-        public DateTime? DateDeDeces { get; set; }
-        public int IdArbre { get; set; }
-        public DateTime DateAjout { get; set; }
-        public int? IdPere { get; set; }
-        public int? IdMere { get; set; }
+        public int id { get; set; }
+        public string nom { get; set; }
+        public string prenom { get; set; }
+        public DateTime? dateDeNaissance { get; set; }
+        public DateTime? dateDeDeces { get; set; }
+        public bool homme { get; set; }
+        public int idArbre { get; set; }
+        public DateTime dateAjout { get; set; }
+        public int? idPere { get; set; }
+        public int? idMere { get; set; }
     }
     public class Role
     {

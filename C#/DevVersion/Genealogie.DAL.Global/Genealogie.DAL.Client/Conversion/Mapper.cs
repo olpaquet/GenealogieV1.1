@@ -17,8 +17,8 @@ namespace Genealogie.DAL.Client.Conversion
         public static UtilisateurRole VersClient(this gl.UtilisateurRole e) { if (e == null) return null; return new UtilisateurRole {idUtilisateur=e.idutilisateur,idrole=e.idrole }; }
         public static gl.UtilisateurRole VersGlobal(this UtilisateurRole e) { if (e == null) return null; return new gl.UtilisateurRole {idutilisateur=e.idUtilisateur,idrole=e.idrole}; }
 
-        public static Arbre VersClient(this gl.Arbre e) { if (e == null) return null; return new Arbre { DateBlocage=e.dateblocage, DateCreation=e.datecreation, Description=e.description, Id=e.id, IdBlocage=e.idblocage, IdBloqueur=e.idbloqueur, IdCreateur=e.idcreateur, Nom=e.nom}; }
-        public static gl.Arbre VersGlobal(this Arbre e) { if (e == null) return null; return new gl.Arbre {dateblocage=e.DateBlocage, datecreation=e.DateCreation, description=e.Description, id=e.Id, idblocage=e.IdBlocage, idbloqueur=e.IdBloqueur, idcreateur=e.IdCreateur, nom=e.Nom }; }
+        public static Arbre VersClient(this gl.Arbre e) { if (e == null) return null; return new Arbre { dateBlocage=e.dateblocage, dateCreation=e.datecreation, description=e.description, id=e.id, idBlocage=e.idblocage, idBloqueur=e.idbloqueur, idCreateur=e.idcreateur, nom=e.nom}; }
+        public static gl.Arbre VersGlobal(this Arbre e) { if (e == null) return null; return new gl.Arbre {dateblocage=e.dateBlocage, datecreation=e.dateCreation, description=e.description, id=e.id, idblocage=e.idBlocage, idbloqueur=e.idBloqueur, idcreateur=e.idCreateur, nom=e.nom }; }
 
         public static Blocage VersClient(this gl.Blocage e) { if (e == null) { return null; } return new Blocage { id = e.id, nom = e.nom, description = e.description, actif = e.actif == 1 ? true : false }; }
         public static gl.Blocage VersGlobal(this Blocage e) { if (e == null) { return null; } return new gl.Blocage { id = e.id, nom = e.nom, description = e.description, actif = e.actif ? 1 : 0 }; }
@@ -28,5 +28,11 @@ namespace Genealogie.DAL.Client.Conversion
 
         public static Nouvelle VersClient(this gl.Nouvelle e) { if (e == null) { return null; } return new Nouvelle { id = e.id, description = e.description, titre = e.titre, actif = e.actif == 1 ? true : false, dateCreation=e.datecreation, idCreateur=e.idcreateur }; }
         public static gl.Nouvelle VersGlobal(this Nouvelle e) { if (e == null) { return null; } return new gl.Nouvelle { id = e.id, description = e.description, titre = e.titre, actif = e.actif ? 1 : 0, idcreateur=e.idCreateur, datecreation=e.dateCreation }; }
+
+        public static Abonnement VersClient(this gl.Abonnement e) { if (e == null) { return null; } return new Abonnement { id = e.id, actif = e.actif == 1 ? true : false, description=e.description, duree=e.duree, nom=e.nom, nombreMaxArbres=e.nombremaxarbres, nombreMaxPersonnes=e.nombremaxpersonnes, prix=e.prix}; }
+        public static gl.Abonnement VersGlobal(this Abonnement e) { if (e == null) { return null; } return new gl.Abonnement { id = e.id, actif = e.actif ? 1 : 0, description=e.description, duree=e.duree, nom=e.nom, nombremaxarbres=e.nombreMaxArbres, nombremaxpersonnes=e.nombreMaxPersonnes, prix=e.prix}; }
+
+        public static Personne VersClient(this gl.Personne e) { if (e == null) { return null; }return new Personne { dateAjout=e.dateajout, dateDeDeces=e.datededeces, dateDeNaissance=e.datedenaissance, homme=(e.homme==1)?true:false, id=e.id, idArbre=e.idarbre, idMere=e.idmere, idPere=e.idpere, nom=e.nom, prenom=e.prenom }; }
+        public static gl.Personne VersGlobal(this Personne e) { if (e == null) { return null; }return new gl.Personne { dateajout=e.dateAjout, datededeces=e.dateDeDeces, datedenaissance=e.dateDeNaissance, homme=e.homme?1:0, id=e.id, idarbre=e.idArbre, idmere=e.idMere, idpere=e.idPere, nom=e.nom, prenom=e.prenom}; }
     }
 }
