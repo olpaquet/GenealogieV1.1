@@ -178,11 +178,17 @@
       },
       "Genealogie.DAL.Global/1.0.0": {
         "dependencies": {
+          "Services": "1.0.0",
           "System.Configuration.ConfigurationManager": "4.7.0",
           "System.Data.SqlClient": "4.8.2"
         },
         "runtime": {
           "Genealogie.DAL.Global.dll": {}
+        }
+      },
+      "Services/1.0.0": {
+        "runtime": {
+          "Services.dll": {}
         }
       },
       "BoiteAOutil.DB.Standard/1.0.0.0": {
@@ -343,6 +349,11 @@
       "hashPath": "system.text.encoding.codepages.4.7.0.nupkg.sha512"
     },
     "Genealogie.DAL.Global/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Services/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

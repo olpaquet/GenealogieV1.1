@@ -265,6 +265,7 @@
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
+          "Services": "1.0.0",
           "System.Configuration.ConfigurationManager": "4.7.0",
           "System.Data.SqlClient": "4.8.2"
         },
@@ -273,6 +274,16 @@
         },
         "runtime": {
           "bin/placeholder/Genealogie.DAL.Global.dll": {}
+        }
+      },
+      "Services/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "compile": {
+          "bin/placeholder/Services.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Services.dll": {}
         }
       }
     }
@@ -1000,6 +1011,11 @@
       "type": "project",
       "path": "../Genealogie.DAL.Global/Genealogie.DAL.Global.csproj",
       "msbuildProject": "../Genealogie.DAL.Global/Genealogie.DAL.Global.csproj"
+    },
+    "Services/1.0.0": {
+      "type": "project",
+      "path": "../Services/Services.csproj",
+      "msbuildProject": "../Services/Services.csproj"
     }
   },
   "projectFileDependencyGroups": {

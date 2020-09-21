@@ -1,4 +1,5 @@
 ﻿using Genealogie.DAL.Global.Modeles;
+using Services;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -9,6 +10,20 @@ namespace Genealogie.DAL.Global.Conversion
     internal static class Mapper
     {
         public static object SiNul(this object o) { return o == DBNull.Value ? null : o; }
+
+
+        public static Recherche VersRecherche(this IDataRecord idr)
+        {
+            if (idr == null) return null;
+            return new Recherche 
+            { 
+                nom=(string)idr[nameof(Recherche.nom)],
+                prenom = (string)idr[nameof(Recherche.prenom)],
+                dateDeDeces = (DateTime?)idr[nameof(Recherche.dateDeDeces)],
+                dateDeNaissance = (DateTime?)idr[nameof(Recherche.dateDeNaissance)],
+                homme = (bool?)idr[nameof(Recherche.homme)]                
+            };
+        }
 
         public static Abonnement VersAbonnement(this IDataRecord idr)
         {

@@ -10,6 +10,7 @@
       "Genealogie.DAL.Global/1.0.0": {
         "dependencies": {
           "NETStandard.Library": "2.0.3",
+          "Services": "1.0.0",
           "System.Configuration.ConfigurationManager": "4.7.0",
           "System.Data.SqlClient": "4.8.2",
           "BoiteAOutil.DB.Standard": "1.0.0.0",
@@ -178,6 +179,11 @@
           }
         }
       },
+      "Services/1.0.0": {
+        "runtime": {
+          "Services.dll": {}
+        }
+      },
       "BoiteAOutil.DB.Standard/1.0.0.0": {
         "runtime": {
           "BoiteAOutil.DB.Standard.dll": {
@@ -334,6 +340,11 @@
       "sha512": "sha512-aeu4FlaUTemuT1qOd1MyU4T516QR4Fy+9yDbwWMPHOHy7U8FD6SgTzdZFO7gHcfAPHtECqInbwklVvUK4RHcNg==",
       "path": "system.text.encoding.codepages/4.7.0",
       "hashPath": "system.text.encoding.codepages.4.7.0.nupkg.sha512"
+    },
+    "Services/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     },
     "BoiteAOutil.DB.Standard/1.0.0.0": {
       "type": "reference",

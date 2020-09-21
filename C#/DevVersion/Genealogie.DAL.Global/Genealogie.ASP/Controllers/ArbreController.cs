@@ -133,5 +133,7 @@ namespace Genealogie.ASP.Controllers
             bool b = rsa.Desactiver(id);
             return RedirectToAction("Index");
         }
+
+        
     }
 }

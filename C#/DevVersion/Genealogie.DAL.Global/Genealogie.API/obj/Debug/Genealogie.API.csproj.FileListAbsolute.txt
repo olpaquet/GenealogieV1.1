@@ -386,3 +386,5 @@ C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.G
 C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\Genealogie.API\obj\Debug\Genealogie.API.pdb
 C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\Genealogie.API\bin\Genealogie.Modeles.API.ASP.dll
 C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\Genealogie.API\bin\Genealogie.Modeles.API.ASP.pdb
+C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\Genealogie.API\bin\Services.dll
+C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\Genealogie.API\bin\Services.pdb

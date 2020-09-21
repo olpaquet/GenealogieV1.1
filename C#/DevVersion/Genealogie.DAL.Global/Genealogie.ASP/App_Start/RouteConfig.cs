@@ -16,10 +16,10 @@ namespace Genealogie.ASP
         {
 
             /*je rajoute la contrainte personnalisée pour l'attribut de route*/
-            /*DefaultInlineConstraintResolver constraintResolver = new DefaultInlineConstraintResolver();
-            constraintResolver.ConstraintMap.Add("ExisteX", typeof(ExisteXConstraint));
+            //DefaultInlineConstraintResolver constraintResolver = new DefaultInlineConstraintResolver();
+            //constraintResolver.ConstraintMap.Add("ExisteX", typeof(ExisteXConstraint));
 
-            routes.MapMvcAttributeRoutes(constraintResolver);*/            
+            //routes.MapMvcAttributeRoutes(constraintResolver);          
 
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 

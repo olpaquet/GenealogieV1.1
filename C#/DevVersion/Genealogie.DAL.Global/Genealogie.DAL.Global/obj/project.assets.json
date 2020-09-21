@@ -260,6 +260,16 @@
             "rid": "win"
           }
         }
+      },
+      "Services/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "compile": {
+          "bin/placeholder/Services.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Services.dll": {}
+        }
       }
     }
   },
@@ -981,11 +991,17 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
+    },
+    "Services/1.0.0": {
+      "type": "project",
+      "path": "../Services/Services.csproj",
+      "msbuildProject": "../Services/Services.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETStandard,Version=v2.0": [
       "NETStandard.Library >= 2.0.3",
+      "Services >= 1.0.0",
       "System.Configuration.ConfigurationManager >= 4.7.0",
       "System.Data.SqlClient >= 4.8.2"
     ]
@@ -1022,7 +1038,11 @@
       },
       "frameworks": {
         "netstandard2.0": {
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\o.paquet\\Documents\\GitHub\\GenealogieV1.1\\C#\\DevVersion\\Genealogie.DAL.Global\\Services\\Services.csproj": {
+              "projectPath": "C:\\Users\\o.paquet\\Documents\\GitHub\\GenealogieV1.1\\C#\\DevVersion\\Genealogie.DAL.Global\\Services\\Services.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

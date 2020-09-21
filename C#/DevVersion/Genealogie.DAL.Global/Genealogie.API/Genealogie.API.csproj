@@ -133,6 +133,7 @@
     <Compile Include="Controllers\ArbreController.cs" />
     <Compile Include="Controllers\BlocageController.cs" />
     <Compile Include="Controllers\NouvelleController.cs" />
+    <Compile Include="Controllers\PersonneController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\ThemeController.cs" />
     <Compile Include="Controllers\UtilisateurController.cs" />
@@ -166,6 +167,10 @@
     <ProjectReference Include="..\Genealogie.Modeles.API.ASP\Genealogie.Modeles.API.ASP.csproj">
       <Project>{e466b2f8-0f05-4258-a2f0-1c5767e8388a}</Project>
       <Name>Genealogie.Modeles.API.ASP</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Services\Services.csproj">
+      <Project>{07331121-1C02-4237-A2DD-B12052142278}</Project>
+      <Name>Services</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

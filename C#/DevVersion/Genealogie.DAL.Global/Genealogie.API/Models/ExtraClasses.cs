@@ -30,6 +30,7 @@ namespace Genealogie.API.Models
     {
         public string chercheString { get; set; }
         public int chercheInt { get; set; }
+        
     }
 
 

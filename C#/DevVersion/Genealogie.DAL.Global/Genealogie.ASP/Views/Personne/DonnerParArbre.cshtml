@@ -1,0 +1,74 @@
+﻿@model IEnumerable<Genealogie.ASP.Models.PersonneIndex>
+
+@{
+    ViewBag.Title = "DonnerParArbre";    
+}
+
+<h2>DonnerParArbre</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Creer", new { id = ViewBag.Arbre })
+    <p>@ViewBag.Arbre</p>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.nom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.prenom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dateDeNaissance)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dateDeDeces)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.homme)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dateAjout)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.nom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.prenom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dateDeNaissance)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dateDeDeces)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.homme)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dateAjout)
+        </td>
+        <td>
+            @for (int i = 0; i < item.enfants.Count(); i++)
+            {
+                @Html.DisplayFor(modelItem => item.enfants[i].nom)
+                @Html.DisplayFor(modelItem => item.enfants[i].prenom)
+                @Html.DisplayFor(modelItem => item.enfants[i].homme)
+                @Html.DisplayFor(modelItem => item.enfants[i].dateDeNaissance)
+                @Html.ActionLink("Explorer","Details", new { id=item.enfants[i].id})
+            }
+        </td>
+        <td>
+            @Html.ActionLink("Modifier", "Modifier", new { id=item.id }) |
+            @Html.ActionLink("Détails", "Details", new { id=item.id }) |
+            @Html.ActionLink("Supprimer", "Supprimer", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>

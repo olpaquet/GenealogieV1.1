@@ -25,8 +25,10 @@ namespace Genealogie.ASP.Controllers
         }
 
         [HttpGet]
+        [FiltreExiste]
         public ActionResult Details(int id)
         {
+            
             RoleServiceAPI rsa = new RoleServiceAPI();
             Role r = rsa.Donner(id);
             RoleDetails rd = new RoleDetails(r);

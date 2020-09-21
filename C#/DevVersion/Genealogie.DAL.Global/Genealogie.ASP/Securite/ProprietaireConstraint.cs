@@ -11,6 +11,7 @@ namespace Genealogie.ASP.Securite
     {
         public bool Match(HttpContextBase httpContext, Route route, string parameterName, RouteValueDictionary values, RouteDirection routeDirection)
         {
+            return true;
             foreach (var x in values)
             {
                 var u = x.Key;

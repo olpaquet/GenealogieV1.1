@@ -6,13 +6,14 @@ using Genealogie.DAL.Global.Repository;
 using gl = Genealogie.DAL.Global.Modeles;
 using Genealogie.DAL.Client.Conversion;
 using System.Linq;
+using Services;
 
 namespace Genealogie.DAL.Client.Services
 {
-    public class PersonneService : IPersonneRepository<Personne>
+    public class PersonneService : IPersonneRepository<Personne,Recherche>
     {
 
-        private IPersonneRepository<gl.Personne> _rep;
+        private IPersonneRepository<gl.Personne, Recherche> _rep;
 
         public PersonneService() { this._rep = new PersonneRepository(); }
 
@@ -22,27 +23,63 @@ namespace Genealogie.DAL.Client.Services
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Personne> Donner(int idArbre)
+        public IEnumerable<Personne> Donner()
         {
-            return _rep.Donner(idArbre).Select(q => q.VersClient());
+            return _rep.Donner().Select(j => j.VersClient());
             throw new NotImplementedException();
         }
 
-        public Personne Donner(int idArbre, int idPersonne)
+        public Personne Donner(int id)
         {
-            return _rep.Donner(idArbre, idPersonne).VersClient();
+            return _rep.Donner(id).VersClient();
             throw new NotImplementedException();
         }
 
         public IEnumerable<Personne> DonnerEnfants(int id)
         {
-            return _rep.DonnerEnfants(id).Select(m => m.VersClient());
+            return _rep.DonnerEnfants(id).Select(j => j.VersClient());
+            throw new NotImplementedException();
+        }
+
+        public Personne DonnerMere(int id)
+        {
+            return _rep.DonnerMere(id).VersClient();
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Personne> DonnerParArbre(int idArbre)
+        {
+            return _rep.DonnerParArbre(idArbre).Select(j => j.VersClient());
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Personne> DonnerParenteesDirectesPossibles(int id, int idArbre)
+        {
+            return _rep.DonnerParenteesDirectesPossibles(id, idArbre).Select(j => j.VersClient());
+            throw new NotImplementedException();
+        }
+
+        public Personne DonnerPere(int id)
+        {
+            return _rep.DonnerPere(id).VersClient();
+            throw new NotImplementedException();
+        }
+
+        public bool EstUtilisee(int id, string[] options)
+        {
+            return _rep.EstUtilisee(id, options);
             throw new NotImplementedException();
         }
 
         public bool Modifier(int id, Personne e)
         {
             return _rep.Modifier(id, e.VersGlobal());
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Personne> Rechercher(Recherche e)
+        {
+            return _rep.Rechercher(e).Select(j => j.VersClient());
             throw new NotImplementedException();
         }
 

@@ -1,4 +1,4 @@
-﻿@model Genealogie.ASP.Models.RoleSuppression
+﻿@model Genealogie.ASP.Models.RoleDetails
 
 @{
     ViewBag.Title = "Supprimer";
@@ -6,7 +6,7 @@
 
 <h2>Supprimer</h2>
 
-<h3>Etes-vous sûr d'effacer ce rôle?</h3>
+<h3>Are you tout à fait sure que c'est un coup de Fantomas?</h3>
 <div>
     <h4>RoleDetails</h4>
     <hr />
@@ -41,8 +41,8 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Effacer" class="btn btn-default" /> |
-            @Html.ActionLink("Retour à la liste", "Index")
+            <input type="submit" value="Supprimer" class="btn btn-default" /> |
+            @Html.ActionLink("Annuler", "Index")
         </div>
     }
 </div>

@@ -119,6 +119,12 @@ namespace Genealogie.Modeles.API.ASP.Modeles
     {
         public string chercheString { get; set; }
         public int chercheInt { get; set; }
-
     }
+
+    public class ControleurPersonneRecherche
+    {
+        public int idArbre { get; set; }
+        public int idPersonne { get; set; }
+    }
+
 }
