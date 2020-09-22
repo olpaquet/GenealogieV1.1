@@ -23,7 +23,7 @@ namespace Genealogie.ASP.Controllers
         }
 
         [HttpGet]
-        /*proprietaire*/        
+        [FiltreProprietaireArbre("arbre")]
         public ActionResult Details(int id)
         {
             ArbreServiceAPI rsa = new ArbreServiceAPI();
@@ -33,7 +33,6 @@ namespace Genealogie.ASP.Controllers
         }
 
         [HttpGet]
-        /*proprietaire*/
         public ActionResult Creer()
         {
             ArbreCreation r = new ArbreCreation();
@@ -41,7 +40,6 @@ namespace Genealogie.ASP.Controllers
         }
 
         [HttpPost]
-        /*proprietaire*/
         public ActionResult Creer(ArbreCreation e)
         {
             if (ModelState.IsValid)
@@ -61,7 +59,7 @@ namespace Genealogie.ASP.Controllers
         }
 
         [HttpGet]
-        /*proprietaire*/        
+        [FiltreProprietaireArbre("arbre")]
         public ActionResult Modifier(int id)
         {
             ArbreServiceAPI rs = new ArbreServiceAPI();
@@ -70,8 +68,7 @@ namespace Genealogie.ASP.Controllers
         }
 
         [HttpPost]
-        /*proprietaire*/
-        
+        [FiltreProprietaireArbre("arbre")]        
         public ActionResult Modifier(int id, ArbreModification rm)
         {
             if (ModelState.IsValid)
@@ -93,7 +90,7 @@ namespace Genealogie.ASP.Controllers
         }
 
         [HttpGet]
-        /*proprietaire*/
+        [FiltreProprietaireArbre("arbre")]
         public ActionResult Supprimer(int id)
         {
             ArbreServiceAPI rsa = new ArbreServiceAPI();
@@ -102,7 +99,7 @@ namespace Genealogie.ASP.Controllers
         }
 
         [HttpPost]
-        /*proprietaire*/
+        [FiltreProprietaireArbre("arbre")]
         public ActionResult Supprimer(int id, ArbreDetails r)
         {
             if (ModelState.IsValid)
@@ -115,7 +112,7 @@ namespace Genealogie.ASP.Controllers
         }
 
         [HttpGet]
-        /*proprietaire*/
+        [FiltreProprietaireArbre("arbre")]
         /*pas bloqué*/
         public ActionResult Activer(int id)
         {
@@ -125,15 +122,13 @@ namespace Genealogie.ASP.Controllers
         }
 
         [HttpGet]
-        /*proprietaire*/
+        [FiltreProprietaireArbre("arbre")]
         /*pas bloqué*/
         public ActionResult Desactiver(int id)
         {
             ArbreServiceAPI rsa = new ArbreServiceAPI();
             bool b = rsa.Desactiver(id);
             return RedirectToAction("Index");
-        }
-
-        
+        }        
     }
 }

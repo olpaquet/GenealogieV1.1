@@ -25,8 +25,7 @@ namespace Genealogie.DAL.Global.Repository
             com.AjouterParametre("homme", e.homme);
             com.AjouterParametre("idarbre", e.idarbre);
             com.AjouterParametre("dateajout", e.dateajout);
-            com.AjouterParametre("idpere", e.idpere);
-            com.AjouterParametre("idmere", e.idmere);
+            
             _connexion.ExecuterNonRequete(com);
             return (int)com.Parametres["id"].Valeur;
         }
@@ -45,7 +44,7 @@ namespace Genealogie.DAL.Global.Repository
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Personne> DonnerParArbre(int idArbre)
+        public IEnumerable<Personne> DonnerPourArbre(int idArbre)
         {
             Commande com = new Commande($"{CONST_PERSONNE_REQ} where idArbre = @idArbre");
             com.AjouterParametre("idArbre", idArbre);
@@ -73,8 +72,7 @@ namespace Genealogie.DAL.Global.Repository
             com.AjouterParametre("homme", e.homme);
             com.AjouterParametre("idarbre", e.idarbre);
             com.AjouterParametre("dateajout", e.dateajout);
-            com.AjouterParametre("idpere", e.idpere);
-            com.AjouterParametre("idmere", e.idmere);
+            
             return (int)_connexion.ExecuterNonRequete(com) > 0;
         }
         private static string ajouterFiltre(string filtre, string ajout)
@@ -163,6 +161,13 @@ namespace Genealogie.DAL.Global.Repository
 
         public bool EstUtilisee(int id, string[] options)
         {
+            Commande com = new Commande ( $"{CONST_PERSONNE_REQ} where idmere in (select id from personne)" );
+            int i = _connexion.ExecuterLecteur(com, j => j.VersPersonne()).Count();
+            if (i > 0) return true;
+            
+            com = new Commande($"{CONST_PERSONNE_REQ} where idpere in (select id from personne)");
+            i = _connexion.ExecuterLecteur(com, j => j.VersPersonne()).Count();
+            if (i > 0) return true;
             return false;
             throw new NotImplementedException();
         }
@@ -175,7 +180,7 @@ namespace Genealogie.DAL.Global.Repository
 
 
             return new PersonneRepository()
-                .DonnerParArbre(idArbre)
+                .DonnerPourArbre(idArbre)
                 .Where(k => !(interdictions.Select(j => j.id).Contains(k.id)))
                 ;            
             
@@ -210,7 +215,46 @@ namespace Genealogie.DAL.Global.Repository
             if (interdits.Where(j => j.id == p.id).SingleOrDefault() != null) interdits.Add(p);
         }
 
-       
+        
 
+        public bool AjouterEnfant(int id, int idEnfant)
+        {
+            Commande com = new Commande("enfant_cre",true);
+            com.AjouterParametre("id", id);
+            com.AjouterParametre("idenfant", idEnfant);
+            return _connexion.ExecuterNonRequete(com)>0;
+            throw new NotImplementedException();
+        }
+
+        public bool SupprimerEnfant(int id, int idEnfant)
+        {
+            Commande com = new Commande("enfant_eff",true);
+            com.AjouterParametre("id", id);
+            com.AjouterParametre("idenfant", idEnfant);
+            return _connexion.ExecuterNonRequete(com) > 0;
+            throw new NotImplementedException();
+        }
+
+        public bool AjouterParent( int id,int idParent)
+        {
+            return new PersonneRepository().AjouterEnfant(idParent, id);
+            throw new NotImplementedException();
+        }
+
+        public bool SupprimerPere(int id)
+        {
+            Commande com = new Commande("pere_eff", true);
+            com.AjouterParametre("id", id);
+            return _connexion.ExecuterNonRequete(com) > 0;
+            throw new NotImplementedException();
+        }        
+
+        public bool SupprimerMere(int id)
+        {
+            Commande com = new Commande("mere_eff", true);
+            com.AjouterParametre("id", id);
+            return _connexion.ExecuterNonRequete(com) > 0;
+            throw new NotImplementedException();
+        }
     }
 }

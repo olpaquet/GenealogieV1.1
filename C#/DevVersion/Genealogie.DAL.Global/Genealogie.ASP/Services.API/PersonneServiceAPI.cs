@@ -15,9 +15,9 @@ namespace Genealogie.ASP.Services.API
     {
 
         /*ControleurPersonneRecherche*/
-        public IEnumerable<Personne> DonnerParArbre(int id)
+        public IEnumerable<Personne> DonnerPourArbre(int id)
         {
-            HttpResponseMessage reponse = _client.GetAsync($"Personne/DonnerParArbre/{id}").Result;
+            HttpResponseMessage reponse = _client.GetAsync($"Personne/DonnerPourArbre/{id}").Result;
             if (!reponse.IsSuccessStatusCode)
             {
                 throw new Exception("Echec de la réception de données.");
@@ -100,6 +100,80 @@ namespace Genealogie.ASP.Services.API
             return x;
 
         }
+
+        public int Creer(Personne p)
+        {
+            string contenuJson = JsonConvert.SerializeObject(p, Formatting.Indented);
+            StringContent contenu = new StringContent(contenuJson, Encoding.UTF8, "application/json");
+            HttpResponseMessage reponse = _client.PostAsync($"Personne/Creer/", contenu).Result;
+            if (!reponse.IsSuccessStatusCode) { throw new Exception("Echec de la réception de données."); }
+            var x = reponse.Content.ReadAsStringAsync().Result;
+            return int.Parse(x);
+        }
+
+
+        public bool AjouterEnfant(ParentEnfant e)
+        {
+            string contenuJson = JsonConvert.SerializeObject(e, Formatting.Indented);
+            StringContent contenu = new StringContent(contenuJson, Encoding.UTF8, "application/json");
+            HttpResponseMessage reponse = _client.PutAsync($"Personne/AjouterEnfant/", contenu).Result;
+            if (!reponse.IsSuccessStatusCode) { throw new Exception("Echec de la réception de données."); }
+            var x = reponse.Content.ReadAsStringAsync().Result;
+            return bool.Parse(x);
+        }
+
+        
+        public bool SupprimerEnfant(ParentEnfant e)
+        {
+            string contenuJson = JsonConvert.SerializeObject(e, Formatting.Indented);
+            StringContent contenu = new StringContent(contenuJson, Encoding.UTF8, "application/json");
+            HttpResponseMessage reponse = _client.PutAsync($"Personne/SupprimerEnfant/", contenu).Result;
+            if (!reponse.IsSuccessStatusCode) { throw new Exception("Echec de la réception de données."); }
+            var x = reponse.Content.ReadAsStringAsync().Result;
+            return bool.Parse(x);
+        }
+       
+        public bool AjouterParent(ParentEnfant e)
+        {
+            string contenuJson = JsonConvert.SerializeObject(e, Formatting.Indented);
+            StringContent contenu = new StringContent(contenuJson, Encoding.UTF8, "application/json");
+            HttpResponseMessage reponse = _client.PutAsync($"Personne/AjouterParent/", contenu).Result;
+            if (!reponse.IsSuccessStatusCode) { throw new Exception("Echec de la réception de données."); }
+            var x = reponse.Content.ReadAsStringAsync().Result;
+            return bool.Parse(x);
+        }
+
+        
+        public bool SupprimerPere(int id)
+        {
+            string contenuJson = JsonConvert.SerializeObject(id, Formatting.Indented);
+            StringContent contenu = new StringContent(contenuJson, Encoding.UTF8, "application/json");
+            HttpResponseMessage reponse = _client.PutAsync($"Personne/SupprimerPere/", contenu).Result;
+            if (!reponse.IsSuccessStatusCode) { throw new Exception("Echec de la réception de données."); }
+            var x = reponse.Content.ReadAsStringAsync().Result;
+            return bool.Parse(x);
+        }
+        
+        public bool SupprimerMere(int id)
+        {
+            string contenuJson = JsonConvert.SerializeObject(id, Formatting.Indented);
+            StringContent contenu = new StringContent(contenuJson, Encoding.UTF8, "application/json");
+            HttpResponseMessage reponse = _client.PutAsync($"Personne/SupprimerMere/", contenu).Result;
+            if (!reponse.IsSuccessStatusCode) { throw new Exception("Echec de la réception de données."); }
+            var x = reponse.Content.ReadAsStringAsync().Result;
+            return bool.Parse(x);
+        }
+
+        public bool Modifier(int id, Personne p)
+        {
+            string contenuJson = JsonConvert.SerializeObject(p, Formatting.Indented);
+            StringContent contenu = new StringContent(contenuJson, Encoding.UTF8, "application/json");
+            HttpResponseMessage reponse = _client.PutAsync($"Personne/Modifier/{id}", contenu).Result;
+            if (!reponse.IsSuccessStatusCode) { throw new Exception("Echec de la réception de données."); }
+            var x = reponse.Content.ReadAsStringAsync().Result;
+            return bool.Parse(x);
+        }
+
     }
 }
  

@@ -20,9 +20,9 @@ namespace Genealogie.API.Controllers
             return new PersonneService().Donner(id).VersAPI();
         }
         [HttpGet]
-        public IEnumerable<Personne> DonnerParArbre(int id)
+        public IEnumerable<Personne> DonnerPourArbre(int id)
         {
-            return new PersonneService().DonnerParArbre(id).Select(j => j.VersAPI());
+            return new PersonneService().DonnerPourArbre(id).Select(j => j.VersAPI());
         }
         [HttpPut]
         public IEnumerable<Personne> Chercher(Recherche e)
@@ -50,5 +50,52 @@ namespace Genealogie.API.Controllers
         {
             return new PersonneService().DonnerParenteesDirectesPossibles(e.idPersonne, e.idArbre).Select(j => j.VersAPI());
         }
+
+
+        [HttpPost]
+        public int Creer(Personne e)
+        {
+            return new PersonneService().Creer(e.VersClient());
+        }
+
+        [HttpPut]
+        public bool AjouterEnfant(ParentEnfant e)
+        {
+            return new PersonneService().AjouterEnfant(e.idParent, e.idEnfant);
+        }
+
+        [HttpPut]
+        public bool SupprimerEnfant(ParentEnfant e)
+        {
+            return new PersonneService().SupprimerEnfant(e.idParent, e.idEnfant);
+        }
+
+        [HttpPut]
+        public bool AjouterParent(ParentEnfant e)
+        {
+            return new PersonneService().AjouterParent(e.idEnfant, e.idParent);
+        }
+
+        [HttpPut]
+        public bool SupprimerPere(int id)
+        {
+            return new PersonneService().SupprimerPere(id);
+        }
+        [HttpPut]
+        public bool SupprimerMere(int id)
+        {
+            return new PersonneService().SupprimerMere(id);
+        }
+
+        [HttpPut]
+        public bool Modifier(int id, Personne e)
+        {
+            PersonneService us = new PersonneService();
+            return us.Modifier(id, e.VersClient());
+        }
+
+
+
+
     }
 }

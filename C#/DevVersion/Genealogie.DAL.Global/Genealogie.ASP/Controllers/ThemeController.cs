@@ -26,6 +26,7 @@ namespace Genealogie.ASP.Controllers
         }
 
         [HttpGet]
+        [FiltreExiste]
         public ActionResult Details(int id)
         {
             ThemeServiceAPI rsa = new ThemeServiceAPI();
@@ -55,6 +56,7 @@ namespace Genealogie.ASP.Controllers
         }
 
         [HttpGet]
+        [FiltreExiste]
         public ActionResult Modifier(int id)
         {
             ThemeServiceAPI rs = new ThemeServiceAPI();
@@ -63,6 +65,7 @@ namespace Genealogie.ASP.Controllers
         }
 
         [HttpPost]
+        [FiltreExiste]
         public ActionResult Modifier(int id, ThemeModification rm)
         {
             if (ModelState.IsValid)
@@ -77,6 +80,7 @@ namespace Genealogie.ASP.Controllers
         }
 
         [HttpGet]
+        [FiltreExiste]
         public ActionResult Supprimer(int id)
         {
             ThemeServiceAPI rsa = new ThemeServiceAPI();
@@ -85,6 +89,7 @@ namespace Genealogie.ASP.Controllers
         }
 
         [HttpPost]
+        [FiltreExiste]
         public ActionResult Supprimer(int id, ThemeDetails r)
         {
             if (ModelState.IsValid)
@@ -97,6 +102,7 @@ namespace Genealogie.ASP.Controllers
         }
 
         [HttpGet]
+        [FiltreExiste]
         public ActionResult Activer(int id)
         {
             ThemeServiceAPI rsa = new ThemeServiceAPI();
@@ -105,6 +111,7 @@ namespace Genealogie.ASP.Controllers
         }
 
         [HttpGet]
+        [FiltreExiste]
         public ActionResult Desactiver(int id)
         {
             ThemeServiceAPI rsa = new ThemeServiceAPI();

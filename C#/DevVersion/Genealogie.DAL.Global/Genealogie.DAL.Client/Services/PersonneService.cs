@@ -47,9 +47,9 @@ namespace Genealogie.DAL.Client.Services
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Personne> DonnerParArbre(int idArbre)
+        public IEnumerable<Personne> DonnerPourArbre(int idArbre)
         {
-            return _rep.DonnerParArbre(idArbre).Select(j => j.VersClient());
+            return _rep.DonnerPourArbre(idArbre).Select(j => j.VersClient());
             throw new NotImplementedException();
         }
 
@@ -86,6 +86,36 @@ namespace Genealogie.DAL.Client.Services
         public bool Supprimer(int id)
         {
             return _rep.Supprimer(id);
+            throw new NotImplementedException();
+        }
+
+        public bool AjouterEnfant(int id, int idEnfant)
+        {
+            return _rep.AjouterEnfant(id, idEnfant);
+            throw new NotImplementedException();
+        }
+
+        public bool SupprimerEnfant(int id, int idEnfant)
+        {
+            return _rep.SupprimerEnfant(id, idEnfant);
+            throw new NotImplementedException();
+        }
+
+        public bool SupprimerPere(int id)
+        {
+            return _rep.SupprimerPere(id);
+            throw new NotImplementedException();
+        }
+
+        public bool SupprimerMere(int id)
+        {
+            return _rep.SupprimerMere(id);
+            throw new NotImplementedException();
+        }
+
+        public bool AjouterParent(int id, int idParent)
+        {
+            return _rep.AjouterParent(id, idParent);
             throw new NotImplementedException();
         }
     }

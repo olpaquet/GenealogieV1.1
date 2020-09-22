@@ -65,7 +65,7 @@ namespace Genealogie.ASP.Services.API
                 throw new Exception("Echec de la réception de données.");
             }
             var x = reponse.Content.ReadAsAsync<Abonnement>().Result;
-            return reponse.Content.ReadAsAsync<Abonnement>().Result;
+            return x;
             throw new NotImplementedException();
         }
 

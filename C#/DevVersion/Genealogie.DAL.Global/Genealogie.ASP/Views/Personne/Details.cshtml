@@ -8,6 +8,7 @@
 
 <div>
     <h4>PersonneIndex</h4>
+    <p>@Model.idArbre</p>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -87,5 +88,5 @@
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Retour à l'arbre", "Details","Arbre", new { id = Model.idArbre } ,null)
 </p>

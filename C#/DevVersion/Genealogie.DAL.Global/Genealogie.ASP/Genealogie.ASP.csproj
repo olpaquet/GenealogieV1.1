@@ -156,6 +156,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NouvelleController.cs" />
     <Compile Include="Controllers\PersonneController.cs" />
+    <Compile Include="Controllers\RechercheController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\ThemeController.cs" />
     <Compile Include="Controllers\UtilisateurController.cs" />
@@ -169,6 +170,7 @@
     <Compile Include="Models\ExtraClasses.cs" />
     <Compile Include="Models\Nouvelle.cs" />
     <Compile Include="Models\Personne.cs" />
+    <Compile Include="Models\FormRecherche.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\Theme.cs" />
     <Compile Include="Models\Utilisateur.cs" />
@@ -180,7 +182,7 @@
     <Compile Include="Securite\ConnecteAutAttribute.cs" />
     <Compile Include="Securite\ExisteConstraint.cs" />
     <Compile Include="Securite\FiltreExisteAttribute.cs" />
-    <Compile Include="Securite\ProprietaireConstraint.cs" />
+    <Compile Include="Securite\FiltreProprietaireArbreAttribute.cs" />
     <Compile Include="Securite\SessionUtilisateur.cs" />
     <Compile Include="ServiceGeneral\ExplorationObjet.cs" />
     <Compile Include="Services.API\AbonnementServiceAPI.cs" />
@@ -219,6 +221,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jqueryDecimalFix.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -266,11 +269,15 @@
     <Content Include="Views\Role\Creer.cshtml" />
     <Content Include="Views\Role\Modifier.cshtml" />
     <Content Include="Views\Role\Supprimer.cshtml" />
-    <Content Include="Views\Personne\DonnerParArbre.cshtml" />
+    <Content Include="Views\Personne\DonnerPourArbre.cshtml" />
     <Content Include="Views\Personne\Details.cshtml" />
+    <Content Include="Views\Personne\Creer.cshtml" />
+    <Content Include="Views\Personne\Modifier.cshtml" />
+    <Content Include="Views\Arbre\Creer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Recherche\" />
     <Folder Include="Views\_admin\" />
   </ItemGroup>
   <ItemGroup>

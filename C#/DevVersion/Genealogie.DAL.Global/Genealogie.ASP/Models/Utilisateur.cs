@@ -144,6 +144,7 @@ namespace Genealogie.ASP.Models
         [DataType(DataType.EmailAddress)]
         [Required]
         public string email { get; set; }
+        [DisplayName("date de naissance")]
         [DataType(DataType.Date)]
         public DateTime? dateDeNaissance { get; set; }
         public bool homme { get; set; }

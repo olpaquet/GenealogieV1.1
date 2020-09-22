@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<Genealogie.ASP.Models.PersonneIndex>
 
 @{
-    ViewBag.Title = "DonnerParArbre";    
+    ViewBag.Title = "DonnerPourArbre";    
 }
 
-<h2>DonnerParArbre</h2>
+<h2>DonnerPourArbre</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Creer", new { id = ViewBag.Arbre })
+    @Html.ActionLink("Créer une nouvelle personne", "Creer", new { id = ViewBag.Arbre })
     <p>@ViewBag.Arbre</p>
 </p>
 <table class="table">

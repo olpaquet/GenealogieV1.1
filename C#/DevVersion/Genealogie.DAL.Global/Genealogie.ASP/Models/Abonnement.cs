@@ -86,7 +86,7 @@ namespace Genealogie.ASP.Models
         {
             
             id = e.id; nom = e.nom; description = e.description; duree = e.duree; 
-            prix = 1;
+            prix = e.prix;
             nombreMaxArbres = e.nombreMaxArbres; nombreMaxPersonnes = e.nombreMaxPersonnes; 
         }
     }
@@ -109,7 +109,7 @@ namespace Genealogie.ASP.Models
         public AbonnementDetails() { }
         public AbonnementDetails(Abonnement e) 
         { 
-            id = e.id; nom = e.nom; description = e.description; duree = e.duree; prix = 1;
+            id = e.id; nom = e.nom; description = e.description; duree = e.duree; prix = e.prix;
             nombreMaxArbres = e.nombreMaxArbres; nombreMaxPersonnes = e.nombreMaxPersonnes; actif = e.actif;
         }
     }

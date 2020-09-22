@@ -16,6 +16,7 @@ namespace Genealogie.ASP.Controllers
     {
         // GET: Blocage
         [HttpGet]
+        [FiltreExiste]
         public ActionResult Index()
         {
             BlocageServiceAPI rs = new BlocageServiceAPI();
@@ -24,6 +25,7 @@ namespace Genealogie.ASP.Controllers
         }
 
         [HttpGet]
+        [FiltreExiste]
         public ActionResult Details(int id)
         {
             BlocageServiceAPI rsa = new BlocageServiceAPI();
@@ -53,6 +55,7 @@ namespace Genealogie.ASP.Controllers
         }
 
         [HttpGet]
+        [FiltreExiste]
         public ActionResult Modifier(int id)
         {
             BlocageServiceAPI rs = new BlocageServiceAPI();
@@ -61,6 +64,7 @@ namespace Genealogie.ASP.Controllers
         }
 
         [HttpPost]
+        [FiltreExiste]
         public ActionResult Modifier(int id, BlocageModification rm)
         {
             if (ModelState.IsValid)
@@ -75,6 +79,7 @@ namespace Genealogie.ASP.Controllers
         }
 
         [HttpGet]
+        [FiltreExiste]
         public ActionResult Supprimer(int id)
         {
             BlocageServiceAPI rsa = new BlocageServiceAPI();
@@ -83,6 +88,7 @@ namespace Genealogie.ASP.Controllers
         }
 
         [HttpPost]
+        [FiltreExiste]
         public ActionResult Supprimer(int id, BlocageDetails r)
         {
             if (ModelState.IsValid)
@@ -95,6 +101,7 @@ namespace Genealogie.ASP.Controllers
         }
 
         [HttpGet]
+        [FiltreExiste]
         public ActionResult Activer(int id)
         {
             BlocageServiceAPI rsa = new BlocageServiceAPI();
@@ -103,6 +110,7 @@ namespace Genealogie.ASP.Controllers
         }
 
         [HttpGet]
+        [FiltreExiste]
         public ActionResult Desactiver(int id)
         {
             BlocageServiceAPI rsa = new BlocageServiceAPI();

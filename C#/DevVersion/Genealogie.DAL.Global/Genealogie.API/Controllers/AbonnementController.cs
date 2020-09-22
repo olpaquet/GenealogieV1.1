@@ -26,6 +26,7 @@ namespace Genealogie.API.Controllers
         public Abonnement Donner(int id)
         {
             AbonnementService us = new AbonnementService();
+            var x = us.Donner(id);
             return us.Donner(id).VersAPI();
         }
 

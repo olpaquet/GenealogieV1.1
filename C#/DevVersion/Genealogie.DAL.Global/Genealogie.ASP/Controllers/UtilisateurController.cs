@@ -26,6 +26,7 @@ namespace Genealogie.ASP.Controllers
         }
         [AutorisationRole(EnumRole.ADMIN)]
         [HttpGet]
+        [FiltreExiste]
         public ActionResult Details(int id)
         {            
             UtilisateurServiceAPI usa = new UtilisateurServiceAPI();
@@ -62,6 +63,7 @@ namespace Genealogie.ASP.Controllers
                 
         [HttpGet]
         [AutorisationRole(EnumRole.ADMIN)]
+        [FiltreExiste]
         public ActionResult Modifier(int id)
         {
             UtilisateurServiceAPI usa = new UtilisateurServiceAPI();
@@ -73,7 +75,8 @@ namespace Genealogie.ASP.Controllers
                 
         [HttpPost]
         [AutorisationRole(EnumRole.ADMIN)]
-        [Route("Utilisateur/Modifier/{id:ExisteX}")]
+        /*[Route("Utilisateur/Modifier/{id:ExisteX}")]*/
+        [FiltreExiste]
         public ActionResult Modifier(int id, UtilisateurModification um)
         {
             if (ModelState.IsValid)
@@ -96,7 +99,9 @@ namespace Genealogie.ASP.Controllers
             
             return RedirectToAction("Index", "Home");
         }
+
         [HttpPost]
+        [AnonymeAut]
         public ActionResult Connexion(UtilisateurConnexion uc)
         {
             if (ModelState.IsValid)
@@ -133,6 +138,7 @@ namespace Genealogie.ASP.Controllers
 
         [AutorisationRole(EnumRole.ADMIN)]
         [HttpPost]
+        [FiltreExiste]
         public ActionResult Supprimer(int id, UtilisateurDetails u)
         {
             if (ModelState.IsValid)
@@ -147,6 +153,7 @@ namespace Genealogie.ASP.Controllers
                 
         [HttpGet]
         [AutorisationRole(EnumRole.ADMIN)]
+        [FiltreExiste]
         public ActionResult Desactiver(int id)
         {
             UtilisateurServiceAPI usa = new UtilisateurServiceAPI();
@@ -156,7 +163,7 @@ namespace Genealogie.ASP.Controllers
                 
         [HttpGet]
         [AutorisationRole(EnumRole.ADMIN)]
-        [Route("Utilisateur/Modifier/{id:ExisteX}")]
+        [FiltreExiste]
         public ActionResult Activer(int id)
         {
             UtilisateurServiceAPI usa = new UtilisateurServiceAPI();

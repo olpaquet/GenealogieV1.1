@@ -23,6 +23,7 @@ namespace Genealogie.ASP.Controllers
         }
 
         [HttpGet]
+        [FiltreExiste]
         public ActionResult Details(int id)
         {
             NouvelleServiceAPI rsa = new NouvelleServiceAPI();
@@ -59,6 +60,7 @@ namespace Genealogie.ASP.Controllers
 
         [HttpGet]
         [AutorisationRole(EnumRole.ADMINNOUVELLE)]
+        [FiltreExiste]
         public ActionResult Activer(int id)
         {
             NouvelleServiceAPI rsa = new NouvelleServiceAPI();
@@ -68,6 +70,7 @@ namespace Genealogie.ASP.Controllers
 
         [HttpGet]
         [AutorisationRole(EnumRole.ADMINNOUVELLE)]
+        [FiltreExiste]
         public ActionResult Desactiver(int id)
         {
             NouvelleServiceAPI rsa = new NouvelleServiceAPI();

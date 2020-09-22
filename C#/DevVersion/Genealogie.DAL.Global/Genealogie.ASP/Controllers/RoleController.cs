@@ -56,6 +56,7 @@ namespace Genealogie.ASP.Controllers
         }
 
         [HttpGet]
+        [FiltreExiste]
         public ActionResult Modifier(int id)
         {
             RoleServiceAPI rs = new RoleServiceAPI();
@@ -64,6 +65,7 @@ namespace Genealogie.ASP.Controllers
         }
 
         [HttpPost]
+        [FiltreExiste]
         public ActionResult Modifier(int id, RoleModification rm)
         {
             if (ModelState.IsValid)
@@ -77,7 +79,8 @@ namespace Genealogie.ASP.Controllers
             return View(rm);
         }
 
-        [HttpGet]        
+        [HttpGet]
+        [FiltreExiste]
         public ActionResult Supprimer(int id)
         {
             RoleServiceAPI rsa = new RoleServiceAPI();
@@ -86,6 +89,7 @@ namespace Genealogie.ASP.Controllers
         }
 
         [HttpPost]
+        [FiltreExiste]
         public ActionResult Supprimer(int id,RoleSuppression r)
         {
             RoleServiceAPI rsa = new RoleServiceAPI();
@@ -100,6 +104,7 @@ namespace Genealogie.ASP.Controllers
         }
 
         [HttpGet]
+        [FiltreExiste]
         public ActionResult Activer(int id)
         {
             RoleServiceAPI rsa = new RoleServiceAPI();
@@ -108,6 +113,7 @@ namespace Genealogie.ASP.Controllers
         }
 
         [HttpGet]
+        [FiltreExiste]
         public ActionResult Desactiver(int id)
         {
             RoleServiceAPI rsa = new RoleServiceAPI();

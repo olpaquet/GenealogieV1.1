@@ -24,6 +24,7 @@ namespace Genealogie.ASP.Controllers
         }
 
         [HttpGet]
+        [FiltreExiste]
         public ActionResult Details(int id)
         {
             AbonnementServiceAPI rsa = new AbonnementServiceAPI();
@@ -54,14 +55,17 @@ namespace Genealogie.ASP.Controllers
         }
 
         [HttpGet]
+        [FiltreExiste]
         public ActionResult Modifier(int id)
         {
             AbonnementServiceAPI rs = new AbonnementServiceAPI();
+            var test = rs.Donner(id);
             AbonnementModification r = new AbonnementModification(rs.Donner(id));
             return View(r);
         }
 
         [HttpPost]
+        [FiltreExiste]
         public ActionResult Modifier(int id, AbonnementModification rm)
         {
             if (ModelState.IsValid)
@@ -76,6 +80,7 @@ namespace Genealogie.ASP.Controllers
         }
 
         [HttpGet]
+        [FiltreExiste]
         public ActionResult Supprimer(int id)
         {
             AbonnementServiceAPI rsa = new AbonnementServiceAPI();
@@ -84,6 +89,7 @@ namespace Genealogie.ASP.Controllers
         }
 
         [HttpPost]
+        [FiltreExiste]
         public ActionResult Supprimer(int id, AbonnementDetails r)
         {
             if (ModelState.IsValid)
@@ -96,6 +102,7 @@ namespace Genealogie.ASP.Controllers
         }
 
         [HttpGet]
+        [FiltreExiste]
         public ActionResult Activer(int id)
         {
             AbonnementServiceAPI rsa = new AbonnementServiceAPI();
@@ -104,6 +111,7 @@ namespace Genealogie.ASP.Controllers
         }
 
         [HttpGet]
+        [FiltreExiste]
         public ActionResult Desactiver(int id)
         {
             AbonnementServiceAPI rsa = new AbonnementServiceAPI();
