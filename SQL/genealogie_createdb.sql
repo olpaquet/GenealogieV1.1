@@ -1255,19 +1255,19 @@ drop procedure Personne_cre
 go
 create PROCEDURE Personne_cre
  @id int out, @nom nvarchar(100), @prenom nvarchar(100), @datedenaissance datetime, 
- @datededeces datetime, @homme int, @idarbre int, @dateajout datetime, @idpere int, @idmere int
+ @datededeces datetime, @homme int, @idarbre int, @dateajout datetime
 AS
-insert into Personne (nom,prenom,datedenaissance,datededeces,homme,idarbre,dateajout,idpere,idmere) 
-values (@nom,@prenom,@datedenaissance,@datededeces,@homme,@idarbre,@dateajout,@idpere,@idmere);
+insert into Personne (nom,prenom,datedenaissance,datededeces,homme,idarbre,dateajout) 
+values (@nom,@prenom,@datedenaissance,@datededeces,@homme,@idarbre,@dateajout);
 set @id = @@IDENTITY;
 go
 drop procedure Personne_mod
 go
 create PROCEDURE Personne_mod
-@id int,@nom nvarchar(100),@prenom nvarchar(100),@datedenaissance datetime,@datededeces datetime,@homme int,@idarbre int,@dateajout datetime,@idpere int,@idmere int
+@id int,@nom nvarchar(100),@prenom nvarchar(100),@datedenaissance datetime,@datededeces datetime,@homme int,@idarbre int,@dateajout datetime
 AS
 update Personne
-set nom=@nom,prenom=@prenom,datedenaissance=@datedenaissance,datededeces=@datededeces,homme=@homme,idarbre=@idarbre,dateajout=@dateajout,idpere=@idpere,idmere=@idmere
+set nom=@nom,prenom=@prenom,datedenaissance=@datedenaissance,datededeces=@datededeces,homme=@homme,idarbre=@idarbre,dateajout=@dateajout
 where id=@id
 ;
 go
@@ -1279,6 +1279,49 @@ AS
 delete Personne 
 where id=@id
 ;
+go
+drop procedure pere_eff 
+go
+create procedure pere_eff @id int
+as
+begin
+update Personne set idpere=null where id=@id
+end
+go
+drop procedure mere_eff 
+go
+create procedure mere_eff @id int
+as
+begin
+update Personne set idmere=null where id=@id
+end
+go
+drop procedure Enfant_cre
+go
+create procedure Enfant_cre
+@id int, @idenfant int
+as
+begin
+declare @h int
+set @h = (select homme from Personne where id=@id)
+if @h=1
+	update Personne set idpere = @id where id = @idenfant
+else
+	update Personne set idmere = @id where id = @idenfant
+end
+go
+drop procedure Enfant_eff
+go
+create procedure Enfant_eff @id int, @idenfant int
+as
+begin
+declare @h int
+set @h = (select homme from Personne where id=@id)
+if @h = 1
+	update Personne set idpere = null where id = @idenfant;
+else
+	update Personne set idmere = null where id = @idenfant;
+end
 go
 /*
 private const string CONST_PERSONNE_REQ = "select id,nom,description,duree,prix,nombremaxarbres,nombremaxpersonnesid,nom,description,idcreateur,datecreation,idblocage,idbloqueur,dateblocageid,nom,descriptionid,dateidpersonne,idpartenaire,datedebut,datefinid,sujet,texte,idemetteur,idconversationid,sujet,texte,idtheme,idpublicateur,datepublicationid,titre,descriptionid,nom,prenom,datedenaissance,datededeces,idarbre,dateajout,idpere,idmere from Personne";
@@ -1424,20 +1467,29 @@ exec Arbre_cre @id out, 'mon deuxième arbre', 'xxxEssayons', 2, @dd, 2,1,@dd
 
 declare @idarbre int
 set @idarbre = 2
-/*1*/exec Personne_cre @id out, 'de Belgique', 'Albert', null,null, 1, 2, @dd, null,null
-/*2*/exec Personne_cre @id out, 'Rufio di Calabre', 'Paola', null,null, 2, 2, @dd, null,null
+/*1*/exec Personne_cre @id out, 'de Belgique', 'Albert', null,null, 1, 2, @dd
+/*2*/exec Personne_cre @id out, 'Rufio di Calabre', 'Paola', null,null, 2, 2, @dd
 
 exec Couple_cre 1, 2, @dd, null
 exec Couple_cre 2, 1, @dd,null
-/*3*/exec Personne_cre @id out, 'de Belgique', 'Philippe', null,null,1,2, @dd, 1,2
-/*4*/exec Personne_cre @id out, 'd''Udekem d''Acoz', 'Mathilde', null,null,0,2, @dd, null,null
-/*5*/exec Personne_cre @id out, 'de Belgique', 'Elisabeth', null,null,0,2, @dd, 3,4
+/*3*/exec Personne_cre @id out, 'de Belgique', 'Philippe', null,null,1,2, @dd
+/*4*/exec Personne_cre @id out, 'd''Udekem d''Acoz', 'Mathilde', null,null,0,2, @dd
+/*5*/exec Personne_cre @id out, 'de Belgique', 'Elisabeth', null,null,0,2, @dd
+exec Enfant_cre 3,5
+exec enfant_cre 4,5 
 
-/*6*/exec Personne_cre @id out, 'Paquet', 'François', null, null, 1, 1, @dd, null, null
-/*7*/exec Personne_cre @id out, 'Jooris', 'Nicole', null, null, 1, 1, @dd, null, null
-/*8*/exec Personne_cre @id out, 'Paquet','Olivier',null,null,1,1,@dd,6,7
-/*9*/exec Personne_cre @id out, 'Paquet','Florian',null,null,1,1,@dd,8,null
-/*10*/exec Personne_cre @id out, 'Paquet','Nicolas',null,null,1,1,@dd,8,null
+/*6*/exec Personne_cre @id out, 'Paquet', 'François', null, null, 1, 1, @dd
+/*7*/exec Personne_cre @id out, 'Jooris', 'Nicole', null, null, 0, 1, @dd
+/*8*/exec Personne_cre @id out, 'Paquet','Olivier',null,null,1,1,@dd
+exec enfant_cre 6,8
+exec enfant_cre 7,8
+/*9*/exec Personne_cre @id out, 'Paquet','Florian',null,null,1,1,@dd
+/*10*/exec Personne_cre @id out, 'Paquet','Nicolas',null,null,1,1,@dd
+exec enfant_cre 8,9
+exec enfant_cre 8,10
+/*11*/exec Personne_cre @id out, 'Dendoncker','Catherine',null,null,0,1,@dd
+exec enfant_cre 11,9
+exec enfant_cre 11,10
 
 
 
@@ -1462,3 +1514,5 @@ select * from utilisateurrole
 select * from nouvelle
 select * from couple
 select * from personne
+
+select * from abonnement
