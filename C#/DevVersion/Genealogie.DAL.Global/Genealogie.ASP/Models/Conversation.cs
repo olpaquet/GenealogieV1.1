@@ -24,6 +24,7 @@ namespace Genealogie.ASP.Models
         public ConversationIndex() { }
         public ConversationIndex(Conversation e)
         {
+            id = e.id;
             date = e.date;
             sujet = e.sujet;
             texte = e.texte;
