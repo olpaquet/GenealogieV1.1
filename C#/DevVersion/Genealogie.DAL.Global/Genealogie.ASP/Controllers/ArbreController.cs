@@ -40,6 +40,7 @@ namespace Genealogie.ASP.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Creer(ArbreCreation e)
         {
             if (ModelState.IsValid)
@@ -47,9 +48,8 @@ namespace Genealogie.ASP.Controllers
                 ArbreServiceAPI rsa = new ArbreServiceAPI();
                 Arbre a = e.VersArbre();
                 /* init */
-                a.idCreateur = SessionUtilisateur.Utilisateur.id;
-                a.idBlocage = null;
-                a.idBloqueur = null;                
+                a.idCreateur = SessionUtilisateur.Utilisateur.id;                
+                
                 /****/
                 int i = rsa.Creer(a);
                 if (i > 0) return RedirectToAction("Index");
@@ -68,19 +68,17 @@ namespace Genealogie.ASP.Controllers
         }
 
         [HttpPost]
-        [FiltreProprietaireArbre("arbre")]        
+        [FiltreProprietaireArbre("arbre")]
+        [ValidateAntiForgeryToken]
         public ActionResult Modifier(int id, ArbreModification rm)
         {
             if (ModelState.IsValid)
             {
                 ArbreServiceAPI rsa = new ArbreServiceAPI();
                 Arbre a = rsa.Donner(id);
-
+                
                 Arbre r = rm.VersArbre();
-                r.id = a.id;
-                r.idBloqueur = a.idBloqueur;
-                r.idBlocage = a.idBlocage;
-                r.idCreateur = a.idCreateur;
+                r.id = a.id;                
 
                 bool b = rsa.Modifier(id, r);
                 if (b) return RedirectToAction("Index");
@@ -100,6 +98,7 @@ namespace Genealogie.ASP.Controllers
 
         [HttpPost]
         [FiltreProprietaireArbre("arbre")]
+        [ValidateAntiForgeryToken]
         public ActionResult Supprimer(int id, ArbreDetails r)
         {
             if (ModelState.IsValid)

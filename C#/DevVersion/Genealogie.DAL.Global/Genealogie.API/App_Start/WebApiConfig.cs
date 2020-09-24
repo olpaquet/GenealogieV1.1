@@ -34,6 +34,11 @@ namespace Genealogie.API
                 routeTemplate: "api/{controller}/{action}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+            config.Routes.MapHttpRoute(
+                name: "ApiDouble",
+                routeTemplate: "api/{controller}/{action}/{id}/{id2}"                
+
+                );
         }
     }
 }

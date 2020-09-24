@@ -61,9 +61,11 @@
                 @Html.DisplayFor(modelItem => item.enfants[i].homme)
                 @Html.DisplayFor(modelItem => item.enfants[i].dateDeNaissance)
                 @Html.ActionLink("Explorer","Details", new { id=item.enfants[i].id})
+                @Html.ActionLink("Supprimer cet enfant", "SupprimerEnfant", new {id=item.id, idEnfant=item.enfants[i].id })
             }
         </td>
         <td>
+            @Html.ActionLink("Ajouter un enfant", "AjouterEnfant", new { id = item.id })
             @Html.ActionLink("Modifier", "Modifier", new { id=item.id }) |
             @Html.ActionLink("Détails", "Details", new { id=item.id }) |
             @Html.ActionLink("Supprimer", "Supprimer", new { id=item.id })

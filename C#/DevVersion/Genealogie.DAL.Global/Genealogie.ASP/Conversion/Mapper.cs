@@ -1,4 +1,5 @@
 ﻿using Genealogie.ASP.Models;
+using Genealogie.ASP.Services.API;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,8 +7,29 @@ using System.Web;
 
 namespace Genealogie.ASP.Conversion
 {
+
+    
+
     public static class Mapper
     {
+        public static string VersNomPrenom(this Personne p)
+        {
+            return $"nom:{p.nom} prénom:{p.prenom}";
+        }
+
+        public static string VersAffichage(this Personne p)
+        {
+            string ret = "";
+            string sexe = (p.homme) ? "homme" : "femme";
+
+            ret = $"nom:{p.nom} prénom:{p.prenom} ({sexe})";
+            ret += $"\nné:{p.dateDeNaissance} => mort:{p.dateDeNaissance}";
+            if (p.idPere != null) ret += $"Père:{new PersonneServiceAPI().Donner((int)p.idPere).VersNomPrenom()}";
+            if (p.idMere != null) ret += $"Mère:{new PersonneServiceAPI().Donner((int)p.idMere).VersNomPrenom()}";
+            
+            return ret;
+        }
+
         public static string VersListePypee(this IEnumerable<int> e) { if (e == null) { return null; }
             int compteur = 0;
             string ret = "";
@@ -64,7 +86,6 @@ namespace Genealogie.ASP.Conversion
             dateDeDeces = e.dateDeDeces, homme = e.homme, idArbre = e.idArbre, dateDeNaissance = e.dateDeNaissance, nom = e.nom, prenom = e.prenom,
             dateAjout = DateTime.Now
         }; }
-
         public static Personne VersPersonne(this PersonneModification e) { if (e == null) { return null; } return new Personne
         {
             dateDeDeces = e.dateDeDeces,
@@ -72,6 +93,10 @@ namespace Genealogie.ASP.Conversion
             homme=e.homme,
             nom = e.nom,
             prenom = e.prenom
-        };  }
+        };  
+        }
+
+        /*Message*/
+        public static Conversation VersConversation(this MessageCreation e) { if (e == null) { return null; } return new Conversation { date = DateTime.Now, idEmetteur = e.idEmetteur, sujet = e.sujet, texte = e.texte } ; }
     }
 }

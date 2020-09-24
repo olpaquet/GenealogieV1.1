@@ -29,7 +29,7 @@ namespace Genealogie.ASP.Services.API
         public IEnumerable<Role> DonnerRolesParUtilisateur(int id)
         {
             
-            HttpResponseMessage reponse = _client.GetAsync($"Utilisateur/DonnerRoles/{id}").Result;
+            HttpResponseMessage reponse = _client.GetAsync($"UtilisateurRole/DonnerRoles/{id}").Result;
             if (!reponse.IsSuccessStatusCode) throw new Exception("Echec de la réception de données");
             return reponse.Content.ReadAsAsync<IEnumerable<Role>>().Result;
 

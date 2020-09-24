@@ -35,6 +35,7 @@ namespace Genealogie.ASP.Validation
                 {
                     case EnumTypeDeDonnee.DECIMAL:
                         b = Sup((decimal)x, _zero);
+                        decimal y = (decimal)x;
                         break;
                     case EnumTypeDeDonnee.INT:
                         b = Sup((int)x, _zero);
@@ -53,7 +54,7 @@ namespace Genealogie.ASP.Validation
                 b = false;
             }
 
-            
+
             
 
             if (!b) return new ValidationResult(ErrorMessage);

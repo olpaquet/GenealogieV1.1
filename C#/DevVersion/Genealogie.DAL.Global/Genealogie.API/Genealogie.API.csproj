@@ -132,12 +132,15 @@
     <Compile Include="Controllers\AbonnementController.cs" />
     <Compile Include="Controllers\ArbreController.cs" />
     <Compile Include="Controllers\BlocageController.cs" />
+    <Compile Include="Controllers\ConversationController.cs" />
+    <Compile Include="Controllers\MessageDestinationController.cs" />
     <Compile Include="Controllers\NouvelleController.cs" />
     <Compile Include="Controllers\PersonneController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\ThemeController.cs" />
     <Compile Include="Controllers\UtilisateurController.cs" />
     <Compile Include="Controllers\UtilisateurRoleController.cs" />
+    <Compile Include="Controllers\VMessageRecuController.cs" />
     <Compile Include="Conversion\Mapper.cs" />
     <Compile Include="Formattage\FormatteurJSon.cs" />
     <Compile Include="Global.asax.cs">
@@ -163,6 +166,10 @@
     <ProjectReference Include="..\Genealogie.DAL.Client\Genealogie.DAL.Client.csproj">
       <Project>{9C8BD70E-F3CF-4621-BC62-C422C5A2EA3D}</Project>
       <Name>Genealogie.DAL.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Genealogie.DAL.Global\Genealogie.DAL.Global.csproj">
+      <Project>{DD858B87-D39B-4DA0-9964-31ADAF15E360}</Project>
+      <Name>Genealogie.DAL.Global</Name>
     </ProjectReference>
     <ProjectReference Include="..\Genealogie.Modeles.API.ASP\Genealogie.Modeles.API.ASP.csproj">
       <Project>{e466b2f8-0f05-4258-a2f0-1c5767e8388a}</Project>

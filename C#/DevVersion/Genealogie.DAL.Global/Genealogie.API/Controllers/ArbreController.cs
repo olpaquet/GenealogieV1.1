@@ -1,6 +1,7 @@
 ﻿using Genealogie.API.Conversion;
 using Genealogie.API.Models;
 using Genealogie.DAL.Client.Services;
+using Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -93,6 +94,18 @@ namespace Genealogie.API.Controllers
         {
             ArbreService rs = new ArbreService();
             return rs.EstUtilisee(id, null);
+        }
+
+        [HttpPut]
+        public bool Bloquer(BlocageArbre e)
+        {
+            return new ArbreService().Bloquer(e);
+        }
+
+        [HttpPut]
+        public bool Debloquer(int id)
+        {
+            return new ArbreService().Debloquer(id);
         }
 
         

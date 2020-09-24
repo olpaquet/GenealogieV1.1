@@ -16,7 +16,7 @@ namespace Genealogie.DAL.Global.Repository
         IEnumerable<TE> DonnerEnfants(int id);
         TE DonnerPere(int id);
         TE DonnerMere(int id);
-        IEnumerable<TE> DonnerParenteesDirectesPossibles(int id, int idArbre);
+        IEnumerable<TE> DonnerParenteesDirectesPossibles(int id);
         
 
         bool EstUtilisee(int id, string[] options);
@@ -26,7 +26,7 @@ namespace Genealogie.DAL.Global.Repository
         
 
         bool AjouterEnfant(int id,int idEnfant);
-        bool SupprimerEnfant(int id,int idEnfant);
+        bool SupprimerEnfant(int id, int idEnfant);
         bool AjouterParent(int id, int idParent);
         bool SupprimerPere(int id);
         bool SupprimerMere(int id);

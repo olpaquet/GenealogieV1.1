@@ -1,6 +1,7 @@
 ﻿using Genealogie.ASP.Models;
 /*using Genealogie.DAL.Global.Repository;*/
 using Newtonsoft.Json;
+using Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -151,6 +152,29 @@ namespace Genealogie.ASP.Services.API
         public IEnumerable<Arbre> Donner(IEnumerable<int> ie, string[] options = null)
         {
             throw new NotImplementedException();
+        }
+
+        public bool Debloquer(int id)
+        {
+            HttpResponseMessage reponse = _client.PutAsync($"Arbre/Debloquer/{id}",null).Result;
+            if (!reponse.IsSuccessStatusCode)
+            {
+                throw new Exception("Echec de la réception de données.");
+            }
+            return bool.Parse(reponse.Content.ReadAsStringAsync().Result);
+        }
+
+        public bool Bloquer(BlocageArbre e)
+        {
+            string contenuJson = JsonConvert.SerializeObject(e, Formatting.Indented);
+            StringContent contenu = new StringContent(contenuJson, Encoding.UTF8, "application/json");
+            HttpResponseMessage reponse = _client.PutAsync($"Arbre/Bloquer/", contenu).Result;
+            if (!reponse.IsSuccessStatusCode)
+            {
+                throw new Exception("Echec de la réception de données.");
+            }
+            var x = reponse.Content.ReadAsStringAsync().Result;
+            return bool.Parse(x);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using BoiteAOutil.DB.Standard;
 using Genealogie.DAL.Global.Conversion;
 using Genealogie.DAL.Global.Modeles;
+using Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Text;
 
 namespace Genealogie.DAL.Global.Repository
 {
-    public class ArbreRepository : BaseRepository, IArbreRepository<Arbre, int>
+    public class ArbreRepository : BaseRepository, IArbreRepository<Arbre, int, BlocageArbre>
     {
         private const string CONST_ARBRE_REQ = "select id,nom,description,idcreateur,datecreation,idblocage,idbloqueur,dateblocage from Arbre";
         public int Creer(Arbre e)
@@ -18,10 +19,8 @@ namespace Genealogie.DAL.Global.Repository
             com.AjouterParametre("nom", e.nom);
             com.AjouterParametre("description", e.description);
             com.AjouterParametre("idcreateur", e.idcreateur);
-            com.AjouterParametre("datecreation", e.datecreation);
-            com.AjouterParametre("idblocage", e.idblocage);
-            com.AjouterParametre("idbloqueur", e.idbloqueur);
-            com.AjouterParametre("dateblocage", e.dateblocage);
+            com.AjouterParametre("datecreation", DateTime.Now);
+            
             _connexion.ExecuterNonRequete(com);
             return (int)com.Parametres["id"].Valeur;
         }
@@ -30,12 +29,8 @@ namespace Genealogie.DAL.Global.Repository
             Commande com = new Commande("Arbre_mod", true);
             com.AjouterParametre("id", 0, true);
             com.AjouterParametre("nom", e.nom);
-            com.AjouterParametre("description", e.description);
-            com.AjouterParametre("idcreateur", e.idcreateur);
-            com.AjouterParametre("datecreation", e.datecreation);
-            com.AjouterParametre("idblocage", e.idblocage);
-            com.AjouterParametre("idbloqueur", e.idbloqueur);
-            com.AjouterParametre("dateblocage", e.dateblocage);
+            com.AjouterParametre("description", e.description);            
+            
             return (int)_connexion.ExecuterNonRequete(com) > 0;
         }
         public bool Supprimer(int id)
@@ -113,6 +108,25 @@ namespace Genealogie.DAL.Global.Repository
             Commande com = new Commande($"{CONST_ARBRE_REQ} where idcreateur = @idcreateur");
             com.AjouterParametre("idcreateur", idutilisateur);
             return _connexion.ExecuterLecteur(com, j => j.VersArbre());
+            throw new NotImplementedException();
+        }
+
+        public bool Debloquer(int id)
+        {
+            Commande com = new Commande("arbre_debloquer", true);
+            com.AjouterParametre("id", id);
+            return _connexion.ExecuterNonRequete(com) > 0;
+            throw new NotImplementedException();
+        }
+
+        public bool Bloquer(BlocageArbre e)
+        {
+            Commande com = new Commande("arbre_bloquer", true);
+            com.AjouterParametre("id", e.id);
+            com.AjouterParametre("idbloqueur", e.idBloqueur);
+            com.AjouterParametre("idblocage", e.idBlocage);
+            com.AjouterParametre("dateblocage", DateTime.Now);
+            return _connexion.ExecuterNonRequete(com) > 0;
             throw new NotImplementedException();
         }
         //throw new NotImplementedException();

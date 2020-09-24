@@ -33,11 +33,7 @@ namespace Genealogie.DAL.Global.Modeles
         public string description { get; set; }
         public int actif { get; set; }
     }
-    public class Conversation
-    {
-        public int id { get; set; }
-        public DateTime date { get; set; }
-    }
+    
     public class Couple
     {
         public int idpersonne { get; set; }
@@ -53,6 +49,16 @@ namespace Genealogie.DAL.Global.Modeles
         public int idemetteur { get; set; }
         public int idconversation { get; set; }
     }
+
+    public class MessageDestination
+    {
+        public int idconversation { get; set; }
+        public int iddestinataire { get; set; }
+        public DateTime? datelecture { get; set; }
+        public DateTime? dateeffacement { get; set; }
+    }
+
+
     public class MessageEfface
     {
         public int idmessage { get; set; }
@@ -148,5 +154,25 @@ namespace Genealogie.DAL.Global.Modeles
         public int idrole { get; set; }
     }
 
-
+    public class Conversation
+    {
+        public int id { get; set; }
+        public DateTime date { get; set; }
+        public string sujet { get; set; }
+        public string texte { get; set; }
+        public int idemetteur { get; set; }
+        public DateTime? dateeffacement { get; set; }
+    }   
+    
+    public class VMessageRecu
+    {
+        public int id { get; set; }
+        public DateTime date { get; set; }
+        public string sujet { get; set; }
+        public string texte { get; set; }
+        public int idemetteur { get; set; }
+        public int iddestinataire { get; set; }
+        public DateTime? datelecture { get; set; }
+        public DateTime? dateeffacement { get; set; }
+    }
 }

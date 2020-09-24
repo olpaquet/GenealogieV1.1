@@ -3,3 +3,4 @@ C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.G
 C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\testreflexion\bin\Debug\testreflexion.pdb
 C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\testreflexion\obj\Debug\testreflexion.exe
 C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\testreflexion\obj\Debug\testreflexion.pdb
+C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\testreflexion\obj\Debug\testreflexion.csprojAssemblyReference.cache

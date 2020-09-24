@@ -45,10 +45,10 @@ namespace Genealogie.API.Controllers
             return new PersonneService().DonnerMere(id).VersAPI();
         }
 
-        [HttpPut]
-        public IEnumerable<Personne> DonnerParenteesDirectesPossibles(ControleurPersonneRecherche e)
+        [HttpGet]
+        public IEnumerable<Personne> DonnerParenteesDirectesPossibles(int id)
         {
-            return new PersonneService().DonnerParenteesDirectesPossibles(e.idPersonne, e.idArbre).Select(j => j.VersAPI());
+            return new PersonneService().DonnerParenteesDirectesPossibles(id).Select(j => j.VersAPI());
         }
 
 

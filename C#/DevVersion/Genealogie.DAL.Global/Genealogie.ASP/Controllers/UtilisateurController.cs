@@ -42,7 +42,7 @@ namespace Genealogie.ASP.Controllers
         {            
             UtilisateurServiceAPI usa = new UtilisateurServiceAPI();
             UtilisateurCreation u = new UtilisateurCreation();
-            u.SLIRoles = usa.DonnerSLIRoles((int?)null).ToList();
+            u.SLIRoles = usa.DonnerSLIRoles((int?)null).ToList();            
             return View(u);
         }
         [AutorisationRole(EnumRole.ADMIN)]
@@ -53,8 +53,14 @@ namespace Genealogie.ASP.Controllers
             {
                 UtilisateurServiceAPI usa = new UtilisateurServiceAPI();
                 Utilisateur ch = u.VersUtilisateur();
-                var x = u.SLIRoles;
-                ch.lRoles = (u.SLIRoles==null)?null:u.SLIRoles.Where(j => j.Selected).Select(k => Int32.Parse(k.Value)).VersListePypee();
+                IList<int> x = u.SLIRoles.Select(j => int.Parse(j.Value)).Where(k=>new UtilisateurServiceAPI().DonnerSLIRoles(null).Select(m=>int.Parse(m.Value)).Contains(k))
+                    .ToList();
+
+                ch.lRoles = u.SLIRoles.Where(j => j.Selected).Select(k => int.Parse(k.Value))
+                    .Where(m=>x.Contains(m))
+                    .VersListePypee();
+                    
+                
                 int b = usa.Creer(ch);
                 if (b >= 1) return RedirectToAction("Index");
             }
@@ -85,6 +91,14 @@ namespace Genealogie.ASP.Controllers
                 UtilisateurModification vum = usa.Donner(id).VersUtilisateurModification();
                 um.login = vum.login;
                 Utilisateur u = um.VersUtilisateur();
+                IList<int> x = um.SLIRoles.Select(j => int.Parse(j.Value)).Where(k => new UtilisateurServiceAPI().DonnerSLIRoles(null).Select(m => int.Parse(m.Value)).Contains(k))
+                    .ToList();
+
+                u.lRoles = um.SLIRoles.Where(j => j.Selected).Select(k => int.Parse(k.Value))
+                    .Where(m => x.Contains(m))
+                    .VersListePypee();
+
+
                 u.lRoles = um.SLIRoles.Where(j => j.Selected).Select(l => Int32.Parse(l.Value)).VersListePypee();
                 if (usa.Modifier(id, u)) return RedirectToAction("Index");
             }

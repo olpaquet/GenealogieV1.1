@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Genealogie.ASP.Models.ConversationIndex>
+
+@{
+    ViewBag.Title = "DonnerMessagesEnvoyes";
+}
+
+<h2>DonnerMessagesEnvoyes</h2>
+
+<p>
+    @Html.ActionLink("Nouveau Message", "EnvoyerMessage")
+</p>
+
+<p>
+
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.sujet)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.texte)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.date)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.sujet)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.texte)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.date)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.id }) |
+                @Html.ActionLink("Supprimer", "Detruire", new { id = item.id })
+            </td>
+        </tr>
+    }
+
+</table>

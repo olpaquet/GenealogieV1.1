@@ -28,14 +28,12 @@ alter table Nouvelle drop constraint fk_nouvelle_createur
 alter table MessageForum drop constraint fk_messageforum_theme
 alter table MessageForum drop constraint fk_messageforum_publicateur
 
-alter table MessageLu drop constraint fk_messagelu_message
- alter table MessageLu drop constraint fk_messagelu_lecteur
 
- alter table MessageEfface drop constraint fk_messageefface_message
- alter table MessageEfface drop constraint fk_messageefface_effaceur
 
-alter table Message drop constraint fk_message_emetteur
- alter table Message drop constraint fk_message_conversation
+alter table conversation drop constraint fk_conversation_emetteur
+
+alter table messagedestination drop constraint fk_messagedestination_conversation
+ alter table messagedestination drop constraint fk_messagedestination_destinataire
 
 /****ENDDROPFK*/
 
@@ -73,10 +71,9 @@ drop table Nouvelle
 drop table Personne
 drop table Theme
 drop table Conversation
-drop table Message
 drop table Couple
-drop table MessageLu
-drop table MessageEfface
+/*drop table MessageLu
+drop table MessageEfface*/
 drop table UtilisateurAbonnement
 
 drop table UtilisateurRole
@@ -85,6 +82,8 @@ drop table UtilisateurRole
 
 drop table MessageForum
 
+drop table messagedestination
+ 
 
 
 go
@@ -237,21 +236,27 @@ create index i_personne_mere on Personne(idmere)
  constraint pk_theme primary key(id)
  )
  create unique index iu_theme_titre on Theme(titre)
-
+ go
  create Table Conversation(
  id int identity(1,1) not null,
- date datetime not null
+ date datetime not null,
+ sujet nvarchar(50),
+ texte nvarchar(max),
+ idemetteur int not null,
+ dateeffacement datetime default null
  constraint pk_conversation primary key (id)
  )
-
- create table Message(
- id int identity(1,1) not null,
- sujet nvarchar(50) not null,
- texte nvarchar(max) not null,
- idemetteur int not null,
- idconversation int not null
- constraint pk_message primary key (id)
+ go
+ create table messagedestination(
+ idconversation int not null,
+ iddestinataire int not null,
+ datelecture datetime default null,
+ dateeffacement datetime default null
+ constraint pk_messagedestination primary key (idconversation, iddestinataire)
  )
+
+ 
+ 
  
  /*
  create table UtilisateurNouvelle(
@@ -272,7 +277,7 @@ create index i_personne_mere on Personne(idmere)
  constraint pk_messageforum primary key(id)
  )
 
- create table MessageLu(
+/* create table MessageLu(
  idmessage int not null,
  idlecteur int not null,
  date datetime
@@ -284,6 +289,11 @@ create index i_personne_mere on Personne(idmere)
  date datetime
  constraint pk_messageefface primary key (idmessage,ideffaceur)
  )
+ */
+
+
+ go
+ 
 
  /*****ENDTABLES*/
 
@@ -314,14 +324,13 @@ create index i_personne_mere on Personne(idmere)
  alter table MessageForum add constraint fk_messageforum_theme foreign key (idtheme) references Theme(id)
  alter table MessageForum add constraint fk_messageforum_publicateur foreign key (idpublicateur) references Utilisateur(id)
 
- alter table MessageLu add constraint fk_messagelu_message foreign key (idmessage) references Message(id)
- alter table MessageLu add constraint fk_messagelu_lecteur foreign key (idlecteur) references Utilisateur(id)
 
- alter table MessageEfface add constraint fk_messageefface_message foreign key (idmessage) references Message(id)
- alter table MessageEfface add constraint fk_messageefface_effaceur foreign key (ideffaceur) references Utilisateur(id)
 
- alter table Message add constraint fk_message_emetteur foreign key (idemetteur) references Utilisateur(id)
- alter table Message add constraint fk_message_conversation foreign key (idconversation) references Conversation(id)
+
+alter table conversation add constraint fk_conversation_emetteur foreign key (idemetteur) references utilisateur(id)
+
+alter table messagedestination add constraint fk_messagedestination_conversation foreign key (idconversation) references conversation(id)
+ alter table messagedestination add constraint fk_messagedestination_destinataire foreign key (iddestinataire) references utilisateur(id)
 
  /*****ENDFOREIGNKEYS*/
 
@@ -956,18 +965,18 @@ go
 drop procedure Arbre_cre
 go
 create PROCEDURE Arbre_cre
- @id int out, @nom nvarchar(100), @description nvarchar(2000), @idcreateur int, @datecreation datetime, @idblocage int, @idbloqueur int, @dateblocage datetime
+ @id int out, @nom nvarchar(100), @description nvarchar(2000), @idcreateur int, @datecreation datetime
 AS
-insert into Arbre (nom,description,idcreateur,datecreation,idblocage,idbloqueur,dateblocage) values (@nom,@description,@idcreateur,@datecreation,@idblocage,@idbloqueur,@dateblocage);
+insert into Arbre (nom,description,idcreateur,datecreation) values (@nom,@description,@idcreateur,@datecreation);
 set @id = @@IDENTITY;
 go
 drop procedure Arbre_mod
 go
 create PROCEDURE Arbre_mod
-@id int,@nom nvarchar(100),@description nvarchar(2000),@idcreateur int,@datecreation datetime,@idblocage int,@idbloqueur int,@dateblocage datetime
+@id int,@nom nvarchar(100),@description nvarchar(2000)
 AS
 update Arbre
-set nom=@nom,description=@description,idcreateur=@idcreateur,datecreation=@datecreation,idblocage=@idblocage,idbloqueur=@idbloqueur,dateblocage=@dateblocage
+set nom=@nom,description=@description
 where id=@id
 ;
 go
@@ -980,6 +989,21 @@ delete Arbre
 where id=@id
 ;
 go
+
+
+drop procedure arbre_debloquer
+go
+create procedure arbre_debloquer @id int
+as
+update Arbre set idblocage=null, dateblocage=null, idbloqueur=null where id = @id;
+go
+drop procedure arbre_bloquer
+go
+create procedure arbre_bloquer @id int, @idblocage int, @dateblocage datetime, @idbloqueur int
+as
+update Arbre set idblocage=@idblocage, dateblocage=@dateblocage, idbloqueur = @idbloqueur where id = @id
+go
+
 /*
 private const string CONST_ARBRE_REQ = "select id,nom,description,duree,prix,nombremaxarbres,nombremaxpersonnesid,nom,description,idcreateur,datecreation,idblocage,idbloqueur,dateblocage from Arbre";
 */
@@ -1041,29 +1065,41 @@ go
 drop procedure Conversation_cre
 go
 create PROCEDURE Conversation_cre
- @id int out, @date datetime
+ @id int out, @sujet nvarchar(50), @texte nvarchar(max), @idemetteur int
 AS
-insert into Conversation (date) values (@date);
+declare @aujourdhui datetime
+set @aujourdhui = (select GETDATE())
+insert into Conversation (date, sujet, texte, idemetteur) values (@aujourdhui, @sujet, @texte, @idemetteur);
 set @id = @@IDENTITY;
 go
-drop procedure Conversation_mod
+--drop procedure Conversation_mod
 go
-create PROCEDURE Conversation_mod
+/*create PROCEDURE Conversation_mod
 @id int,@date datetime
 AS
 update Conversation
 set date=@date
 where id=@id
 ;
+*/
 go
-drop procedure Conversation_eff
+drop procedure conversation_effacee
 go
-create procedure Conversation_eff
+create procedure conversation_effacee @id int
+as
+declare @aujourdhui datetime
+set @aujourdhui = (select GETDATE())
+update Conversation set dateeffacement = @aujourdhui where id = @id
+go
+go
+--drop procedure Conversation_eff
+go
+/*create procedure Conversation_eff
 @id int
 AS
 delete Conversation 
 where id=@id
-;
+*/
 go
 /*
 private const string CONST_CONVERSATION_REQ = "select id,nom,description,duree,prix,nombremaxarbres,nombremaxpersonnesid,nom,description,idcreateur,datecreation,idblocage,idbloqueur,dateblocageid,nom,descriptionid,date from Conversation";
@@ -1433,6 +1469,72 @@ select id,nom,description,duree,prix,nombremaxarbres,nombremaxpersonnesid,nom,de
 private const string CONST_THEME_REQ = "select id,nom,description,duree,prix,nombremaxarbres,nombremaxpersonnesid,nom,description,idcreateur,datecreation,idblocage,idbloqueur,dateblocageid,nom,descriptionid,dateidpersonne,idpartenaire,datedebut,datefinid,sujet,texte,idemetteur,idconversationid,sujet,texte,idtheme,idpublicateur,datepublicationid,titre,descriptionid,nom,prenom,datedenaissance,datededeces,idarbre,dateajout,idpere,idmereid,nom,descriptionid,titre,description from Theme";
 */
 
+/***txable***messagedestination*/
+go	
+drop procedure messagedestination_cre
+go
+create PROCEDURE messagedestination_cre
+ @idconversation int, @iddestinataire int
+AS
+insert into messagedestination (idconversation, iddestinataire) values (@idconversation,@iddestinataire);
+
+go
+
+drop procedure messagedestination_lu
+go
+create procedure messagedestination_lu @idconversation int, @iddestinataire int
+as
+declare @aujourdhui datetime
+set @aujourdhui = (select GETDATE())
+update messagedestination set datelecture=@aujourdhui where idconversation=@idconversation and iddestinataire=@iddestinataire
+go
+drop procedure messagedestination_efface
+go
+create procedure messagedestination_efface @idconversation int, @iddestinataire int
+as
+declare @aujourdhui datetime
+set @aujourdhui = (select GETDATE())
+update messagedestination set dateeffacement=@aujourdhui where idconversation=@idconversation and iddestinataire=@iddestinataire
+go
+/*drop procedure messagedestination_mod
+go
+create PROCEDURE messagedestination_mod
+@idconversation int,@iddestinataire int,@datelecture datetime,@dateeffacement datetime
+AS
+update messagedestination
+set iddestinataire=@iddestinataire,datelecture=@datelecture,dateeffacement=@dateeffacement
+where idconversation=@idconversation
+;
+*/
+go
+/*drop procedure messagedestination_eff
+go
+create procedure messagedestination_eff
+@idconversation int
+AS
+delete messagedestination 
+where idconversation=@idconversation
+;
+*/
+go
+/*
+private const string CONST_MESSAGEDESTINATION_REQ = "select idconversation,iddestinataire,datelecture,dateeffacement from messagedestination";
+*/
+/***************************/
+/*VUES*/
+go
+drop view VMessageRecu
+go
+create view VMessageRecu
+AS
+select 
+c.id, c.date, c.sujet, c.texte, idemetteur, md.iddestinataire, 
+md.datelecture, md.dateeffacement 
+from conversation c
+join messagedestination md on md.idconversation = c.id
+go
+
+
 
 /************SETUP******/
 declare @id int
@@ -1461,10 +1563,11 @@ exec Nouvelle_cre @id out, 'C''est parti!', 'Super promotion à l''occasion de l'
 
 set @dd = (select GETDATE())
 exec utilisateur_cre @id out, 'sabrina','Salerno','Sabrina','sabrina@boysboys.boys',null,2,null,'1','presel','postsel', null
-exec Arbre_cre @id out, 'mon premier arbre', 'Essayons', 2, @dd, null,null,null
+exec Arbre_cre @id out, 'mon premier arbre', 'Essayons', 2, @dd
 set @dd = (select GETDATE())
-exec Arbre_cre @id out, 'mon deuxième arbre', 'xxxEssayons', 2, @dd, 2,1,@dd
-
+exec Arbre_cre @id out, 'mon deuxième arbre', 'xxxEssayons', 2, @dd
+--exec Arbre_bloquer 2,1,@dd
+exec arbre_bloquer 2, 1, @dd, 1
 declare @idarbre int
 set @idarbre = 2
 /*1*/exec Personne_cre @id out, 'de Belgique', 'Albert', null,null, 1, 2, @dd
@@ -1492,10 +1595,11 @@ exec enfant_cre 11,9
 exec enfant_cre 11,10
 
 
+exec Conversation_cre @id out, 'premier message', 'Salut Sabrina!', 1
+exec messagedestination_cre @id, 2
 
 
-
-
+select id,date,sujet,texte,idemetteur,dateeffacement from Conversation where idemetteur = 1
 
 
 
@@ -1514,5 +1618,7 @@ select * from utilisateurrole
 select * from nouvelle
 select * from couple
 select * from personne
-
+select * from arbre
 select * from abonnement
+select * from conversation
+select * from vmessagerecu

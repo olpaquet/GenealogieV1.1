@@ -127,4 +127,38 @@ namespace Genealogie.Modeles.API.ASP.Modeles
         public int idPersonne { get; set; }
     }
 
+    public class BConversation
+    {
+        public int id { get; set; }
+        public DateTime date { get; set; }
+        public string sujet { get; set; }
+        public string texte { get; set; }
+        public int idEmetteur { get; set; }
+        public DateTime? dateEffacement { get; set; }
+    }
+
+    public class BMessageDestination
+    {
+        public int idConversation { get; set; }
+        public int idDestinataire { get; set; }
+        public DateTime? dateLecture { get; set; }
+        public DateTime? dateEffacement { get; set; }
+    }
+
+    public class BVMesageRecu
+    {
+        /*
+        c.id, c.date, c.sujet, c.texte, idemetteur, md.iddestinataire, 
+md.datelecture, md.dateeffacement
+            */
+        public int id { get; set; }
+        public DateTime date { get; set; }
+        public string sujet { get; set; }
+        public string texte { get; set; }
+        public int idEmetteur { get; set; }
+        public int idDestinataire { get; set; }
+        public DateTime? dateLecture { get; set; }
+        public DateTime? dateEffacement { get; set; }
+
+    }
 }

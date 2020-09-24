@@ -1,4 +1,5 @@
 ﻿using Genealogie.ASP.Models;
+using Genealogie.ASP.Services.API;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,9 @@ namespace Genealogie.ASP.Securite
 {
     public static class ConnexionUtilisateur
     {
-        public static string baseUrl { get { return "http://localhost:61297/api/"; }  }
+        public static string baseUrl { get { return "http://localhost:61297/api/";
+                /*return "http://localhost:8080/GenealogieAPI";*/
+            }  }
         public static string login { get; private set; }
         public static string motDePasse {  get; private set; }
 
@@ -28,6 +31,7 @@ namespace Genealogie.ASP.Securite
                 return (Utilisateur)HttpContext.Current.Session["utilisateur"]; }
             set
             {
+
                 HttpContext.Current.Session["Utilisateur"] = value;
                 if (value == null)
                 {
@@ -42,6 +46,10 @@ namespace Genealogie.ASP.Securite
                     HttpContext.Current.Session["admin"] = ((Utilisateur)value).estAdmin()?"1":null;
                     var x = ((Utilisateur)value).estAdmin();
                 }
+
+
+                arbres = (value==null)?new List<Arbre>():new ArbreServiceAPI().DonnerParUtilisateur(Utilisateur.id).ToList();
+                roles = (value == null) ? new List<Role>() : new UtilisateurRoleServiceAPI().DonnerRolesParUtilisateur(Utilisateur.id).ToList();
             }
         }
 
@@ -67,7 +75,17 @@ namespace Genealogie.ASP.Securite
         }
 
         public static bool Connecte() { return !SessionUtilisateur.Anonyme(); }
+
+
+        /* hors httpcontext */
+        public static IList<Arbre> arbres;
+        public static IList<Role> roles;
+        
     }
+
+
+
+
 
 
 }

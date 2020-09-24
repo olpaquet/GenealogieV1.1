@@ -6,13 +6,14 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using Genealogie.DAL.Client.Conversion;
+using Services;
 
 namespace Genealogie.DAL.Client.Services
 {
-    public class ArbreService : IArbreRepository<Arbre,int>
+    public class ArbreService : IArbreRepository<Arbre,int,BlocageArbre>
     {
 
-        private IArbreRepository<gl.Arbre,int> _rep;
+        private IArbreRepository<gl.Arbre,int,BlocageArbre> _rep;
 
         public ArbreService() { this._rep = new ArbreRepository(); }
 
@@ -22,9 +23,21 @@ namespace Genealogie.DAL.Client.Services
             throw new NotImplementedException();
         }
 
+        public bool Debloquer(int id)
+        {
+            return _rep.Debloquer(id);
+            throw new NotImplementedException();
+        }
+
         public int Creer(Arbre e)
         {
             return _rep.Creer(e.VersGlobal());
+            throw new NotImplementedException();
+        }
+
+        public bool Bloquer(BlocageArbre e)
+        {
+            return _rep.Bloquer(e);
             throw new NotImplementedException();
         }
 

@@ -36,7 +36,11 @@
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
 
                     @if (HttpContext.Current.Session["utilisateur"] != null)
-                    {<li>@Html.ActionLink("Mes arbres", "Index", "Arbre")</li>}
+                    {
+                        <li>@Html.ActionLink("Messages reçus", "DonnerMessagesRecus", "Message")</li>
+                        <li>@Html.ActionLink("Messages envoyés", "DonnerMessagesEnvoyes", "Message")</li>
+                        <li>@Html.ActionLink("Mes arbres", "Index", "Arbre")</li>
+}
 
                     @{ var xx = HttpContext.Current.Session["admin"];}
                     @if (HttpContext.Current.Session["admin"] != null)
@@ -47,7 +51,7 @@
                         <li>@Html.ActionLink("Thèmes", "Index", "Theme")</li>
                         <li>@Html.ActionLink("Abonnements", "Index", "Abonnement")</li>
                     }
-                    
+
                 </ul>
             </div>
         </div>

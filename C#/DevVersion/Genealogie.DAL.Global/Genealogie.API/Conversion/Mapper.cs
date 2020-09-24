@@ -34,6 +34,17 @@ namespace Genealogie.API.Conversion
         public static cl.Personne VersClient(this Personne e){ if (e == null) { return null; } return new cl.Personne { dateDeNaissance = e.dateDeNaissance, dateAjout = e.dateAjout, dateDeDeces = e.dateDeDeces, homme = e.homme, id = e.id, idArbre = e.idArbre, idMere = e.idMere, idPere = e.idPere, nom = e.nom, prenom = e.prenom }; }
 
 
+        public static MessageDestination VersAPI(this cl.MessageDestination e) { if (e == null) { return null; } return new MessageDestination { dateEffacement=e.dateEffacement, dateLecture=e.dateLecture, idConversation=e.idConversation, idDestinataire=e.idDestinataire  }; }
+        public static cl.MessageDestination VersClient(this MessageDestination e) { if (e == null) { return null; } return new cl.MessageDestination { dateEffacement = e.dateEffacement, dateLecture = e.dateLecture, idConversation = e.idConversation, idDestinataire = e.idDestinataire }; }
+
+        public static Conversation VersAPI(this cl.Conversation e) { if (e == null) { return null; } return new Conversation { date=e.date, dateEffacement=e.dateEffacement, id=e.id, idEmetteur=e.idEmetteur, sujet=e.sujet, texte=e.texte}; }
+        public static cl.Conversation VersClient(this Conversation e) { if (e == null) { return null; } return new cl.Conversation { date = e.date, dateEffacement = e.dateEffacement, id = e.id, idEmetteur = e.idEmetteur, sujet = e.sujet, texte = e.texte }; }
+
+        public static VMessageRecu VersAPI(this cl.VMessageRecu e) { if (e == null) { return null; } return new VMessageRecu { date=e.date, dateEffacement=e.date, dateLecture=e.dateLecture, id=e.id, idDestinataire=e.idDestinataire, idEmetteur=e.idEmetteur, sujet=e.sujet, texte=e.texte}; }
+        public static cl.VMessageRecu VersClient(this VMessageRecu e) { if (e == null) { return null; } return new cl.VMessageRecu { date = e.date, dateEffacement = e.date, dateLecture = e.dateLecture, id = e.id, idDestinataire = e.idDestinataire, idEmetteur = e.idEmetteur, sujet = e.sujet, texte = e.texte }; }
+
+        /*public static MessageDestination VersAPI(this cl.MessageDestination e) { if (e == null) { return null; } return new MessageDestination { dateEffacement=e.dateEffacement, dateLecture=e.dateLecture, idConversation=e.idConversation, idDestinataire=e.idDestinataire}; }
+        public static cl.MessageDestination VersClient(this MessageDestination e) { if (e == null) { return null; } return new cl.MessageDestination { dateEffacement = e.dateEffacement, dateLecture = e.dateLecture, idConversation = e.idConversation, idDestinataire = e.idDestinataire }; }*/
 
     }
 }

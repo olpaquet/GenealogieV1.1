@@ -16,5 +16,8 @@ namespace Genealogie.API.Models
     public class Nouvelle : BNouvelle { }
     public class Abonnement : BAbonnement { }
     public class Arbre : BArbre { }
-    public class Personne : BPersonne { }    
+    public class Personne : BPersonne { }
+    public class MessageDestination : BMessageDestination { }
+    public class Conversation : BConversation { }
+    public class VMessageRecu : BVMesageRecu { }
 }

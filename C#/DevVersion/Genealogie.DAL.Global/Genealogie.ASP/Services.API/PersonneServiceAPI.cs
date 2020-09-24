@@ -87,11 +87,10 @@ namespace Genealogie.ASP.Services.API
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Personne> DonnerParenteesDirectesPossibles(int id, int idArbre)
+        public IEnumerable<Personne> DonnerParenteesDirectesPossibles(int id)
         {
-            string contenuJson = JsonConvert.SerializeObject(new ControleurPersonneRecherche { idArbre=idArbre, idPersonne=id }, Formatting.Indented);
-            StringContent contenu = new StringContent(contenuJson, Encoding.UTF8, "application/json");
-            HttpResponseMessage reponse = _client.PutAsync($"Personne/DonnerParenteesDirectesPossibles/{id}",contenu).Result;
+            
+            HttpResponseMessage reponse = _client.GetAsync($"Personne/DonnerParenteesDirectesPossibles/{id}").Result;
             if (!reponse.IsSuccessStatusCode)
             {
                 throw new Exception("Echec de la réception de données.");

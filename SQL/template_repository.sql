@@ -4,7 +4,7 @@ use Genealogie
 declare @yes nvarchar(max);
 declare @ttype varchar(100);
 
-declare @nomtable varchar(250) = 'Personne'
+declare @nomtable varchar(250) = 'MessageDestination'
 DECLARE @idcol int
 declare @nomcol VARCHAR(250)
 declare @typecol nVARCHAR(25)

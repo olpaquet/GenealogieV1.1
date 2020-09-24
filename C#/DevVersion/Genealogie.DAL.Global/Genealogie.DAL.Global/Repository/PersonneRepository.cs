@@ -172,8 +172,9 @@ namespace Genealogie.DAL.Global.Repository
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Personne> DonnerParenteesDirectesPossibles(int id, int idArbre)
+        public IEnumerable<Personne> DonnerParenteesDirectesPossibles(int id)
         {
+            int idArbre = new PersonneRepository().Donner(id).idarbre;
             List<Personne> interdictions = new List<Personne>();
             InterditsVersHaut(id, interdictions);
             InterditsVersBas(id, interdictions);

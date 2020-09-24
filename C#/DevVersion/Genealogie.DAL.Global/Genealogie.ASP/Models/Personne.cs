@@ -22,9 +22,11 @@ namespace Genealogie.ASP.Models
         [DisplayName("date de naissance")]
         public DateTime? dateDeNaissance { get; set; }
         [DisplayName("date de décès")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime? dateDeDeces { get; set; }
         public bool homme { get; set; }
         [DisplayName("ajout")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime dateAjout { get; set; }
         public Personne pere { get; set; }
         public Personne mere { get; set; }
@@ -82,9 +84,11 @@ namespace Genealogie.ASP.Models
         public bool homme { get; set; }
         [DataType(DataType.Date)]
         [DisplayName("date de naissance")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? dateDeNaissance { get; set; }
         [DataType(DataType.Date)]
         [DisplayName("date de décès")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? dateDeDeces { get; set; }
 
         public PersonneModification() { }
@@ -96,5 +100,15 @@ namespace Genealogie.ASP.Models
             this.nom = e.nom;
             this.prenom = e.prenom;            
         }
+    }
+
+    public class PersonneAjouterEnfant
+    {
+        public int  id { get; set; }
+        public int  idArbre { get; set; }
+        public string Parent { get; set; }
+        public int machin { get; set; }
+
+        public IList<SelectListItem> enfants { get; set; }
     }
 }

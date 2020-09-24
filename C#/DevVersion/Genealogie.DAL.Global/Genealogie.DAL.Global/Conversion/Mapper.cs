@@ -83,16 +83,27 @@ namespace Genealogie.DAL.Global.Conversion
                 actif = (int)idr[nameof(Blocage.actif)]
             };
         }
+        
         public static Conversation VersConversation(this IDataRecord idr)
         {
             if (idr == null) return null;
+            
             return new Conversation
             {
-                id = (int)idr[nameof(Conversation.id)]
+                id = (int)idr[nameof(Conversation.id)]/*int*/
             ,
-                date = (DateTime)idr[nameof(Conversation.date)]
+                date = (DateTime)idr[nameof(Conversation.date)]/*datetime*/
+            ,
+                sujet = (string)idr[nameof(Conversation.sujet)]/*nvarchar*/
+            ,
+                texte = (string)idr[nameof(Conversation.texte)]/*nvarchar*/
+            ,
+                idemetteur = (int)idr[nameof(Conversation.idemetteur)]/*int*/
+            ,
+                dateeffacement = (DateTime?)idr[nameof(Conversation.dateeffacement)].SiNul()/*datetime*/
             };
         }
+
         public static Couple VersCouple(this IDataRecord idr)
         {
             if (idr == null) return null;
@@ -305,6 +316,40 @@ namespace Genealogie.DAL.Global.Conversion
                 idrole = (int)idr[nameof(UtilisateurRole.idrole)]
             };
         }
+
+        public static MessageDestination VersMessageDestination(this IDataRecord idr)
+        {
+            if (idr == null) return null;            
+            return new MessageDestination
+            {
+                idconversation = (int)idr[nameof(MessageDestination.idconversation)]/*int*/
+            ,
+                iddestinataire = (int)idr[nameof(MessageDestination.iddestinataire)]/*int*/
+            ,
+                datelecture = (DateTime?)idr[nameof(MessageDestination.datelecture)].SiNul()/*datetime*/
+            ,
+                dateeffacement = (DateTime?)idr[nameof(MessageDestination.dateeffacement)].SiNul()/*datetime*/
+            };
+        }
+        /*
+         * private const string CONST_VMESSAGERECU_REQ = "select id, date, sujet, texte, idemetteur, ddestinataire, 
+         * datelecture, dateeffacement from VMessageRecu"; */
+        public static VMessageRecu VersVMessageRecu(this IDataRecord idr)
+        {
+            if (idr == null) return null;
+            return new VMessageRecu
+            {
+                id=(int)idr[nameof(VMessageRecu.id)],
+                date = (DateTime)idr[nameof(VMessageRecu.date)],
+                sujet = (string)idr[nameof(VMessageRecu.sujet)],
+                texte = (string)idr[nameof(VMessageRecu.texte)],
+                idemetteur = (int)idr[nameof(VMessageRecu.idemetteur)],
+                datelecture = (DateTime?)idr[nameof(VMessageRecu.datelecture)].SiNul(),
+                iddestinataire = (int)idr[nameof(VMessageRecu.iddestinataire)],
+                dateeffacement = (DateTime?)idr[nameof(VMessageRecu.dateeffacement)].SiNul()
+            };
+        }
+
 
 
 

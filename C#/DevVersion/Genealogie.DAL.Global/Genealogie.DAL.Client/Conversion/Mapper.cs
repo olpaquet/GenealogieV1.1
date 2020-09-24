@@ -34,5 +34,14 @@ namespace Genealogie.DAL.Client.Conversion
 
         public static Personne VersClient(this gl.Personne e) { if (e == null) { return null; }return new Personne { dateAjout=e.dateajout, dateDeDeces=e.datededeces, dateDeNaissance=e.datedenaissance, homme=(e.homme==1)?true:false, id=e.id, idArbre=e.idarbre, idMere=e.idmere, idPere=e.idpere, nom=e.nom, prenom=e.prenom }; }
         public static gl.Personne VersGlobal(this Personne e) { if (e == null) { return null; }return new gl.Personne { dateajout=e.dateAjout, datededeces=e.dateDeDeces, datedenaissance=e.dateDeNaissance, homme=e.homme?1:0, id=e.id, idarbre=e.idArbre, idmere=e.idMere, idpere=e.idPere, nom=e.nom, prenom=e.prenom}; }
+
+        public static Conversation VersClient(this gl.Conversation e) { if (e == null) { return null; } return new Conversation { date=e.date, dateEffacement=e.dateeffacement, id=e.id, idEmetteur=e.idemetteur, sujet=e.sujet, texte=e.texte}; }
+        public static gl.Conversation VersGlobal(this Conversation e) { if (e == null) { return null; } return new gl.Conversation { date = e.date, dateeffacement = e.dateEffacement, id = e.id, idemetteur = e.idEmetteur, sujet = e.sujet, texte = e.texte }; }
+
+        public static VMessageRecu VersClient(this gl.VMessageRecu e) { if (e == null) { return null; } return new VMessageRecu { date=e.date, dateEffacement=e.dateeffacement, dateLecture=e.datelecture, id=e.id, idDestinataire=e.iddestinataire, idEmetteur=e.idemetteur, sujet=e.sujet, texte=e.texte}; }
+        public static gl.VMessageRecu VersGlobal(this VMessageRecu e) { if (e == null) { return null; } return new gl.VMessageRecu { date = e.date, dateeffacement = e.dateEffacement, datelecture = e.dateLecture, id = e.id, iddestinataire = e.idDestinataire, idemetteur = e.idEmetteur, sujet = e.sujet, texte = e.texte }; }
+
+        public static MessageDestination VersClient(this gl.MessageDestination e) { if (e == null) { return null; } return new MessageDestination { dateEffacement=e.dateeffacement, dateLecture=e.datelecture, idConversation=e.idconversation, idDestinataire=e.iddestinataire}; }
+        public static gl.MessageDestination VersGlobal(this MessageDestination e) { if (e == null) { return null; } return new gl.MessageDestination { dateeffacement = e.dateEffacement, datelecture = e.dateLecture, idconversation = e.idConversation, iddestinataire = e.idDestinataire }; }
     }
 }

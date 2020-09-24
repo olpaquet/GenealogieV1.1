@@ -153,7 +153,9 @@
     <Compile Include="Controllers\AbonnementController.cs" />
     <Compile Include="Controllers\ArbreController.cs" />
     <Compile Include="Controllers\BlocageController.cs" />
+    <Compile Include="Controllers\ConversationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Controllers\NouvelleController.cs" />
     <Compile Include="Controllers\PersonneController.cs" />
     <Compile Include="Controllers\RechercheController.cs" />
@@ -167,7 +169,10 @@
     <Compile Include="Models\Abonnement.cs" />
     <Compile Include="Models\Arbre.cs" />
     <Compile Include="Models\Blocage.cs" />
+    <Compile Include="Models\Conversation.cs" />
     <Compile Include="Models\ExtraClasses.cs" />
+    <Compile Include="Models\MessageDestination.cs" />
+    <Compile Include="Models\Messagerie.cs" />
     <Compile Include="Models\Nouvelle.cs" />
     <Compile Include="Models\Personne.cs" />
     <Compile Include="Models\FormRecherche.cs" />
@@ -175,6 +180,7 @@
     <Compile Include="Models\Theme.cs" />
     <Compile Include="Models\Utilisateur.cs" />
     <Compile Include="Models\UtilisateurRole.cs" />
+    <Compile Include="Models\VMessageRecu.cs" />
     <Compile Include="Phrases\Phrase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Securite\AutorisationRoleAttribute.cs" />
@@ -189,12 +195,15 @@
     <Compile Include="Services.API\ArbreServiceAPI.cs" />
     <Compile Include="Services.API\BaseServiceAPI.cs" />
     <Compile Include="Services.API\BlocageServiceAPI.cs" />
+    <Compile Include="Services.API\ConversationServiceAPI.cs" />
+    <Compile Include="Services.API\MessageDestinationServiceAPI.cs" />
     <Compile Include="Services.API\NouvelleServiceAPI.cs" />
     <Compile Include="Services.API\PersonneServiceAPI.cs" />
     <Compile Include="Services.API\RoleServiceAPI.cs" />
     <Compile Include="Services.API\ThemeServiceAPI.cs" />
     <Compile Include="Services.API\UtilisateurRoleServiceAPI.cs" />
     <Compile Include="Services.API\UtilisateurServiceAPI.cs" />
+    <Compile Include="Services.API\VMessageRecuServiceAPI.cs" />
     <Compile Include="Validation\PositifAttribute.cs" />
     <Compile Include="Validation\InutiliseeAttribute.cs" />
     <Compile Include="Validation\MotDePasseConfirmeAttribute.cs" />
@@ -274,6 +283,11 @@
     <Content Include="Views\Personne\Creer.cshtml" />
     <Content Include="Views\Personne\Modifier.cshtml" />
     <Content Include="Views\Arbre\Creer.cshtml" />
+    <Content Include="Views\Personne\AjouterEnfant.cshtml" />
+    <Content Include="Views\Conversation\Donner.cshtml" />
+    <Content Include="Views\Message\DonnerMessagesRecus.cshtml" />
+    <Content Include="Views\Message\DonnerMessagesEnvoyes.cshtml" />
+    <Content Include="Views\Message\EnvoyerMessage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

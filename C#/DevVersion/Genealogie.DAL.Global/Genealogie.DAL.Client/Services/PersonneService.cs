@@ -53,9 +53,9 @@ namespace Genealogie.DAL.Client.Services
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Personne> DonnerParenteesDirectesPossibles(int id, int idArbre)
+        public IEnumerable<Personne> DonnerParenteesDirectesPossibles(int id)
         {
-            return _rep.DonnerParenteesDirectesPossibles(id, idArbre).Select(j => j.VersClient());
+            return _rep.DonnerParenteesDirectesPossibles(id).Select(j => j.VersClient());
             throw new NotImplementedException();
         }
 
