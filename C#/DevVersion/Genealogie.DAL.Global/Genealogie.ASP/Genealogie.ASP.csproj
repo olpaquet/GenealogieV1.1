@@ -156,6 +156,7 @@
     <Compile Include="Controllers\ConversationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MessageController.cs" />
+    <Compile Include="Controllers\MessageDestinationController.cs" />
     <Compile Include="Controllers\NouvelleController.cs" />
     <Compile Include="Controllers\PersonneController.cs" />
     <Compile Include="Controllers\RechercheController.cs" />
@@ -288,6 +289,8 @@
     <Content Include="Views\Message\DonnerMessagesRecus.cshtml" />
     <Content Include="Views\Message\DonnerMessagesEnvoyes.cshtml" />
     <Content Include="Views\Message\EnvoyerMessage.cshtml" />
+    <Content Include="Views\MessageDestination\Lire.cshtml" />
+    <Content Include="Views\Conversation\Lire.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

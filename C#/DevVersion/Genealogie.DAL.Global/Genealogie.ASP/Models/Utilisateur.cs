@@ -21,6 +21,13 @@ namespace Genealogie.ASP.Models
         public int nombreDeRoles() { return this.roles.Count(); }
         public string nomAffichage() { string pr = this.prenom ?? ""; return $"{pr.Trim()} {this.nom.Trim()}".Trim(); }
         public bool estAdmin() { UtilisateurServiceAPI usa = new UtilisateurServiceAPI(); return usa.EstAdmin(this.id); }
+        public int nombreDArbres { get { return new ArbreServiceAPI().DonnerParUtilisateur(this.id).Count(); } }
+        public int nombreDePersonnes { get {
+                int nb = 0;
+                foreach (Arbre a in new ArbreServiceAPI().DonnerParUtilisateur(this.id)) 
+                { nb += new PersonneServiceAPI().DonnerPourArbre(a.id).Count(); }
+                return nb;
+            } }
     }
 
     public class UtilisateurIndex

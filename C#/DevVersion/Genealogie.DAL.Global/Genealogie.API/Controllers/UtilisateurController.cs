@@ -10,11 +10,13 @@ using Genealogie.DAL.Client.Services;
 using Newtonsoft.Json;
 using System.Text;
 using System.Web.Http;
+using Genealogie.API.Autentification;
 //using Genealogie.DAL.Global.Repository;
 //using Genealogie.DAL.Global.Repository;
 
 namespace Genealogie.API.Controllers
 {
+    [AutBase("-")]
     public class UtilisateurController : ApiController /*, IUtilisateurRepository<Utilisateur>*/
     {
 

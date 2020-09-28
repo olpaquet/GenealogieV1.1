@@ -203,7 +203,7 @@ namespace Genealogie.DAL.Global.Conversion
             {
                 id = (int)idr[nameof(Personne.id)]
             ,
-                nom = (string)idr[nameof(Personne.nom)]
+                nom = (string)idr[nameof(Personne.nom)].SiNul()
             ,
                 prenom = (string)idr[nameof(Personne.prenom)].SiNul()
             ,
@@ -248,6 +248,15 @@ namespace Genealogie.DAL.Global.Conversion
                 description = (string)idr[nameof(Theme.description)]
             ,
                 actif = (int)idr[nameof(Theme.actif)]
+            };
+        }
+        public static UtilisateurAPI VersUtilisateurAPI(this IDataRecord idr)
+        {
+            if (idr == null) return null;
+            return new UtilisateurAPI
+            {
+                login = (string)idr[nameof(UtilisateurAPI.login)],
+                dom = (string)idr[nameof(UtilisateurAPI.dom)]
             };
         }
         public static Utilisateur VersUtilisateur(this IDataRecord idr)

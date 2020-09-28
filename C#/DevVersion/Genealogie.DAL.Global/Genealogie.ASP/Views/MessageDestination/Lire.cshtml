@@ -1,0 +1,59 @@
+﻿@model Genealogie.ASP.Models.MessageDestinationLecture
+
+@{
+    ViewBag.Title = "Lire";
+}
+
+<h2>Lire</h2>
+
+<div>
+    <h4>MessageDestinationLecture</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.idConversation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idConversation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.emetteur)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.emetteur)
+        </dd>
+
+        
+
+        
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sujet)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sujet)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.texte)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.texte)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Lu" class="btn btn-default" /> |
+            
+        </div>
+    }
+</div>

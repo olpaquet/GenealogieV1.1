@@ -8,11 +8,19 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Genealogie.API.Conversion;
+using Genealogie.API.Autentification;
 
 namespace Genealogie.API.Controllers
 {
+    [AutBase("-")]
     public class VMessageRecuController : ApiController /*, IVMessageRecuRepository<VMessageRecu>*/
     {
+        [HttpGet]
+        public IEnumerable<VMessageRecu> DonnerConversationComplete(int id)
+        {
+            return new VMessageRecuService().DonnerConversationComplete(id).Select(j => j.VersAPI());
+        }
+
         [HttpGet]
         [Route("api/VMessageRecu/Donner/{id:int}/{id2:int}")]
         public IEnumerable<VMessageRecu> Donner(int idConvesation, int idDestinataire)

@@ -39,5 +39,15 @@ namespace Genealogie.ASP.Services.API
             }
             return reponse.Content.ReadAsAsync<IEnumerable<VMessageRecu>>().Result;
         }
+
+        public IEnumerable<VMessageRecu> DonnerConversationComplete(int id)
+        {
+            HttpResponseMessage reponse = _client.GetAsync($"VMessageRecu/DonnerConversationComplete/{id}").Result;
+            if (!reponse.IsSuccessStatusCode)
+            {
+                throw new Exception("Echec de la réception de données.");
+            }
+            return reponse.Content.ReadAsAsync<IEnumerable<VMessageRecu>>().Result;
+        }
     }
 }

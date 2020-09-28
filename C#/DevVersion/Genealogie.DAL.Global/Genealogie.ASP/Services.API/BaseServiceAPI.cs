@@ -1,6 +1,7 @@
 ﻿using Genealogie.ASP.Securite;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -13,9 +14,9 @@ namespace Genealogie.ASP.Services.API
     public class BaseServiceAPI
     {
         protected HttpClient _client;
-        protected string _baseUrl = ConnexionUtilisateur.baseUrl;
-        private string _login = ConnexionUtilisateur.login;
-        private string _motDePasse = ConnexionUtilisateur.motDePasse;
+        protected string _baseUrl = ConfigurationManager.AppSettings["baseUrl"].ToString();
+        private string _login = ConfigurationManager.AppSettings["loginAPI"].ToString();
+        private string _motDePasse = ConfigurationManager.AppSettings["motdepasseAPI"].ToString();
 
         public BaseServiceAPI( )
         {

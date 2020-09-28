@@ -1,4 +1,5 @@
-﻿using Genealogie.API.Conversion;
+﻿using Genealogie.API.Autentification;
+using Genealogie.API.Conversion;
 using Genealogie.API.Models;
 using Genealogie.DAL.Client.Services;
 using System;
@@ -10,6 +11,7 @@ using System.Web.Http;
 
 namespace Genealogie.API.Controllers
 {
+    [AutBase("-")]
     public class ThemeController : ApiController /*, IThemeRepository<Theme>*/
     {
         [HttpGet]

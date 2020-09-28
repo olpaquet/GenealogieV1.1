@@ -1,4 +1,5 @@
-﻿using Genealogie.API.Conversion;
+﻿using Genealogie.API.Autentification;
+using Genealogie.API.Conversion;
 using Genealogie.API.Models;
 using Genealogie.DAL.Client.Services;
 using Services;
@@ -11,6 +12,7 @@ using System.Web.Http;
 
 namespace Genealogie.API.Controllers
 {
+    [AutBase("-")]
     public class ArbreController : ApiController /*, IArbreRepository<Arbre>*/
     {
         [HttpPost]

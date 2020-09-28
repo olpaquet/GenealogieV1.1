@@ -20,9 +20,17 @@ namespace Genealogie.DAL.Global.Repository
             throw new NotImplementedException();
         }
 
+        public IEnumerable<VMessageRecu> DonnerConversationComplete(int id)
+        {
+            Commande com = new Commande($"{CONST_VMESSAGERECU_REQ} where id = @idconversation");
+            com.AjouterParametre("idconversation", id);
+            return _connexion.ExecuterLecteur(com, j => j.VersVMessageRecu());
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<VMessageRecu> DonnerPoubellePourDestinataire(int id)
         {
-            Commande com = new Commande($"{CONST_VMESSAGERECU_REQ} where iddestinataire = @iddestinataire and datelecture is not null");
+            Commande com = new Commande($"{CONST_VMESSAGERECU_REQ} where iddestinataire = @iddestinataire and dateeffacement is not null");
             com.AjouterParametre("iddestinataire", id);
             return _connexion.ExecuterLecteur(com, j => j.VersVMessageRecu());
             throw new NotImplementedException();
@@ -30,7 +38,7 @@ namespace Genealogie.DAL.Global.Repository
 
         public IEnumerable<VMessageRecu> DonnerPourDestinataire(int id)
         {
-            Commande com = new Commande($"{CONST_VMESSAGERECU_REQ} where iddestinataire = @iddestinataire and datelecture is null");
+            Commande com = new Commande($"{CONST_VMESSAGERECU_REQ} where iddestinataire = @iddestinataire and dateeffacement is null");
             com.AjouterParametre("iddestinataire", id);
             return _connexion.ExecuterLecteur(com, j => j.VersVMessageRecu());
             throw new NotImplementedException();

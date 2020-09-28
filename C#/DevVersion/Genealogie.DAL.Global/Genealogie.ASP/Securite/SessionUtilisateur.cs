@@ -2,28 +2,13 @@
 using Genealogie.ASP.Services.API;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Configuration;
 using System.Linq;
 using System.Web;
 
 namespace Genealogie.ASP.Securite
-{
-    public static class ConnexionUtilisateur
-    {
-        public static string baseUrl { get {
-                return ConfigurationManager.AppSettings["baseUrl"].ToString();
-                return "http://localhost:61297/api/";
-                /*return "http://localhost:8080/GenealogieAPI";*/
-            }  }
-        public static string login { get; private set; }
-        public static string motDePasse {  get; private set; }
-
-        public static void AssignerUtilisateur(string plogin, string pmotDePasse)
-        {
-            login = plogin;
-            motDePasse = pmotDePasse;            
-        }
-    }
+{ 
 
     public static class SessionUtilisateur
     {

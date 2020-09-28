@@ -40,6 +40,18 @@ namespace Genealogie.DAL.Client.Services
             throw new NotImplementedException();
         }
 
+        public IEnumerable<MessageDestination> DonnerPourConversation(int idConversation)
+        {
+            return _rep.DonnerPourConversation(idConversation).Select(j => j.VersClient());
+            throw new NotImplementedException();
+        }
+
+        public bool EstLu(int idConversation, int idDestinataire)
+        {
+            return _rep.EstLu(idConversation, idDestinataire);
+            throw new NotImplementedException();
+        }
+
         public bool Lire(int idConversation, int idDestinataire)
         {
             return _rep.Lire(idConversation, idDestinataire);

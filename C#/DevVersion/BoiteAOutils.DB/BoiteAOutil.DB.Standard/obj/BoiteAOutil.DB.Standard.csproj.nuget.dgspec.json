@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\o.paquet\\source\\repos\\BoiteAOutils.DB\\BoiteAOutil.DB.Standard\\BoiteAOutil.DB.Standard.csproj": {}
+    "C:\\Users\\o.paquet\\Documents\\GitHub\\GenealogieV1.1\\C#\\DevVersion\\BoiteAOutils.DB\\BoiteAOutil.DB.Standard\\BoiteAOutil.DB.Standard.csproj": {}
   },
   "projects": {
-    "C:\\Users\\o.paquet\\source\\repos\\BoiteAOutils.DB\\BoiteAOutil.DB.Standard\\BoiteAOutil.DB.Standard.csproj": {
+    "C:\\Users\\o.paquet\\Documents\\GitHub\\GenealogieV1.1\\C#\\DevVersion\\BoiteAOutils.DB\\BoiteAOutil.DB.Standard\\BoiteAOutil.DB.Standard.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\o.paquet\\source\\repos\\BoiteAOutils.DB\\BoiteAOutil.DB.Standard\\BoiteAOutil.DB.Standard.csproj",
+        "projectUniqueName": "C:\\Users\\o.paquet\\Documents\\GitHub\\GenealogieV1.1\\C#\\DevVersion\\BoiteAOutils.DB\\BoiteAOutil.DB.Standard\\BoiteAOutil.DB.Standard.csproj",
         "projectName": "BoiteAOutil.DB.Standard",
-        "projectPath": "C:\\Users\\o.paquet\\source\\repos\\BoiteAOutils.DB\\BoiteAOutil.DB.Standard\\BoiteAOutil.DB.Standard.csproj",
+        "projectPath": "C:\\Users\\o.paquet\\Documents\\GitHub\\GenealogieV1.1\\C#\\DevVersion\\BoiteAOutils.DB\\BoiteAOutil.DB.Standard\\BoiteAOutil.DB.Standard.csproj",
         "packagesPath": "C:\\Users\\o.paquet\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\o.paquet\\source\\repos\\BoiteAOutils.DB\\BoiteAOutil.DB.Standard\\obj\\",
+        "outputPath": "C:\\Users\\o.paquet\\Documents\\GitHub\\GenealogieV1.1\\C#\\DevVersion\\BoiteAOutils.DB\\BoiteAOutil.DB.Standard\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",

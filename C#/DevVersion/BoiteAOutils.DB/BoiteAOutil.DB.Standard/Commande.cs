@@ -20,14 +20,14 @@ namespace BoiteAOutil.DB.Standard
             Parametres = new Dictionary<string, Parametre>();
         }
 
-        public void AjouterParametre(string parameterName, object value, bool isOutput = false, int size = 0)
+        public void AjouterParametre(string parameterName, object value, bool isOutput = false, int taille = 0)
         {
             if (Parametres.TryGetValue(parameterName, out _)) throw new ArgumentException("Paramètre déjà présent.", nameof(parameterName));
             Parametre param = new Parametre();
             param.Nom = parameterName;
             param.Valeur = value ?? DBNull.Value;
             param.Direction = (isOutput) ? System.Data.ParameterDirection.Output : System.Data.ParameterDirection.Input;
-            param.Taille = size;
+            param.Taille = taille;
             Parametres.Add(parameterName, param);
         }
     }

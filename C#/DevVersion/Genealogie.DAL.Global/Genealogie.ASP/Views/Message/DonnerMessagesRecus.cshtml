@@ -53,8 +53,8 @@
     </td>
     <td>
         
-        @Html.ActionLink("Lire", "Details", new { /* id=item.PrimaryKey */ }) |
-        @Html.ActionLink("Supprimer", "Detruire", new { /* id=item.PrimaryKey */ })
+        @Html.ActionLink("Lire", "Lire", "MessageDestination",new { id = item.idConversation  /* id=item.PrimaryKey */ }, "") |
+        @Html.ActionLink("Supprimer", "Detruire", "MessageDestination", new { id=item.idConversation /* id=item.PrimaryKey */ },"")
     </td>
 </tr>
     }

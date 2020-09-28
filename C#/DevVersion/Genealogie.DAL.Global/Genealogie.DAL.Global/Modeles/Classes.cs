@@ -118,6 +118,7 @@ namespace Genealogie.DAL.Global.Modeles
         public string description { get; set; }
         public int actif { get; set; }
     }
+    
     public class Utilisateur
     {
         public int id { get; set; }

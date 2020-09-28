@@ -23,6 +23,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Services\Servic
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp2", "ConsoleApp2\ConsoleApp2.csproj", "{3E5C7FC2-896D-469A-A46C-B03A69BDC2CA}"
 EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Genealogie.DB.SQL", "Genealogie.DB.SQL\Genealogie.DB.SQL.sqlproj", "{544B888B-CDFE-4E54-BEAB-9640DE77BCD5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,12 @@ Global
 		{3E5C7FC2-896D-469A-A46C-B03A69BDC2CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E5C7FC2-896D-469A-A46C-B03A69BDC2CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E5C7FC2-896D-469A-A46C-B03A69BDC2CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{544B888B-CDFE-4E54-BEAB-9640DE77BCD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{544B888B-CDFE-4E54-BEAB-9640DE77BCD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{544B888B-CDFE-4E54-BEAB-9640DE77BCD5}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{544B888B-CDFE-4E54-BEAB-9640DE77BCD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{544B888B-CDFE-4E54-BEAB-9640DE77BCD5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{544B888B-CDFE-4E54-BEAB-9640DE77BCD5}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

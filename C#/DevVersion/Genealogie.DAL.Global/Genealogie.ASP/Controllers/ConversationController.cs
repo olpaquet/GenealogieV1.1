@@ -6,24 +6,35 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using static Genealogie.ASP.Models.ConversationIndex;
 
 namespace Genealogie.ASP.Controllers
 {
     public class ConversationController : Controller
     {
-        [HttpGet]
+        /*[HttpGet]
         [ConnecteAut]
         public ActionResult Donner()
         {
             IEnumerable<ConversationIndex> ci = new ConversationServiceAPI().DonnerParEmetteur(SessionUtilisateur.Utilisateur.id).Select(j => new ConversationIndex(j));
             return View(ci);
-        }
+        }*/
 
-        [HttpGet]
+        [HttpGet]        
         public ActionResult Detruire(int id)
         {
             new ConversationServiceAPI().Detruire(id);
             return RedirectToAction("Donner");
         }
+
+        [HttpGet]
+        public ActionResult Lire(int id)
+        {
+            Conversation c = new ConversationServiceAPI().Donner(id);
+            ConversationLecture cl = new ConversationLecture(c);
+            return View(cl);
+        }
+
+        
     }
 }

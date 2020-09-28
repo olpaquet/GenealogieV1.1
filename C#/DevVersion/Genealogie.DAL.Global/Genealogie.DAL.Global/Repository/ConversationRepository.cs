@@ -47,7 +47,7 @@ namespace Genealogie.DAL.Global.Repository
         {
             Commande com = new Commande("Conversation_effacee", true);
             com.AjouterParametre("id", id);
-            return _connexion.ExecuterNonRequete(com) > 0;
+            return _connexion.ExecuterNonRequete(com) >= 0;
             throw new NotImplementedException();
         }
 

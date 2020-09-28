@@ -22,6 +22,12 @@ namespace Genealogie.DAL.Client.Services
             throw new NotImplementedException();
         }
 
+        public IEnumerable<VMessageRecu> DonnerConversationComplete(int id)
+        {
+            return _rep.DonnerConversationComplete(id).Select(j => j.VersClient());
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<VMessageRecu> DonnerPoubellePourDestinataire(int id)
         {
             return _rep.DonnerPoubellePourDestinataire(id).Select(j => j.VersClient());

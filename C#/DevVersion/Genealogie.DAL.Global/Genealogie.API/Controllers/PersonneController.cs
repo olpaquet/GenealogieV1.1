@@ -1,4 +1,5 @@
-﻿using Genealogie.API.Conversion;
+﻿using Genealogie.API.Autentification;
+using Genealogie.API.Conversion;
 using Genealogie.API.Models;
 using Genealogie.DAL.Client.Services;
 using Genealogie.Modeles.API.ASP.Modeles;
@@ -12,6 +13,7 @@ using System.Web.Http;
 
 namespace Genealogie.API.Controllers
 {
+    [AutBase("-")]
     public class PersonneController : ApiController
     {
         [HttpGet]

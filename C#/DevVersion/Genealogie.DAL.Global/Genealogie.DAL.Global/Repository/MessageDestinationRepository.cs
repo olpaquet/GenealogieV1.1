@@ -25,7 +25,7 @@ namespace Genealogie.DAL.Global.Repository
             Commande com = new Commande("messagedestination_efface", true);
             com.AjouterParametre("idconversation", idConversation);
             com.AjouterParametre("iddestinataire", idDestinataire);
-            return _connexion.ExecuterNonRequete(com) > 0;
+            return _connexion.ExecuterNonRequete(com) >= 0;
             
             throw new NotImplementedException();
         }
@@ -47,12 +47,29 @@ namespace Genealogie.DAL.Global.Repository
             throw new NotImplementedException();
         }
 
+        public IEnumerable<MessageDestination> DonnerPourConversation(int idConversation)
+        {
+            Commande com = new Commande($"{CONST_MESSAGEDESTINATION_REQ} where idconversation = @idconversation");
+            com.AjouterParametre("idconversation", idConversation);
+            return _connexion.ExecuterLecteur(com, k => k.VersMessageDestination());
+            throw new NotImplementedException();
+        }
+
+        public bool EstLu(int idConversation, int idDestinataire)
+        {
+            Commande com = new Commande($"select count (*) from ({CONST_MESSAGEDESTINATION_REQ} where idconversation = @idconversation and iddestinataire = @iddestinataire and datelecture is not null) x");
+            com.AjouterParametre("idconversation", idConversation);
+            com.AjouterParametre("iddestinataire", idDestinataire);
+            return (int)_connexion.ExecuterScalaire(com) == 1;            
+            throw new NotImplementedException();
+        }
+
         public bool Lire(int idConversation, int idDestinataire)
         {
             Commande com = new Commande("messagedestination_lu",true);
             com.AjouterParametre("idconversation", idConversation);
             com.AjouterParametre("iddestinataire", idDestinataire);
-            return _connexion.ExecuterNonRequete(com) > 0;
+            return _connexion.ExecuterNonRequete(com) >= 0;
             throw new NotImplementedException();
         }
 

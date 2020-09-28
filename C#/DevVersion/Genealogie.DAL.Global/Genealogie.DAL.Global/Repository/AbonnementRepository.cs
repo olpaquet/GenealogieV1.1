@@ -32,7 +32,7 @@ namespace Genealogie.DAL.Global.Repository
             com.AjouterParametre("nom", e.nom);
             com.AjouterParametre("description", e.description);
             com.AjouterParametre("duree", e.duree);
-            com.AjouterParametre("prix", e.prix);
+            com.AjouterParametre("prix", e.prix,false,5);
             com.AjouterParametre("nombremaxarbres", e.nombremaxarbres);
             com.AjouterParametre("nombremaxpersonnes", e.nombremaxpersonnes);
             return (int)_connexion.ExecuterNonRequete(com) > 0;

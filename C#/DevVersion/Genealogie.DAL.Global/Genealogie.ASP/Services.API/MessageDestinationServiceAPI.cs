@@ -113,5 +113,31 @@ namespace Genealogie.ASP.Services.API
             var x = reponse.Content.ReadAsStringAsync().Result;
             return bool.Parse(x);
         }
+
+        public IEnumerable<MessageDestination> DonnerPourConversation(int id)
+        {
+            /*string contenuJson = JsonConvert.SerializeObject(e, Formatting.Indented);
+            StringContent contenu = new StringContent(contenuJson, Encoding.UTF8, "application/json");*/
+            HttpResponseMessage reponse = _client.GetAsync($"MessageDestination/DonnerPourConversation/{id}").Result;
+            if (!reponse.IsSuccessStatusCode)
+            {
+                throw new Exception("Echec de la réception de données.");
+            }
+            var x = reponse.Content.ReadAsAsync<IEnumerable<MessageDestination>>().Result;
+            return x;
+        }
+
+        public bool EstLu(int idConversation, int idDestinataire)
+        {
+            /*string contenuJson = JsonConvert.SerializeObject(e, Formatting.Indented);
+            StringContent contenu = new StringContent(contenuJson, Encoding.UTF8, "application/json");*/
+            HttpResponseMessage reponse = _client.GetAsync($"MessageDestination/EstLu/{idConversation}/{idDestinataire}").Result;
+            if (!reponse.IsSuccessStatusCode)
+            {
+                throw new Exception("Echec de la réception de données.");
+            }
+            var x = reponse.Content.ReadAsStringAsync().Result;
+            return bool.Parse(x);
+        }
     }
 }

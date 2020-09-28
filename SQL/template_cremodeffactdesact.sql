@@ -26,7 +26,7 @@ declare @sset varchar(8000);
 declare cc cursor for 
 select nomtable from v_tables 
 --where nomtable not in ('Utilisateur','MessageLu','MessageEfface','UtilisateurAbonnement','UtilisateurRole','UtilisateurNouvelle')
-where nomtable = 'VMessageRecu'
+where nomtable = 'Role'
 group by nomtable
 
 

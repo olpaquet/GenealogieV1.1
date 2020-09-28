@@ -127,7 +127,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Autentification\AutentificationDeBase.cs" />
+    <Compile Include="Autentification\AutBaseAttribute.cs" />
     <Compile Include="Autentification\ResultatAvecDefi.cs" />
     <Compile Include="Controllers\AbonnementController.cs" />
     <Compile Include="Controllers\ArbreController.cs" />

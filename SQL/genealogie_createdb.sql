@@ -83,7 +83,7 @@ drop table UtilisateurRole
 drop table MessageForum
 
 drop table messagedestination
- 
+drop table utilisateurapi
 
 
 go
@@ -93,7 +93,15 @@ go
 
 
 /***TABLES*/
-
+create table utilisateurapi(
+id int identity (1,1) not null,
+login nvarchar(50) not null,
+motdepasse varbinary(64) not null,
+presel nvarchar(255) not null,
+postsel nvarchar(255) not null,
+dom nvarchar(max)
+constraint pk_utilisateurapi primary key(id))
+create unique index iu_utilisateurapi_login on utilisateurapi(login) 
 
  create table Utilisateur
  (
@@ -102,7 +110,7 @@ go
  nom nvarchar(50) not null,
  prenom nvarchar(50)  null,
  email nvarchar(200) not null,
- datedenaissance datetime,
+ datedenaissance datetime2,
  homme int not null,
  cartedepayement nvarchar(50),
  motdepasse varbinary(64) not null,
@@ -126,7 +134,7 @@ go
  nom nvarchar(50) not null,
  description nvarchar(1000) not null,
  duree int not null,
- prix decimal not null default 0.0,
+ prix money not null default 0.0,
  nombremaxarbres int not null default 0,
  nombremaxpersonnes int not null default 0,
  actif int not null default 1
@@ -139,9 +147,9 @@ go
  create table UtilisateurAbonnement(
  idabonne int not null,
  idabonnement int not null,
- dateabonnement datetime not null,
+ dateabonnement datetime2 not null,
  cartedepayement nvarchar(50) not null,
- prix decimal not null default 0.0
+ prix money not null default 0.0
  constraint pk_utilisateurabonnement primary key(idabonne,idabonnement, dateabonnement)
  )
  
@@ -168,10 +176,10 @@ go
  nom nvarchar(50) not null,
  description nvarchar(1000) not null,
  idcreateur int not null,
- datecreation datetime not null,
+ datecreation datetime2 not null,
  idblocage int,
  idbloqueur int,
- dateblocage datetime
+ dateblocage datetime2
  constraint pk_arbre primary key(id)
  )
  create unique index iu_arbre_nom on Arbre(nom,idcreateur)
@@ -192,13 +200,13 @@ go
  
  create table Personne(
  id int identity (1,1) not null,
- nom nvarchar(50) not null,
+ nom nvarchar(50) ,
  prenom nvarchar(50),
- datedenaissance datetime,
- datededeces datetime,
+ datedenaissance datetime2,
+ datededeces datetime2,
  homme int not null,
  idarbre int not null,
- dateajout datetime not null,
+ dateajout datetime2 not null,
  idpere int,
  idmere int
  constraint pk_personne primary key (id)
@@ -211,8 +219,8 @@ create index i_personne_mere on Personne(idmere)
  create table Couple(
  idpersonne int not null,
  idpartenaire int not null,
- datedebut datetime not null,
- datefin datetime
+ datedebut datetime2 not null,
+ datefin datetime2
  constraint pk_couple primary key (idpersonne, idpartenaire, datedebut)
  )
  
@@ -221,7 +229,7 @@ create index i_personne_mere on Personne(idmere)
  titre nvarchar(50) not null,
  description nvarchar(1000) not null,
  idcreateur int not null,
- datecreation datetime not null,
+ datecreation datetime2 not null,
  actif int not null default 1
  constraint pk_nouvelle primary key(id)
  )
@@ -239,19 +247,19 @@ create index i_personne_mere on Personne(idmere)
  go
  create Table Conversation(
  id int identity(1,1) not null,
- date datetime not null,
+ date datetime2 not null,
  sujet nvarchar(50),
  texte nvarchar(max),
  idemetteur int not null,
- dateeffacement datetime default null
+ dateeffacement datetime2 default null
  constraint pk_conversation primary key (id)
  )
  go
  create table messagedestination(
  idconversation int not null,
  iddestinataire int not null,
- datelecture datetime default null,
- dateeffacement datetime default null
+ datelecture datetime2 default null,
+ dateeffacement datetime2 default null
  constraint pk_messagedestination primary key (idconversation, iddestinataire)
  )
 
@@ -262,7 +270,7 @@ create index i_personne_mere on Personne(idmere)
  create table UtilisateurNouvelle(
  idpublicateur int not null,
  idnouvelle int not null,
- datepublication datetime not null
+ datepublication datetime2 not null
  constraint pk_utilisateurnouvelle primary key(idpublicateur,idnouvelle)
  )*/
  
@@ -272,7 +280,7 @@ create index i_personne_mere on Personne(idmere)
  texte nvarchar(max),
  idtheme int not null,
  idpublicateur int not null,
- datepublication datetime,
+ datepublication datetime2,
  actif int not null default 1
  constraint pk_messageforum primary key(id)
  )
@@ -280,13 +288,13 @@ create index i_personne_mere on Personne(idmere)
 /* create table MessageLu(
  idmessage int not null,
  idlecteur int not null,
- date datetime
+ date datetime2
  constraint pk_messagelu primary key (idmessage,idlecteur)
  )
  create table MessageEfface(
  idmessage int not null,
  ideffaceur int not null,
- date datetime
+ date datetime2
  constraint pk_messageefface primary key (idmessage,ideffaceur)
  )
  */
@@ -335,6 +343,24 @@ alter table messagedestination add constraint fk_messagedestination_conversation
  /*****ENDFOREIGNKEYS*/
 
 /*****fonctionnalités*/
+drop procedure GenererHasard
+go
+
+create procedure GenererHasard @nombredecaracteres int, @ret  nvarchar(max) out
+as
+begin
+DECLARE @compteur int;  
+
+set @compteur = 1
+while @compteur <= @nombredecaracteres
+	begin
+	
+	set @ret = CONCAT(@ret,char(50+rand() * 100))
+	set @compteur = @compteur + 1
+	end
+
+end
+GO  
 go
 drop function nbentrees
 go
@@ -368,6 +394,7 @@ as
 begin
 
 	declare @ret nvarchar(max)
+	
 
 	declare @nb int = (select dbo.nbentrees(@st, @sep))
 	if @nb = 1
@@ -453,6 +480,9 @@ AS
 BEGIN
     RETURN HASHBYTES('SHA2_512',CONCAT(@presel,@motdepasse,@postsel))
 END
+
+
+
 GO
 
  drop function ControlerUtilisateur
@@ -470,7 +500,23 @@ BEGIN
 	declare @postsel nvarchar(255);*/
 	--declare @epw varbinary(64);
 	declare @u int;	
+	declare @api int;
 
+	if @option = 'API'
+		set @api = 1
+
+	if @api = 1
+	begin
+		select @u = count(*)
+		from utilisateurapi 
+		where login = @login and 
+		dbo.ConstruireHMotdepasse(@motdepasse, presel, postsel) = motdepasse;
+		/*if @u = null	
+			return 0*/
+		return @u;    
+	end
+
+	
 
 	select @u = count(*)
 	from utilisateur 
@@ -488,11 +534,18 @@ create procedure changersel
 @login nvarchar(50),
 @motdepasse nvarchar(50),
 @presel nvarchar(255),
-@postsel nvarchar(255)
+@postsel nvarchar(255),
+@options nvarchar(max)
 as
 begin
 declare @pw varbinary(64)
-select @reponse = dbo.ControlerUtilisateur(@login,@motdepasse,null);
+declare @option nvarchar(max);
+
+if @options = 'API'
+	set @options = 1
+
+	
+select @reponse = dbo.ControlerUtilisateur(@login,@motdepasse,@options);
 if @reponse = 0
 	return @reponse;
 select @pw = dbo.ConstruireHMotdepasse(@motdepasse, @presel,@postsel)
@@ -515,19 +568,39 @@ begin
 	declare @epw varbinary(64);
 	declare @u int;
 	declare @id int;
+
+	declare @api int
+
+	if @xoption = 'API'
+		set @api = 1
 	
-	select @id = id, @presel = presel, @postsel=postsel 
-	from utilisateur 
-	where login = @xlogin 
-	and dbo.ConstruireHMotdepasse(@vieuxmotdepasse,presel,postsel) = motdepasse;
+	if @api = 1
+		select @id = id, @presel = presel, @postsel=postsel 
+		from utilisateur 
+		where login = @xlogin 
+		and dbo.ConstruireHMotdepasse(@vieuxmotdepasse,presel,postsel) = motdepasse;
+	else
+		select @id = id, @presel = presel, @postsel=postsel 
+		from utilisateurapi
+		where login = @xlogin 
+		and dbo.ConstruireHMotdepasse(@vieuxmotdepasse,presel,postsel) = motdepasse;
 	
 	if @id is null
 		set @xreponse = 0;
 	else 
 	begin
-	    set @epw = dbo.ConstruireHMotdepasse(@motdepasse,@presel,@postsel);
-		update utilisateur set motdepasse = @epw where id = @id;
-		set @xreponse = 1;
+		if @api = 1
+		begin
+			set @epw = dbo.ConstruireHMotdepasse(@motdepasse,@presel,@postsel);
+			update utilisateurapi set motdepasse = @epw where id = @id;
+			set @xreponse = 1
+		end	
+		else
+		begin
+			set @epw = dbo.ConstruireHMotdepasse(@motdepasse,@presel,@postsel);
+			update utilisateur set motdepasse = @epw where id = @id;
+			set @xreponse = 1
+		end
 	end
     
 end
@@ -536,6 +609,31 @@ go
 
 
 /***********CRUD*/
+go
+drop procedure utilisateurapi_cre
+go
+
+create PROCEDURE utilisateurapi_cre
+ @id int out, @login nvarchar(100), 
+ @motdepasse nvarchar(50),
+ @dom nvarchar(max) = null
+AS
+begin
+
+declare @presel nvarchar(255)
+declare @postsel nvarchar(255)
+exec GenererHasard 255, @presel out
+exec GenererHasard 255, @postsel out	
+		declare @mp varbinary(64);
+		set @mp = dbo.ConstruireHMotdepasse(@motdepasse,@presel,@postsel);
+		insert into utilisateurapi 
+		(login,motdepasse,presel,postsel,dom) 
+		values (@login,@mp,@presel,@postsel,@dom);
+		--save transaction ut		
+end
+go
+
+
 go	
 drop procedure utilisateurrole_cre
 go
@@ -577,7 +675,7 @@ go
 
 create PROCEDURE utilisateur_cre
  @id int out, @login nvarchar(100), @nom nvarchar(100), @prenom nvarchar(100), 
- @email nvarchar(400), @datedenaissance datetime, @homme int, @cartedepayement nvarchar(50), 
+ @email nvarchar(400), @datedenaissance datetime2, @homme int, @cartedepayement nvarchar(50), 
  @motdepasse nvarchar(50), @presel nvarchar(510), @postsel nvarchar(510),
  @roles nvarchar(max) = null
 AS
@@ -646,7 +744,7 @@ drop procedure utilisateur_mod
 go
 create PROCEDURE utilisateur_mod
 @id int,@nom nvarchar(100),@prenom nvarchar(100),
-@email nvarchar(400),@datedenaissance datetime,@homme int, @cartedepayement nvarchar(50),
+@email nvarchar(400),@datedenaissance datetime2,@homme int, @cartedepayement nvarchar(50),
 @roles nvarchar(max) 
 AS
 begin
@@ -777,7 +875,7 @@ go
 drop procedure messagelu_cre
 go
 create PROCEDURE messagelu_cre
- @idmessage int , @idlecteur int, @date datetime
+ @idmessage int , @idlecteur int, @date datetime2
 AS
 insert into messagelu (idmessage,idlecteur,date) values (@idmessage,@idlecteur,@date);
 
@@ -785,7 +883,7 @@ go
 drop procedure messagelu_mod
 go
 create PROCEDURE messagelu_mod
-@idmessage int,@idlecteur int,@date datetime
+@idmessage int,@idlecteur int,@date datetime2
 AS
 update messagelu
 set date=@date
@@ -809,7 +907,7 @@ go
 drop procedure messageefface_cre
 go
 create PROCEDURE messageefface_cre
- @idmessage int , @ideffaceur int, @date datetime
+ @idmessage int , @ideffaceur int, @date datetime2
 AS
 insert into messageefface (idmessage,ideffaceur,date) values (@idmessage,@ideffaceur,@date);
 
@@ -817,7 +915,7 @@ go
 drop procedure messageefface_mod
 go
 create PROCEDURE messageefface_mod
-@idmessage int,@ideffaceur int,@date datetime
+@idmessage int,@ideffaceur int,@date datetime2
 AS
 update messageefface
 set date=@date
@@ -841,7 +939,7 @@ go
 drop procedure utilisateurabonnement_cre
 go
 create PROCEDURE utilisateurabonnement_cre
- @idabonne int, @idabonnement int, @dateabonnement datetime, @cartedepayement nvarchar(100), @prix decimal
+ @idabonne int, @idabonnement int, @dateabonnement datetime2, @cartedepayement nvarchar(100), @prix money
 AS
 insert into utilisateurabonnement (idabonne,idabonnement,dateabonnement,cartedepayement,prix) values (@idabonne,@idabonnement,@dateabonnement,@cartedepayement,@prix);
 
@@ -849,7 +947,7 @@ go
 drop procedure utilisateurabonnement_mod
 go
 create PROCEDURE utilisateurabonnement_mod
-@idabonne int,@idabonnement int,@dateabonnement datetime,@cartedepayement nvarchar(100), @prix decimal
+@idabonne int,@idabonnement int,@dateabonnement datetime2,@cartedepayement nvarchar(100), @prix money
 AS
 update utilisateurabonnement
 set dateabonnement=@dateabonnement,cartedepayement=@cartedepayement,prix=@prix
@@ -877,7 +975,7 @@ private const string CONST_UTILISATEURROLE_REQ = "select idutilisateur,idrole fr
 drop procedure utilisateurnouvelle_cre
 go
 create PROCEDURE utilisateurnouvelle_cre
- @idpublicateur int , @idnouvelle int, @datepublication datetime
+ @idpublicateur int , @idnouvelle int, @datepublication datetime2
 AS
 insert into utilisateurnouvelle (idpublicateur,idnouvelle,datepublication) values (@idpublicateur,@idnouvelle,@datepublication);
 */
@@ -885,7 +983,7 @@ insert into utilisateurnouvelle (idpublicateur,idnouvelle,datepublication) value
 drop procedure utilisateurnouvelle_mod
 go
 create PROCEDURE utilisateurnouvelle_mod
-@idpublicateur int,@idnouvelle int,@datepublication datetime
+@idpublicateur int,@idnouvelle int,@datepublication datetime2
 AS
 update utilisateurnouvelle
 set datepublication=@datepublication
@@ -912,7 +1010,7 @@ go
 drop procedure Abonnement_cre
 go
 create PROCEDURE Abonnement_cre
- @id int out, @nom nvarchar(100), @description nvarchar(2000), @duree int, @prix decimal, @nombremaxarbres int, @nombremaxpersonnes int
+ @id int out, @nom nvarchar(100), @description nvarchar(2000), @duree int, @prix money, @nombremaxarbres int, @nombremaxpersonnes int
 AS
 insert into Abonnement (nom,description,duree,prix,nombremaxarbres,nombremaxpersonnes) values (@nom,@description,@duree,@prix,@nombremaxarbres,@nombremaxpersonnes);
 set @id = @@IDENTITY;
@@ -920,7 +1018,7 @@ go
 drop procedure Abonnement_mod
 go
 create PROCEDURE Abonnement_mod
-@id int,@nom nvarchar(100),@description nvarchar(2000),@duree int,@prix decimal,@nombremaxarbres int,@nombremaxpersonnes int
+@id int,@nom nvarchar(100),@description nvarchar(2000),@duree int,@prix money,@nombremaxarbres int,@nombremaxpersonnes int
 AS
 update Abonnement
 set nom=@nom,description=@description,duree=@duree,prix=@prix,nombremaxarbres=@nombremaxarbres,nombremaxpersonnes=@nombremaxpersonnes
@@ -965,7 +1063,7 @@ go
 drop procedure Arbre_cre
 go
 create PROCEDURE Arbre_cre
- @id int out, @nom nvarchar(100), @description nvarchar(2000), @idcreateur int, @datecreation datetime
+ @id int out, @nom nvarchar(100), @description nvarchar(2000), @idcreateur int, @datecreation datetime2
 AS
 insert into Arbre (nom,description,idcreateur,datecreation) values (@nom,@description,@idcreateur,@datecreation);
 set @id = @@IDENTITY;
@@ -999,7 +1097,7 @@ update Arbre set idblocage=null, dateblocage=null, idbloqueur=null where id = @i
 go
 drop procedure arbre_bloquer
 go
-create procedure arbre_bloquer @id int, @idblocage int, @dateblocage datetime, @idbloqueur int
+create procedure arbre_bloquer @id int, @idblocage int, @dateblocage datetime2, @idbloqueur int
 as
 update Arbre set idblocage=@idblocage, dateblocage=@dateblocage, idbloqueur = @idbloqueur where id = @id
 go
@@ -1067,7 +1165,7 @@ go
 create PROCEDURE Conversation_cre
  @id int out, @sujet nvarchar(50), @texte nvarchar(max), @idemetteur int
 AS
-declare @aujourdhui datetime
+declare @aujourdhui datetime2
 set @aujourdhui = (select GETDATE())
 insert into Conversation (date, sujet, texte, idemetteur) values (@aujourdhui, @sujet, @texte, @idemetteur);
 set @id = @@IDENTITY;
@@ -1075,7 +1173,7 @@ go
 --drop procedure Conversation_mod
 go
 /*create PROCEDURE Conversation_mod
-@id int,@date datetime
+@id int,@date datetime2
 AS
 update Conversation
 set date=@date
@@ -1087,7 +1185,7 @@ drop procedure conversation_effacee
 go
 create procedure conversation_effacee @id int
 as
-declare @aujourdhui datetime
+declare @aujourdhui datetime2
 set @aujourdhui = (select GETDATE())
 update Conversation set dateeffacement = @aujourdhui where id = @id
 go
@@ -1109,7 +1207,7 @@ go
 drop procedure Couple_cre
 go
 create PROCEDURE Couple_cre
- @idpersonne int , @idpartenaire int, @datedebut datetime, @datefin datetime
+ @idpersonne int , @idpartenaire int, @datedebut datetime2, @datefin datetime2
 AS
 insert into Couple (idpersonne,idpartenaire,datedebut,datefin) values (@idpersonne,@idpartenaire,@datedebut,@datefin);
 
@@ -1117,7 +1215,7 @@ go
 drop procedure Couple_mod
 go
 create PROCEDURE Couple_mod
-@idpersonne int,@idpartenaire int,@datedebut datetime,@datefin datetime
+@idpersonne int,@idpartenaire int,@datedebut datetime2,@datefin datetime2
 AS
 update Couple
 set datedebut=@datedebut,datefin=@datefin
@@ -1174,7 +1272,7 @@ go
 drop procedure MessageForum_cre
 go
 create PROCEDURE MessageForum_cre
- @id int out, @sujet nvarchar(100), @texte nvarchar(MAX), @idtheme int, @idpublicateur int, @datepublication datetime
+ @id int out, @sujet nvarchar(100), @texte nvarchar(MAX), @idtheme int, @idpublicateur int, @datepublication datetime2
 AS
 insert into MessageForum (sujet,texte,idtheme,idpublicateur,datepublication) values (@sujet,@texte,@idtheme,@idpublicateur,@datepublication);
 set @id = @@IDENTITY;
@@ -1182,7 +1280,7 @@ go
 drop procedure MessageForum_mod
 go
 create PROCEDURE MessageForum_mod
-@id int,@sujet nvarchar(100),@texte nvarchar(MAX),@idtheme int,@idpublicateur int,@datepublication datetime
+@id int,@sujet nvarchar(100),@texte nvarchar(MAX),@idtheme int,@idpublicateur int,@datepublication datetime2
 AS
 update MessageForum
 set sujet=@sujet,texte=@texte,idtheme=@idtheme,idpublicateur=@idpublicateur,datepublication=@datepublication
@@ -1228,7 +1326,7 @@ go
 drop procedure Nouvelle_cre
 go
 create PROCEDURE Nouvelle_cre
- @id int out, @titre nvarchar(100), @description nvarchar(2000), @idcreateur int, @datecreation datetime
+ @id int out, @titre nvarchar(100), @description nvarchar(2000), @idcreateur int, @datecreation datetime2
 AS
 insert into Nouvelle (titre,description,idcreateur,datecreation) values (@titre,@description,@idcreateur,@datecreation);
 set @id = @@IDENTITY;
@@ -1236,7 +1334,7 @@ go
 drop procedure Nouvelle_mod
 go
 create PROCEDURE Nouvelle_mod
-@id int,@titre nvarchar(100),@description nvarchar(2000),@idcreateur int,@datecreation datetime
+@id int,@titre nvarchar(100),@description nvarchar(2000),@idcreateur int,@datecreation datetime2
 AS
 update Nouvelle
 set titre=@titre,description=@description,idcreateur=@idcreateur,datecreation=@datecreation
@@ -1290,8 +1388,8 @@ go
 drop procedure Personne_cre
 go
 create PROCEDURE Personne_cre
- @id int out, @nom nvarchar(100), @prenom nvarchar(100), @datedenaissance datetime, 
- @datededeces datetime, @homme int, @idarbre int, @dateajout datetime
+ @id int out, @nom nvarchar(100), @prenom nvarchar(100), @datedenaissance datetime2, 
+ @datededeces datetime2, @homme int, @idarbre int, @dateajout datetime2
 AS
 insert into Personne (nom,prenom,datedenaissance,datededeces,homme,idarbre,dateajout) 
 values (@nom,@prenom,@datedenaissance,@datededeces,@homme,@idarbre,@dateajout);
@@ -1300,7 +1398,7 @@ go
 drop procedure Personne_mod
 go
 create PROCEDURE Personne_mod
-@id int,@nom nvarchar(100),@prenom nvarchar(100),@datedenaissance datetime,@datededeces datetime,@homme int,@idarbre int,@dateajout datetime
+@id int,@nom nvarchar(100),@prenom nvarchar(100),@datedenaissance datetime2,@datededeces datetime2,@homme int,@idarbre int,@dateajout datetime2
 AS
 update Personne
 set nom=@nom,prenom=@prenom,datedenaissance=@datedenaissance,datededeces=@datededeces,homme=@homme,idarbre=@idarbre,dateajout=@dateajout
@@ -1484,22 +1582,27 @@ drop procedure messagedestination_lu
 go
 create procedure messagedestination_lu @idconversation int, @iddestinataire int
 as
-declare @aujourdhui datetime
+declare @aujourdhui datetime2
 set @aujourdhui = (select GETDATE())
-update messagedestination set datelecture=@aujourdhui where idconversation=@idconversation and iddestinataire=@iddestinataire
+update messagedestination set datelecture=@aujourdhui
+where idconversation=@idconversation and iddestinataire=@iddestinataire and datelecture is null
+
 go
 drop procedure messagedestination_efface
 go
 create procedure messagedestination_efface @idconversation int, @iddestinataire int
 as
-declare @aujourdhui datetime
+declare @aujourdhui datetime2
 set @aujourdhui = (select GETDATE())
-update messagedestination set dateeffacement=@aujourdhui where idconversation=@idconversation and iddestinataire=@iddestinataire
+update messagedestination set dateeffacement=@aujourdhui 
+where idconversation=@idconversation and iddestinataire=@iddestinataire
+and dateeffacement is null
+
 go
 /*drop procedure messagedestination_mod
 go
 create PROCEDURE messagedestination_mod
-@idconversation int,@iddestinataire int,@datelecture datetime,@dateeffacement datetime
+@idconversation int,@iddestinataire int,@datelecture datetime2,@dateeffacement datetime2
 AS
 update messagedestination
 set iddestinataire=@iddestinataire,datelecture=@datelecture,dateeffacement=@dateeffacement
@@ -1557,7 +1660,7 @@ exec utilisateur_cre @id out, 'admin','admin',null,'adm@i.n',null,1,null,'1','pr
 exec utilisateur_mod @id, 'admin',null,'adm@i.n',null,1,null,'1,3'
 
 
-declare @dd datetime
+declare @dd datetime2
 set @dd = (select GETDATE())
 exec Nouvelle_cre @id out, 'C''est parti!', 'Super promotion à l''occasion de l''ouverture du site. Pour chaque abonnement platinium souscrit, nous vous dirons merci.', 1, @dd
 
@@ -1598,6 +1701,7 @@ exec enfant_cre 11,10
 exec Conversation_cre @id out, 'premier message', 'Salut Sabrina!', 1
 exec messagedestination_cre @id, 2
 
+exec utilisateurapi_cre @id out, 'ASP', 'boys boys boys, I''m looking for a good time', '-'
 
 select id,date,sujet,texte,idemetteur,dateeffacement from Conversation where idemetteur = 1
 
@@ -1605,7 +1709,7 @@ select id,date,sujet,texte,idemetteur,dateeffacement from Conversation where ide
 
 
 /*@id int,@nom nvarchar(100),@prenom nvarchar(100),
-@email nvarchar(400),@datedenaissance datetime,@homme int, @cartedepayement nvarchar(50),
+@email nvarchar(400),@datedenaissance datetime2,@homme int, @cartedepayement nvarchar(50),
 @roles nvarchar(max) */
 --exec utilisateurrole_cre @id, @iid
 select * from role
@@ -1622,3 +1726,10 @@ select * from arbre
 select * from abonnement
 select * from conversation
 select * from vmessagerecu
+select * from messagedestination
+select * from utilisateurapi
+
+select  motdepasse, dbo.ConstruireHMotdepasse('boys boys boys, I''m looking for a good time', presel,postsel) from utilisateurapi
+select login, motdepasse,dbo.ConstruireHMotdepasse('1',presel,postsel) from utilisateur
+
+

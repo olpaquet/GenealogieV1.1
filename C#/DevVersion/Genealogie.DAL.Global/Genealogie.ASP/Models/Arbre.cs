@@ -13,7 +13,11 @@ namespace Genealogie.ASP.Models
 {
     public class Arbre : BArbre
     {
-        public int nombreDePersonnes { get { return 1; } }
+        public int nombreDePersonnes { get 
+            {
+                return new PersonneServiceAPI().DonnerPourArbre(this.id).Count();
+                 
+            } }
     }
 
     public class ArbreIndex

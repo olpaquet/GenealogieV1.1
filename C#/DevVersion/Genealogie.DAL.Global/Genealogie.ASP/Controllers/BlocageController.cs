@@ -15,8 +15,7 @@ namespace Genealogie.ASP.Controllers
     public class BlocageController : Controller
     {
         // GET: Blocage
-        [HttpGet]
-        [FiltreExiste]
+        [HttpGet]        
         public ActionResult Index()
         {
             BlocageServiceAPI rs = new BlocageServiceAPI();
