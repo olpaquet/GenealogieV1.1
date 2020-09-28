@@ -10,6 +10,16 @@ namespace Genealogie.ASP.Models
 {
     public class MessageDestination: BMessageDestination
     {
+        public bool Lu { get { return this.dateLecture != null; } }
+        public IEnumerable<MessageDestination> autresMessages
+        {
+            get{return new MessageDestinationServiceAPI().DonnerPourConversation(this.idConversation)
+                    .Where(j => j.idDestinataire != this.idDestinataire);}
+        }
+        public Utilisateur destinataire { get { return new UtilisateurServiceAPI().Donner(this.idDestinataire); } }
+        public Conversation conversation { get { return new ConversationServiceAPI().Donner(this.idConversation); } }
+        public Utilisateur emetteur { get { return new UtilisateurServiceAPI().Donner(this.conversation.idEmetteur) ; } }
+
     }
 
     public class MessageDestinationLecture
@@ -25,15 +35,10 @@ namespace Genealogie.ASP.Models
         public MessageDestinationLecture(MessageDestination e)
         {
             this.idConversation = e.idConversation;
-            this.emetteur = new UtilisateurServiceAPI()
-                .Donner(new ConversationServiceAPI().Donner(this.idConversation).idEmetteur).login;
-            this.autresDestinataires = new MessageDestinationServiceAPI()
-                .DonnerPourConversation(this.idConversation)
-                .Where(j=>j.idDestinataire!=SessionUtilisateur.Utilisateur.id)
-                .Select(k=>new UtilisateurServiceAPI().Donner(k.idDestinataire).login)
-                .ToList()
+            this.emetteur = e.emetteur.login;
+            this.autresDestinataires = e.autresMessages.Select(j=>new UtilisateurServiceAPI().Donner(j.idDestinataire).login).ToList()
                 ;
-            Conversation c = new ConversationServiceAPI().Donner(this.idConversation);
+            Conversation c = e.conversation;
             this.sujet = c.sujet;
             this.texte = c.texte;
         }

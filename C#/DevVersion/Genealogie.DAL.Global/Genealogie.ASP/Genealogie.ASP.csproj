@@ -291,10 +291,12 @@
     <Content Include="Views\Message\EnvoyerMessage.cshtml" />
     <Content Include="Views\MessageDestination\Lire.cshtml" />
     <Content Include="Views\Conversation\Lire.cshtml" />
+    <Content Include="Views\Recherche\xx.cshtml" />
+    <Content Include="Views\Recherche\Index.cshtml" />
+    <Content Include="Views\Recherche\Rechercher.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Recherche\" />
     <Folder Include="Views\_admin\" />
   </ItemGroup>
   <ItemGroup>

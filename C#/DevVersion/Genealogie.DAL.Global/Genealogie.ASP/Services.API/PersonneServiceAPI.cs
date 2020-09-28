@@ -37,19 +37,7 @@ namespace Genealogie.ASP.Services.API
             return x;
         }
 
-        public IEnumerable<Personne> Rechercher(Recherche e)
-        {
-            string contenuJson = JsonConvert.SerializeObject(e, Formatting.Indented);
-            StringContent contenu = new StringContent(contenuJson, Encoding.UTF8, "application/json");
-            HttpResponseMessage reponse = _client.PutAsync($"Personne/Chercher/",contenu).Result;
-            if (!reponse.IsSuccessStatusCode)
-            {
-                throw new Exception("Echec de la réception de données.");
-            }
-            var x = reponse.Content.ReadAsAsync<IEnumerable<Personne>>().Result;
-            return x;
-            throw new NotImplementedException();
-        }
+        
 
         public IEnumerable<Personne> DonnerEnfants(int id)
         {
@@ -171,6 +159,18 @@ namespace Genealogie.ASP.Services.API
             if (!reponse.IsSuccessStatusCode) { throw new Exception("Echec de la réception de données."); }
             var x = reponse.Content.ReadAsStringAsync().Result;
             return bool.Parse(x);
+        }
+
+        public IEnumerable<Personne> Rechercher(Recherche rec)
+        {
+          
+            string contenuJson = JsonConvert.SerializeObject(rec, Formatting.Indented);
+            StringContent contenu = new StringContent(contenuJson, Encoding.UTF8, "application/json");
+            HttpResponseMessage reponse = _client.PutAsync($"Personne/Rechercher/", contenu).Result;
+            if (!reponse.IsSuccessStatusCode) { throw new Exception("Echec de la réception de données."); }
+            var x = reponse.Content.ReadAsAsync<IEnumerable<Personne>>().Result;
+            return x;
+          
         }
 
     }

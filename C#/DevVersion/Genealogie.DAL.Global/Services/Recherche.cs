@@ -6,7 +6,7 @@ namespace Services
 {
     public class Recherche
     {
-        public int? arbreExclu { get; set; }
+        public int? idCreateurExclu { get; set; }
         public string nom { get; set; }
         public string prenom { get; set; }
         public bool? homme { get; set; }

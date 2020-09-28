@@ -96,6 +96,12 @@ namespace Genealogie.API.Controllers
             return us.Modifier(id, e.VersClient());
         }
 
+        [HttpPut]
+        public IEnumerable<Personne> Rechercher(Recherche rec)
+        {
+            return new PersonneService().Rechercher(rec).Select(j=>j.VersAPI());
+        }
+
 
 
 

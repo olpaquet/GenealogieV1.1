@@ -25,22 +25,18 @@
         <dd>
             @Html.DisplayFor(model => model.emetteur)
         </dd>
-        <p>Destinataires (@Model.destinataires.Count())</p>
-        <p>@Model.destinataires[0].destinataire</p>
-        @for(int jj=0; @Model.destinataires.Count()<jj; jj++)
-        {
-            <p>coucou</p>
-            @Html.DisplayNameFor(x=>x.destinataires[jj].destinataire);
-            @Html.DisplayNameFor(x=>x.destinataires[jj].Lu)
-        }
 
 
-        <p>yes we can</p>
-        @foreach(var item in Model.destinataires)
+        @for(int k = 0; k<Model.messages.Count(); k++)
         {
-            @Html.DisplayFor(modelItem => item.destinataire )
-            @Html.DisplayFor(modelItem => item.Lu)
+            <dt>@Html.DisplayNameFor(x=>x.messages[k].Lu)</dt>
+            <dd>
+                @Html.DisplayFor(x => x.messages[k].destinataire.login)
+                        @Html.DisplayFor(x => x.messages[k].Lu)
+                    </dd>
         }
+
+        
 
         <dt>
             @Html.DisplayNameFor(model => model.sujet)

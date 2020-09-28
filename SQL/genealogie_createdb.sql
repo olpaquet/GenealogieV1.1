@@ -1638,6 +1638,13 @@ join messagedestination md on md.idconversation = c.id
 go
 
 
+drop view VPersonne
+go
+create view VPersonne
+as
+select p.*, a.idblocage, u.actif utilisateuractif from personne p join arbre a on a.id = p.idarbre join utilisateur u on u.id = a.idcreateur
+go
+
 
 /************SETUP******/
 declare @id int

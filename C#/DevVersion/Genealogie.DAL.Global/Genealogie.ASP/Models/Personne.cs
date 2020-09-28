@@ -12,6 +12,9 @@ namespace Genealogie.ASP.Models
 {
     public class Personne : BPersonne
     {
+        public Personne pere { get { return this.idPere==null?null:new PersonneServiceAPI().Donner((int)this.idPere); } }
+        public Personne mere { get { return this.idMere == null ? null : new PersonneServiceAPI().Donner((int)this.idMere); } }
+        public IEnumerable<Personne> enfants { get { return new PersonneServiceAPI().DonnerEnfants(this.id); } }
     }
 
     public class PersonneIndex
@@ -41,12 +44,12 @@ namespace Genealogie.ASP.Models
             this.dateAjout = e.dateAjout;
             this.dateDeDeces = e.dateDeDeces;
             this.dateDeNaissance = e.dateDeNaissance;
-            this.pere = (e.idPere == null) ? null : (new PersonneServiceAPI().DonnerPere(this.id));
-            this.mere = (e.idMere == null) ? null : (new PersonneServiceAPI().DonnerMere(this.id));
+            this.pere = e.pere;
+            this.mere = e.mere;
             this.nom = e.nom;
             this.prenom = e.prenom;
             this.idArbre = e.idArbre;
-            this.enfants = new PersonneServiceAPI().DonnerEnfants(this.id).ToList();
+            this.enfants = e.enfants.ToList();
         }
 
 

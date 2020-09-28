@@ -11,7 +11,9 @@ namespace Genealogie.DAL.Global.Repository
 {
     public class PersonneRepository : BaseRepository, IPersonneRepository<Personne,Recherche>
     {
-        
+        private const string CONST_VPERSONNE_REQ = "select id,nom,prenom,datedenaissance,datededeces,homme,idarbre,dateajout,idpere,idmere, idblocage, utilisateuractif from VPersonne";
+
+
         private const string CONST_PERSONNE_REQ = "select id,nom,prenom,datedenaissance,datededeces,homme,idarbre,dateajout,idpere,idmere from Personne";
         public int Creer(Personne e)
         {
@@ -82,17 +84,22 @@ namespace Genealogie.DAL.Global.Repository
         }
         public IEnumerable<Personne> Rechercher(Recherche e)
         {
-            string requeteSql = $"{CONST_PERSONNE_REQ}";
+            string requeteSql = $"{CONST_VPERSONNE_REQ} ";
             string filtreSql = "";
             string nomParam = "";
             Dictionary<string, object> dicoParametresRequete = new Dictionary<string, object>();
 
-            if (e.arbreExclu != null)
+            nomParam = "utilisateuractif";
+            dicoParametresRequete.Add(nomParam, 1);
+            filtreSql = ajouterFiltre(filtreSql, $"{nomParam} = @{nomParam}");
+
+            if (e.idCreateurExclu != null)
             {
-                nomParam = "idArbre";
-                dicoParametresRequete.Add(nomParam, e.arbreExclu);                
-                filtreSql = ajouterFiltre(filtreSql, $"{nomParam} = @{nomParam}");
+                nomParam = "idcreateureclu";
+                dicoParametresRequete.Add(nomParam, e.idCreateurExclu);
+                filtreSql = ajouterFiltre(filtreSql, $"{nomParam} <> @{nomParam}");
             }
+         
 
             if (e.dateDeDeces != null)
             {
@@ -117,7 +124,7 @@ namespace Genealogie.DAL.Global.Repository
 
             if (e.nom != null)
             {
-                nomParam = "datededeces";
+                nomParam = "nom";
                 dicoParametresRequete.Add(nomParam, e.nom);
                 filtreSql = ajouterFiltre(filtreSql, $"{nomParam} = @{nomParam}");
             }
@@ -127,6 +134,7 @@ namespace Genealogie.DAL.Global.Repository
                 dicoParametresRequete.Add(nomParam, e.prenom);
                 filtreSql = ajouterFiltre(filtreSql, $"{nomParam} = @{nomParam}");
             }
+            if (filtreSql != "") filtreSql = $" where {filtreSql}";
 
 
             Commande com = new Commande($"{requeteSql} {filtreSql}");

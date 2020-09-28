@@ -10,7 +10,10 @@ using System.Web;
 
 namespace Genealogie.ASP.Models
 {
-    public class Abonnement : BAbonnement { }
+    public class Abonnement : BAbonnement 
+    {
+
+    }
     /*
      * public int id { get; set; }
         public string nom { get; set; }

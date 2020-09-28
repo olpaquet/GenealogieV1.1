@@ -13,11 +13,14 @@ namespace Genealogie.ASP.Models
 {
     public class Arbre : BArbre
     {
-        public int nombreDePersonnes { get 
-            {
-                return new PersonneServiceAPI().DonnerPourArbre(this.id).Count();
-                 
-            } }
+        public IEnumerable<Personne> personnes
+        { get { return new PersonneServiceAPI().DonnerPourArbre(this.id); } }
+        public int nombreDePersonnes
+        { get { return personnes.Count(); } }
+        public Blocage Blocage
+        {
+            get { return this.idBlocage == null ? null : new BlocageServiceAPI().Donner((int)this.idBlocage); }
+        }
     }
 
     public class ArbreIndex
@@ -29,10 +32,10 @@ namespace Genealogie.ASP.Models
         public int nombreDePersonnes { get; set; }
         [DisplayName("bloqué")]
         public bool bloque { get; set; }
-        
+
 
         public ArbreIndex() { }
-        public ArbreIndex(Arbre e) {  this.description = e.description; this.nom = e.nom; this.id = e.id; this.nombreDePersonnes = e.nombreDePersonnes; this.bloque = e.dateBlocage != null; }
+        public ArbreIndex(Arbre e) { this.description = e.description; this.nom = e.nom; this.id = e.id; this.nombreDePersonnes = e.nombreDePersonnes; this.bloque = e.dateBlocage != null; }
     }
 
     public class ArbreCreation
@@ -54,7 +57,7 @@ namespace Genealogie.ASP.Models
         public int id { get; set; }
         [Required]
         [MaxLength(50)]
-        [NomUnique("Arbre","nom","idCreateur",EnumAction.MODIFIER)]
+        [NomUnique("Arbre", "nom", "idCreateur", EnumAction.MODIFIER)]
         public string nom { get; set; }
         [Required]
         [MaxLength(1000)]
@@ -75,7 +78,7 @@ namespace Genealogie.ASP.Models
         [DisplayName("date de création")]
         public DateTime dateCreation { get; set; }
         [DisplayName("nombre de personnes dans l'arbre")]
-        public int nombreDePersonnes { get; set; }        
+        public int nombreDePersonnes { get; set; }
         [DisplayName("bloqueur")]
         public string bloqueur { get; set; }
         [DisplayName("blocage")]
@@ -84,10 +87,12 @@ namespace Genealogie.ASP.Models
         public DateTime? dateBlocage { get; set; }
 
         public ArbreDetails() { }
-        public ArbreDetails(Arbre e) { this.description = e.description; this.nom = e.nom; this.id = e.id;
+        public ArbreDetails(Arbre e)
+        {
+            this.description = e.description; this.nom = e.nom; this.id = e.id;
             createur = new UtilisateurServiceAPI().Donner(e.idCreateur).nomAffichage();
-            blocage = (e.idBlocage==null)?"":new BlocageServiceAPI().Donner((int)e.idBlocage).nom;
-            bloqueur = (e.idBloqueur==null)?"":new UtilisateurServiceAPI().Donner((int)e.idBloqueur).nom;
+            blocage = (e.idBlocage == null) ? "" : new BlocageServiceAPI().Donner((int)e.idBlocage).nom;
+            bloqueur = (e.idBloqueur == null) ? "" : new UtilisateurServiceAPI().Donner((int)e.idBloqueur).nom;
             dateBlocage = e.dateBlocage;
             dateCreation = e.dateCreation;
 
