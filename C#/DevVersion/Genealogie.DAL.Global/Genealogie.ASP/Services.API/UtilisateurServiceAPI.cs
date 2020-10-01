@@ -201,5 +201,18 @@ namespace Genealogie.ASP.Services.API
             return bool.Parse(reponse.Content.ReadAsStringAsync().Result);
             throw new NotImplementedException();
         }
+        
+        public bool ChangerMotDePasse(NouveauMotDePasse e)
+        {
+            string contenuJson = JsonConvert.SerializeObject(e, Formatting.Indented);
+            StringContent contenu = new StringContent(contenuJson, Encoding.UTF8, "application/json");
+            HttpResponseMessage reponse = _client.PostAsync($"Utilisateur/ChangerMotDePasse/",contenu).Result;
+            if (!reponse.IsSuccessStatusCode)
+            {
+                throw new Exception("Echec de la réception de données.");
+            }
+            return bool.Parse(reponse.Content.ReadAsStringAsync().Result);
+            throw new NotImplementedException();
+        }
     }
 }

@@ -6,8 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using Services;
-
-
+using System.Web.Mvc;
 
 namespace Genealogie.ASP.Models
 {
@@ -65,4 +64,6 @@ namespace Genealogie.ASP.Models
         public BlocageDetails() { }
         public BlocageDetails(Blocage e) { this.actif = e.actif; this.description = e.description; this.nom = e.nom; this.id = e.id; }
     }
+
+    
 }

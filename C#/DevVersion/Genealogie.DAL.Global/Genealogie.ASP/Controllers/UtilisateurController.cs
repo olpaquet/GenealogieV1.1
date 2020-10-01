@@ -207,6 +207,27 @@ namespace Genealogie.ASP.Controllers
             return View(uc);
 
         }
+
+        [ConnecteAut]
+        [HttpGet]
+        public ActionResult ChangerMotDePasse()
+        {
+            NouveauMotDePasse nmdp = new NouveauMotDePasse { login = SessionUtilisateur.Utilisateur.login };
+            return View(nmdp);
+        }
+
+        
+        [ConnecteAut]
+        [HttpPost]
+        public ActionResult ChangerMotDePasse(NouveauMotDePasse e)
+        {
+            if (ModelState.IsValid)
+            {
+                e.login = SessionUtilisateur.Utilisateur.login;
+                if (new UtilisateurServiceAPI().ChangerMotDePasse(e)) return RedirectToAction("Index", "Home");
+            }
+            return View(e);
+        }
         
     }
 }

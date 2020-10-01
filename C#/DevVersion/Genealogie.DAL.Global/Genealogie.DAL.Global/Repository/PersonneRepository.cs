@@ -11,7 +11,7 @@ namespace Genealogie.DAL.Global.Repository
 {
     public class PersonneRepository : BaseRepository, IPersonneRepository<Personne,Recherche>
     {
-        private const string CONST_VPERSONNE_REQ = "select id,nom,prenom,datedenaissance,datededeces,homme,idarbre,dateajout,idpere,idmere, idblocage, utilisateuractif from VPersonne";
+        private const string CONST_VPERSONNE_REQ = "select id,nom,prenom,datedenaissance,datededeces,homme,idarbre,dateajout,idpere,idmere, idcreateur, idblocage, utilisateuractif from VPersonne";
 
 
         private const string CONST_PERSONNE_REQ = "select id,nom,prenom,datedenaissance,datededeces,homme,idarbre,dateajout,idpere,idmere from Personne";
@@ -95,7 +95,7 @@ namespace Genealogie.DAL.Global.Repository
 
             if (e.idCreateurExclu != null)
             {
-                nomParam = "idcreateureclu";
+                nomParam = "idcreateur";
                 dicoParametresRequete.Add(nomParam, e.idCreateurExclu);
                 filtreSql = ajouterFiltre(filtreSql, $"{nomParam} <> @{nomParam}");
             }

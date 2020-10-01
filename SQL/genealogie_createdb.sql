@@ -576,12 +576,12 @@ begin
 	
 	if @api = 1
 		select @id = id, @presel = presel, @postsel=postsel 
-		from utilisateur 
+		from utilisateurapi
 		where login = @xlogin 
 		and dbo.ConstruireHMotdepasse(@vieuxmotdepasse,presel,postsel) = motdepasse;
 	else
 		select @id = id, @presel = presel, @postsel=postsel 
-		from utilisateurapi
+		from utilisateur
 		where login = @xlogin 
 		and dbo.ConstruireHMotdepasse(@vieuxmotdepasse,presel,postsel) = motdepasse;
 	
@@ -1410,6 +1410,11 @@ go
 create procedure Personne_eff
 @id int
 AS
+
+update personne set idpere = null where idpere = @id;
+update personne set idmere = null where idmere = @id;
+
+
 delete Personne 
 where id=@id
 ;
@@ -1642,7 +1647,11 @@ drop view VPersonne
 go
 create view VPersonne
 as
-select p.*, a.idblocage, u.actif utilisateuractif from personne p join arbre a on a.id = p.idarbre join utilisateur u on u.id = a.idcreateur
+select p.*, a.idcreateur, a.idblocage, u.actif utilisateuractif
+from personne p 
+join arbre a on a.id = p.idarbre 
+join utilisateur u on u.id = a.idcreateur
+where a.dateblocage is null
 go
 
 

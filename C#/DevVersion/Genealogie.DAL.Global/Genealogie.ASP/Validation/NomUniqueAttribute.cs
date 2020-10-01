@@ -119,7 +119,7 @@ namespace Genealogie.ASP.Validation
                     if (ob.res != null ) b = false;
                     break;
                 case EnumAction.MODIFIER:
-                    if (!(ob.res == ob.id)) b = false;
+                    if (!(ob.res == ob.id)) b = true;
                     break;
             }
             if (!b) return new ValidationResult(ErrorMessage);

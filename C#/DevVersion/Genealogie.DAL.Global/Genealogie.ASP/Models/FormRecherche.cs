@@ -16,7 +16,7 @@ namespace Genealogie.ASP.Models
         public DateTime? dateDeNaissance { get; set; }
         public DateTime? dateDeDeces { get; set; }
 
-        public IList<Personne> personnes { get; set; }
+        public IList<PersonneIndex> personnes { get; set; }
 
         public FormRecherche() { }
         public FormRecherche(string nom)
@@ -36,7 +36,9 @@ namespace Genealogie.ASP.Models
             this.dateDeNaissance = rec.dateDeNaissance;
 
             this.personnes = new PersonneServiceAPI().Rechercher(rec)
-                .OrderBy(k=>k.nom).ThenBy(k=>k.prenom).ThenBy(k=>k.dateDeNaissance)
+                .Select(j => new PersonneIndex(j))
+                .OrderBy(m => m.nomProprietaire)
+                .ThenBy(j => j.nomArbre)
                 .ToList();
         }
     }

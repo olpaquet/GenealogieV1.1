@@ -55,19 +55,48 @@
         </td>
         <td>
             @for (int i = 0; i < item.enfants.Count(); i++)
-            {
-                @Html.DisplayFor(modelItem => item.enfants[i].nom)
-                @Html.DisplayFor(modelItem => item.enfants[i].prenom)
-                @Html.DisplayFor(modelItem => item.enfants[i].homme)
-                @Html.DisplayFor(modelItem => item.enfants[i].dateDeNaissance)
-                @Html.ActionLink("Explorer","Details", new { id=item.enfants[i].id})
-                @Html.ActionLink("Supprimer cet enfant", "SupprimerEnfant", new {id=item.id, idEnfant=item.enfants[i].id })
+            {<p>
+            
+    @Html.DisplayFor(modelItem => item.enfants[i].nom)
+    @Html.DisplayFor(modelItem => item.enfants[i].prenom)
+    @Html.DisplayFor(modelItem => item.enfants[i].homme)
+    @Html.DisplayFor(modelItem => item.enfants[i].dateDeNaissance)
+    @Html.ActionLink("Explorer", "Details", new { id = item.enfants[i].id })
+    @Html.ActionLink("Supprimer cet enfant", "SupprimerEnfant", new { id = item.id, idEnfant = item.enfants[i].id })
+</p>
             }
         </td>
         <td>
+            @if (item.pere != null)
+            {<p>Père</p>
+             <p>
+                 @Html.DisplayFor(modelItem => item.pere.nom)
+                 @Html.DisplayFor(modelItem => item.pere.prenom)
+                 @Html.DisplayFor(modelItem => item.pere.homme)
+                 @Html.DisplayFor(modelItem => item.pere.dateDeNaissance)
+             </p>
+        <p>
+            @Html.ActionLink("Explorer", "Details", new { id = item.pere.id })
+            @Html.ActionLink("Supprimer le papa", "SupprimerPere", new { id = item.id })
+        </p>}
+            @if (item.mere != null)
+            {<p>Mère</p>
+             <p>
+                 @Html.DisplayFor(modelItem => item.mere.nom)
+                 @Html.DisplayFor(modelItem => item.mere.prenom)
+                 @Html.DisplayFor(modelItem => item.mere.homme)
+                 @Html.DisplayFor(modelItem => item.mere.dateDeNaissance)
+             </p>
+        <p>
+            @Html.ActionLink("Explorer", "Details", new { id = item.mere.id })
+            @Html.ActionLink("Supprimer la maman", "SupprimerMere", new { id = item.id })
+        </p>}
+        </td>
+        <td>
             @Html.ActionLink("Ajouter un enfant", "AjouterEnfant", new { id = item.id })
-            @Html.ActionLink("Modifier", "Modifier", new { id=item.id }) |
-            @Html.ActionLink("Détails", "Details", new { id=item.id }) |
+            @if (item.pere == null || item.mere == null) { @Html.ActionLink("Ajouter un parent","AjouterParent",new { id = item.id })}
+            @Html.ActionLink("Modifier", "Modifier", new { id=item.id })
+            @Html.ActionLink("Détails", "Details", new { id=item.id })
             @Html.ActionLink("Supprimer", "Supprimer", new { id=item.id })
         </td>
     </tr>

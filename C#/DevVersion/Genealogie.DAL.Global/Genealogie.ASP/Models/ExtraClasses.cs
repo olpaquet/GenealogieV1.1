@@ -8,14 +8,14 @@ using Genealogie.Modeles.API.ASP.Modeles;
 namespace Genealogie.ASP.Models
 {
     
-
+    /*
     public class ChangerMotDePasse
     {
         public string login { get; set; }
         public string vieuxMotDePasse { get; set; }
         public string nouveauMotDePasse { get; set; }
         public string[] option { get; set; }
-    }
+    }*/
 
     public class UtilisateurValide
     {

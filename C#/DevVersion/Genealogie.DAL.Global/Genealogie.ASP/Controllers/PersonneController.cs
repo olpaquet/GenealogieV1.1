@@ -27,7 +27,7 @@ namespace Genealogie.ASP.Controllers
 
         [HttpGet]
         [FiltreExiste]
-        [FiltreProprietaireArbre("personne")]
+        
         public ActionResult Details(int id)
         {
             PersonneIndex pi = new PersonneIndex(new PersonneServiceAPI().Donner(id));
@@ -35,7 +35,7 @@ namespace Genealogie.ASP.Controllers
             return View(pi);
         }
         [HttpGet]
-        [FiltreProprietaireArbre("personne")]
+        /*[FxiltreProprietaireArbre]*/
         public ActionResult Creer(int id)
         {
             PersonneCreation pc = new PersonneCreation();
@@ -44,7 +44,8 @@ namespace Genealogie.ASP.Controllers
             return View(pc);
         }
         [HttpPost]
-        [ValidateAntiForgeryToken]        
+        [ValidateAntiForgeryToken]
+        [FxiltreProprietaireArbre]
         public ActionResult Creer(PersonneCreation c)
         {
             if (ModelState.IsValid)
@@ -52,7 +53,11 @@ namespace Genealogie.ASP.Controllers
                 Personne p = c.VersPersonne();
 
                 /* contrôle arbre */
-                if (SessionUtilisateur.arbres.Select(j => j.id).Contains(c.idArbre))
+
+                var x = SessionUtilisateur.arbres;
+                if (SessionUtilisateur.arbres
+                    .Where(j=>j.id==p.idArbre)
+                    .Count()==1)
                 {
                     int i = new PersonneServiceAPI().Creer(p);
                     if (i > 0) return RedirectToAction("DonnerPourArbre", new { id = c.idArbre });
@@ -66,7 +71,7 @@ namespace Genealogie.ASP.Controllers
 
         [HttpGet]
         [FiltreExiste]
-        [FiltreProprietaireArbre("personne")]
+        /*[FxiltreProprietaireArbre]*/
         public ActionResult Modifier(int id)
         {
             PersonneModification pm = new PersonneModification(new PersonneServiceAPI().Donner(id));
@@ -75,7 +80,7 @@ namespace Genealogie.ASP.Controllers
 
         [HttpPost]
         [FiltreExiste]
-        [FiltreProprietaireArbre("personne")]
+        /*[FiltreProprietaireArbre("personne")]*/
         [ValidateAntiForgeryToken]
         public ActionResult Modifier(int id, PersonneModification pm)
         {
@@ -141,5 +146,60 @@ namespace Genealogie.ASP.Controllers
             return RedirectToAction("DonnerPourArbre", new { id = new PersonneServiceAPI().Donner(idEnfant).idArbre});
         }
 
+        [HttpGet]        
+        [FiltreProprietaireArbre("personne")]
+        public ActionResult SupprimerMere(int id)
+        {
+
+            new PersonneServiceAPI().SupprimerMere(id);
+            return RedirectToAction("DonnerPourArbre", new { id = new PersonneServiceAPI().Donner(id).idArbre });
+        }
+
+        [HttpGet]
+        [FiltreProprietaireArbre("personne")]
+        public ActionResult SupprimerPere(int id)
+        {
+
+            new PersonneServiceAPI().SupprimerPere(id);
+            return RedirectToAction("DonnerPourArbre", new { id = new PersonneServiceAPI().Donner(id).idArbre });
+        }
+
+        [HttpGet]        
+        public ActionResult AjouterParent(int id)
+        {
+            FormAjouterParent fap = new FormAjouterParent();
+            Personne p = new PersonneServiceAPI().Donner(id);
+            fap.idArbre = p.idArbre;
+            IEnumerable<Personne> liste =  new PersonneServiceAPI().DonnerParenteesDirectesPossibles(id);
+
+            if (p.idPere != null) liste = liste.Where(j => !j.homme);
+            if (p.idMere != null) liste = liste.Where(j => j.homme);
+
+            fap.parents = liste.Select(j => new SelectListItem { Selected = false, Value=j.id.ToString(), Text=$"{j.VersAffichage()} ({j.homme.VersSexe()})" }).ToList();
+
+            return View(fap);
+        }
+
+        [HttpPost]
+        [FiltreProprietaireArbre("personne")]
+        public ActionResult AjouterParent(int id, FormAjouterParent fap)
+        {
+            Personne p = new PersonneServiceAPI().Donner(id);
+            fap.idArbre = p.idArbre;
+
+            IEnumerable<Personne> liste = new PersonneServiceAPI().DonnerParenteesDirectesPossibles(id);
+
+            if (p.idPere != null) liste = liste.Where(j => !j.homme);
+            if (p.idMere != null) liste = liste.Where(j => j.homme);
+
+            if (liste.Where(j => j.id == fap.idParent).SingleOrDefault() == null) return View(fap);
+
+            if (ModelState.IsValid)
+            {
+                bool b = new PersonneServiceAPI().AjouterParent(new ParentEnfant { idParent=fap.idParent,  idEnfant = id });
+                if (b) return RedirectToAction("DonnerPourArbre", new { id = p.idArbre });
+            }
+            return View(fap);
+        }
     }
 }

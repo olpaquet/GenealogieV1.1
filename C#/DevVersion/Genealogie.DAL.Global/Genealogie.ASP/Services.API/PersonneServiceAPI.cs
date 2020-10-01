@@ -133,9 +133,8 @@ namespace Genealogie.ASP.Services.API
         
         public bool SupprimerPere(int id)
         {
-            string contenuJson = JsonConvert.SerializeObject(id, Formatting.Indented);
-            StringContent contenu = new StringContent(contenuJson, Encoding.UTF8, "application/json");
-            HttpResponseMessage reponse = _client.PutAsync($"Personne/SupprimerPere/", contenu).Result;
+            
+            HttpResponseMessage reponse = _client.PutAsync($"Personne/SupprimerPere/{id}", null).Result;
             if (!reponse.IsSuccessStatusCode) { throw new Exception("Echec de la réception de données."); }
             var x = reponse.Content.ReadAsStringAsync().Result;
             return bool.Parse(x);
@@ -143,9 +142,8 @@ namespace Genealogie.ASP.Services.API
         
         public bool SupprimerMere(int id)
         {
-            string contenuJson = JsonConvert.SerializeObject(id, Formatting.Indented);
-            StringContent contenu = new StringContent(contenuJson, Encoding.UTF8, "application/json");
-            HttpResponseMessage reponse = _client.PutAsync($"Personne/SupprimerMere/", contenu).Result;
+            
+            HttpResponseMessage reponse = _client.PutAsync($"Personne/SupprimerMere/{id}", null).Result;
             if (!reponse.IsSuccessStatusCode) { throw new Exception("Echec de la réception de données."); }
             var x = reponse.Content.ReadAsStringAsync().Result;
             return bool.Parse(x);

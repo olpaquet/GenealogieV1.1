@@ -102,6 +102,8 @@ namespace Genealogie.API.Controllers
             return new PersonneService().Rechercher(rec).Select(j=>j.VersAPI());
         }
 
+        
+
 
 
 

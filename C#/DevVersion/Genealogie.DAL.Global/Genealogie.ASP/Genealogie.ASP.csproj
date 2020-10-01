@@ -174,6 +174,7 @@
     <Compile Include="Models\ExtraClasses.cs" />
     <Compile Include="Models\MessageDestination.cs" />
     <Compile Include="Models\Messagerie.cs" />
+    <Compile Include="Models\NouveauMotDePasse.cs" />
     <Compile Include="Models\Nouvelle.cs" />
     <Compile Include="Models\Personne.cs" />
     <Compile Include="Models\FormRecherche.cs" />
@@ -190,6 +191,7 @@
     <Compile Include="Securite\ExisteConstraint.cs" />
     <Compile Include="Securite\FiltreExisteAttribute.cs" />
     <Compile Include="Securite\FiltreProprietaireArbreAttribute.cs" />
+    <Compile Include="Securite\FxiltreProprietaireArbreAttribute.cs" />
     <Compile Include="Securite\SessionUtilisateur.cs" />
     <Compile Include="ServiceGeneral\ExplorationObjet.cs" />
     <Compile Include="Services.API\AbonnementServiceAPI.cs" />
@@ -294,6 +296,12 @@
     <Content Include="Views\Recherche\xx.cshtml" />
     <Content Include="Views\Recherche\Index.cshtml" />
     <Content Include="Views\Recherche\Rechercher.cshtml" />
+    <Content Include="Views\Arbre\Modifier.cshtml" />
+    <Content Include="Views\Utilisateur\ChangerMotDePasse.cshtml" />
+    <Content Include="Views\Arbre\Supprimer.cshtml" />
+    <Content Include="Views\Arbre\ListerTout.cshtml" />
+    <Content Include="Views\Arbre\Bloquer.cshtml" />
+    <Content Include="Views\Personne\AjouterParent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

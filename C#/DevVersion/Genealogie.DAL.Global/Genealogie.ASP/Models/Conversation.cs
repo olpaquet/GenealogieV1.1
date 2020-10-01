@@ -28,6 +28,7 @@ namespace Genealogie.ASP.Models
         [DisplayName("date d'envoi")]
         [DataType(DataType.DateTime)]
         public DateTime date { get; set; }
+        public IList<string> destinataires { get; set; }
 
         public ConversationIndex() { }
         public ConversationIndex(Conversation e)
@@ -37,6 +38,7 @@ namespace Genealogie.ASP.Models
             sujet = e.sujet;
             texte = e.texte;
             date = e.date;
+            destinataires = e.messages.Select(j => new UtilisateurServiceAPI().Donner(j.idDestinataire).login).ToList();
         }
 
         
@@ -46,7 +48,7 @@ namespace Genealogie.ASP.Models
     {
         public int idConversation { get; set; }
         public string emetteur { get; set; }
-        public IList<MessageDestination> messages { get; set; }
+        public IList<MessageDestinationLecture> messages { get; set; }
         public string sujet { get; set; }
         public string texte { get; set; }
 
@@ -54,7 +56,9 @@ namespace Genealogie.ASP.Models
         {
             this.idConversation = e.id;
             this.emetteur = SessionUtilisateur.Utilisateur.login;
-            this.messages = e.messages.ToList();
+            this.messages = e.messages
+                .Select(j=>new MessageDestinationLecture(j))
+                .ToList();
             this.sujet = e.sujet;
             this.texte = e.texte;
         }

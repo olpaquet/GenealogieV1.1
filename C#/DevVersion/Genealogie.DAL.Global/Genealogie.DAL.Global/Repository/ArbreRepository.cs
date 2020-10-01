@@ -27,7 +27,7 @@ namespace Genealogie.DAL.Global.Repository
         public bool Modifier(int id, Arbre e)
         {
             Commande com = new Commande("Arbre_mod", true);
-            com.AjouterParametre("id", 0, true);
+            com.AjouterParametre("id", id);
             com.AjouterParametre("nom", e.nom);
             com.AjouterParametre("description", e.description);            
             

@@ -20,4 +20,14 @@ namespace Genealogie.API.Models
     public class MessageDestination : BMessageDestination { }
     public class Conversation : BConversation { }
     public class VMessageRecu : BVMesageRecu { }
+
+    public class NouveauMotDePasse
+    {
+        public string login { get; set; }
+        public string ancienMotDePasse { get; set; }
+        public string motDePasse { get; set; }
+        public string motDePasseConfirmation { get; set; }
+    }
+
+   
 }

@@ -37,54 +37,11 @@
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Save" class="btn btn-default" formmethod="get" />
             </div>
-        </div><div>
-            <table class="table">
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.nom)
-                    </th>
-
-                    <th>
-                        @Html.DisplayNameFor(model => model.prenom)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.homme)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.dateDeNaissance)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.dateDeDeces)
-                    </th>
-
-                </tr>
-                @foreach (var x in Model.personnes)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => x.nom)
-                        </td>
-
-                        <td>
-                            @Html.DisplayFor(modelItem => x.prenom)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => x.homme)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => x.dateDeNaissance)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => x.dateDeDeces)
-                        </td>
-
-                    </tr>
-                }
-            </table>
         </div>
         <div>
             <table class="table">
-                <tr>
+                <tr><th>Propriétaire</th>
+                    <th>Arbre</th>
                     <th>
                         @Html.DisplayNameFor(model => model.nom)
                     </th>
@@ -101,11 +58,14 @@
                     <th>
                         @Html.DisplayNameFor(model => model.dateDeDeces)
                     </th>
+                    <th>Enfants</th>
 
-                </tr>
+                    </tr>
                 @foreach (var x in Model.personnes)
                 {
                     <tr>
+                        <td>@Html.DisplayFor(modelItem=>x.nomProprietaire)</td>
+                        <td>@Html.DisplayFor(modelItem=>x.nomArbre)</td>
                         <td>
                             @Html.DisplayFor(modelItem => x.nom)
                         </td>
@@ -122,11 +82,23 @@
                         <td>
                             @Html.DisplayFor(modelItem => x.dateDeDeces)
                         </td>
+                        @if (x.enfants.Count() != 0)
+                        {
+                        <td>
+                            <p>enfants...</p>
+                            @foreach (var y in x.enfants)
+                            {
+                                <p>@Html.ActionLink(y.nomAffichage, "Details", "Personne", new { id = y.id } , "")
+                        @Html.DisplayFor(modelItem => y.nomAffichage)</p>
+                            }
+                        </td>
+                        }
 
                     </tr>
                 }
             </table>
         </div>
+      
     </div>
 }
 

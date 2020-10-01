@@ -17,6 +17,7 @@ namespace Genealogie.ASP.Models
         public string texte { get; set; }
         public string emetteur { get; set; }
         public string destinataire { get; set; }
+        public bool lu { get; set; }
 
         public MessageRecuIndex() { }
         public MessageRecuIndex(VMessageRecu e)
@@ -29,6 +30,7 @@ namespace Genealogie.ASP.Models
             this.idDestinataire = e.idDestinataire;
             this.emetteur = new UtilisateurServiceAPI().Donner(idEmetteur).login;
             this.destinataire = new UtilisateurServiceAPI().Donner(idDestinataire).login;
+            this.lu = e.dateLecture != null;
 
         }
     }

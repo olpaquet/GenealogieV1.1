@@ -2,6 +2,7 @@
 using Genealogie.ASP.Models;
 using Genealogie.ASP.Securite;
 using Genealogie.ASP.Services.API;
+using Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,20 @@ namespace Genealogie.ASP.Controllers
     [ConnecteAut]
     public class ArbreController : Controller
     {
+
+        [HttpGet]
+        [AutorisationRole(EnumRole.ADMIN)]
+        public ActionResult ListerTout()
+        {
+            ArbreServiceAPI asa = new ArbreServiceAPI();
+            IEnumerable<ArbreIndex> ai = asa.Donner().Select(j => { ArbreIndex a = new ArbreIndex(j);
+                a.proprietaire = new UtilisateurServiceAPI().Donner(j.idCreateur).login;
+                a.blocage = j.idBlocage == null ? "xxx" : new BlocageServiceAPI().Donner((int)j.idBlocage).nom;
+                return a;
+            });
+            
+            return View(ai);
+        }
         // GET: Arbre
         [HttpGet]
         public ActionResult Index()
@@ -36,6 +51,7 @@ namespace Genealogie.ASP.Controllers
         public ActionResult Creer()
         {
             ArbreCreation r = new ArbreCreation();
+            r.idCreateur = SessionUtilisateur.Utilisateur.id;
             return View(r);
         }
 
@@ -52,7 +68,11 @@ namespace Genealogie.ASP.Controllers
                 
                 /****/
                 int i = rsa.Creer(a);
-                if (i > 0) return RedirectToAction("Index");
+                if (i > 0)
+                {
+                    SessionUtilisateur.arbres.Add(new ArbreServiceAPI().Donner(i));
+                    return RedirectToAction("Index");
+                }
             }
             return View(e);
 
@@ -64,6 +84,7 @@ namespace Genealogie.ASP.Controllers
         {
             ArbreServiceAPI rs = new ArbreServiceAPI();
             ArbreModification r = new ArbreModification(rs.Donner(id));
+            
             return View(r);
         }
 
@@ -128,6 +149,52 @@ namespace Genealogie.ASP.Controllers
             ArbreServiceAPI rsa = new ArbreServiceAPI();
             bool b = rsa.Desactiver(id);
             return RedirectToAction("Index");
-        }        
+        }       
+        
+        [HttpGet]
+        [AutorisationRole(EnumRole.ADMIN)]
+        public ActionResult Bloquer(int id)
+        {
+            FormBlocageArbre ba = new FormBlocageArbre();
+            /*ba.blocages = new BlocageServiceAPI().Donner(new ObjetDonnerListe { ienum = null, options=null })
+                .Select(j => new SelectListItem {Selected=false, Text=j.nom, Value=j.id.ToString() })
+                .ToList();*/
+            /*IEnumerable<string> d = new BlocageServiceAPI().Donner(new ObjetDonnerListe { ienum = null, options = null }).Select(j => j.nom);
+            ba.blocages = new SelectList(d, d.FirstOrDefault());*/
+            ba.blocages = new BlocageServiceAPI().Donner(new ObjetDonnerListe { ienum = null, options = null });
+            ba.id = id;
+            
+            return View(ba);
+        }
+        [HttpPost]
+        [AutorisationRole(EnumRole.ADMIN)]
+        public ActionResult Bloquer(int id, FormBlocageArbre e)
+        {
+            if (ModelState.IsValid)
+            {
+                BlocageArbre ba = new BlocageArbre();
+                ba.id = id;
+                ba.idBloqueur = SessionUtilisateur.Utilisateur.id;
+
+                /*object oo = e.blocages.SelectedValue;
+                oo = e.blocageChoisi;
+
+
+                ba.idBlocage = (int)new BlocageServiceAPI().DonnerParNom((string)oo);*/
+                ba.idBlocage = e.idBlocage;
+                
+                bool b = new ArbreServiceAPI().Bloquer(ba);
+                if (b) return RedirectToAction("ListerTout");
+            }
+            return View(e);
+        }
+
+        [HttpGet]
+        [AutorisationRole(EnumRole.ADMIN)]
+        public ActionResult Debloquer(int id)
+        {
+            new ArbreServiceAPI().Debloquer(id);
+            return RedirectToAction("ListerTout");
+        }
     }
 }

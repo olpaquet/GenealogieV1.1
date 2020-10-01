@@ -1,4 +1,5 @@
-﻿using Genealogie.ASP.Services.API;
+﻿
+using Genealogie.ASP.Services.API;
 using Genealogie.ASP.Validation;
 using Genealogie.Modeles.API.ASP.Modeles;
 using Services;
@@ -8,20 +9,25 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace Genealogie.ASP.Models
 {
     public class Arbre : BArbre
     {
-        public IEnumerable<Personne> personnes
-        { get { return new PersonneServiceAPI().DonnerPourArbre(this.id); } }
-        public int nombreDePersonnes
-        { get { return personnes.Count(); } }
-        public Blocage Blocage
+        public IEnumerable<Personne> Personnes()
+        {  return new PersonneServiceAPI().DonnerPourArbre(this.id);  }
+        public int NombreDePersonnes()
+        {  return Personnes().Count(); }
+        public Blocage Blocage()
         {
-            get { return this.idBlocage == null ? null : new BlocageServiceAPI().Donner((int)this.idBlocage); }
+            return this.idBlocage == null ? null : new BlocageServiceAPI().Donner((int)this.idBlocage);
         }
-    }
+        public bool Bloque() {  return this.dateBlocage != null; }
+        public Utilisateur Createur() {  return new UtilisateurServiceAPI().Donner(this.idCreateur);  }
+        public Utilisateur Bloqueur() {  return (this.idBloqueur==null)?null:new UtilisateurServiceAPI().Donner((int)this.idBloqueur);}
+}
+    
 
     public class ArbreIndex
     {
@@ -33,9 +39,13 @@ namespace Genealogie.ASP.Models
         [DisplayName("bloqué")]
         public bool bloque { get; set; }
 
+        public string proprietaire { get; set; }
+        public string blocage { get; set; }
+        public int? idBlocage { get; set; }
+
 
         public ArbreIndex() { }
-        public ArbreIndex(Arbre e) { this.description = e.description; this.nom = e.nom; this.id = e.id; this.nombreDePersonnes = e.nombreDePersonnes; this.bloque = e.dateBlocage != null; }
+        public ArbreIndex(Arbre e) { this.bloque = e.Bloque(); this.description = e.description; this.nom = e.nom; this.id = e.id; this.nombreDePersonnes = e.NombreDePersonnes(); this.idBlocage = e.idBlocage; }
     }
 
     public class ArbreCreation
@@ -47,9 +57,10 @@ namespace Genealogie.ASP.Models
         [Required]
         [MaxLength(1000)]
         public string description { get; set; }
+        public int idCreateur { get; set; }
 
         public ArbreCreation() { }
-        public ArbreCreation(Arbre e) { this.description = e.description; this.nom = e.nom; }
+        public ArbreCreation(Arbre e) { this.description = e.description; this.nom = e.nom;this.idCreateur = e.idCreateur; }
     }
 
     public class ArbreModification
@@ -62,9 +73,9 @@ namespace Genealogie.ASP.Models
         [Required]
         [MaxLength(1000)]
         public string description { get; set; }
-
+        public int idCreateur { get; set; }
         public ArbreModification() { }
-        public ArbreModification(Arbre e) { this.description = e.description; this.nom = e.nom; this.id = e.id; }
+        public ArbreModification(Arbre e) { this.description = e.description; this.nom = e.nom; this.id = e.id; this.idCreateur = e.idCreateur; }
     }
 
     public class ArbreDetails
@@ -90,12 +101,26 @@ namespace Genealogie.ASP.Models
         public ArbreDetails(Arbre e)
         {
             this.description = e.description; this.nom = e.nom; this.id = e.id;
-            createur = new UtilisateurServiceAPI().Donner(e.idCreateur).nomAffichage();
-            blocage = (e.idBlocage == null) ? "" : new BlocageServiceAPI().Donner((int)e.idBlocage).nom;
-            bloqueur = (e.idBloqueur == null) ? "" : new UtilisateurServiceAPI().Donner((int)e.idBloqueur).nom;
+            createur = e.Createur().nomAffichage();
+            blocage = (e.idBlocage == null) ? "" :e.Blocage().nom;
+            bloqueur = (e.idBloqueur == null) ? "" : e.Bloqueur().nom;
             dateBlocage = e.dateBlocage;
             dateCreation = e.dateCreation;
 
         }
+
+        
+    }
+    public class FormBlocageArbre
+    {
+        
+            public int id { get; set; }
+            public string blocageChoisi { get; set; }
+        public int idBlocage { get; set; }
+        //public IList<SelectListItem> blocages { get; set; }
+        public IEnumerable<Blocage> blocages { get; set; }
+
+
+
     }
 }

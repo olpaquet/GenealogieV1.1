@@ -29,6 +29,7 @@
                     else
                     {
                         <li>@HttpContext.Current.Session["nomaffichage"]</li>
+                        <li>@Html.ActionLink("Changer le mot de passe", "ChangerMotDePasse", "Utilisateur")</li>
                         <li>@Html.ActionLink("Déconnexion", "Deconnexion", "Utilisateur")</li>
                     }
                     <li>@Html.ActionLink("Accueil", "Index", "Home")</li>
@@ -46,6 +47,7 @@
                     @{ var xx = HttpContext.Current.Session["admin"];}
                     @if (HttpContext.Current.Session["admin"] != null)
                     {
+                        <li>@Html.ActionLink("Blocage/Déblocage d'arbres","ListerTout","Arbre")</li>
                         <li>@Html.ActionLink("Utilisateurs", "Index", "Utilisateur")</li>
                         <li>@Html.ActionLink("Rôles", "Index", "Role")</li>
                         <li>@Html.ActionLink("Blocages", "Index", "Blocage")</li>

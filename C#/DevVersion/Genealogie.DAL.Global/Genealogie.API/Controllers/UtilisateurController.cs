@@ -167,6 +167,13 @@ namespace Genealogie.API.Controllers
             UtilisateurService rs = new UtilisateurService();
             return rs.EstUtilisee(id, null);
         }
+
+        [HttpPost]
+        public bool ChangerMotDePasse(NouveauMotDePasse e)
+        {
+            UtilisateurService us = new UtilisateurService();
+            return us.ChangerMotDePasse(e.login, e.ancienMotDePasse, e.motDePasse, null);
+        }
     }
 
 }

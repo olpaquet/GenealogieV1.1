@@ -29,10 +29,10 @@
 
         @for(int k = 0; k<Model.messages.Count(); k++)
         {
-            <dt>@Html.DisplayNameFor(x=>x.messages[k].Lu)</dt>
+            <dt>@Html.DisplayNameFor(x=>x.messages[k].lu)</dt>
             <dd>
-                @Html.DisplayFor(x => x.messages[k].destinataire.login)
-                        @Html.DisplayFor(x => x.messages[k].Lu)
+                @Html.DisplayFor(x => x.messages[k].nomDestinataire)
+                        @Html.DisplayFor(x => x.messages[k].lu)
                     </dd>
         }
 
