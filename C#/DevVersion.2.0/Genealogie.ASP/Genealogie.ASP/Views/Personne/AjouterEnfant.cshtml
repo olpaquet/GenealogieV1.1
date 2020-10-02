@@ -1,0 +1,49 @@
+﻿@model Genealogie.ASP.Models.PersonneAjouterEnfant
+
+@{
+    ViewBag.Title = "AjouterEnfant";
+}
+
+<h2>AjouterEnfant</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div>
+        @Html.DisplayFor(mo=>mo.Parent)
+    </div>
+
+    <div class="form-horizontal">
+        <h4>PersonneAjouterEnfant</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        <label asp-for="roles" class="control-label"></label>
+        @for (int i = 0; i < Model.enfants.Count(); i++)
+        {
+            <br />
+            @Html.RadioButtonFor(x => x.machin, Model.enfants[i].Value, "") @Model.enfants[i].Text
+            /*<input type="radio" id="enfants" name="machin" value="@Model.enfants[i].Value"> @Model.enfants[i].Text*/
+
+        }
+    </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Ajouter" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Annuler", "DonnerPourArbre", new { id = Model.idArbre }, null);
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

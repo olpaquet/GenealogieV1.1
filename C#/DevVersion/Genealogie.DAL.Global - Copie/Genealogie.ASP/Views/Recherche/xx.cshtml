@@ -1,0 +1,110 @@
+﻿@model Genealogie.ASP.Models.FormRecherche
+
+
+
+    <div class="form-horizontal">
+        <h4>FormRecherche</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" formmethod="get" />
+            </div>
+        </div><div>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.nom)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.prenom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.homme)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.dateDeNaissance)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.dateDeDeces)
+            </th>
+
+        </tr>
+        @foreach (var x in Model.personnes)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => x.nom)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => x.prenom)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => x.homme)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => x.dateDeNaissance)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => x.dateDeDeces)
+                </td>
+
+            </tr>
+        }
+    </table>
+</div>
+        <div>
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.nom)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.prenom)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.homme)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.dateDeNaissance)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.dateDeDeces)
+                    </th>
+                    
+                </tr>
+                @foreach (var x in Model.personnes)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => x.nom)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => x.prenom)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => x.homme)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => x.dateDeNaissance)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => x.dateDeDeces)
+                        </td>
+                
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

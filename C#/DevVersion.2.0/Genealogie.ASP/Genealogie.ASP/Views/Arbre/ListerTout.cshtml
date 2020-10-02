@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Genealogie.ASP.Models.ArbreIndex>
+
+@{
+    ViewBag.Title = "ListerTout";
+}
+
+<h2>ListerTout</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>@Html.DisplayNameFor(model=>model.proprietaire)</th>
+        <th>
+            @Html.DisplayNameFor(model => model.nom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nombreDePersonnes)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.bloque)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>@Html.DisplayFor(modelItem=> item.proprietaire)</td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nombreDePersonnes)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.bloque)
+        </td>
+        <td>
+            @if (item.bloque)
+            {@Html.ActionLink($"Débloquer({item.blocage})", "Debloquer", new { id = item.id })}
+        else
+        {@Html.ActionLink("Bloquer", "Bloquer", new { id = item.id })}
+
+
+
+        </td>
+    </tr>
+}
+
+</table>

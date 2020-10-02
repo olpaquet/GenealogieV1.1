@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Genealogie.ASP.Models.MessageRecuIndex>
+
+@{
+    ViewBag.Title = "DonnerMessagesRecus";
+}
+
+<h2>DonnerMessagesRecus</h2>
+
+<p>
+    @Html.ActionLink("Nouveau Message", "EnvoyerMessage")
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.emetteur)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.date)
+        </th>
+        <th>@Html.DisplayNameFor(model=>model.lu)</th>
+        <th>
+            @Html.DisplayNameFor(model => model.sujet)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.texte)
+        </th>
+
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        @Html.HiddenFor(modelItem => item.idConversation)
+        @Html.HiddenFor(modelItem => item.idDestinataire)
+        @Html.HiddenFor(modelItem => item.destinataire)
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.emetteur)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.date)
+    </td>
+    <th>@Html.DisplayFor(modelItem => item.lu)</th>
+    <td>
+        @Html.DisplayFor(modelItem => item.sujet)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.texte)
+    </td>
+
+    <td>
+        @Html.DisplayFor(modelItem => item.destinataire)
+    </td>
+    <td>
+
+        @Html.ActionLink("Lire", "Lire", "MessageDestination", new { id = item.idConversation  /* id=item.PrimaryKey */ }, "") |
+        @Html.ActionLink("Supprimer", "Detruire", "MessageDestination", new { id = item.idConversation /* id=item.PrimaryKey */ }, "")
+    </td>
+</tr>
+    }
+
+</table>

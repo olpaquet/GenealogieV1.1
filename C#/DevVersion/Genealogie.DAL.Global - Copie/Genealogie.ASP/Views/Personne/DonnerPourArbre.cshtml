@@ -1,0 +1,114 @@
+﻿@model IEnumerable<Genealogie.ASP.Models.PersonneIndex>
+
+@{
+    ViewBag.Title = "DonnerPourArbre";
+    ViewBag.Title = $"Arbre de {ViewBag.ProprietaireArbre} : {ViewBag.NomArbre}";
+        }
+
+        <h2>@ViewBag.Title</h2>
+
+        <p>
+            @Html.ActionLink("Créer une nouvelle personne", "Creer", new { id = ViewBag.Arbre })
+        <p>@ViewBag.Arbre</p>
+        </p>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.nom)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.prenom)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.dateDeNaissance)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.dateDeDeces)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.homme)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.dateAjout)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.enfants)
+                </th>
+                <th>
+                    parents
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.nom)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.prenom)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.dateDeNaissance)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.dateDeDeces)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.homme)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.dateAjout)
+                    </td>
+                    <td>
+                        @for (int i = 0; i < item.enfants.Count(); i++)
+                        {<p>
+
+                                @Html.DisplayFor(modelItem => item.enfants[i].nom)
+                                @Html.DisplayFor(modelItem => item.enfants[i].prenom)
+                                @Html.DisplayFor(modelItem => item.enfants[i].homme)
+                                @Html.DisplayFor(modelItem => item.enfants[i].dateDeNaissance)
+                                @Html.ActionLink("Explorer", "Details", new { id = item.enfants[i].id })
+                                @Html.ActionLink("Supprimer cet enfant", "SupprimerEnfant", new { id = item.id, idEnfant = item.enfants[i].id })
+                            </p>
+                        }
+                    </td>
+                    <td>
+                        @if (item.pere != null)
+                        {<p>Père</p>
+                            <p>
+                                @Html.DisplayFor(modelItem => item.pere.nom)
+                                @Html.DisplayFor(modelItem => item.pere.prenom)
+                                @Html.DisplayFor(modelItem => item.pere.homme)
+                                @Html.DisplayFor(modelItem => item.pere.dateDeNaissance)
+                            </p>
+                            <p>
+                                @Html.ActionLink("Explorer", "Details", new { id = item.pere.id })
+                                @Html.ActionLink("Supprimer le papa", "SupprimerPere", new { id = item.id })
+                            </p>}
+                        @if (item.mere != null)
+                        {<p>Mère</p>
+                            <p>
+                                @Html.DisplayFor(modelItem => item.mere.nom)
+                                @Html.DisplayFor(modelItem => item.mere.prenom)
+                                @Html.DisplayFor(modelItem => item.mere.homme)
+                                @Html.DisplayFor(modelItem => item.mere.dateDeNaissance)
+                            </p>
+                            <p>
+                                @Html.ActionLink("Explorer", "Details", new { id = item.mere.id })
+                                @Html.ActionLink("Supprimer la maman", "SupprimerMere", new { id = item.id })
+                            </p>}
+                    </td>
+                    <td>
+                        @Html.ActionLink("Ajouter un enfant", "AjouterEnfant", new { id = item.id })
+                        @if (item.pere == null || item.mere == null)
+                        {@Html.ActionLink("Ajouter un parent", "AjouterParent", new { id = item.id })}
+                        @Html.ActionLink("Modifier", "Modifier", new { id = item.id })
+                        @Html.ActionLink("Détails", "Details", new { id = item.id })
+                        @Html.ActionLink("Supprimer", "Supprimer", new { id = item.id })
+                    </td>
+                </tr>
+            }
+
+        </table>

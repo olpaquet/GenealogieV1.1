@@ -1,0 +1,61 @@
+﻿@model Genealogie.ASP.Models.MessageCreation
+
+@{
+    ViewBag.Title = "EnvoyerMessage";
+}
+
+<h2>EnvoyerMessage</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <h4>MessageCreation</h4>
+    @Html.HiddenFor(m => m.idEmetteur)
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.sujet, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.sujet, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.sujet, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.texte, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.texte, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.texte, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="??" class="control-label"></label>
+        @for (int i = 0; i < Model.SLIDestinataires.Count(); i++)
+        {
+            <br />
+            @Html.RadioButtonFor(x => x.idDestinataire, Model.SLIDestinataires[i].Value, "") @Model.SLIDestinataires[i].Text
+            /*<input type="radio" id="enfants" name="machin" value="@Model.enfants[i].Value"> @Model.enfants[i].Text*/
+
+        }
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Annuler", "DonnerMessagesRecus")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

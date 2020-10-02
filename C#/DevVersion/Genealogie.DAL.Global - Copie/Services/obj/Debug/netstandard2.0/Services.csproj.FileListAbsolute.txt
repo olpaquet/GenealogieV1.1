@@ -1,0 +1,8 @@
+C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\Services\bin\Debug\netstandard2.0\Services.deps.json
+C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\Services\bin\Debug\netstandard2.0\Services.dll
+C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\Services\bin\Debug\netstandard2.0\Services.pdb
+C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\Services\obj\Debug\netstandard2.0\Services.AssemblyInfoInputs.cache
+C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\Services\obj\Debug\netstandard2.0\Services.AssemblyInfo.cs
+C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\Services\obj\Debug\netstandard2.0\Services.dll
+C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\Services\obj\Debug\netstandard2.0\Services.pdb
+C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\Services\obj\Debug\netstandard2.0\Services.csprojAssemblyReference.cache

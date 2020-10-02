@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Genealogie.ASP.Models.AbonnementIndex>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Créer un nouvel abonnement", "Creer")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.nom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.actif)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.nom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.actif)
+        </td>
+        <td>
+            @Html.ActionLink("Modifier", "Modifier", new { id = item.id }) |
+            @Html.ActionLink("Détails", "Details", new { id = item.id }) |
+            @if (!item.actif) {@Html.ActionLink("Effacer", "Effacer", new { id = item.id })} |
+            @if (item.actif)
+            {@Html.ActionLink("Désactiver", "Desactiver", new { id = item.id })}
+        else
+        {@Html.ActionLink("Activer", "Activer", new { id = item.id })}
+        </td>
+    </tr>
+}
+
+</table>

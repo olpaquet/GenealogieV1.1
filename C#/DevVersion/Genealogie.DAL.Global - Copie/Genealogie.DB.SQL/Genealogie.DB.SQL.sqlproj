@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>Genealogie.DB.SQL</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{544b888b-cdfe-4e54-beab-9640de77bcd5}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>Genealogie.DB.SQL</RootNamespace>
+    <AssemblyName>Genealogie.DB.SQL</AssemblyName>
+    <ModelCollation>1033,CI</ModelCollation>
+    <DefaultFileStructure>BySchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+    <DefaultCollation>Latin1_General_CI_AS</DefaultCollation>
+    <DefaultFilegroup>PRIMARY</DefaultFilegroup>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="Tables\" />
+    <Folder Include="Views\" />
+    <Folder Include="Functions\" />
+    <Folder Include="Stored Procedures\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="Tables\UtilisateurAbonnement.sql" />
+    <Build Include="Tables\Role.sql" />
+    <Build Include="Tables\UtilisateurRole.sql" />
+    <Build Include="Tables\Arbre.sql" />
+    <Build Include="Tables\Blocage.sql" />
+    <Build Include="Tables\Personne.sql" />
+    <Build Include="Tables\Couple.sql" />
+    <Build Include="Tables\Nouvelle.sql" />
+    <Build Include="Tables\Theme.sql" />
+    <Build Include="Tables\Conversation.sql" />
+    <Build Include="Tables\messagedestination.sql" />
+    <Build Include="Tables\MessageForum.sql" />
+    <Build Include="Tables\MyEmployees.sql" />
+    <Build Include="Tables\tmotdepasse.sql" />
+    <Build Include="Tables\test.sql" />
+    <Build Include="Tables\touslescaracteres.sql" />
+    <Build Include="Tables\utilisateurapi.sql" />
+    <Build Include="Tables\Utilisateur.sql" />
+    <Build Include="Tables\Abonnement.sql" />
+    <Build Include="Views\v_tables.sql" />
+    <Build Include="Views\VMessageRecu.sql" />
+    <Build Include="Functions\nbentrees.sql" />
+    <Build Include="Functions\entree.sql" />
+    <Build Include="Functions\PositionDans.sql" />
+    <Build Include="Functions\ConstruireHMotdepasse.sql" />
+    <Build Include="Functions\ControlerUtilisateur.sql" />
+    <Build Include="Functions\DonnerTypeCSharp.sql" />
+    <Build Include="Stored Procedures\Personne_Enfant_cre.sql" />
+    <Build Include="Stored Procedures\Personne_Enfant_eff.sql" />
+    <Build Include="Stored Procedures\GenererHasard.sql" />
+    <Build Include="Stored Procedures\changersel.sql" />
+    <Build Include="Stored Procedures\pchangermotdepasse.sql" />
+    <Build Include="Stored Procedures\utilisateurapi_cre.sql" />
+    <Build Include="Stored Procedures\utilisateurrole_cre.sql" />
+    <Build Include="Stored Procedures\utilisateurrole_mod.sql" />
+    <Build Include="Stored Procedures\utilisateurrole_eff.sql" />
+    <Build Include="Stored Procedures\utilisateur_cre.sql" />
+    <Build Include="Stored Procedures\utilisateur_mod.sql" />
+    <Build Include="Stored Procedures\utilisateur_eff.sql" />
+    <Build Include="Stored Procedures\utilisateur_act.sql" />
+    <Build Include="Stored Procedures\utilisateur_desact.sql" />
+    <Build Include="Stored Procedures\messagelu_cre.sql" />
+    <Build Include="Stored Procedures\messagelu_mod.sql" />
+    <Build Include="Stored Procedures\messagelu_eff.sql" />
+    <Build Include="Stored Procedures\messageefface_cre.sql" />
+    <Build Include="Stored Procedures\messageefface_mod.sql" />
+    <Build Include="Stored Procedures\messageefface_eff.sql" />
+    <Build Include="Stored Procedures\test_cre.sql" />
+    <Build Include="Stored Procedures\utilisateurabonnement_cre.sql" />
+    <Build Include="Stored Procedures\utilisateurabonnement_mod.sql" />
+    <Build Include="Stored Procedures\utilisateurabonnement_eff.sql" />
+    <Build Include="Stored Procedures\Abonnement_cre.sql" />
+    <Build Include="Stored Procedures\Abonnement_mod.sql" />
+    <Build Include="Stored Procedures\Abonnement_eff.sql" />
+    <Build Include="Stored Procedures\Abonnement_act.sql" />
+    <Build Include="Stored Procedures\Abonnement_desact.sql" />
+    <Build Include="Stored Procedures\conversation_lue.sql" />
+    <Build Include="Stored Procedures\Arbre_cre.sql" />
+    <Build Include="Stored Procedures\Arbre_mod.sql" />
+    <Build Include="Stored Procedures\Arbre_eff.sql" />
+    <Build Include="Stored Procedures\arbre_debloquer.sql" />
+    <Build Include="Stored Procedures\arbre_bloquer.sql" />
+    <Build Include="Stored Procedures\Blocage_cre.sql" />
+    <Build Include="Stored Procedures\Blocage_mod.sql" />
+    <Build Include="Stored Procedures\Blocage_eff.sql" />
+    <Build Include="Stored Procedures\Blocage_act.sql" />
+    <Build Include="Stored Procedures\Blocage_desact.sql" />
+    <Build Include="Stored Procedures\Conversation_cre.sql" />
+    <Build Include="Stored Procedures\conversation_effacee.sql" />
+    <Build Include="Stored Procedures\Couple_cre.sql" />
+    <Build Include="Stored Procedures\Couple_mod.sql" />
+    <Build Include="Stored Procedures\Couple_eff.sql" />
+    <Build Include="Stored Procedures\Message_cre.sql" />
+    <Build Include="Stored Procedures\Message_mod.sql" />
+    <Build Include="Stored Procedures\Message_eff.sql" />
+    <Build Include="Stored Procedures\MessageForum_cre.sql" />
+    <Build Include="Stored Procedures\MessageForum_mod.sql" />
+    <Build Include="Stored Procedures\MessageForum_eff.sql" />
+    <Build Include="Stored Procedures\MessageForum_act.sql" />
+    <Build Include="Stored Procedures\MessageForum_desact.sql" />
+    <Build Include="Stored Procedures\Nouvelle_cre.sql" />
+    <Build Include="Stored Procedures\Nouvelle_mod.sql" />
+    <Build Include="Stored Procedures\Nouvelle_eff.sql" />
+    <Build Include="Stored Procedures\Nouvelle_act.sql" />
+    <Build Include="Stored Procedures\Nouvelle_desact.sql" />
+    <Build Include="Stored Procedures\Personne_cre.sql" />
+    <Build Include="Stored Procedures\Personne_mod.sql" />
+    <Build Include="Stored Procedures\Personne_eff.sql" />
+    <Build Include="Stored Procedures\pere_eff.sql" />
+    <Build Include="Stored Procedures\mere_eff.sql" />
+    <Build Include="Stored Procedures\Enfant_cre.sql" />
+    <Build Include="Stored Procedures\Enfant_eff.sql" />
+    <Build Include="Stored Procedures\Role_cre.sql" />
+    <Build Include="Stored Procedures\Role_mod.sql" />
+    <Build Include="Stored Procedures\Role_eff.sql" />
+    <Build Include="Stored Procedures\Role_act.sql" />
+    <Build Include="Stored Procedures\Role_desact.sql" />
+    <Build Include="Stored Procedures\Theme_cre.sql" />
+    <Build Include="Stored Procedures\Theme_mod.sql" />
+    <Build Include="Stored Procedures\Theme_eff.sql" />
+    <Build Include="Stored Procedures\Theme_act.sql" />
+    <Build Include="Stored Procedures\Theme_desact.sql" />
+    <Build Include="Stored Procedures\messagedestination_cre.sql" />
+    <Build Include="Stored Procedures\messagedestination_efface.sql" />
+    <Build Include="Stored Procedures\messagedestination_lu.sql" />
+  </ItemGroup>
+</Project>
