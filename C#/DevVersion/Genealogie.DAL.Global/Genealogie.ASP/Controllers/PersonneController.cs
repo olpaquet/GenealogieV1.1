@@ -22,6 +22,9 @@ namespace Genealogie.ASP.Controllers
         {
             IEnumerable<PersonneIndex> per = new PersonneServiceAPI().DonnerPourArbre(id).Select(j => new PersonneIndex(j));
             ViewBag.Arbre = id;
+            Arbre a = new ArbreServiceAPI().Donner(id);
+            ViewBag.ProprietaireArbre = a.Createur().login;
+            ViewBag.NomArbre = a.nom;
             return View(per);
         }
 
@@ -123,6 +126,7 @@ namespace Genealogie.ASP.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [FiltreProprietaireArbre("personne")]
         public ActionResult AjouterEnfant(int id, PersonneAjouterEnfant pae)
         {
             pae.idArbre = new PersonneServiceAPI().Donner(id).idArbre;
@@ -140,10 +144,11 @@ namespace Genealogie.ASP.Controllers
         [HttpGet]        
         [Route("Personne/SupprimerEnfant/{id:int}/{idenfant:int}")]
         [FiltreProprietaireArbre("personne")]
-        public ActionResult SupprimerEnfant(int id, int idEnfant)
+        [FiltreEnfantSupprimable]
+        public ActionResult SupprimerEnfant(int id, int idenfant)
         {
-            new PersonneServiceAPI().SupprimerEnfant(new ParentEnfant { idEnfant = idEnfant, idParent = id }) ;
-            return RedirectToAction("DonnerPourArbre", new { id = new PersonneServiceAPI().Donner(idEnfant).idArbre});
+            new PersonneServiceAPI().SupprimerEnfant(new ParentEnfant { idEnfant = idenfant, idParent = id }) ;
+            return RedirectToAction("DonnerPourArbre", new { id = new PersonneServiceAPI().Donner(idenfant).idArbre});
         }
 
         [HttpGet]        
@@ -201,5 +206,15 @@ namespace Genealogie.ASP.Controllers
             }
             return View(fap);
         }
+
+        [HttpGet]
+        [FiltreProprietaireArbre("personne")]
+        public ActionResult Supprimer(int id)
+        {
+            Personne p = new PersonneServiceAPI().Donner(id);
+            new PersonneServiceAPI().Supprimer(id);
+            return RedirectToAction("DonnerPourArbre", new { id = p.idArbre });
+        }
     }
+    
 }

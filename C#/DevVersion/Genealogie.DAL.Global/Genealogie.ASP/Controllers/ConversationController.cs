@@ -20,7 +20,8 @@ namespace Genealogie.ASP.Controllers
             return View(ci);
         }*/
 
-        [HttpGet]        
+        [HttpGet] 
+        [FiltreAuteurConversation]
         public ActionResult Detruire(int id)
         {
             new ConversationServiceAPI().Detruire(id);
@@ -28,6 +29,7 @@ namespace Genealogie.ASP.Controllers
         }
 
         [HttpGet]
+        [FiltreAuteurConversation]
         public ActionResult Lire(int id)
         {
             Conversation c = new ConversationServiceAPI().Donner(id);

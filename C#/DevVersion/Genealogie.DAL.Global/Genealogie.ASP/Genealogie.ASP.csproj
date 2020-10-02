@@ -187,12 +187,15 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Securite\AutorisationRoleAttribute.cs" />
     <Compile Include="Securite\AnonymeAutAttribute.cs" />
+    <Compile Include="Securite\FiltreAuteurConversationAttribute.cs" />
     <Compile Include="Securite\ConnecteAutAttribute.cs" />
+    <Compile Include="Securite\FiltreEnfantSupprimableAttribute.cs" />
     <Compile Include="Securite\ExisteConstraint.cs" />
     <Compile Include="Securite\FiltreExisteAttribute.cs" />
     <Compile Include="Securite\FiltreProprietaireArbreAttribute.cs" />
     <Compile Include="Securite\FxiltreProprietaireArbreAttribute.cs" />
     <Compile Include="Securite\SessionUtilisateur.cs" />
+    <Compile Include="Securite\FiltreArbreSupprimableAttribute.cs" />
     <Compile Include="ServiceGeneral\ExplorationObjet.cs" />
     <Compile Include="Services.API\AbonnementServiceAPI.cs" />
     <Compile Include="Services.API\ArbreServiceAPI.cs" />

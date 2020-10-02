@@ -23,7 +23,9 @@ namespace Genealogie.ASP.Conversion
             string sexe = (p.homme) ? "homme" : "femme";
 
             ret = $"nom:{p.nom} prénom:{p.prenom} ({sexe})";
-            ret += $"\nné:{p.dateDeNaissance} => mort:{p.dateDeNaissance}";
+            string ddn = String.Format("{0:dd/MM/yyyy}", p.dateDeNaissance);
+            string ddd = String.Format("{0:dd/MM/yyyy}", p.dateDeDeces);
+            ret += $"\nné:{ddn} => mort:{ddd}";
             if (p.idPere != null) ret += $"Père:{new PersonneServiceAPI().Donner((int)p.idPere).VersNomPrenom()}";
             if (p.idMere != null) ret += $"Mère:{new PersonneServiceAPI().Donner((int)p.idMere).VersNomPrenom()}";
             

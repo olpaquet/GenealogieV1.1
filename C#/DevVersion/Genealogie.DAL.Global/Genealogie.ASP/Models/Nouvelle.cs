@@ -27,6 +27,7 @@ namespace Genealogie.ASP.Models
         [DisplayName("Editeur")]
         public string createur { get; set; }
         [DataType(DataType.DateTime)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy hh:mm:ss}")]
         [DisplayName("publication")]
         public DateTime dateCreation { get; set; }
         public bool actif { get; set; }

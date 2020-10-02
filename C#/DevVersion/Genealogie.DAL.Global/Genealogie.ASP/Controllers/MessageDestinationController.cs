@@ -26,6 +26,7 @@ namespace Genealogie.ASP.Controllers
         [ConnecteAut]
         public ActionResult Lire(int id, MessageDestinationLecture e)
         {
+            e.idDestinataire = SessionUtilisateur.Utilisateur.id;
             new MessageDestinationServiceAPI().Lire(id, SessionUtilisateur.Utilisateur.id);
             return RedirectToAction("DonnerMessagesRecus", "Message");
         }

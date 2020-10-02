@@ -58,6 +58,7 @@ namespace Genealogie.ASP.Controllers
         [ConnecteAut]
         public ActionResult EnvoyerMessage(MessageCreation md)
         {
+            md.idEmetteur = SessionUtilisateur.Utilisateur.id;
             Conversation e = md.VersConversation();
             if (ModelState.IsValid)
             {

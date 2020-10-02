@@ -65,6 +65,7 @@ namespace Genealogie.ASP.Models
         public string email { get; set; }
         [DataType(DataType.Date)]
         [DisplayName("date de naissance")]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}")]
         public DateTime? dateDeNaissance { get; set; }
         public bool homme { get; set; }
         [DisplayName("carte de payement")]
@@ -115,6 +116,7 @@ namespace Genealogie.ASP.Models
         public string email { get; set; }
         [DisplayName("date de naissance")]
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode =true)]
         public DateTime? dateDeNaissance { get; set; }
         public bool homme { get; set; }
         [MaxLength(50)]

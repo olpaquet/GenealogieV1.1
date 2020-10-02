@@ -171,6 +171,15 @@ namespace Genealogie.ASP.Services.API
           
         }
 
+        public bool Supprimer(int id)
+        {
+
+            HttpResponseMessage reponse = _client.DeleteAsync($"Personne/Supprimer/{id}").Result;
+            if (!reponse.IsSuccessStatusCode) { throw new Exception("Echec de la réception de données."); }
+            var x = reponse.Content.ReadAsStringAsync().Result;
+            return bool.Parse(x);
+        }
+
     }
 }
  

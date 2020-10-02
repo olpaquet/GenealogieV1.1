@@ -26,6 +26,7 @@ namespace Genealogie.ASP.Models
         public bool Bloque() {  return this.dateBlocage != null; }
         public Utilisateur Createur() {  return new UtilisateurServiceAPI().Donner(this.idCreateur);  }
         public Utilisateur Bloqueur() {  return (this.idBloqueur==null)?null:new UtilisateurServiceAPI().Donner((int)this.idBloqueur);}
+        
 }
     
 
@@ -38,7 +39,7 @@ namespace Genealogie.ASP.Models
         public int nombreDePersonnes { get; set; }
         [DisplayName("bloqué")]
         public bool bloque { get; set; }
-
+        [DisplayName("propriétaire")]
         public string proprietaire { get; set; }
         public string blocage { get; set; }
         public int? idBlocage { get; set; }
@@ -86,6 +87,7 @@ namespace Genealogie.ASP.Models
         [DisplayName("créateur")]
         public string createur { get; set; }
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy hh:mm:ss}")]
         [DisplayName("date de création")]
         public DateTime dateCreation { get; set; }
         [DisplayName("nombre de personnes dans l'arbre")]
@@ -95,6 +97,7 @@ namespace Genealogie.ASP.Models
         [DisplayName("blocage")]
         public string blocage { get; set; }
         [DisplayName("date de blocage")]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy hh:mm:ss}")]
         public DateTime? dateBlocage { get; set; }
 
         public ArbreDetails() { }

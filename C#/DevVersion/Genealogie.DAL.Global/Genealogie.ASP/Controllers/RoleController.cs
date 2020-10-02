@@ -48,8 +48,14 @@ namespace Genealogie.ASP.Controllers
             if (ModelState.IsValid)
             {
                 RoleServiceAPI rsa = new RoleServiceAPI();
+                
                 int i = rsa.Creer(e.VersRole());
-                if (i > 0) return RedirectToAction("Index");
+                if (i > 0)
+                {
+                    
+                    
+                    return RedirectToAction("Index");
+                }
             }
             return View(e);
 
@@ -59,8 +65,12 @@ namespace Genealogie.ASP.Controllers
         [FiltreExiste]
         public ActionResult Modifier(int id)
         {
+
             RoleServiceAPI rs = new RoleServiceAPI();
             RoleModification r = new RoleModification(rs.Donner(id));
+
+            
+
             return View(r);
         }
 

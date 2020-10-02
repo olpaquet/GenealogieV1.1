@@ -27,6 +27,7 @@ namespace Genealogie.ASP.Models
         public string texte { get; set; }
         [DisplayName("date d'envoi")]
         [DataType(DataType.DateTime)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy hh:mm:ss}")]
         public DateTime date { get; set; }
         public IList<string> destinataires { get; set; }
 

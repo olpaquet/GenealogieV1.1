@@ -110,6 +110,7 @@ namespace Genealogie.ASP.Controllers
 
         [HttpGet]
         [FiltreProprietaireArbre("arbre")]
+        [FiltreArbreSupprimable]
         public ActionResult Supprimer(int id)
         {
             ArbreServiceAPI rsa = new ArbreServiceAPI();
@@ -120,13 +121,19 @@ namespace Genealogie.ASP.Controllers
         [HttpPost]
         [FiltreProprietaireArbre("arbre")]
         [ValidateAntiForgeryToken]
+        [FiltreArbreSupprimable]
         public ActionResult Supprimer(int id, ArbreDetails r)
         {
             if (ModelState.IsValid)
             {
                 ArbreServiceAPI rsa = new ArbreServiceAPI();
+                Arbre a = rsa.Donner(id);
                 bool b = rsa.Supprimer(id);
-                if (b) return RedirectToAction("Index");
+                if (b)
+                {
+                    SessionUtilisateur.arbres.Remove(a);
+                    return RedirectToAction("Index");
+                }
             }
             return View(r);
         }

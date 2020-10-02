@@ -41,11 +41,12 @@
             @Html.DisplayFor(modelItem => item.bloque)
         </td>
         <td>
-            
-            @Html.ActionLink("Modifier", "DonnerPourArbre", "Personne", new { id=item.id },null) |
-            
-            @Html.ActionLink("Détails", "Details", new { id=item.id }) |
-            @Html.ActionLink("Supprimer", "Supprimer", new { id=item.id })
+
+            @Html.ActionLink("Gestion & contenu", "DonnerPourArbre", "Personne", new { id = item.id }, null) |
+            @Html.ActionLink("Modifier le signalétique", "Modifier", new { id = item.id }) |
+            @Html.ActionLink("Détails", "Details", new { id = item.id }) |
+            @if (item.nombreDePersonnes == 0)
+            {@Html.ActionLink("Supprimer", "Supprimer", new { id = item.id })}
         </td>
     </tr>
 }

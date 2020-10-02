@@ -42,13 +42,17 @@ namespace Genealogie.ASP.Models
         public string nom { get; set; }
         public string prenom { get; set; }
         [DisplayName("date de naissance")]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}")]
+        [DataType(DataType.Date)]
         public DateTime? dateDeNaissance { get; set; }
         [DisplayName("date de décès")]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}")]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}")]
+        [DataType(DataType.Date)]
         public DateTime? dateDeDeces { get; set; }
         public bool homme { get; set; }
         [DisplayName("ajout")]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy hh:mm:ss}")]
+        [DataType(DataType.DateTime)]
         public DateTime dateAjout { get; set; }
         public PersonneIndex pere { get; set; }
         public PersonneIndex mere { get; set; }
@@ -148,6 +152,7 @@ namespace Genealogie.ASP.Models
     {
         public int  id { get; set; }
         public int  idArbre { get; set; }
+        [DisplayName("parent")]
         public string Parent { get; set; }
         public int machin { get; set; }
 

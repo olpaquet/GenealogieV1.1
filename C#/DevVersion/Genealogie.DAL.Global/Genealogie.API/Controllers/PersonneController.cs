@@ -102,6 +102,11 @@ namespace Genealogie.API.Controllers
             return new PersonneService().Rechercher(rec).Select(j=>j.VersAPI());
         }
 
+        [HttpDelete]
+        public bool Supprimer(int id)
+        {
+            return new PersonneService().Supprimer(id);
+        }
         
 
 

@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<Genealogie.ASP.Models.NouvelleIndex>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "A la Une";
 }
 
-<h2>Index</h2>
+<h2>@ViewBag.Title</h2>
 
 <p>
     @if (HttpContext.Current.Session["admin"] != null) { @Html.ActionLink("Créer une nouvelle", "Creer")}

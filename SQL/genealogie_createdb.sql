@@ -233,7 +233,7 @@ create index i_personne_mere on Personne(idmere)
  actif int not null default 1
  constraint pk_nouvelle primary key(id)
  )
-
+ create index i_nouvelle_datecreation on Nouvelle(datecreation)
  
 
  create table Theme(
@@ -254,6 +254,9 @@ create index i_personne_mere on Personne(idmere)
  dateeffacement datetime2 default null
  constraint pk_conversation primary key (id)
  )
+ create index i_conversation_emetteurdate on Conversation(id, date)
+
+
  go
  create table messagedestination(
  idconversation int not null,
@@ -262,6 +265,7 @@ create index i_personne_mere on Personne(idmere)
  dateeffacement datetime2 default null
  constraint pk_messagedestination primary key (idconversation, iddestinataire)
  )
+
 
  
  

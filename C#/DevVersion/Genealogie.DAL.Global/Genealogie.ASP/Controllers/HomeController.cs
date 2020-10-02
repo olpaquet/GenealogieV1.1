@@ -15,14 +15,14 @@ namespace Genealogie.ASP.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Qui sommes-nous?.";
 
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Pour nous contacter...";
 
             return View();
         }
