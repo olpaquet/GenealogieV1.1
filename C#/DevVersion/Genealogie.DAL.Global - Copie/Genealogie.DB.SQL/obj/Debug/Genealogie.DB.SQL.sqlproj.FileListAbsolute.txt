@@ -1,8 +1,0 @@
-C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\Genealogie.DB.SQL\bin\Debug\Genealogie.DB.SQL.dacpac
-C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\Genealogie.DB.SQL\obj\Debug\Genealogie.DB.SQL.sqlprojAssemblyReference.cache
-C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\Genealogie.DB.SQL\obj\Debug\Model.xml
-C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\Genealogie.DB.SQL\obj\Debug\refactor.xml
-C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\Genealogie.DB.SQL\obj\Debug\postdeploy.sql
-C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\Genealogie.DB.SQL\obj\Debug\predeploy.sql
-C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\Genealogie.DB.SQL\obj\Debug\Genealogie.DB.SQL.dll
-C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\Genealogie.DB.SQL\obj\Debug\Genealogie.DB.SQL.pdb
