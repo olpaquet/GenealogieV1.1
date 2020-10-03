@@ -2,6 +2,8 @@
 using Services;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -11,9 +13,17 @@ namespace Genealogie.ASP.Models
     {
         public int? idCreateurExclu { get; set; }
         public string nom { get; set; }
+
+        [DisplayName("prénom")]
         public string prenom { get; set; }
         public bool? homme { get; set; }
+        [DisplayName("date de naissance")]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}")]
+        [DataType(DataType.Date)]
         public DateTime? dateDeNaissance { get; set; }
+        [DisplayName("date de décès")]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}")]
+        [DataType(DataType.Date)]
         public DateTime? dateDeDeces { get; set; }
 
         public IList<PersonneIndex> personnes { get; set; }
