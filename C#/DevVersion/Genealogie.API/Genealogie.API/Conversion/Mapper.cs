@@ -43,6 +43,10 @@ namespace Genealogie.API.Conversion
         public static VMessageRecu VersAPI(this cl.VMessageRecu e) { if (e == null) { return null; } return new VMessageRecu { date=e.date, dateEffacement=e.date, dateLecture=e.dateLecture, id=e.id, idDestinataire=e.idDestinataire, idEmetteur=e.idEmetteur, sujet=e.sujet, texte=e.texte}; }
         public static cl.VMessageRecu VersClient(this VMessageRecu e) { if (e == null) { return null; } return new cl.VMessageRecu { date = e.date, dateEffacement = e.date, dateLecture = e.dateLecture, id = e.id, idDestinataire = e.idDestinataire, idEmetteur = e.idEmetteur, sujet = e.sujet, texte = e.texte }; }
 
+
+        public static cl.Chat VersClient(this Chat e) { if (e == null) return null; return new cl.Chat { date=e.date, id=e.id, idUtilisateur=e.idEmetteur, message=e.message, actif=e.actif }; }
+
+        public static Chat VersAPI(this cl.Chat e) { if (e == null) return null; return new Chat { date = e.date, id = e.id, idEmetteur=e.idUtilisateur, message = e.message, actif = e.actif }; }
         /*public static MessageDestination VersAPI(this cl.MessageDestination e) { if (e == null) { return null; } return new MessageDestination { dateEffacement=e.dateEffacement, dateLecture=e.dateLecture, idConversation=e.idConversation, idDestinataire=e.idDestinataire}; }
         public static cl.MessageDestination VersClient(this MessageDestination e) { if (e == null) { return null; } return new cl.MessageDestination { dateEffacement = e.dateEffacement, dateLecture = e.dateLecture, idConversation = e.idConversation, idDestinataire = e.idDestinataire }; }*/
 

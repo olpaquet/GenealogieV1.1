@@ -6,3 +6,11 @@ C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.G
 C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\Genealogie.Modeles.API.ASP\obj\Debug\netstandard2.0\Genealogie.Modeles.API.ASP.dll
 C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\Genealogie.Modeles.API.ASP\obj\Debug\netstandard2.0\Genealogie.Modeles.API.ASP.pdb
 C:\Users\o.paquet\Documents\GitHub\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\Genealogie.Modeles.API.ASP\obj\Debug\netstandard2.0\Genealogie.Modeles.API.ASP.csprojAssemblyReference.cache
+E:\Github\GenealogieV1.1\C#\DevVersion\Genealogie.Modeles.API.ASP\bin\Debug\netstandard2.0\Genealogie.Modeles.API.ASP.deps.json
+E:\Github\GenealogieV1.1\C#\DevVersion\Genealogie.Modeles.API.ASP\bin\Debug\netstandard2.0\Genealogie.Modeles.API.ASP.dll
+E:\Github\GenealogieV1.1\C#\DevVersion\Genealogie.Modeles.API.ASP\bin\Debug\netstandard2.0\Genealogie.Modeles.API.ASP.pdb
+E:\Github\GenealogieV1.1\C#\DevVersion\Genealogie.Modeles.API.ASP\obj\Debug\netstandard2.0\Genealogie.Modeles.API.ASP.AssemblyInfoInputs.cache
+E:\Github\GenealogieV1.1\C#\DevVersion\Genealogie.Modeles.API.ASP\obj\Debug\netstandard2.0\Genealogie.Modeles.API.ASP.AssemblyInfo.cs
+E:\Github\GenealogieV1.1\C#\DevVersion\Genealogie.Modeles.API.ASP\obj\Debug\netstandard2.0\Genealogie.Modeles.API.ASP.csproj.CoreCompileInputs.cache
+E:\Github\GenealogieV1.1\C#\DevVersion\Genealogie.Modeles.API.ASP\obj\Debug\netstandard2.0\Genealogie.Modeles.API.ASP.dll
+E:\Github\GenealogieV1.1\C#\DevVersion\Genealogie.Modeles.API.ASP\obj\Debug\netstandard2.0\Genealogie.Modeles.API.ASP.pdb

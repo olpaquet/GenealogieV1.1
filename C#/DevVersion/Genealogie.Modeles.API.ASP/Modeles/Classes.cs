@@ -161,4 +161,13 @@ md.datelecture, md.dateeffacement
         public DateTime? dateEffacement { get; set; }
 
     }    
+
+    public class BChat
+    {
+        public int id { get; set; }
+        public int idEmetteur { get; set; }
+        public DateTime date { get; set; }
+        public string message { get; set; }
+        public bool actif { get; set; }
+    }
 }

@@ -23,6 +23,8 @@ namespace Genealogie.DAL.Client.Conversion
         public static Blocage VersClient(this gl.Blocage e) { if (e == null) { return null; } return new Blocage { id = e.id, nom = e.nom, description = e.description, actif = e.actif == 1 ? true : false }; }
         public static gl.Blocage VersGlobal(this Blocage e) { if (e == null) { return null; } return new gl.Blocage { id = e.id, nom = e.nom, description = e.description, actif = e.actif ? 1 : 0 }; }
 
+        public static Chat VersClient(this gl.Chat e) { if (e == null) return null; return new Chat { actif = e.actif==1?true:false, date = e.date, id = e.id, idUtilisateur = e.idutilisateur, message = e.message }; }
+        public static gl.Chat VersGlobal(this Chat e) { if (e == null) return null; return new gl.Chat { actif=e.actif?1:0, date=e.date, id=e.id, idutilisateur=e.idUtilisateur, message=e.message }; }
         public static Theme VersClient(this gl.Theme e) { if (e == null) { return null; } return new Theme { id = e.id, description = e.description, titre = e.titre, actif = e.actif == 1 ? true : false }; }
         public static gl.Theme VersGlobal(this Theme e) { if (e == null) { return null; } return new gl.Theme { id = e.id, description = e.description, titre = e.titre, actif = e.actif ? 1 : 0 }; }
 

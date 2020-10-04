@@ -83,7 +83,24 @@ namespace Genealogie.DAL.Global.Conversion
                 actif = (int)idr[nameof(Blocage.actif)]
             };
         }
-        
+
+        public static Chat VersChat(this IDataRecord idr)
+        {
+            if (idr == null) return null;
+            return new Chat
+            {
+                id = (int)idr[nameof(Chat.id)]/*int*/
+            ,
+                idutilisateur = (int)idr[nameof(Chat.idutilisateur)]/*int*/
+            ,
+                message = (string)idr[nameof(Chat.message)]/*nvarchar*/
+            ,
+                date = (DateTime)idr[nameof(Chat.date)]/*datetime*/
+            ,
+                actif = (int)idr[nameof(Chat.actif)]/*actif*/
+            };
+        }
+
         public static Conversation VersConversation(this IDataRecord idr)
         {
             if (idr == null) return null;

@@ -34,7 +34,14 @@ namespace Genealogie.DAL.Client.Modeles
         public string description { get; set; }
         public bool actif { get; set; }
     }
-
+    public class Chat
+    {
+        public int id { get; set; }
+        public int idUtilisateur { get; set; }
+        public string message { get; set; }
+        public DateTime date { get; set; }
+        public bool actif { get; set; }
+    }
     public class Conversation
     {
         public int id { get; set; }

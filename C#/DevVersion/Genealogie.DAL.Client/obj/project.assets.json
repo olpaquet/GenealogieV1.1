@@ -606,27 +606,20 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\o.paquet\\.nuget\\packages\\": {},
-    "C:\\Microsoft\\Xamarin\\NuGet\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\olivi\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\o.paquet\\Documents\\GitHub\\GenealogieV1.1\\C#\\DevVersion.2.0\\Genealogie.DAL.Client\\Genealogie.DAL.Client.csproj",
+      "projectUniqueName": "E:\\Github\\GenealogieV1.1\\C#\\DevVersion\\Genealogie.DAL.Client\\Genealogie.DAL.Client.csproj",
       "projectName": "Genealogie.DAL.Client",
-      "projectPath": "C:\\Users\\o.paquet\\Documents\\GitHub\\GenealogieV1.1\\C#\\DevVersion.2.0\\Genealogie.DAL.Client\\Genealogie.DAL.Client.csproj",
-      "packagesPath": "C:\\Users\\o.paquet\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\o.paquet\\Documents\\GitHub\\GenealogieV1.1\\C#\\DevVersion.2.0\\Genealogie.DAL.Client\\obj\\",
+      "projectPath": "E:\\Github\\GenealogieV1.1\\C#\\DevVersion\\Genealogie.DAL.Client\\Genealogie.DAL.Client.csproj",
+      "packagesPath": "C:\\Users\\olivi\\.nuget\\packages\\",
+      "outputPath": "E:\\Github\\GenealogieV1.1\\C#\\DevVersion\\Genealogie.DAL.Client\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Microsoft\\Xamarin\\NuGet\\",
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\o.paquet\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        "C:\\Users\\olivi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netstandard2.0"
@@ -670,7 +663,7 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
       }
     }
   }

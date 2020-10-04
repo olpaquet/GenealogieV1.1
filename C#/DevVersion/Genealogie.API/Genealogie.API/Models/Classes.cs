@@ -7,7 +7,7 @@ using System.Web;
 
 namespace Genealogie.API.Models
 {
-    
+    public class Chat : BChat { }
     public class Utilisateur : BUtilisateur{}
     public class UtilisateurRole : BUtilisateurRole { }
     public class Role : BRole { }
@@ -23,6 +23,7 @@ namespace Genealogie.API.Models
 
     public class NouveauMotDePasse
     {
+        public int id { get; set; }
         public string login { get; set; }
         public string ancienMotDePasse { get; set; }
         public string motDePasse { get; set; }

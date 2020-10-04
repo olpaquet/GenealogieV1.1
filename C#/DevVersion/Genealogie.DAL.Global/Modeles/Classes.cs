@@ -33,7 +33,14 @@ namespace Genealogie.DAL.Global.Modeles
         public string description { get; set; }
         public int actif { get; set; }
     }
-    
+    public class Chat
+    {
+        public int id { get; set; }
+        public int idutilisateur { get; set; }
+        public string message { get; set; }
+        public DateTime date { get; set; }
+        public int actif { get; set; }
+    }
     public class Couple
     {
         public int idpersonne { get; set; }

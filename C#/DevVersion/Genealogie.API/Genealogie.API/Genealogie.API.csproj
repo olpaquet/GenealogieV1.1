@@ -144,6 +144,7 @@
     <Compile Include="Controllers\AbonnementController.cs" />
     <Compile Include="Controllers\ArbreController.cs" />
     <Compile Include="Controllers\BlocageController.cs" />
+    <Compile Include="Controllers\ChatController.cs" />
     <Compile Include="Controllers\ConversationController.cs" />
     <Compile Include="Controllers\MessageDestinationController.cs" />
     <Compile Include="Controllers\NouvelleController.cs" />
@@ -173,6 +174,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Chat\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

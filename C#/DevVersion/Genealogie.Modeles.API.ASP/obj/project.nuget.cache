@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "K/c/4gE0lWpYAMyCeV1Mz4Se59LPztpVbuBvbs9U+Ylh+tOPB2uomeAJhsuBVzYGhZG0UFNveJTyx8k2XyWoTw==",
+  "success": true,
+  "projectFilePath": "E:\\Github\\GenealogieV1.1\\C#\\DevVersion\\Genealogie.Modeles.API.ASP\\Genealogie.Modeles.API.ASP.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\olivi\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\olivi\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

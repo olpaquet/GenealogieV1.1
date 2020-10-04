@@ -598,8 +598,8 @@ E:\Github\GenealogieV1.1\C#\DevVersion\Genealogie.API\Genealogie.API\bin\BoiteAO
 E:\Github\GenealogieV1.1\C#\DevVersion\Genealogie.API\Genealogie.API\bin\fr\System.Net.Http.Formatting.resources.dll
 E:\Github\GenealogieV1.1\C#\DevVersion\Genealogie.API\Genealogie.API\bin\fr\System.Web.Http.resources.dll
 E:\Github\GenealogieV1.1\C#\DevVersion\Genealogie.API\Genealogie.API\bin\fr\System.Web.Http.WebHost.resources.dll
-E:\Github\GenealogieV1.1\C#\DevVersion\Genealogie.API\Genealogie.API\obj\Debug\Genealogie.API.csprojAssemblyReference.cache
 E:\Github\GenealogieV1.1\C#\DevVersion\Genealogie.API\Genealogie.API\obj\Debug\Genealogie.API.csproj.CoreCompileInputs.cache
 E:\Github\GenealogieV1.1\C#\DevVersion\Genealogie.API\Genealogie.API\obj\Debug\Genealogie.API.csproj.CopyComplete
 E:\Github\GenealogieV1.1\C#\DevVersion\Genealogie.API\Genealogie.API\obj\Debug\Genealogie.API.dll
 E:\Github\GenealogieV1.1\C#\DevVersion\Genealogie.API\Genealogie.API\obj\Debug\Genealogie.API.pdb
+E:\Github\GenealogieV1.1\C#\DevVersion\Genealogie.API\Genealogie.API\obj\Debug\Genealogie.API.csprojAssemblyReference.cache
