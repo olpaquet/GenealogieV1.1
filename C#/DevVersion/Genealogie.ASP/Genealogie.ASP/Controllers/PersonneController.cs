@@ -27,6 +27,14 @@ namespace Genealogie.ASP.Controllers
             ViewBag.NomArbre = a.nom;
             return View(per);
         }
+        /*
+        [HttpGet]
+        [FiltreExiste]*/
+        public ActionResult Detailxs(int id)
+        {
+            PersonneIndex pi = new PersonneIndex(new PersonneServiceAPI().Donner(id));
+            return View(pi);
+        }
 
         [HttpGet]
         [FiltreExiste]

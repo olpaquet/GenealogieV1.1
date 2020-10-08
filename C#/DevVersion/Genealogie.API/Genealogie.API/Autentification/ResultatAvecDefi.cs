@@ -22,13 +22,13 @@ namespace Genealogie.API.Autentification
 
         public async Task<HttpResponseMessage> ExecuteAsync(CancellationToken tokenAnnulation)
         {
-            var result = await _suivant.ExecuteAsync(tokenAnnulation);
-            if (result.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+            var resultat = await _suivant.ExecuteAsync(tokenAnnulation);
+            if (resultat.StatusCode == System.Net.HttpStatusCode.Unauthorized)
             {
-                result.Headers.WwwAuthenticate.Add(
+                resultat.Headers.WwwAuthenticate.Add(
                     new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", this._indice));
             }
-            return result;
+            return resultat;
         }
     }
 }

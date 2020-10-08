@@ -1,0 +1,138 @@
+﻿@model Genealogie.ASP.Models.PersonneIndex
+
+@{
+    ViewBag.Title = "Detailxs";
+}
+
+<h2>Detailxs</h2>
+
+<div>
+    <h4>PersonneIndex</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nomAffichage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nomAffichage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.prenom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.prenom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dateDeNaissance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dateDeNaissance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dateDeDeces)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dateDeDeces)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.homme)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.homme)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dateAjout)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dateAjout)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.idArbre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idArbre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nomArbre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nomArbre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nomProprietaire)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nomProprietaire)
+        </dd>
+
+    </dl>
+</div>
+
+<div class="contour">
+    <p>
+        <span class="titretexte1">Arbre généalogique :</span>
+        <br>
+        voir aussi : http://thecodeplayer.com/walkthrough/css3-family-tree
+        <div class="tree">
+            <ul>
+                <li>
+                    <a href="#">Parent</a>
+                    <ul>
+                        <li>
+                            <a href="#"><img src="https://www.developpez.net/forums/avatars/256045-jreaux62.gif?dateline=1487190201" alt="Avatar de jreaux62" title="Avatar de jreaux62"><br />Child</a>
+                            <ul>
+                                <li> <a href="#">Grand Child</a> </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#"><img src="https://www.developpez.net/forums/avatars/256045-jreaux62.gif?dateline=1487190201" alt="Avatar de jreaux62" title="Avatar de jreaux62"><br />Child</a>
+                            <ul>
+                                <li><a href="#">Grand Child</a></li>
+                                <li>
+                                    <a href="#">Grand Child</a>
+                                    <ul>
+                                        <li> <a href="#">Great Grand Child</a> </li>
+                                        <li> <a href="#">Great Grand Child</a> </li>
+                                        <li> <a href="#">Great Grand Child</a> </li>
+                                    </ul>
+                                </li>
+                                <li><a href="#">Grand Child</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+</div>
+
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
