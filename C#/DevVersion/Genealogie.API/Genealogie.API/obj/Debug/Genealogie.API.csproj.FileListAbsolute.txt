@@ -602,4 +602,3 @@ E:\Github\GenealogieV1.1\C#\DevVersion\Genealogie.API\Genealogie.API\obj\Debug\G
 E:\Github\GenealogieV1.1\C#\DevVersion\Genealogie.API\Genealogie.API\obj\Debug\Genealogie.API.csproj.CopyComplete
 E:\Github\GenealogieV1.1\C#\DevVersion\Genealogie.API\Genealogie.API\obj\Debug\Genealogie.API.dll
 E:\Github\GenealogieV1.1\C#\DevVersion\Genealogie.API\Genealogie.API\obj\Debug\Genealogie.API.pdb
-E:\Github\GenealogieV1.1\C#\DevVersion\Genealogie.API\Genealogie.API\obj\Debug\Genealogie.API.csprojAssemblyReference.cache

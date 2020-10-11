@@ -242,6 +242,7 @@
     <Compile Include="Services.API\UtilisateurServiceAPI.cs" />
     <Compile Include="Services.API\VMessageRecuServiceAPI.cs" />
     <Compile Include="Services\DesDates.cs" />
+    <Compile Include="Services\DessinerArbre.cs" />
     <Compile Include="Validation\PositifAttribute.cs" />
     <Compile Include="Validation\InutiliseeAttribute.cs" />
     <Compile Include="Validation\MotDePasseConfirmeAttribute.cs" />
@@ -345,6 +346,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Attributs\" />
     <Folder Include="Views\_admin\" />
   </ItemGroup>
   <ItemGroup>

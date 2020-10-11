@@ -28,7 +28,7 @@
                     }
                     else
                     {
-                        <li>@HttpContext.Current.Session["nomaffichage"]</li>
+                        <li>@Html.ActionLink(@HttpContext.Current.Session["nomaffichage"].ToString(), "Index","Home")</li>
                         <li>@Html.ActionLink("Changer le mot de passe", "ChangerMotDePasse", "Utilisateur")</li>
                         <li>@Html.ActionLink("Déconnexion", "Deconnexion", "Utilisateur")</li>
                     }

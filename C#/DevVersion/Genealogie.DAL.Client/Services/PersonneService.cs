@@ -118,5 +118,29 @@ namespace Genealogie.DAL.Client.Services
             return _rep.AjouterParent(id, idParent);
             throw new NotImplementedException();
         }
+
+        public IEnumerable<Personne> DonnerEnfants(int idPere, int idMere)
+        {
+            return _rep.DonnerEnfants(idPere, idMere).Select(j => j.VersClient());
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Personne> DonnerEnfantsSansMere(int idPere)
+        {
+            return _rep.DonnerEnfantsSansMere(idPere).Select(j => j.VersClient());
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Personne> DonnerEnfantsSansPere(int idMere)
+        {
+            return _rep.DonnerEnfantsSansPere(idMere).Select(j => j.VersClient());
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Personne> DonnerEnfantsSurs(int id, bool pere)
+        {
+            return _rep.DonnerEnfantsSurs(id, pere).Select(l => l.VersClient());
+            throw new NotImplementedException();
+        }
     }
 }

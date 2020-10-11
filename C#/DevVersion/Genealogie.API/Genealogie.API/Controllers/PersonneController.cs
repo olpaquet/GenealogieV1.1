@@ -36,6 +36,7 @@ namespace Genealogie.API.Controllers
         {
             return new PersonneService().DonnerEnfants(id).Select(j => j.VersAPI());
         }
+
         [HttpGet]
         public Personne DonnerPere(int id)
         {
@@ -46,7 +47,27 @@ namespace Genealogie.API.Controllers
         {
             return new PersonneService().DonnerMere(id).VersAPI();
         }
-
+        [HttpGet]
+        public IEnumerable<Personne> DonnerEnfants(int id, int id2)
+        {
+            return new PersonneService().DonnerEnfants(id, id2).Select(j => j.VersAPI());
+        }
+        [HttpGet]
+        public IEnumerable<Personne> DonnerEnfantsSansMere(int id)
+        {
+            return new PersonneService().DonnerEnfantsSansMere(id).Select(j => j.VersAPI());
+        }
+        [HttpGet]
+        public IEnumerable<Personne> DonnerEnfantsSansPere(int id)
+        {
+            return new PersonneService().DonnerEnfantsSansPere(id).Select(j => j.VersAPI());
+        }
+        [HttpGet]
+        [Route("api/DonnerEnfantsSurs/pere")]
+        public IEnumerable<Personne> DonnerEnfantsSurs(int id, bool pere)
+        {
+            return new PersonneService().DonnerEnfantsSurs(id, pere).Select(j => j.VersAPI());
+        }
         [HttpGet]
         public IEnumerable<Personne> DonnerParenteesDirectesPossibles(int id)
         {

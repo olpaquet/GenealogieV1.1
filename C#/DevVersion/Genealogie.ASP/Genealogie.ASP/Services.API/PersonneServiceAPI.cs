@@ -51,6 +51,19 @@ namespace Genealogie.ASP.Services.API
             throw new NotImplementedException();
         }
 
+        public IEnumerable<Personne> DonnerEnfants(int id, int id2)
+        {
+
+            HttpResponseMessage reponse = _client.GetAsync($"Personne/DonnerEnfants/{id}/{id2}").Result;
+            if (!reponse.IsSuccessStatusCode)
+            {
+                throw new Exception("Echec de la réception de données.");
+            }
+            var x = reponse.Content.ReadAsAsync<IEnumerable<Personne>>().Result;
+            return x;
+
+        }
+
         public Personne DonnerPere(int id)
         {
             HttpResponseMessage reponse = _client.GetAsync($"Personne/DonnerPere/{id}").Result;
@@ -178,6 +191,45 @@ namespace Genealogie.ASP.Services.API
             if (!reponse.IsSuccessStatusCode) { throw new Exception("Echec de la réception de données."); }
             var x = reponse.Content.ReadAsStringAsync().Result;
             return bool.Parse(x);
+        }
+
+
+        public IEnumerable<Personne> DonnerEnfantsSansMere(int idPere)
+        {
+
+            HttpResponseMessage reponse = _client.GetAsync($"Personne/DonnerEnfantsSansMere/{idPere}").Result;
+            if (!reponse.IsSuccessStatusCode)
+            {
+                throw new Exception("Echec de la réception de données.");
+            }
+            var x = reponse.Content.ReadAsAsync<IEnumerable<Personne>>().Result;
+            return x;
+
+        }
+        public IEnumerable<Personne> DonnerEnfantsSansPere(int idMere)
+        {
+
+            HttpResponseMessage reponse = _client.GetAsync($"Personne/DonnerEnfantsSansPere/{idMere}").Result;
+            if (!reponse.IsSuccessStatusCode)
+            {
+                throw new Exception("Echec de la réception de données.");
+            }
+            var x = reponse.Content.ReadAsAsync<IEnumerable<Personne>>().Result;
+            return x;
+
+        }
+
+        public IEnumerable<Personne> DonnerEnfantsSurs(int id, bool pere)
+        {
+
+            HttpResponseMessage reponse = _client.GetAsync($"Personne/DonnerEnfantsSurs/{id}/{pere}").Result;
+            if (!reponse.IsSuccessStatusCode)
+            {
+                throw new Exception("Echec de la réception de données.");
+            }
+            var x = reponse.Content.ReadAsAsync<IEnumerable<Personne>>().Result;
+            return x;
+
         }
 
     }

@@ -183,4 +183,10 @@ namespace Genealogie.DAL.Global.Modeles
         public DateTime? datelecture { get; set; }
         public DateTime? dateeffacement { get; set; }
     }
+
+    public class Parent
+    {
+        public Personne pere { get; set; }
+        public Personne mere { get; set; }
+    }
 }

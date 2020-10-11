@@ -20,7 +20,7 @@ namespace Genealogie.ASP.Controllers
         [FiltreProprietaireArbre("arbre")]
         public ActionResult DonnerPourArbre(int id)
         {
-            IEnumerable<PersonneIndex> per = new PersonneServiceAPI().DonnerPourArbre(id).Select(j => new PersonneIndex(j));
+            IEnumerable<PersonneIndex> per = new PersonneServiceAPI().DonnerPourArbre(id).Select(j => new PersonneIndex(j,true,true));
             ViewBag.Arbre = id;
             Arbre a = new ArbreServiceAPI().Donner(id);
             ViewBag.ProprietaireArbre = a.Createur().login;
@@ -32,7 +32,9 @@ namespace Genealogie.ASP.Controllers
         [FiltreExiste]*/
         public ActionResult Detailxs(int id)
         {
-            PersonneIndex pi = new PersonneIndex(new PersonneServiceAPI().Donner(id));
+            PersonneDansArbreIndividuel pi = new PersonneDansArbreIndividuel(new PersonneServiceAPI().Donner(id),int.MaxValue);
+            //ArbrePourVue apv = new ArbrePourVue(pi);
+            
             return View(pi);
         }
 
@@ -41,7 +43,7 @@ namespace Genealogie.ASP.Controllers
         
         public ActionResult Details(int id)
         {
-            PersonneIndex pi = new PersonneIndex(new PersonneServiceAPI().Donner(id));
+            PersonneIndex pi = new PersonneIndex(new PersonneServiceAPI().Donner(id),true, true);
             
             return View(pi);
         }

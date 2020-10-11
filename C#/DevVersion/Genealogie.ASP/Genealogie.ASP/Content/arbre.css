@@ -1,6 +1,6 @@
 ﻿
 /*arbre généalogique début*/
-.xtree ul {
+.arbre ul {
     padding-top: 20px;
     position: relative;
     transition: all 0.5s;
@@ -8,14 +8,14 @@
     -moz-transition: all 0.5s;
 }
 
-.tree ul {
+.arbre ul {
     padding-top: 20px;
     position: relative;
 }
 
 
 
-.xtree li {
+.arbre li {
     float: left;
     text-align: center;
     list-style-type: none;
@@ -26,7 +26,7 @@
     transition: all 0.5s;
 }
 
-.tree li {
+.arbre li {
     float: left;
     padding: 20px 5px 0 5px;
     text-align: center;
@@ -36,7 +36,7 @@
 
     /*We will use ::before and ::after to draw the connectors*/
 
-    .xtree li::before, .tree li::after {
+    .arbre li::before, .arbre li::after {
         content: '';
         position: absolute;
         top: 0;
@@ -46,7 +46,7 @@
         height: 20px;
     }
 
-    .tree li::before, .tree li::after {
+    .arbre li::before, .arbre li::after {
         content: '';
         position: absolute;
         top: 0;
@@ -57,13 +57,13 @@
     }
 
 
-.xtree li::after {
+.arbre li::after {
     right: auto;
     left: 50%;
     border-left: 10px solid #ccc;
 }
 
-.tree li::after {
+.arbre li::after {
     right: auto;
     left: 50%;
     border-left: 10px solid #ccc;
@@ -71,33 +71,33 @@
 
 /*We need to remove left-right connectors from elements without
 any siblings*/
-.tree li:only-child::after, .tree li:only-child::before {
+.arbre li:only-child::after, .arbre li:only-child::before {
     display: none;
 }
 
 
 /*Remove space from the top of single children*/
-.tree li:only-child {
+.arbre li:only-child {
     padding-top: 0;
 }
 
 /*Remove left connector from first child and
 right connector from last child*/
-.tree li:first-child::before, .tree li:last-child::after {
+.arbre li:first-child::before, .arbre li:last-child::after {
     border: 10px none;
 }
 /*Adding back the vertical connector to the last nodes*/
-.tree li:last-child::before {
+.arbre li:last-child::before {
     border-right: 10px solid #ccc;
     border-radius: 0 5px 0 0;
 }
 
-.tree li:first-child::after {
+.arbre li:first-child::after {
     border-radius: 5px 0 0 0;
 }
 
 /*Time to add downward connectors from parents*/
-.tree ul ul::before {
+.arbre ul ul::before {
     content: '';
     position: absolute;
     top: 0;
@@ -107,7 +107,7 @@ right connector from last child*/
     height: 20px;
 }
 
-.tree li a {
+.arbre li a {
     border: 1px solid #ccc;
     padding: 5px 10px;
     text-decoration: none;
@@ -123,16 +123,16 @@ right connector from last child*/
 
     /*Time for some hover effects*/
     /*We will apply the hover effect the the lineage of the element also*/
-    .xtree li a:hover, .tree li a:hover + ul li a {
+    .arbre li a:hover, .arbre li a:hover + ul li a {
         background: #c8e4f8;
         color: #000;
         border: 1px solid #94a0b4;
     }
         /*Connector styles on hover*/
-        .xtree li a:hover + ul li::after,
-        .xtree li a:hover + ul li::before,
-        .xtree li a:hover + ul::before,
-        .xtree li a:hover + ul ul::before {
+        .arbre li a:hover + ul li::after,
+        .arbre li a:hover + ul li::before,
+        .arbre li a:hover + ul::before,
+        .arbre li a:hover + ul ul::before {
             border-color: #94a0b4;
         }
 

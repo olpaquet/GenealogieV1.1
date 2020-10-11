@@ -46,7 +46,7 @@ namespace Genealogie.ASP.Models
             this.dateDeNaissance = rec.dateDeNaissance;
 
             this.personnes = new PersonneServiceAPI().Rechercher(rec)
-                .Select(j => new PersonneIndex(j))
+                .Select(j => new PersonneIndex(j,true,true))
                 .OrderBy(m => m.nomProprietaire)
                 .ThenBy(j => j.nomArbre)
                 .ToList();

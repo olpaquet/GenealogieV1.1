@@ -100,6 +100,8 @@ namespace Genealogie.ASP.Conversion
         };  
         }
 
+
+
         /*Message*/
         public static Conversation VersConversation(this MessageCreation e) { if (e == null) { return null; } return new Conversation { date = DateTime.Now, idEmetteur = e.idEmetteur, sujet = e.sujet, texte = e.texte } ; }
     }

@@ -105,7 +105,7 @@
                         @if (item.pere == null || item.mere == null)
                         {@Html.ActionLink("Ajouter un parent", "AjouterParent", new { id = item.id })}
                         @Html.ActionLink("Modifier", "Modifier", new { id = item.id })
-                        @Html.ActionLink("Détails", "Details", new { id = item.id })
+                        @Html.ActionLink("Afficher l'arbre généalogique", "Detailxs", new { id = item.id })
                         @Html.ActionLink("Supprimer", "Supprimer", new { id = item.id })
                     </td>
                 </tr>

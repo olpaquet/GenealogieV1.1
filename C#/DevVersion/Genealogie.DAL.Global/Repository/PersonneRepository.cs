@@ -265,5 +265,45 @@ namespace Genealogie.DAL.Global.Repository
             return _connexion.ExecuterNonRequete(com) > 0;
             throw new NotImplementedException();
         }
+
+        public IEnumerable<Personne> DonnerEnfants(int idPere, int idMere)
+        {
+            Commande com = new Commande($"{CONST_PERSONNE_REQ} where idpere = @idpere and idmere = @idmere");
+            com.AjouterParametre("idmere", idMere);
+            com.AjouterParametre("idpere", idPere);
+            return _connexion.ExecuterLecteur(com, j => j.VersPersonne());
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Personne> DonnerEnfantsSansMere(int idPere)
+        {
+            Commande com = new Commande($"{CONST_PERSONNE_REQ} where idpere = @idpere and idmere is null");
+            
+            com.AjouterParametre("idpere", idPere);
+            return _connexion.ExecuterLecteur(com, j => j.VersPersonne());
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Personne> DonnerEnfantsSansPere(int idMere)
+        {
+            Commande com = new Commande($"{CONST_PERSONNE_REQ} where idpere is null and idmere = @idmere");
+            com.AjouterParametre("idmere", idMere);
+            return _connexion.ExecuterLecteur(com, j => j.VersPersonne());
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Personne> DonnerEnfantsSurs(int id, bool pere)
+        {
+
+            string requeteSQL = $"{CONST_PERSONNE_REQ}";
+            if (pere) requeteSQL = $"{requeteSQL} where idpere = @id";
+            else requeteSQL = $"{requeteSQL} where idmere = @id";
+
+            Commande com = new Commande(requeteSQL);
+            com.AjouterParametre("id", id);
+            return _connexion.ExecuterLecteur(com, j => j.VersPersonne());
+            throw new NotImplementedException();
+        }
+
     }
 }

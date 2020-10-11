@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "testreflexion", "testreflex
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{D442618D-C370-44D2-8512-5680769A33CD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp2", "ConsoleApp2\ConsoleApp2.csproj", "{3BFD06ED-8692-444E-B82C-00EA45C2C02C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{D442618D-C370-44D2-8512-5680769A33CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D442618D-C370-44D2-8512-5680769A33CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D442618D-C370-44D2-8512-5680769A33CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BFD06ED-8692-444E-B82C-00EA45C2C02C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BFD06ED-8692-444E-B82C-00EA45C2C02C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BFD06ED-8692-444E-B82C-00EA45C2C02C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BFD06ED-8692-444E-B82C-00EA45C2C02C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -82,3 +82,4 @@ E:\Github\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\obj\Debug\netstanda
 E:\Github\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\obj\Debug\netstandard2.0\Genealogie.DAL.Global.csproj.CopyComplete
 E:\Github\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\obj\Debug\netstandard2.0\Genealogie.DAL.Global.dll
 E:\Github\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\obj\Debug\netstandard2.0\Genealogie.DAL.Global.pdb
+E:\Github\GenealogieV1.1\C#\DevVersion\Genealogie.DAL.Global\obj\Debug\netstandard2.0\Genealogie.DAL.Global.csprojAssemblyReference.cache
