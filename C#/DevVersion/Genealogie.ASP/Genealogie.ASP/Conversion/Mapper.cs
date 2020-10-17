@@ -1,4 +1,5 @@
 ﻿using Genealogie.ASP.Models;
+using Genealogie.ASP.Services;
 using Genealogie.ASP.Services.API;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,8 @@ namespace Genealogie.ASP.Conversion
 
     public static class Mapper
     {
+
+        public static IList<string> VersFiche(this Personne p) { return ServPersonne.Fiche(p); }
         public static string VersNomPrenom(this Personne p)
         {
             return $"nom:{p.nom} prénom:{p.prenom}";

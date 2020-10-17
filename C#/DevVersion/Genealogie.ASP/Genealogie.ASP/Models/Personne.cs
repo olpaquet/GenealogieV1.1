@@ -1,6 +1,7 @@
 ﻿using Genealogie.ASP.Services;
 using Genealogie.ASP.Services.API;
 using Genealogie.Modeles.API.ASP.Modeles;
+using Microsoft.Ajax.Utilities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,6 +10,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Web;
+using System.Web.Http.ModelBinding;
 using System.Web.Mvc;
 
 namespace Genealogie.ASP.Models
@@ -179,12 +181,16 @@ namespace Genealogie.ASP.Models
         public string nom { get; set; }
         public string prenom { get; set; }
         public bool homme { get; set; }
-
+        public int? idPere { get; set; }
+        public int? idMere { get; set; }
         public IList<string> fiche { get; set; }
         public DateTime? dateDeNaissance { get; set; }
         public DateTime? dateDeDeces { get; set; }
         public DateTime dateAjout { get; set; }
         public IList<PersonneDansArbreIndividuel> descendants { get; set; }
+
+
+        
 
         public PersonneDansArbreIndividuel(Personne p, int pbas = int.MaxValue)
         {
@@ -195,6 +201,8 @@ namespace Genealogie.ASP.Models
             this.dateAjout = p.dateAjout;
             this.dateDeDeces = p.dateDeDeces;
             this.dateDeNaissance = p.dateDeNaissance;
+            this.idPere = p.idPere;
+            this.idMere = p.idMere;
 
             int limite = (pbas == int.MaxValue) ? int.MaxValue : pbas - 1;
             this.descendants = new List<PersonneDansArbreIndividuel>();
@@ -211,20 +219,104 @@ namespace Genealogie.ASP.Models
             }
 
             /* fiche */
-            string f = "";
-            f += this.prenom.Trim();
-            f += " ";
-            f += this.nom.Trim();
-            f = f.Trim();
-            f += this.homme ? "(homme)" : "(femme)";
-            this.fiche = new List<string>();
-            this.fiche.Add(f);
+            this.fiche = ServPersonne.Fiche(p);
+        }
+    }
+
+    public class F2ormArbre
+    {
+        public Personne maitre { get; set; }
+        public Personne parent { get; set; }
+        public IList<Personne> couples { get; set; }
+        public IList<string> fiche { get; set; }
+        public IDictionary<int, IList<string>> fichespartenaire { get; set; }
+        public IDictionary<Personne, IList<FormArbre>> descendants { get; set; }
+
+        public F2ormArbre() { }
+        public F2ormArbre(Personne p, Personne parent, int pbas = int.MaxValue)
+        {            
+
+        }
+
+    }
+    public class FormArbre
+    {
+        public Personne parent { get; set; }
+        public Personne maitre { get; set; }
+        public IList<Personne> couples { get; set; }
+        
+        public IList<string> fiche { get; set; }
+
+        public IDictionary<int, IList<string>> fichespartenaire { get; set; }
+        public IList<FormArbre> descendants { get; set; }
+
+        public IDictionary<Personne, IList<FormArbre>> dXescendants = new Dictionary<Personne, IList<FormArbre>>();
+
+        public FormArbre() { }
+        
+        public FormArbre(Personne p, Personne parent, int pbas = int.MaxValue)
+        {
+            this.fiche = ServPersonne.Fiche(p);
+            this.parent = parent;
+            this.maitre = p;
             
-            if (this.dateDeNaissance != null) { this.fiche.Add( $"né le {((DateTime)this.dateDeNaissance).ToString("D", CultureInfo.CreateSpecificCulture(DesDates.cultureClub()))}"); }
-            if (this.dateDeDeces != null) { this.fiche.Add($"décédé le {((DateTime)this.dateDeDeces).ToString("D", CultureInfo.CreateSpecificCulture(DesDates.cultureClub()))}"); }
+            int limite = pbas == int.MaxValue ? int.MaxValue : pbas--;
+
+            IEnumerable<Personne> sescouples = new CoupleServiceAPI().Partenaires(p.id).Select(j => new PersonneServiceAPI().Donner(j)).ToList();
+            //if (couples == null) couples = new List<Personne>();
+            this.couples = new List<Personne>();
+            
+
+            this.descendants = new List<FormArbre>();
+            this.dXescendants = new Dictionary<Personne, IList<FormArbre>>();
+            IEnumerable<Descendant> prog = new PersonneServiceAPI().DonnerLesEnfants(p.id).OrderBy(j=>j.parent==null?int.MaxValue:j.parent.id).ThenBy(j=>j.enfant==null?int.MaxValue:j.enfant.id);
+            if (pbas > 0)
+            {
+                int memParentId = -1;
+                IList<FormArbre> d = new List<FormArbre>();
+                foreach (Descendant desc in prog)
+                {
+                    if (memParentId != (desc.parent==null?0:desc.parent.id)) 
+                    {
+                        d = new List<FormArbre>();
+                        memParentId = desc.parent==null?0:desc.parent.id; 
+                        this.couples.Add(desc.parent==null?new Personne {id=0 }:desc.parent);
+                        var y = "oo";
+                        d.Add(new FormArbre(desc.enfant, desc.parent, limite));
+                        dXescendants.Add(desc.parent==null?new Personne { id = 0 }:desc.parent, d);
+                    }
+                    else d.Add(new FormArbre(desc.enfant, desc.parent, limite));
+                    descendants.Add(new FormArbre(new PersonneServiceAPI().Donner(desc.enfant.id) , desc.parent, limite));
+                }
+                IEnumerable<Personne> tempCouple = couples;
+                foreach (Personne pp in sescouples.Where(j => !tempCouple.Select(k=>k.id).Contains(j.id)))
+                {
+                    this.couples.Add(pp);
+                    //descendants.Add(new FormArbre(pp, null, limite));
+                }
+            }
+            if (pbas == 0)
+            {
+                foreach (Personne pp in sescouples)
+                {
+                    descendants.Add(new FormArbre(this.maitre, new PersonneServiceAPI().Donner(pp.id), -1));
+                    IList<FormArbre> xx = new List<FormArbre>();
+                    
+                }
+                this.couples = sescouples.ToList();
+            }
+
+            this.fichespartenaire = new Dictionary<int, IList<string>>();
+            foreach (Personne pp in couples)
+            {
+                this.fichespartenaire.Add(pp.id, ServPersonne.Fiche(pp));
+            }
+            descendants.OrderBy(j => j.maitre.id);
+            
             
         }
     }
+
     public class xArbrePourVue
     {
         public string html { get; set; }

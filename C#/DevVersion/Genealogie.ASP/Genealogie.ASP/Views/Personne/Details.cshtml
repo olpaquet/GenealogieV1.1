@@ -1,92 +1,76 @@
-﻿@model Genealogie.ASP.Models.PersonneIndex
+﻿@model Genealogie.ASP.Models.PersonneDansArbreIndividuel
+@using Genealogie.ASP.Models
 
-@{
-    ViewBag.Title = "Details";
+
+<h2>
+    @Model.prenom @Model.nom () et ses descendants
+</h2>
+
+@helper Montre(string titre, object desc)
+{
+    if (desc != null)
+    {<p>@titre @desc </p>}
 }
+@helper Montre(PersonneDansArbreIndividuel p)
+{
+<bb>
+    <a href="#">
 
-<h2>Details</h2>
-
-<div>
-    <h4>PersonneIndex</h4>
-    <p>@Model.idArbre</p>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.nom)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.nom)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.prenom)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.prenom)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.dateDeNaissance)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.dateDeNaissance)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.dateDeDeces)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.dateDeDeces)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.homme)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.homme)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.dateAjout)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.dateAjout)
-        </dd>
-        <p>Enfants</p>
-        @for (int i = 0; i < Model.enfants.Count(); i++)
+        @foreach (string s in p.fiche)
         {
-            <dd>@Html.DisplayFor(model => model.enfants[i].nom)</dd>
-            <dd>@Html.DisplayFor(model => model.enfants[i].prenom)</dd>
-            <dd>@Html.DisplayFor(model => model.enfants[i].homme)</dd>
-            @Html.ActionLink("Détails", "Details", new { id = Model.enfants[i].id })
-        }
-        <p>pèrexxx</p>
-        @if (Model.pere != null)
-        {
-            <p>Père</p>
-            <dd>@Html.DisplayFor(model => model.pere.nom)</dd>
-            <dd>@Html.DisplayFor(model => model.pere.prenom)</dd>
-            <dd>@Html.DisplayFor(model => model.pere.dateDeNaissance)</dd>
-            @Html.ActionLink("Détails", "Details", new { id = Model.pere.id })
-        }
-        @if (Model.mere != null)
-        {
-            <p>Mère</p>
-            <dd>@Html.DisplayFor(model => model.mere.nom)</dd>
-            <dd>@Html.DisplayFor(model => model.mere.prenom)</dd>
-            <dd>@Html.DisplayFor(model => model.mere.dateDeNaissance)</dd>
-            @Html.ActionLink("Détails", "Details", new { id = Model.mere.id })
+            <p>@s</p>
         }
 
-    </dl>
-</div>
+    </a>
+    <p>
+        @Html.ActionLink("Modifier", "Modifier", new { id = p.id })
+    </p>
+    @if (p.idPere == null || p.idMere == null)
+    {<p>
+    @Html.ActionLink("Ajouter parent", "AjouterParent", new { id = p.id })
+</p>}
+    @if (p.idPere != null)
+    {
 <p>
-    
-    @Html.ActionLink("Retour à l'arbre", "Details","Arbre", new { id = Model.idArbre } ,null)
+    @Html.ActionLink("Supprimer le père", "SupprimerPere", new { id = p.id })
+</p>}
+            @if (p.idMere != null)
+            {
+<p>
+    @Html.ActionLink("Supprimer la mère", "SupprimerMere", new { id = p.id })
 </p>
+            <p>
+                @Html.ActionLink("Ajouter enfant", "AjouterEnfant", new { id = p.id })
+        </p>}
+    </bb>
+
+}
+@helper ShowTree(IEnumerable<PersonneDansArbreIndividuel> descendants)
+{
+    <ul>
+        @foreach (var descendant in descendants)
+        {
+            <li>
+                @Montre(descendant)
+                @if (descendant.descendants.Any())
+                {
+                    @ShowTree(descendant.descendants)
+                }
+            </li>
+        }
+    </ul>
+}
+<div class="arbre">
+    <ul>
+        <li>
+            @Montre(Model)
+            @ShowTree(Model.descendants)
+        </li>
+
+
+    </ul>
+</div>
+@section Scripts {
+
+
+}

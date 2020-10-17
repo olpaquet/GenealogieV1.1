@@ -6,6 +6,7 @@ using Genealogie.Modeles.API.ASP.Modeles;
 using Services;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -24,7 +25,10 @@ namespace Genealogie.API.Controllers
         [HttpGet]
         public IEnumerable<Personne> DonnerPourArbre(int id)
         {
-            return new PersonneService().DonnerPourArbre(id).Select(j => j.VersAPI());
+            return new PersonneService().DonnerPourArbre(id).Select(j => j.VersAPI())
+                .OrderBy(j => j.nom).OrderBy(j => j.prenom)
+                .OrderBy(j => j.dateDeDeces).OrderBy(j => j.dateDeDeces)
+                ;
         }
         [HttpPut]
         public IEnumerable<Personne> Chercher(Recherche e)
@@ -130,7 +134,13 @@ namespace Genealogie.API.Controllers
         }
         
 
-
+        [HttpGet]
+        public IEnumerable<Descendant> DonnerLesEnfants(int id)
+        {
+            var x = new PersonneService().DonnerLesEnfants(id);
+            return x.Select(j=>j.VersAPI());;
+            return new PersonneService().DonnerLesEnfants(id).Select(j => j.VersAPI());
+        }
 
 
     }

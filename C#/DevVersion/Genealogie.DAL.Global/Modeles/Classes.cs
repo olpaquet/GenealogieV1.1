@@ -189,4 +189,12 @@ namespace Genealogie.DAL.Global.Modeles
         public Personne pere { get; set; }
         public Personne mere { get; set; }
     }
+
+    public class Descendant
+    {
+        public int id { get; set; }
+        public Personne parent { get; set; }
+        public Personne enfant { get; set; }       
+        
+    }
 }

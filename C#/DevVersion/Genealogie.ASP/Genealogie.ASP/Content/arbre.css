@@ -1,7 +1,7 @@
 ﻿
 /*arbre généalogique début*/
 .arbre ul {
-    padding-top: 20px;
+    padding-top: 120px;
     position: relative;
     transition: all 0.5s;
     -webkit-transition: all 0.5s;
@@ -107,8 +107,8 @@ right connector from last child*/
     height: 20px;
 }
 
-.arbre li a {
-    border: 1px solid #ccc;
+.arbre li bb {
+    border: 12px solid #ccc;
     padding: 5px 10px;
     text-decoration: none;
     color: #666;
@@ -123,17 +123,27 @@ right connector from last child*/
 
     /*Time for some hover effects*/
     /*We will apply the hover effect the the lineage of the element also*/
-    .arbre li a:hover, .arbre li a:hover + ul li a {
+    .arbre li bb:hover, .arbre li bb:hover + ul li bb {
         background: #c8e4f8;
         color: #000;
-        border: 1px solid #94a0b4;
+        border: 12px solid #94a0b4;
     }
         /*Connector styles on hover*/
-        .arbre li a:hover + ul li::after,
-        .arbre li a:hover + ul li::before,
-        .arbre li a:hover + ul::before,
-        .arbre li a:hover + ul ul::before {
+        .arbre li bb:hover + ul li::after,
+        .arbre li bb:hover + ul li::before,
+        .arbre li bb:hover + ul::before,
+        .arbre li bb:hover + ul ul::before {
             border-color: #94a0b4;
         }
+
+.arbre-bas{
+    border-bottom: 2px solid black;
+}
+.arbre-contour{
+    border: 2px solid black;
+}
+.arbre-droit{
+    border-right: 2px solid black;
+}
 
 /*arbre généalogique fin*/

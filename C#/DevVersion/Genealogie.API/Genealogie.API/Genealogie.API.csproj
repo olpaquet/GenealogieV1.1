@@ -45,7 +45,7 @@
   <ItemGroup>
     <Reference Include="Genealogie.DAL.Client, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Genealogie.DAL.Client\bin\Debug\netstandard2.0\Genealogie.DAL.Client.dll</HintPath>
+      <HintPath>..\..\Genealogie.DAL.Client\Genealogie.DAL.Client\bin\Debug\netstandard2.0\Genealogie.DAL.Client.dll</HintPath>
     </Reference>
     <Reference Include="Genealogie.Modeles.API.ASP, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -146,6 +146,7 @@
     <Compile Include="Controllers\BlocageController.cs" />
     <Compile Include="Controllers\ChatController.cs" />
     <Compile Include="Controllers\ConversationController.cs" />
+    <Compile Include="Controllers\CoupleController.cs" />
     <Compile Include="Controllers\MessageDestinationController.cs" />
     <Compile Include="Controllers\NouvelleController.cs" />
     <Compile Include="Controllers\PersonneController.cs" />

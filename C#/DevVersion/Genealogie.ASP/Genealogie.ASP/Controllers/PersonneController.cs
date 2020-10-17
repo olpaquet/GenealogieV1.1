@@ -21,16 +21,17 @@ namespace Genealogie.ASP.Controllers
         public ActionResult DonnerPourArbre(int id)
         {
             IEnumerable<PersonneIndex> per = new PersonneServiceAPI().DonnerPourArbre(id).Select(j => new PersonneIndex(j,true,true));
+            per.OrderBy(j => j.nom).ThenBy(j => j.prenom).ThenBy(j => j.dateDeNaissance).ThenBy(j => j.dateDeDeces);
             ViewBag.Arbre = id;
             Arbre a = new ArbreServiceAPI().Donner(id);
             ViewBag.ProprietaireArbre = a.Createur().login;
             ViewBag.NomArbre = a.nom;
             return View(per);
         }
-        /*
+        
         [HttpGet]
-        [FiltreExiste]*/
-        public ActionResult Detailxs(int id)
+        [FiltreExiste]
+        public ActionResult Details(int id)
         {
             PersonneDansArbreIndividuel pi = new PersonneDansArbreIndividuel(new PersonneServiceAPI().Donner(id),int.MaxValue);
             //ArbrePourVue apv = new ArbrePourVue(pi);
@@ -39,16 +40,16 @@ namespace Genealogie.ASP.Controllers
         }
 
         [HttpGet]
-        [FiltreExiste]
-        
-        public ActionResult Details(int id)
+        [FiltreExiste]        
+        public ActionResult Detailxs(int id)
         {
             PersonneIndex pi = new PersonneIndex(new PersonneServiceAPI().Donner(id),true, true);
             
             return View(pi);
         }
+
         [HttpGet]
-        /*[FxiltreProprietaireArbre]*/
+        [FxiltreProprietaireArbre]
         public ActionResult Creer(int id)
         {
             PersonneCreation pc = new PersonneCreation();
@@ -224,6 +225,14 @@ namespace Genealogie.ASP.Controllers
             Personne p = new PersonneServiceAPI().Donner(id);
             new PersonneServiceAPI().Supprimer(id);
             return RedirectToAction("DonnerPourArbre", new { id = p.idArbre });
+        }
+
+        [HttpGet]
+        public ActionResult DonnerLArbre(int id)
+        {
+            FormArbre fa = new FormArbre(new PersonneServiceAPI().Donner(id), null);
+
+            return View(fa);
         }
     }
     

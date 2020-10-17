@@ -550,7 +550,6 @@ E:\Github\GenealogieV1.1\C#\DevVersion\Genealogie.API\Genealogie.API\bin\roslyn\
 E:\Github\GenealogieV1.1\C#\DevVersion\Genealogie.API\Genealogie.API\bin\roslyn\vbc.rsp
 E:\Github\GenealogieV1.1\C#\DevVersion\Genealogie.API\Genealogie.API\bin\roslyn\VBCSCompiler.exe
 E:\Github\GenealogieV1.1\C#\DevVersion\Genealogie.API\Genealogie.API\bin\roslyn\VBCSCompiler.exe.config
-E:\Github\GenealogieV1.1\C#\DevVersion\Genealogie.API\Genealogie.API\bin\Genealogie.DAL.Client.dll
 E:\Github\GenealogieV1.1\C#\DevVersion\Genealogie.API\Genealogie.API\bin\Genealogie.Modeles.API.ASP.dll
 E:\Github\GenealogieV1.1\C#\DevVersion\Genealogie.API\Genealogie.API\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 E:\Github\GenealogieV1.1\C#\DevVersion\Genealogie.API\Genealogie.API\bin\Microsoft.Web.Infrastructure.dll
@@ -602,3 +601,5 @@ E:\Github\GenealogieV1.1\C#\DevVersion\Genealogie.API\Genealogie.API\obj\Debug\G
 E:\Github\GenealogieV1.1\C#\DevVersion\Genealogie.API\Genealogie.API\obj\Debug\Genealogie.API.csproj.CopyComplete
 E:\Github\GenealogieV1.1\C#\DevVersion\Genealogie.API\Genealogie.API\obj\Debug\Genealogie.API.dll
 E:\Github\GenealogieV1.1\C#\DevVersion\Genealogie.API\Genealogie.API\obj\Debug\Genealogie.API.pdb
+E:\Github\GenealogieV1.1\C#\DevVersion\Genealogie.API\Genealogie.API\obj\Debug\Genealogie.API.csprojAssemblyReference.cache
+E:\Github\GenealogieV1.1\C#\DevVersion\Genealogie.API\Genealogie.API\bin\Genealogie.DAL.Client.dll

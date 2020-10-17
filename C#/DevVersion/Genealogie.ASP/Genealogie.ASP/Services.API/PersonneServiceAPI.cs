@@ -232,6 +232,14 @@ namespace Genealogie.ASP.Services.API
 
         }
 
+        public IEnumerable<Descendant> DonnerLesEnfants(int id)
+        {
+            HttpResponseMessage reponse = _client.GetAsync($"Personne/DonnerLesEnfants/{id}").Result;
+            if (!reponse.IsSuccessStatusCode) { throw new Exception("Echec de la réception de données."); }
+            var x = reponse.Content.ReadAsAsync<IEnumerable<Descendant>>().Result;
+            return x;
+        }
+
     }
 }
  

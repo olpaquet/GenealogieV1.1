@@ -4,12 +4,13 @@ using Genealogie.DAL.Global.Modeles;
 using Services;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 
 namespace Genealogie.DAL.Global.Repository
 {
-    public class PersonneRepository : BaseRepository, IPersonneRepository<Personne,Recherche>
+    public class PersonneRepository : BaseRepository, IPersonneRepository<Personne,Recherche,Descendant>
     {
         private const string CONST_VPERSONNE_REQ = "select id,nom,prenom,datedenaissance,datededeces,homme,idarbre,dateajout,idpere,idmere, idcreateur, idblocage, utilisateuractif from VPersonne";
 
@@ -143,8 +144,8 @@ namespace Genealogie.DAL.Global.Repository
                 com.AjouterParametre(p.Key, p.Value);
             }
 
-            return _connexion.ExecuterLecteur(com, i => i.VersPersonne()).OrderBy(j => j.idarbre);
-
+            return  _connexion.ExecuterLecteur(com, i => i.VersPersonne()).OrderBy(j => j.idarbre);
+            
             throw new NotImplementedException();
         }
 
@@ -191,6 +192,7 @@ namespace Genealogie.DAL.Global.Repository
             return new PersonneRepository()
                 .DonnerPourArbre(idArbre)
                 .Where(k => !(interdictions.Select(j => j.id).Contains(k.id)))
+                //?? new List<Personne>();
                 ;            
             
         }
@@ -271,7 +273,8 @@ namespace Genealogie.DAL.Global.Repository
             Commande com = new Commande($"{CONST_PERSONNE_REQ} where idpere = @idpere and idmere = @idmere");
             com.AjouterParametre("idmere", idMere);
             com.AjouterParametre("idpere", idPere);
-            return _connexion.ExecuterLecteur(com, j => j.VersPersonne());
+            return _connexion.ExecuterLecteur(com, j => j.VersPersonne()) //??new List<Personne>()
+                ;
             throw new NotImplementedException();
         }
 
@@ -280,7 +283,8 @@ namespace Genealogie.DAL.Global.Repository
             Commande com = new Commande($"{CONST_PERSONNE_REQ} where idpere = @idpere and idmere is null");
             
             com.AjouterParametre("idpere", idPere);
-            return _connexion.ExecuterLecteur(com, j => j.VersPersonne());
+            return _connexion.ExecuterLecteur(com, j => j.VersPersonne()) //??new List<Personne>()
+                ;
             throw new NotImplementedException();
         }
 
@@ -288,7 +292,8 @@ namespace Genealogie.DAL.Global.Repository
         {
             Commande com = new Commande($"{CONST_PERSONNE_REQ} where idpere is null and idmere = @idmere");
             com.AjouterParametre("idmere", idMere);
-            return _connexion.ExecuterLecteur(com, j => j.VersPersonne());
+            return _connexion.ExecuterLecteur(com, j => j.VersPersonne()) //??new List<Personne>()
+                ;
             throw new NotImplementedException();
         }
 
@@ -301,9 +306,49 @@ namespace Genealogie.DAL.Global.Repository
 
             Commande com = new Commande(requeteSQL);
             com.AjouterParametre("id", id);
-            return _connexion.ExecuterLecteur(com, j => j.VersPersonne());
+            return _connexion.ExecuterLecteur(com, j => j.VersPersonne()) //??new List<Personne>()
+                ;
             throw new NotImplementedException();
         }
 
+        public IEnumerable<Descendant> DonnerLesEnfants(int id)
+        {
+            string sqlRequete = $"{CONST_PERSONNE_REQ}";
+            Personne p = new PersonneRepository().Donner(id);
+            string s = p.homme==1 ? "idpere" : "idmere";
+            sqlRequete += $" where {s} = @id";
+
+            Commande com = new Commande(sqlRequete);
+            com.AjouterParametre("id", id);
+
+            
+            IEnumerable<Personne> enfants = _connexion.ExecuterLecteur(com, j => j.VersPersonne());
+
+            var vivacite = enfants.Select(j => new { parentId = ((p.homme == 1) ? j.idmere : j.idpere), enfant = j})
+                .GroupBy(j => j.parentId)               
+                ;
+            IList<Descendant> descendants = new List<Descendant>();
+
+            foreach(var ch in vivacite)
+            {
+                Console.WriteLine(ch);
+                Console.WriteLine(ch.Count());
+                /*
+                Descendants d = new Descendants(ch.Key == null ? null : new PersonneRepository().Donner((int)ch.Key), 
+                    enfants.Where(j=>p.homme==1?j.idmere==ch.Key:j.idpere==ch.Key));
+                */
+                int? idparent = ch.Key;
+                Personne parent = idparent==null?null:new PersonneRepository().Donner((int)idparent);
+
+                foreach(var chch in ch)
+                {
+                    descendants.Add(new Descendant {id=p.id, parent=parent, enfant=chch.enfant });
+                }
+            }
+            //if (descendants.Count() == 0) descendants = null;
+            return descendants;
+
+            throw new NotImplementedException();
+        }
     }
 }

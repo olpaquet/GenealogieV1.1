@@ -29,6 +29,13 @@ namespace Genealogie.API.Models
         public string motDePasse { get; set; }
         public string motDePasseConfirmation { get; set; }
     }
+    public class Descendant
+    {
+        public int id { get; set; }
+        public Personne parent { get; set; }
+        public Personne enfant { get; set; }
+        
+        
+    }
 
-   
 }

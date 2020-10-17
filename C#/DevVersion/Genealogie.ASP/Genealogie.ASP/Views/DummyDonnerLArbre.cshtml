@@ -1,0 +1,137 @@
+﻿@model Genealogie.ASP.Models.FormArbre
+@using Genealogie.ASP.Models
+@using Genealogie.ASP.Conversion
+
+@{
+    ViewBag.Title = "DonnerLArbre";
+}
+
+<h2>DonnerLArbre</h2>
+
+<h2>
+    @Model.maitre.nom @Model.maitre.nom () et ses descendants
+</h2>
+
+@helper Montre(Personne p, string type)
+{
+    <p>@p.prenom</p>
+}
+@helper Montrex(Personne p, string type)
+{
+    <p>
+        <a href="#">
+            @if (type != null)
+            {
+                <br /><strong>@type</strong><br />
+            }
+            @foreach (string s in p.VersFiche())
+            {
+                @s<br />
+            }
+
+        </a>
+    <p>
+        @Html.ActionLink("Modifier", "Modifier", new { id = p.id })
+    </p>
+    @if (p.idPere == null || p.idMere == null)
+    {<p>
+            @Html.ActionLink("Ajouter parent", "AjouterParent", new { id = p.id })
+        </p>}
+    @if (p.idPere != null)
+    {
+        <p>
+            @Html.ActionLink("Supprimer le père", "SupprimerPere", new { id = p.id })
+        </p>}
+    @if (p.idMere != null)
+    {
+        <p>
+            @Html.ActionLink("Supprimer la mère", "SupprimerMere", new { id = p.id })
+        </p>
+        <p>
+            @Html.ActionLink("Ajouter enfant", "AjouterEnfant", new { id = p.id })
+        </p>}
+    </p>
+
+}
+@helper MontreArbre(Personne Parent, IDictionary<Personne, IList<FormArbre>> progeniture, int nbcols)
+{
+    int comptecols = 0;
+    if (progeniture.Count() != 0)
+    {
+        <tr>
+            <td></td>
+
+            @{int mem = -1;
+            }
+            @foreach (var desc in progeniture)
+            {
+                <td></td>
+
+                comptecols++;
+                int coco = desc.Key.id;
+
+
+
+                <td>
+                    <table>
+                        <tr>
+                            @foreach (var prog in desc.Value)
+                            {
+
+                                <td>@Montre(prog.maitre, null)</td>
+
+
+                                foreach (var part in prog.couples)
+                                {
+                                    <td>---</td>
+                                    <td>@Montre(part, "Compagnon/agne")</td>
+                                }
+                            <tr>@MontreArbre(prog.parent, prog.dXescendants, 1 + prog.couples.Count())</tr>
+
+
+                        }
+
+
+
+                </tr></table>
+
+
+                </td>
+
+
+            }
+
+            @for (int ii = comptecols + 1; ii < nbcols; ii++)
+            {
+                comptecols++;
+                <td></td>
+            }
+            </tr>
+            <tr>yes we can @comptecols</tr>
+        }
+}
+
+
+<div class="xarbre">
+    <table>
+        <tr>
+            <td>@Montre(Model.maitre, null)</td>
+
+
+            @foreach (var part in Model.couples)
+            {
+                <td>---</td>
+                <td>@Montre(part, "Compagnon/agne")</td>
+}
+            @MontreArbre(Model.parent, Model.dXescendants, 1 + Model.couples.Count())
+
+        </tr>
+    </table>
+
+
+</div>
+@section Scripts {
+
+
+}
+

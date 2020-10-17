@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Genealogie.DAL.Global.Repository
 {
-    public interface IPersonneRepository<TE,RE>: IBasePersonne<TE>
+    public interface IPersonneRepository<TE,RE,TEE>: IBasePersonne<TE>
     {
         IEnumerable<TE> Rechercher(RE e);
 
@@ -12,5 +12,6 @@ namespace Genealogie.DAL.Global.Repository
         IEnumerable<TE> DonnerEnfantsSansMere(int idPere);
         IEnumerable<TE> DonnerEnfantsSansPere(int idMere);
         IEnumerable<TE> DonnerEnfantsSurs(int id, bool pere);
+        IEnumerable<TEE> DonnerLesEnfants(int id);
     }
 }

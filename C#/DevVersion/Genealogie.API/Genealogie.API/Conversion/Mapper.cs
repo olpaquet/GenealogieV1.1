@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Genealogie.API.Models;
+using System.Runtime.CompilerServices;
 
 namespace Genealogie.API.Conversion
 {
@@ -50,5 +51,6 @@ namespace Genealogie.API.Conversion
         /*public static MessageDestination VersAPI(this cl.MessageDestination e) { if (e == null) { return null; } return new MessageDestination { dateEffacement=e.dateEffacement, dateLecture=e.dateLecture, idConversation=e.idConversation, idDestinataire=e.idDestinataire}; }
         public static cl.MessageDestination VersClient(this MessageDestination e) { if (e == null) { return null; } return new cl.MessageDestination { dateEffacement = e.dateEffacement, dateLecture = e.dateLecture, idConversation = e.idConversation, idDestinataire = e.idDestinataire }; }*/
 
+        public static Descendant VersAPI(this cl.Descendant e) { if (e == null) return null; return new Descendant { enfant=e.enfant.VersAPI(), parent=e.parent.VersAPI(), id=e.id }; }
     }
 }

@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="Genealogie.DAL.Global">
+      <HintPath>..\..\Genealogie.DAL.Global\bin\Debug\netstandard2.0\Genealogie.DAL.Global.dll</HintPath>
+    </Reference>
+    <Reference Include="Services">
+      <HintPath>..\..\Services\bin\Debug\netstandard2.0\Services.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Services\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.7.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
+  </ItemGroup>
+
+</Project>

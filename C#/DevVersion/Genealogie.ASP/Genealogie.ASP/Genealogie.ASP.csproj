@@ -201,6 +201,7 @@
     <Compile Include="Models\Blocage.cs" />
     <Compile Include="Models\Chat.cs" />
     <Compile Include="Models\Conversation.cs" />
+    <Compile Include="Models\Descendant.cs" />
     <Compile Include="Models\ExtraClasses.cs" />
     <Compile Include="Models\MessageDestination.cs" />
     <Compile Include="Models\Messagerie.cs" />
@@ -233,6 +234,7 @@
     <Compile Include="Services.API\BlocageServiceAPI.cs" />
     <Compile Include="Services.API\ChatServiceAPI.cs" />
     <Compile Include="Services.API\ConversationServiceAPI.cs" />
+    <Compile Include="Services.API\CoupleServiceAPI.cs" />
     <Compile Include="Services.API\MessageDestinationServiceAPI.cs" />
     <Compile Include="Services.API\NouvelleServiceAPI.cs" />
     <Compile Include="Services.API\PersonneServiceAPI.cs" />
@@ -243,6 +245,7 @@
     <Compile Include="Services.API\VMessageRecuServiceAPI.cs" />
     <Compile Include="Services\DesDates.cs" />
     <Compile Include="Services\DessinerArbre.cs" />
+    <Compile Include="Services\ServPersonne.cs" />
     <Compile Include="Validation\PositifAttribute.cs" />
     <Compile Include="Validation\InutiliseeAttribute.cs" />
     <Compile Include="Validation\MotDePasseConfirmeAttribute.cs" />
@@ -321,7 +324,7 @@
     <Content Include="Views\Role\Modifier.cshtml" />
     <Content Include="Views\Role\Supprimer.cshtml" />
     <Content Include="Views\Personne\DonnerPourArbre.cshtml" />
-    <Content Include="Views\Personne\Details.cshtml" />
+    <Content Include="Views\Personne\Detailxs.cshtml" />
     <Content Include="Views\Personne\Creer.cshtml" />
     <Content Include="Views\Personne\Modifier.cshtml" />
     <Content Include="Views\Arbre\Creer.cshtml" />
@@ -342,7 +345,9 @@
     <Content Include="Views\Arbre\Bloquer.cshtml" />
     <Content Include="Views\Personne\AjouterParent.cshtml" />
     <Content Include="Views\Chat\Miauler.cshtml" />
-    <Content Include="Views\Personne\Detailxs.cshtml" />
+    <Content Include="Views\Personne\Details.cshtml" />
+    <Content Include="Views\Personne\DonnerLArbre.cshtml" />
+    <Content Include="Views\DummyDonnerLArbre.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

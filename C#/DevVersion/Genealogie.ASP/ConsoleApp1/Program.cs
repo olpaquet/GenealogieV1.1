@@ -26,7 +26,8 @@ namespace ConsoleApp1
                  //Console.WriteLine($"{jj}:{s}");
             }
 
-            testarbre();
+            //testarbre();
+            testForm(8);
 
             Console.WriteLine("appuyez sur une touche pour quitter");
             Console.ReadKey();
@@ -119,6 +120,15 @@ namespace ConsoleApp1
         private static string cultureClub()
         {
             return ConfigurationManager.AppSettings["culture"].ToString();
+        }
+
+        private static void testForm(int id)
+        {
+            Personne maitre = new PersonneServiceAPI().Donner(28);
+            Personne parent = null;
+            FormArbre fa = new FormArbre(maitre, parent);
+            //F2ormArbre f2a = new F2ormArbre(fa);
+            var y = "x";
         }
 
     }
