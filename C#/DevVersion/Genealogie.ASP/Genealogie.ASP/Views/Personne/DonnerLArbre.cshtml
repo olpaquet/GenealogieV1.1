@@ -12,133 +12,168 @@
     @Model.maitre.prenom @Model.maitre.nom () et ses descendants
 </h2>
 
-@helper SepMaitresse()
-{<td>
-        <table>
-            <tbody>
-                <tr>
-                    <td class="arbre-bas">&emsp;&emsp;</td>
-                </tr>
-                <tr>
-                    <td></td>
-                </tr>
-            </tbody>
-        </table>
-    </td>
-}
 
-@helper SepPiquet(bool ok)
-{
-    <td>&emsp;&emsp;</td>
-    <td>
-        <table>
-            <tbody>
-                <tr>
-                @if (@ok)
-                {
-                    <td class="arbre-droit">&emsp;&emsp;</td>
- }
-                else
-                {
-                    <td></td>
-}
-
-
-
-                <td></td>
-            </tr>
-            </tbody>
-        </table>
-    </td>
-}
-
-
-@helper Montre(IList<string> x, string type)
-{
-
-    foreach (string j in x)
-    {<p> @j </p>}
-}
-@helper MontreArbre(Personne p, IList<FormArbre> progeniture)
-{
-    <td></td>
-    foreach (var x in progeniture)
-    {
-        <td class="arbre-contour">@x.maitre.prenom</td>
-
-    }
-}
-
-@helper MontreSuperArbre(FormArbre fa) 
-{ 
-<tbody>
-    <tr>
-        <td class="arbre-contour">
-            @Montre(@fa.maitre.VersFiche(), null)
+    @helper SepMaitresse()
+    {<td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class="arbre-bas">&emsp;&emsp;</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
         </td>
+    }
 
-        @foreach (var x in fa.couples)
-        {
-            @SepMaitresse()
-            <td class="arbre-contour">
-                @Montre(x.VersFiche(), "compagnon(agne)")
-            </td>
-        }
-    </tr>
-    <tr>
+    @helper SepPiquet(bool ok)
+    {
         <td>&emsp;&emsp;</td>
-        @foreach (var x in fa.couples)
-        {
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        @if (@ok)
+                        {
+                            <td class="arbre-droit">&emsp;&emsp;</td>
+                        }
+                        else
+                        {
+                            <td></td>
+                        }
 
-            bool b = fa.descendants.Select(j => j.parent == null ? 0 : j.parent.id).Contains(x.id);
+
+
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+    }
 
 
 
-            @SepPiquet(b);
+    @helper Montre(IList<string> x, string type, int? i)
+    {
+        if (i == null)
+        {<a href="#">
+                @foreach (string j in x)
+                {<p> @j </p>}
+            <p>yes yes null</p>
+            </a>}
+        if (i != null)
+        {<a href="/personne/donnerlarbre/@i">
+                @foreach (string j in x)
+                {<p> @j </p>}
+            <p>no no @i</p>
+            </a>}
 
 
-
-        }
-    </tr>
-    <tr>
-        <td></td>
-
-        @foreach(var x in fa.couples)
-        {
-            <td></td>
-            <td>
-                @if (fa.descendants.Select(j => j.parent == null ? 0 : j.parent.id).Contains(x.id))
-                {
-                    <table>
-                        <tbody>
-                            <tr>
-                                @foreach(var y in fa.descendants.Where(j=>(j.parent==null?0:j.parent.id) == x.id))
-                                {
-                                <td>
-                                    @MontreSuperArbre(y);
-                                </td>
-                                <td>&emsp;</td>
-                                }
-                            </tr>
-                        </tbody>
-                    </table>
                 }
-            </td>
-        }
-        
-    </tr>
+                @helper MontreArbreW(Personne p, IList<FormArbre> progeniture)
+                {
+                    <td></td>
+                    foreach (var x in progeniture)
+                    {
+                        <td class="arbre-contour">@x.maitre.prenom</td>
 
-</tbody>
-}
+                    }
+                }
+
+                @helper MontreSuperArbre(FormArbre fa)
+                {
+                    <tbody>
+                        <tr>
+                            @if (@fa.maitre.idPere != 0 && fa.maitre.idPere!=null)
+                            {
+                                <td class="arbre-contour">@Montre(@fa.maitre.Pere().VersFiche(), "Père", fa.maitre.id)</td>
+                            }
+                            @if (@fa.maitre.idPere == 0||fa.maitre ==null)
+                            {
+                                <td class="arbre-contour">@Montre((new Personne { id = 0, homme = true, nom = "?" }).VersFiche(), "Père", null)</td>
+                            }
+                            <td>@SepMaitresse()</td>
+                            @if (fa.maitre.idMere != 0 && fa.maitre.idMere!=null)
+                            {
+                                <td class="arbre-contour">@Montre(@fa.maitre.Mere().VersFiche(), "Mère", fa.maitre.id)</td>
+                            }
+                            @if (fa.maitre.idMere == 0 || fa.maitre.idMere ==null)
+                            {
+                                <td class="arbre-contour">@Montre((new Personne { id = 0, homme = false, nom = "?" }).VersFiche(), "Mère", null)</td>
+                            }
 
 
-<div>
-    <table>
-        @MontreSuperArbre(Model);
-    </table>
-</div>
-@section Scripts {
+
+<tr></tr>
+                        <tr>
+                            <td class="arbre-contour">
+                                @Montre(@fa.maitre.VersFiche(), null, fa.maitre.id)
+                            </td>
+
+                            @foreach (var x in fa.couples)
+                            {
+                                @SepMaitresse()
+                                <td class="arbre-contour">
+                                    @Montre(x.VersFiche(), "compagnon(agne)", x.id)
+                                </td>
+                            }
+                        </tr>
+                        <tr>
+                            <td>&emsp;&emsp;</td>
+                            @foreach (var x in fa.couples)
+                            {
+
+                                bool b = fa.descendants.Select(j => j.parent == null ? 0 : j.parent.id).Contains(x.id);
 
 
-}
+
+                                @SepPiquet(b);
+
+
+
+                            }
+                        </tr>
+                        <tr>
+                            <td></td>
+
+                            @foreach (var x in fa.couples)
+                            {
+                                <td></td>
+                                <td>
+                                    @if (fa.descendants.Select(j => j.parent == null ? 0 : j.parent.id).Contains(x.id))
+                                    {
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    @foreach (var y in fa.descendants.Where(j => (j.parent == null ? 0 : j.parent.id) == x.id))
+                                                    {
+                                                        <td>
+                                                            @MontreSuperArbre(y);
+                                                        </td>
+                                                        <td>&emsp;</td>
+                                                    }
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    }
+                                </td>
+                            }
+
+                        </tr>
+
+                    </tbody>
+                }
+
+
+                <div>
+                    <table>
+                        @MontreSuperArbre(Model);
+                    </table>
+                </div>
+                @section Scripts {
+
+
+                }
 

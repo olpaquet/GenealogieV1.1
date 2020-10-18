@@ -1,0 +1,27 @@
+﻿body {
+}
+.entoure {
+    border: 1px solid red;
+}
+
+.bordurebas {
+    border-bottom: 1px solid red;
+}
+
+.borduregauche {
+    border-left: 1px solid red;
+}
+
+.borduredroit {
+    border-right: 1px solid red;
+}
+
+.centre {
+    text-align: center;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+

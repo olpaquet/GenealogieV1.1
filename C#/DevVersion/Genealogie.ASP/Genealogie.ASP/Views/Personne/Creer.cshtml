@@ -67,7 +67,10 @@
 }
 
 <div>
-    @Html.ActionLink("Retour à l'arbre", "DonnerPourArbre", new { id = Model.idArbre })
+    @if (HttpContext.Current.Session["retour"] == null)
+    {@Html.ActionLink("Retour", "DonnerPourArbre", new { id = 1 })}
+    @if (HttpContext.Current.Session["retour"] != null)
+    {@Html.ActionLink("Retour", HttpContext.Current.Session["Action"].ToString(), HttpContext.Current.Session["Controleur"].ToString(), new { id = int.Parse(HttpContext.Current.Session["RetourId"].ToString()) },null)}
 </div>
 
 @section Scripts {

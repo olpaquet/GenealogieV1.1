@@ -25,6 +25,7 @@ namespace Genealogie.ASP
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/arbre2.css",
                       "~/Content/site.css",
                       "~/Content/arbre.css"));
         }

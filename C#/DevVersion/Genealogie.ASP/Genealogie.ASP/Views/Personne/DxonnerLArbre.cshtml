@@ -1,0 +1,176 @@
+﻿@model Genealogie.ASP.Models.FormArbre
+@using Genealogie.ASP.Models
+@using Genealogie.ASP.Conversion
+
+
+@helper SeparateurHorizontal(int i, int j)
+{
+    <table>
+        <tbody>
+            <tr>
+                @for (int c = 1; c <= i; c++)
+                {
+                    string cl = ""; if (c == j) { cl = "bordurebas"; }
+                    <td class="@cl">&emsp;</td>
+                }
+            </tr>
+        </tbody>
+    </table>
+}
+
+@helper MontrerPersonne(Personne p, string titre, int id, bool phomme)
+{
+    if (id == 0)
+    {<a href="#">@MontrerPersonne(new Personne { homme = phomme }, titre)</a>}
+else
+{ <a href="/Personne/DxonnerLArbre/@id">@MontrerPersonne(p, titre)</a>}
+}
+
+@helper MontrerPersonne(Personne p, string titre)
+{
+    <table>
+        <tbody>
+            <tr>
+                <td>
+                    @if (!(titre == "" || titre == null))
+                    {<p><strong>@titre</strong></p>}
+                    @if (p.id != 0)
+                    {
+                        foreach (string x in p.VersFiche())
+                        {
+                            <p>@x</p>
+                        }
+                    }
+
+                    @{string qui = p.homme ? "Inconnu" : "Inconnue";}
+                    @if (p.id == 0)
+                    {<p>@qui</p>}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+}
+
+@helper MontrerPersonne(FormArbre fa)
+{
+    <td>
+        <table>
+            <tbody>
+                <!-- première ligne -->
+                <tr>
+                    <td class="entoure">@MontrerPersonne(fa.maitre, "Maître", fa.maitre.id, true)</td>
+                    @foreach (Personne epouse in fa.couples)
+                    {
+                        <td>@SeparateurHorizontal(2, 1)</td>
+                        <td class="entoure">@MontrerPersonne(epouse, "Compangon(agne)", epouse.id, epouse.homme) </td>
+                    }
+                    @{ int nbcols = 2 * Model.couples.Count() + 1;}
+
+                </tr>
+                <tr><td colspan="@nbcols">&emsp;</td></tr>
+                <tr><td colspan="@nbcols">&emsp;</td></tr>
+                <!-- deuxième ligne -->
+                <tr>
+                    <td colspan="1">
+                        @foreach (Personne epouse in fa.couples)
+                        {
+                        <td />
+                        <td>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <!--copiercoller <table><tbody><tr><td>kid1</td><td>kid2</td></tr></tbody></table>-->
+
+                                        @{int enf = 0;
+                                        }
+                                        @foreach (FormArbre enfant in fa.descendants.Where(j => (j.parent == null ? 0 : j.parent.id) == epouse.id))
+                                        {
+                                            enf++;
+                                            if (enf > 1)
+                                            {
+                                                <td>&emsp;</td>
+                                            }
+                                            @MontrerPersonne(enfant);
+                                            <!-- <td class="entoure">@MontrerPersonne(enfant.maitre, "", enfant.maitre.id, enfant.maitre.homme)</td> -->
+                                        }
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    }
+
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+}
+
+<table>
+    <tbody>
+        <!-- première ligne -->
+        <tr>
+
+            <td class="entoure">@MontrerPersonne((Model.maitre.idPere == null) ? new Personne { homme = true } : Model.maitre.Pere(), "Père", (Model.maitre.idPere == null) ? 0 : (int)Model.maitre.idPere, true)</td>
+            <td>@SeparateurHorizontal(2, 1)</td>
+            <td class="entoure">@MontrerPersonne((Model.maitre.idMere == null) ? new Personne { homme = false } : Model.maitre.Mere(), "Mère", (Model.maitre.idMere == null) ? 0 : (int)Model.maitre.idMere, true)</td>
+
+
+        </tr>
+        <tr><td colspan="3">&emsp;</td></tr>
+        <tr><td colspan="3">&emsp;</td></tr>
+        <!-- deuxième ligne -->
+        <tr>
+            <!-- maître -->
+            <td colspan="3">
+                <table>
+                    <tbody>
+                        <!-- première ligne -->
+                        <tr>
+                            <td class="entoure">@MontrerPersonne(Model.maitre, "Maître", Model.maitre.id, true)</td>
+                            @foreach (Personne epouse in Model.couples)
+                            {
+                                <td>@SeparateurHorizontal(2, 1)</td>
+                                <td class="entoure">@MontrerPersonne(epouse, "Compangon(agne)", epouse.id, epouse.homme) </td>
+                            }
+                            @{ int nbcols = 2 * Model.couples.Count() + 1;}
+
+                        </tr>
+                        <tr><td colspan="@nbcols">&emsp;</td></tr>
+                        <tr><td colspan="@nbcols">&emsp;</td></tr>
+                        <!-- deuxième ligne -->
+                        <tr>
+                            <td colspan="1">
+                                @foreach (Personne epouse in Model.couples)
+                                {
+                                <td />
+                                <td>
+                                    <table>
+                                        <tbody>
+                                            <tr>
+                                                <!--copiercoller <table><tbody><tr><td>kid1</td><td>kid2</td></tr></tbody></table>-->
+
+                                                @{int enf = 0;
+                                                }
+                                                @foreach (FormArbre enfant in Model.descendants.Where(j => (j.parent == null ? 0 : j.parent.id) == epouse.id))
+                                                {
+                                                    enf++;
+                                                    if (enf > 1)
+                                                    {
+                                                        <td>&emsp;</td>
+                                                    }
+
+                                                    @MontrerPersonne(enfant)
+                                                }
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            }
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>

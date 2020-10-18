@@ -225,8 +225,10 @@
     <Compile Include="Securite\FiltreExisteAttribute.cs" />
     <Compile Include="Securite\FiltreProprietaireArbreAttribute.cs" />
     <Compile Include="Securite\FxiltreProprietaireArbreAttribute.cs" />
+    <Compile Include="Securite\GestionLiens.cs" />
     <Compile Include="Securite\SessionUtilisateur.cs" />
     <Compile Include="Securite\FiltreArbreSupprimableAttribute.cs" />
+    <Compile Include="Securite\VideRetourAttribute.cs" />
     <Compile Include="ServiceGeneral\ExplorationObjet.cs" />
     <Compile Include="Services.API\AbonnementServiceAPI.cs" />
     <Compile Include="Services.API\ArbreServiceAPI.cs" />
@@ -253,6 +255,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\arbre.css" />
+    <Content Include="Content\arbre2.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -348,6 +351,7 @@
     <Content Include="Views\Personne\Details.cshtml" />
     <Content Include="Views\Personne\DonnerLArbre.cshtml" />
     <Content Include="Views\DummyDonnerLArbre.cshtml" />
+    <Content Include="Views\Personne\DxonnerLArbre.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

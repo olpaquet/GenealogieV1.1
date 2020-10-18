@@ -25,6 +25,7 @@ namespace Genealogie.ASP.Controllers
         public ActionResult Detruire(int id)
         {
             new ConversationServiceAPI().Detruire(id);
+            
             return RedirectToAction("Donner");
         }
 

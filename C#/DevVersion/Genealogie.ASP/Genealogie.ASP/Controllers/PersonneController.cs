@@ -21,11 +21,12 @@ namespace Genealogie.ASP.Controllers
         public ActionResult DonnerPourArbre(int id)
         {
             IEnumerable<PersonneIndex> per = new PersonneServiceAPI().DonnerPourArbre(id).Select(j => new PersonneIndex(j,true,true));
-            per.OrderBy(j => j.nom).ThenBy(j => j.prenom).ThenBy(j => j.dateDeNaissance).ThenBy(j => j.dateDeDeces);
+            per = per.OrderBy(j => j.nom).ThenBy(j => j.prenom).ThenBy(j => j.dateDeNaissance).ThenBy(j => j.dateDeDeces);
             ViewBag.Arbre = id;
             Arbre a = new ArbreServiceAPI().Donner(id);
             ViewBag.ProprietaireArbre = a.Createur().login;
             ViewBag.NomArbre = a.nom;
+            Retour.InitialiseRetour("Personne", "DonnerPourArbre", id, null);
             return View(per);
         }
         
@@ -55,6 +56,7 @@ namespace Genealogie.ASP.Controllers
             PersonneCreation pc = new PersonneCreation();
             
             pc.idArbre = id;
+            
             return View(pc);
         }
         [HttpPost]
@@ -228,10 +230,19 @@ namespace Genealogie.ASP.Controllers
         }
 
         [HttpGet]
+        
         public ActionResult DonnerLArbre(int id)
         {
+            Retour.InitialiseRetour("Personne", "DonnerLArbre", id, null);
             FormArbre fa = new FormArbre(new PersonneServiceAPI().Donner(id), null);
 
+            return View(fa);
+        }
+        [HttpGet]
+        public ActionResult DxonnerLArbre(int id)
+        {
+            Retour.InitialiseRetour("Personne", "DxonnerLArbre", id, null);
+            FormArbre fa = new FormArbre(new PersonneServiceAPI().Donner(id), null);
             return View(fa);
         }
     }
